@@ -22,7 +22,7 @@ export default function SponsorsSection({
 }) {
   const activeTiers = TIER_ORDER.filter((tier) => sponsorsByTier[tier].length > 0);
   const totalSponsors = activeTiers.reduce((sum, tier) => sum + sponsorsByTier[tier].length, 0);
-  const tierSummaries = TIER_ORDER.map((tier) => ({
+  const tierSummaries = activeTiers.map((tier) => ({
     tier,
     label: TIER_CONFIG[tier].label,
     count: sponsorsByTier[tier].length,

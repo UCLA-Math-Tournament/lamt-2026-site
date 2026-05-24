@@ -54,14 +54,6 @@ export default function FooterClient() {
                   </a>
                 ))}
               </div>
-              <div className="flex flex-wrap justify-center gap-3">
-                <Link href="/live" className="footer-utility-link">
-                  Live Page
-                </Link>
-                <Link href="/admin" className="footer-utility-link">
-                  Staff Admin
-                </Link>
-              </div>
             </div>
           </div>
           <div className="flex justify-center lg:justify-end">
