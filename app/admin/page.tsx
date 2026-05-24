@@ -41,7 +41,7 @@ function StorageModeNotice({ compact = false }: { compact?: boolean }) {
       </p>
       {!compact && (
         <Link href="/live?preview=1" className="btn-outline">
-          Open Draft Preview
+          Open Draft View
         </Link>
       )}
     </section>
@@ -335,7 +335,7 @@ function AnnouncementsTab({ updates, setUpdates }: {
 
       <section className="lamt-panel">
         <div className="lamt-panel-header">
-          <h2 className="text-xl font-extrabold text-[var(--color-text)]">Preview Updates</h2>
+          <h2 className="text-xl font-extrabold text-[var(--color-text)]">Draft Updates</h2>
           <span className="font-bold text-[var(--color-text-muted)]">{updates.length}</span>
         </div>
         {updates.length === 0 ? (
@@ -481,7 +481,7 @@ export default function AdminPage() {
             <p className="page-summary mt-5">Prepare staff drafts, review the event page, and keep official updates deliberate.</p>
             <div className="mt-6 flex flex-wrap gap-3">
               <Link href="/live?preview=1" className="btn-filled">
-                Open Draft Preview
+                Open Draft View
               </Link>
               <Link href="/live" className="btn-outline">
                 Open Event Page
