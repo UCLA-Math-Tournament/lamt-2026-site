@@ -1,6 +1,6 @@
 'use client';
 
-import { AnimatePresence, motion, useMotionValueEvent, useReducedMotion, useScroll } from 'framer-motion';
+import { motion, useMotionValueEvent, useReducedMotion, useScroll } from 'framer-motion';
 import { useRef, useState } from 'react';
 
 type AboutRevealItem = {
@@ -76,20 +76,17 @@ export default function AboutStickyReveal() {
     <section className="about-reveal" ref={sectionRef} aria-label="LAMT in brief">
       <div className="about-reveal__stage" aria-live="polite">
         <span className="label-caps">LAMT in Brief</span>
-        <AnimatePresence mode="wait" initial={false}>
-          <motion.div
-            key={activeItem.id}
-            className="about-reveal__current"
-            initial={reduceMotion ? false : { opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={reduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: -8 }}
-            transition={reduceMotion ? { duration: 0 } : { duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
-          >
-            <p>{activeItem.number}</p>
-            <h3>{activeItem.title}</h3>
-            <span>{activeItem.summary}</span>
-          </motion.div>
-        </AnimatePresence>
+        <motion.div
+          key={activeItem.id}
+          className="about-reveal__current"
+          initial={reduceMotion ? false : { opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={reduceMotion ? { duration: 0 } : { duration: 0.18, ease: [0.16, 1, 0.3, 1] }}
+        >
+          <p>{activeItem.number}</p>
+          <h3>{activeItem.title}</h3>
+          <span>{activeItem.summary}</span>
+        </motion.div>
 
         <div className="about-reveal__rail">
           {revealItems.map((item, index) => (
