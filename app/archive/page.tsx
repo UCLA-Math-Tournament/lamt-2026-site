@@ -18,7 +18,7 @@ export default function ArchivePage() {
                     "Guts": "/lamt2026/Guts Solutions.pdf"
                 },
                 Results: {
-                    "Results": "/lamt2026/lamt2026results" // note: .html files cannot have file extension in url here. Alternatively, set cleanUrls in package.json. Info: https://vercel.com/docs/project-configuration/vercel-json#cleanurls
+                    "Results": "/lamt2026/lamt2026results"
                 },
                 Other: {
                     "Apology Letter": "/lamt2026/Apology Letter.pdf"
@@ -72,7 +72,7 @@ export default function ArchivePage() {
             <h2 className="section-title">{year.title}</h2>
             <div className="archive-year-board">
               <div className="archive-year-meta">
-                <span className="label-caps">Season Index</span>
+                <span className="label-caps">Published Materials</span>
                 <strong>LAMT {year.title}</strong>
                 <p className="section-copy">
                   Problems, solutions, results, and corrections for LAMT {year.title}.
