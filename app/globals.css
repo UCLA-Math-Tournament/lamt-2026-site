@@ -3381,6 +3381,18 @@ body {
   padding: var(--space-5);
 }
 
+.faq-control-panel .lamt-input {
+  transition:
+    border-color 160ms ease,
+    box-shadow 200ms ease,
+    transform 200ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.faq-control-panel .lamt-input:focus {
+  box-shadow: 5px 5px 0 rgba(39, 116, 174, 0.14);
+  transform: translateY(-1px);
+}
+
 .faq-category-grid {
   display: flex;
   flex-wrap: wrap;
@@ -3440,6 +3452,7 @@ body {
 .faq-toggle {
   font-size: var(--text-xl);
   line-height: 1;
+  transition: transform 220ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .faq-question strong {
@@ -3459,12 +3472,6 @@ body {
   text-transform: uppercase;
 }
 
-.faq-accordion-content {
-  border-top: 3px solid var(--color-border);
-  background: var(--color-surface-2);
-  padding: var(--space-5) var(--space-5) var(--space-5) calc(3.5rem + var(--space-8));
-}
-
 .faq-accordion-content p {
   color: var(--color-text-secondary);
   font-weight: 750;
@@ -3473,6 +3480,56 @@ body {
 
 .faq-accordion-item.is-open {
   border-color: var(--ucla-gold);
+}
+
+.faq-accordion-item {
+  transition:
+    border-color 160ms ease,
+    box-shadow 200ms ease,
+    transform 200ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.faq-accordion-item:hover {
+  transform: translateY(-2px);
+}
+
+.faq-accordion-item.is-open .faq-toggle {
+  transform: rotate(180deg);
+}
+
+.faq-accordion-content {
+  display: grid;
+  grid-template-rows: 0fr;
+  overflow: hidden;
+  border-top: 0 solid transparent;
+  background: var(--color-surface-2);
+  transition:
+    grid-template-rows 240ms cubic-bezier(0.16, 1, 0.3, 1),
+    border-top-width 180ms ease,
+    border-color 180ms ease;
+}
+
+.faq-accordion-content[data-open="true"] {
+  grid-template-rows: 1fr;
+  border-top: 3px solid var(--color-border);
+}
+
+.faq-accordion-content__inner {
+  min-height: 0;
+  padding: 0 var(--space-5) 0 calc(3.5rem + var(--space-8));
+  opacity: 0;
+  transform: translateY(-4px);
+  transition:
+    opacity 180ms ease,
+    padding-block 220ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 220ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.faq-accordion-content[data-open="true"] .faq-accordion-content__inner {
+  padding-top: var(--space-5);
+  padding-bottom: var(--space-5);
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .contact-strip {
@@ -3623,8 +3680,8 @@ body {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .faq-accordion-content {
-    padding: var(--space-4);
+  .faq-accordion-content__inner {
+    padding-inline: var(--space-4);
   }
 }
 

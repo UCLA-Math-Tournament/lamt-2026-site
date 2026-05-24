@@ -95,11 +95,15 @@ export default function FAQPage() {
             ) : (
               filtered.map((item, index) => {
                 const isOpen = openId === item.id;
+                const triggerId = `faq-trigger-${item.id}`;
+                const contentId = `faq-content-${item.id}`;
                 return (
                   <article key={item.id} className={`faq-accordion-item ${isOpen ? 'is-open' : ''}`}>
                     <button
+                      id={triggerId}
                       type="button"
                       aria-expanded={isOpen}
+                      aria-controls={contentId}
                       onClick={() => setOpenId(isOpen ? '' : item.id)}
                       className="faq-accordion-trigger"
                     >
@@ -110,11 +114,18 @@ export default function FAQPage() {
                       </span>
                       <span className="faq-toggle" aria-hidden="true">{isOpen ? '-' : '+'}</span>
                     </button>
-                    {isOpen && (
-                      <div className="faq-accordion-content">
+                    <div
+                      id={contentId}
+                      role="region"
+                      aria-labelledby={triggerId}
+                      aria-hidden={!isOpen}
+                      className="faq-accordion-content"
+                      data-open={isOpen ? 'true' : 'false'}
+                    >
+                      <div className="faq-accordion-content__inner">
                         <p>{item.a}</p>
                       </div>
-                    )}
+                    </div>
                   </article>
                 );
               })

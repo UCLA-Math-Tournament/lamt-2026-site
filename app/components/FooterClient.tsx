@@ -60,7 +60,7 @@ export default function FooterClient() {
             <div className="max-w-xs text-center lg:text-right">
               <p className="text-[11px] leading-relaxed text-[#DAEBFE] opacity-80 md:text-xs">
                 We are a student group acting independently of the University of California.
-                We take full responsibility for our organization and this web site.
+                We take full responsibility for our organization and this website.
               </p>
             </div>
           </div>
