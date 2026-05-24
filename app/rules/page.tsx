@@ -164,7 +164,10 @@ export default function RulesPage() {
 
           <div className="answer-reference-board">
             <div className="answer-lab-panel">
-              <h3 className="mb-4 font-extrabold text-[var(--color-text)]">Accepted Examples</h3>
+              <div className="answer-panel-heading">
+                <h3>Accepted Examples</h3>
+                <span>{acceptableExamples.length}</span>
+              </div>
               <div className="answer-chip-grid">
                 {acceptableExamples.map((item) => (
                   <span key={item.math} className="answer-chip">
@@ -175,18 +178,25 @@ export default function RulesPage() {
             </div>
 
             <div className="answer-lab-panel">
-              <h3 className="mb-4 font-extrabold text-[var(--color-text)]">Rejected Examples</h3>
-              <div className="answer-correction-table">
+              <div className="answer-panel-heading">
+                <h3>Rejected Examples</h3>
+                <span>{unacceptableExamples.length}</span>
+              </div>
+              <div className="answer-correction-list" aria-label="Rejected answer examples with accepted rewrites">
                 <div className="answer-correction-head" aria-hidden="true">
                   <span>Rejected</span>
+                  <span>Rewrite</span>
                   <span>Accepted</span>
                 </div>
                 {unacceptableExamples.map((item) => (
                   <article key={item.unsimplified} className="answer-correction">
-                    <div>
+                    <div className="answer-correction__cell answer-correction__cell--rejected">
+                      <span className="answer-correction__label">Rejected</span>
                       <p className="line-through"><InlineMath math={item.unsimplified} /></p>
                     </div>
-                    <div>
+                    <div className="answer-correction__arrow" aria-hidden="true">→</div>
+                    <div className="answer-correction__cell answer-correction__cell--accepted">
+                      <span className="answer-correction__label">Accepted</span>
                       <p><InlineMath math={item.acceptable} /></p>
                     </div>
                   </article>
