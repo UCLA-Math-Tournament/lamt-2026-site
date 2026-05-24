@@ -1,6 +1,8 @@
 'use client';
 
 import { useEffect, useMemo, useState } from 'react';
+import * as AccordionPrimitive from '@radix-ui/react-accordion';
+import { MinusIcon, PlusIcon } from '@radix-ui/react-icons';
 
 const STAFF_EMAIL = 'uclamathtournament@gmail.com';
 
@@ -86,51 +88,48 @@ export default function FAQPage() {
             </div>
           </div>
 
-          <div className="faq-accordion" aria-live="polite">
-            {filtered.length === 0 ? (
-              <article className="faq-empty">
-                <h3>No matching answers</h3>
-                <p className="section-copy">Try a broader search or email staff directly.</p>
-              </article>
-            ) : (
-              filtered.map((item, index) => {
+          {filtered.length === 0 ? (
+            <article className="faq-empty">
+              <h3>No matching answers</h3>
+              <p className="section-copy">Try a broader search or email staff directly.</p>
+            </article>
+          ) : (
+            <AccordionPrimitive.Root
+              type="single"
+              value={openId}
+              onValueChange={setOpenId}
+              className="faq-accordion"
+              aria-live="polite"
+            >
+              {filtered.map((item, index) => {
                 const isOpen = openId === item.id;
-                const triggerId = `faq-trigger-${item.id}`;
-                const contentId = `faq-content-${item.id}`;
                 return (
-                  <article key={item.id} className={`faq-accordion-item ${isOpen ? 'is-open' : ''}`}>
-                    <button
-                      id={triggerId}
-                      type="button"
-                      aria-expanded={isOpen}
-                      aria-controls={contentId}
-                      onClick={() => setOpenId(isOpen ? '' : item.id)}
-                      className="faq-accordion-trigger"
-                    >
-                      <span className="faq-index">{String(index + 1).padStart(2, '0')}</span>
-                      <span className="faq-question">
-                        <strong>{item.q}</strong>
-                        <small>{item.category}</small>
-                      </span>
-                      <span className="faq-toggle" aria-hidden="true">{isOpen ? '-' : '+'}</span>
-                    </button>
-                    <div
-                      id={contentId}
-                      role="region"
-                      aria-labelledby={triggerId}
-                      aria-hidden={!isOpen}
-                      className="faq-accordion-content"
-                      data-open={isOpen ? 'true' : 'false'}
-                    >
-                      <div className="faq-accordion-content__inner">
-                        <p>{item.a}</p>
-                      </div>
-                    </div>
-                  </article>
+                  <AccordionPrimitive.Item key={item.id} value={item.id} asChild>
+                    <article className={`faq-accordion-item ${isOpen ? 'is-open' : ''}`}>
+                      <AccordionPrimitive.Header className="faq-accordion-heading">
+                        <AccordionPrimitive.Trigger className="faq-accordion-trigger">
+                          <span className="faq-index">{String(index + 1).padStart(2, '0')}</span>
+                          <span className="faq-question">
+                            <strong>{item.q}</strong>
+                            <small>{item.category}</small>
+                          </span>
+                          <span className="faq-toggle" aria-hidden="true">
+                            <PlusIcon className="faq-toggle__plus" />
+                            <MinusIcon className="faq-toggle__minus" />
+                          </span>
+                        </AccordionPrimitive.Trigger>
+                      </AccordionPrimitive.Header>
+                      <AccordionPrimitive.Content className="faq-accordion-content">
+                        <div className="faq-accordion-content__inner">
+                          <p>{item.a}</p>
+                        </div>
+                      </AccordionPrimitive.Content>
+                    </article>
+                  </AccordionPrimitive.Item>
                 );
-              })
-            )}
-          </div>
+              })}
+            </AccordionPrimitive.Root>
+          )}
         </div>
       </section>
 
