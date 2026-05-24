@@ -21,12 +21,6 @@ export default function SponsorsSection({
   sponsorsByTier: Record<Tier, string[]>;
 }) {
   const activeTiers = TIER_ORDER.filter((tier) => sponsorsByTier[tier].length > 0);
-  const totalSponsors = activeTiers.reduce((sum, tier) => sum + sponsorsByTier[tier].length, 0);
-  const tierSummaries = activeTiers.map((tier) => ({
-    tier,
-    label: TIER_CONFIG[tier].label,
-    count: sponsorsByTier[tier].length,
-  }));
 
   return (
     <section id="sponsors" className="page-shell border-t-4 border-[var(--ucla-gold)] bg-[var(--color-surface)]">
@@ -45,42 +39,16 @@ export default function SponsorsSection({
 
       {activeTiers.length > 0 ? (
         <div className="sponsor-tier-stack">
-          <section className="sponsor-support-board" aria-label="LAMT sponsor support summary">
-            <div className="sponsor-support-board__copy">
-              <p className="label-caps">LAMT 2026</p>
-              <h3>Sponsors</h3>
-              <p>
-                Thank you to the organizations supporting LAMT 2026.
-              </p>
-            </div>
-            <div className="sponsor-support-board__stats">
-              <div className="sponsor-count-tile">
-                <span>{totalSponsors}</span>
-                <strong>active sponsors</strong>
-              </div>
-              <div className="sponsor-tier-rail">
-                {tierSummaries.map(({ tier, label, count }) => (
-                  <div key={tier} className={`sponsor-tier-card sponsor-tier-card--${tier}`} data-active={count > 0}>
-                    <span>{label}</span>
-                    <strong>{count}</strong>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </section>
-
           {activeTiers.map((tier) => {
             const { label, imgHeight } = TIER_CONFIG[tier];
             return (
               <section key={tier} className="section-row">
                 <div className="sponsor-tier-heading">
                   <h3 className="section-title">{label}</h3>
-                  <span>{sponsorsByTier[tier].length} listed</span>
                 </div>
                 <div className={`sponsor-grid sponsor-matrix sponsor-matrix--${tier}`}>
                   {sponsorsByTier[tier].map((src, index) => (
                     <div key={src} className="sponsor-card sponsor-logo-frame">
-                      <span className="sponsor-card__index">{String(index + 1).padStart(2, '0')}</span>
                       <Image
                         src={src}
                         alt={`${label} sponsor ${index + 1}`}
@@ -101,7 +69,7 @@ export default function SponsorsSection({
       ) : (
         <div className="section-row sponsor-empty-state">
           <h3 className="section-title">Sponsor Announcements</h3>
-          <p className="section-copy">Sponsor announcements are coming soon. This section is prepared as a logo matrix once sponsor files are added.</p>
+          <p className="section-copy">Sponsor information will be posted when available.</p>
         </div>
       )}
 
