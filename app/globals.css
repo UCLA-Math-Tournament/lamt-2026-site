@@ -4654,7 +4654,6 @@ body {
   background: var(--ucla-gold);
   color: var(--ucla-blue-deep);
   box-shadow: 7px 7px 0 rgba(0, 59, 92, 0.28);
-  transform: translateY(-2px);
 }
 
 .theme-toggle svg {
