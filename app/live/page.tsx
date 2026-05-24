@@ -17,6 +17,21 @@ const STORAGE_KEYS = {
 
 const STAFF_EMAIL = "uclamathtournament@gmail.com";
 
+const ARCHIVE_UPDATES: Update[] = [
+  {
+    id: -1,
+    timestamp: "May 17, 2026",
+    title: "LAMT 2026 complete",
+    body: "Problems, solutions, results, and the final schedule are available for review.",
+  },
+  {
+    id: -2,
+    timestamp: "Post-contest",
+    title: "Questions after the tournament",
+    body: `Email ${STAFF_EMAIL}. Include your school, team name, and the event you are asking about.`,
+  },
+];
+
 const HELP_ITEMS = [
   { label: "Info Desk", tag: "Check-In", detail: "Outside MS 4000A.", href: null },
   { label: "Wi-Fi", tag: "Campus", detail: "UCLA-WEB.", href: null },
@@ -173,8 +188,22 @@ function MapSection() {
 }
 
 function UpdatesFeed({ updates, previewMode }: { updates: Update[]; previewMode: boolean }) {
-  const heading = previewMode ? "Draft Announcements" : "Tournament Announcements";
+  const useArchiveUpdates = !previewMode && TOURNAMENT_OVER && updates.length === 0;
+  const displayedUpdates = useArchiveUpdates ? ARCHIVE_UPDATES : updates;
+  const heading = previewMode ? "Draft Announcements" : useArchiveUpdates ? "Event Notices" : "Tournament Announcements";
   const reduceMotion = useReducedMotion();
+  const entrance = reduceMotion
+    ? {}
+    : {
+        initial: { opacity: 0, y: 22 },
+        animate: { opacity: 1, y: 0 },
+      };
+  const detailReveal = reduceMotion
+    ? {}
+    : {
+        initial: { opacity: 0, y: 10 },
+        animate: { opacity: 1, y: 0 },
+      };
 
   return (
     <section className="lamt-panel" aria-live="polite">
@@ -183,69 +212,87 @@ function UpdatesFeed({ updates, previewMode }: { updates: Update[]; previewMode:
           <p className="label-caps">Announcements</p>
           <h2 className="mt-1 text-xl font-extrabold text-[var(--color-text)]">{heading}</h2>
         </div>
-        {(updates.length > 0 || previewMode) && (
+        {(displayedUpdates.length > 0 || previewMode) && (
           <div className="flex flex-wrap items-center justify-end gap-2">
             <span className="font-bold text-[var(--color-text-muted)]">
-              {updates.length === 0 ? "No updates" : `${updates.length} ${updates.length === 1 ? "update" : "updates"}`}
+              {displayedUpdates.length === 0 ? "No updates" : `${displayedUpdates.length} ${displayedUpdates.length === 1 ? "update" : "updates"}`}
             </span>
             <span className={`feed-mode-badge ${previewMode ? "feed-mode-badge--preview" : ""}`}>
-              {previewMode ? "Staff Draft" : "Posted"}
+              {previewMode ? "Staff Draft" : useArchiveUpdates ? "Archive" : "Posted"}
             </span>
           </div>
         )}
       </div>
-      {updates.length === 0 ? (
+      {displayedUpdates.length === 0 ? (
         <div className="live-announcement-list" role="status">
           <motion.div
             className="live-announcement-card live-announcement-card--empty"
-            initial={reduceMotion ? false : { opacity: 0, y: 18 }}
-            animate={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+            {...entrance}
             transition={{ duration: 0.42, ease: [0.16, 1, 0.3, 1] }}
           >
-            <div className="live-announcement-meta">
-              <span className="live-latest-badge live-latest-badge--quiet">
-                <span className="live-latest-badge__shine" aria-hidden="true" />
-                <span>{previewMode ? "Draft" : TOURNAMENT_OVER ? "Archive" : "Official"}</span>
+            <div className="live-announcement-shell">
+              <span className="live-announcement-badge" aria-hidden="true">
+                {previewMode ? "D" : TOURNAMENT_OVER ? "A" : "L"}
               </span>
+              <div className="live-announcement-content">
+                <div className="live-announcement-meta">
+                  <span className="live-latest-badge live-latest-badge--quiet">
+                    {previewMode ? "Draft" : TOURNAMENT_OVER ? "Archive" : "Official"}
+                  </span>
+                </div>
+                <motion.p className="section-copy" {...detailReveal} transition={{ delay: 0.08, duration: 0.28, ease: [0.16, 1, 0.3, 1] }}>
+                  {previewMode ? "No draft announcements." : "No announcements yet."}
+                </motion.p>
+              </div>
             </div>
-            <p className="section-copy">
-              {previewMode
-                ? "No draft announcements."
-                : TOURNAMENT_OVER
-                  ? "No announcements posted."
-                  : "No announcements yet."}
-            </p>
           </motion.div>
         </div>
       ) : (
         <div className="live-announcement-list" role="list">
-          {updates.map((update, index) => (
+          {displayedUpdates.map((update, index) => {
+            const status = previewMode ? "Draft" : useArchiveUpdates ? "Archive" : index === 0 ? "Latest" : "Posted";
+            const badge = previewMode ? "D" : useArchiveUpdates ? "A" : index === 0 ? "L" : "P";
+
+            return (
             <motion.article
               key={update.id}
               className="live-announcement-card"
               data-latest={index === 0 ? "true" : undefined}
+              data-mode={useArchiveUpdates ? "archive" : previewMode ? "preview" : "posted"}
               role="listitem"
-              initial={reduceMotion ? false : { opacity: 0, y: 18 }}
-              animate={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+              {...entrance}
               transition={{
                 duration: 0.42,
                 delay: Math.min(index * 0.055, 0.18),
                 ease: [0.16, 1, 0.3, 1],
               }}
             >
-              <div className="live-announcement-meta">
-                {index === 0 && (
-                  <span className="live-latest-badge" aria-label="Latest announcement">
-                    <span className="live-latest-badge__shine" aria-hidden="true" />
-                    <span>Latest</span>
-                  </span>
-                )}
-                <span className="live-announcement-time">{update.timestamp}</span>
+              <div className="live-announcement-shell">
+                <span className="live-announcement-badge" aria-hidden="true">{badge}</span>
+                <div className="live-announcement-content">
+                  <div className="live-announcement-meta">
+                    <span className="live-latest-badge" aria-label={`${status} announcement`}>
+                      {status}
+                    </span>
+                    <span className="live-announcement-time">{update.timestamp}</span>
+                  </div>
+                  <motion.div
+                    className="live-announcement-copy"
+                    {...detailReveal}
+                    transition={{
+                      duration: 0.3,
+                      delay: reduceMotion ? 0 : Math.min(index * 0.055 + 0.08, 0.22),
+                      ease: [0.16, 1, 0.3, 1],
+                    }}
+                  >
+                    {update.title && <h3>{update.title}</h3>}
+                    <p className="section-copy whitespace-pre-line">{update.body}</p>
+                  </motion.div>
+                </div>
               </div>
-              {update.title && <h3 className="mb-3 text-xl font-extrabold text-[var(--color-text)]">{update.title}</h3>}
-              <p className="section-copy whitespace-pre-line">{update.body}</p>
             </motion.article>
-          ))}
+            );
+          })}
         </div>
       )}
     </section>
