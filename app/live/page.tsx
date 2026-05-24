@@ -225,7 +225,9 @@ function UpdatesFeed({ updates, previewMode }: { updates: Update[]; previewMode:
           <p className="section-copy">
             {previewMode
               ? "Local preview updates from this browser will appear here. They are not public."
-              : "Official tournament announcements will appear here."}
+              : TOURNAMENT_OVER
+                ? "No additional tournament announcements are posted."
+                : "Official tournament announcements will appear here."}
           </p>
         </div>
       ) : (
@@ -356,14 +358,14 @@ export default function LivePage() {
     <div className="page-shell">
       <header className="page-hero">
         <div>
-          <p className="page-kicker">Tournament Day</p>
+          <p className="page-kicker">Event Archive</p>
           <span className="gold-rule" />
         </div>
         <div className="grid gap-6 lg:grid-cols-[1fr_auto] lg:items-end">
           <div>
-            <h1 className="page-title">LAMT 2026 Tournament Day</h1>
+            <h1 className="page-title">LAMT 2026 Event Archive</h1>
             <p className="page-summary mt-5">
-              Schedule status, staff announcements, UCLA venue directions, and tournament-day help for Sunday, May 17, 2026.
+              Final status, schedule, UCLA venue directions, and staff contact information from Sunday, May 17, 2026.
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
               <a href="#announcements" className="btn-filled">
@@ -376,7 +378,7 @@ export default function LivePage() {
                 Campus Map
               </a>
               <a href="#help" className="btn-outline">
-                Help
+                Contact
               </a>
             </div>
           </div>
@@ -394,7 +396,7 @@ export default function LivePage() {
       </section>
 
       <section id="schedule" className="section-row">
-        <h2 className="section-title">Today</h2>
+        <h2 className="section-title">Schedule</h2>
         <div className="grid gap-5 xl:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)]">
           <LiveStatus schedule={schedule} />
           <ScheduleTable schedule={schedule} />

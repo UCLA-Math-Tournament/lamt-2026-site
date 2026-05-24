@@ -52,7 +52,7 @@ export default function TournamentPage() {
       </header>
 
       <section className="section-row">
-        <h2 className="section-title">At A Glance</h2>
+        <h2 className="section-title">At a Glance</h2>
         <div className="tournament-fact-grid">
           {facts.map((fact) => (
             <article key={fact.label} className="tournament-fact">
@@ -86,7 +86,7 @@ export default function TournamentPage() {
       </section>
 
       <section className="section-row">
-        <h2 className="section-title">Dayflow</h2>
+        <h2 className="section-title">Schedule</h2>
         <div className="lamt-timeline" aria-label="LAMT 2026 tournament day timeline">
           {schedule.map(({ time, end, event, location, note }, index) => (
             <article key={`${time}-${event}`} className="lamt-timeline-item">
@@ -126,13 +126,13 @@ export default function TournamentPage() {
       </section>
 
       <section className="section-row">
-        <h2 className="section-title">Actions</h2>
+        <h2 className="section-title">More Information</h2>
         <div className="stagger-parent flex flex-wrap gap-3">
           <a href="/archive" className="btn-filled btn-ripple">
             View 2026 Archive
           </a>
-          <a href="/live" className="btn-outline btn-ripple">
-            Tournament Day Page
+          <a href="/rules" className="btn-outline btn-ripple">
+            Read Competition Rules
           </a>
         </div>
       </section>

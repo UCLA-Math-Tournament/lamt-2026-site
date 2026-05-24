@@ -65,17 +65,35 @@ export default function RulesPage() {
 
   const prohibited = [
     'Calculators',
-    'Other computational aids, such as slide rulers and abaci',
+    'Other computational aids, such as slide rules and abaci',
     'Reference materials, such as books and notes',
     'Communication devices, such as cell phones and computers',
     'Any drawing aids (rulers, compasses, protractors)',
     'Graph paper',
   ];
 
-  const ruleSignals = [
-    { label: 'Exact', text: 'Answers should be exact unless a problem states otherwise.' },
-    { label: 'Simplified', text: 'Equivalent expressions may still be rejected if left unsimplified.' },
-    { label: 'No Devices', text: 'Calculators, computers, phones, and communication devices are not contest aids.' },
+  const keyRules = [
+    { label: 'Answers', text: 'Exact and simplified unless the problem states otherwise.' },
+    { label: 'Individual Tests', text: 'No internet access and no communication with other people.' },
+    { label: 'Team Tests', text: 'Teammates may communicate only during team-based tests.' },
+  ];
+
+  const ruleTable = [
+    {
+      category: 'Contest aids',
+      allowed: 'Materials explicitly provided or approved by LAMT staff.',
+      notAllowed: 'Calculators, slide rules, abaci, books, notes, graph paper, rulers, compasses, and protractors.',
+    },
+    {
+      category: 'Communication',
+      allowed: 'Team discussion during team-based tests.',
+      notAllowed: 'Phones, computers, internet access, or communication outside the permitted team format.',
+    },
+    {
+      category: 'Answer form',
+      allowed: 'Correct mathematical notation, exact values, and simplified expressions.',
+      notAllowed: 'Unsimplified expressions or unsupported approximations unless a problem requests them.',
+    },
   ];
 
   return (
@@ -96,10 +114,10 @@ export default function RulesPage() {
       </header>
 
       <section className="section-row">
-        <h2 className="section-title">Rule Signals</h2>
-        <div className="rules-signal-grid">
-          {ruleSignals.map((item) => (
-            <article key={item.label} className="rules-signal-card">
+        <h2 className="section-title">Key Rules</h2>
+        <div className="rules-reference-grid">
+          {keyRules.map((item) => (
+            <article key={item.label} className="rules-mini-rule">
               <span>{item.label}</span>
               <p>{item.text}</p>
             </article>
@@ -121,32 +139,44 @@ export default function RulesPage() {
       </section>
 
       <section className="section-row">
-        <h2 className="section-title">Honor Code</h2>
-        <div className="rules-callout">
-          <p className="section-copy mb-6">
-            We expect that when taking their individual tests, the only aid or resource students will use are those explicitly specified below. Students may not access the internet or communicate with other people. For team-based tests, students may communicate with their teammates, but otherwise the same expectations hold.
-          </p>
-          <p className="mb-4 font-extrabold text-[var(--color-text)]">
-            The following may not be used during any testing portion of the contest:
-          </p>
-          <ul className="rule-chip-grid">
-            {prohibited.map((item) => (
-              <li key={item}>{item}</li>
+        <h2 className="section-title">Allowed / Not Allowed</h2>
+        <div className="rules-comparison-board">
+          <div className="rules-comparison-table" role="table" aria-label="LAMT rules reference">
+            <div className="rules-table-row rules-table-head" role="row">
+              <span role="columnheader">Area</span>
+              <span role="columnheader">Allowed</span>
+              <span role="columnheader">Not Allowed</span>
+            </div>
+            {ruleTable.map((row) => (
+              <div key={row.category} className="rules-table-row" role="row">
+                <strong role="cell">{row.category}</strong>
+                <p role="cell">{row.allowed}</p>
+                <p role="cell">{row.notAllowed}</p>
+              </div>
             ))}
-          </ul>
+          </div>
+
+          <div className="rules-prohibited-list">
+            <h3>Not permitted during testing</h3>
+            <ul>
+              {prohibited.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+          </div>
         </div>
       </section>
 
       <section className="section-row">
-        <h2 className="section-title">Acceptable Answers</h2>
+        <h2 className="section-title">Answer Format</h2>
         <div>
           <p className="section-copy mb-8">
             Answers must be written in correct mathematical notation. Unless otherwise specified, all answers must be exact and simplified. Graders will take a reasonably lenient interpretation of &quot;simplified.&quot; The decisions of the LAMT coordinators are final.
           </p>
 
-          <div className="answer-lab">
+          <div className="answer-reference-board">
             <div className="answer-lab-panel">
-              <h3 className="mb-4 font-extrabold text-[var(--color-text)]">Examples of Acceptable Answers</h3>
+              <h3 className="mb-4 font-extrabold text-[var(--color-text)]">Accepted Examples</h3>
               <div className="answer-chip-grid">
                 {acceptableExamples.map((item) => (
                   <span key={item.math} className="answer-chip">
@@ -157,16 +187,18 @@ export default function RulesPage() {
             </div>
 
             <div className="answer-lab-panel">
-              <h3 className="mb-4 font-extrabold text-[var(--color-text)]">Examples of Unacceptable Answers</h3>
-              <div className="answer-correction-grid">
+              <h3 className="mb-4 font-extrabold text-[var(--color-text)]">Rejected Examples</h3>
+              <div className="answer-correction-table">
+                <div className="answer-correction-head" aria-hidden="true">
+                  <span>Rejected</span>
+                  <span>Accepted</span>
+                </div>
                 {unacceptableExamples.map((item) => (
                   <article key={item.unsimplified} className="answer-correction">
                     <div>
-                      <span className="label-caps">Rejected</span>
                       <p className="line-through"><InlineMath math={item.unsimplified} /></p>
                     </div>
                     <div>
-                      <span className="label-caps">Accepted</span>
                       <p><InlineMath math={item.acceptable} /></p>
                     </div>
                   </article>

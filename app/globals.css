@@ -3819,3 +3819,222 @@ body {
 .home-hero h1 {
   max-width: min(100%, 12ch);
 }
+
+.rules-reference-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-4);
+}
+
+.rules-mini-rule,
+.rules-comparison-board,
+.rules-prohibited-list,
+.answer-reference-board .answer-lab-panel {
+  border: 3px solid var(--color-border);
+  background: var(--color-surface);
+  box-shadow: 7px 7px 0 rgba(39, 116, 174, 0.1);
+}
+
+.rules-mini-rule {
+  border-left: 8px solid var(--ucla-gold);
+  padding: var(--space-4);
+}
+
+.rules-mini-rule span,
+.rules-table-head span,
+.rules-prohibited-list h3,
+.answer-correction-head span {
+  color: var(--color-text-muted);
+  font-size: var(--text-xs);
+  font-weight: 950;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.rules-mini-rule p {
+  margin-top: var(--space-2);
+  color: var(--color-text);
+  font-size: var(--text-lg);
+  font-weight: 950;
+  line-height: 1.25;
+}
+
+.rules-comparison-board {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(16rem, 0.36fr);
+  gap: 0;
+  overflow: hidden;
+}
+
+.rules-comparison-table {
+  display: grid;
+  min-width: 0;
+}
+
+.rules-table-row {
+  display: grid;
+  grid-template-columns: minmax(9rem, 0.24fr) minmax(0, 0.38fr) minmax(0, 0.38fr);
+  min-width: 0;
+  border-bottom: 3px solid var(--color-border);
+}
+
+.rules-table-row:last-child {
+  border-bottom: 0;
+}
+
+.rules-table-row > * {
+  min-width: 0;
+  border-right: 3px solid var(--color-border);
+  padding: var(--space-4);
+}
+
+.rules-table-row > *:last-child {
+  border-right: 0;
+}
+
+.rules-table-head {
+  background: var(--ucla-blue);
+}
+
+.rules-table-head span {
+  color: #FFFFFF;
+}
+
+.rules-table-row strong {
+  color: var(--color-text);
+  font-size: var(--text-lg);
+  font-weight: 950;
+  line-height: 1.15;
+}
+
+.rules-table-row p {
+  color: var(--color-text-secondary);
+  font-weight: 800;
+  line-height: 1.45;
+}
+
+.rules-prohibited-list {
+  border-width: 0 0 0 3px;
+  box-shadow: none;
+  padding: var(--space-5);
+}
+
+.rules-prohibited-list h3 {
+  color: var(--color-text);
+}
+
+.rules-prohibited-list ul {
+  display: grid;
+  gap: var(--space-2);
+  margin-top: var(--space-4);
+  list-style: none;
+}
+
+.rules-prohibited-list li {
+  border-left: 5px solid var(--ucla-gold);
+  background: var(--color-surface-2);
+  padding: 0.75rem 0.9rem;
+  color: var(--color-text-secondary);
+  font-size: var(--text-sm);
+  font-weight: 850;
+  line-height: 1.35;
+}
+
+.answer-reference-board {
+  display: grid;
+  gap: var(--space-5);
+}
+
+.answer-reference-board .answer-lab-panel {
+  padding: var(--space-5);
+}
+
+.answer-correction-table {
+  display: grid;
+  border: 3px solid var(--color-border);
+  background: var(--color-surface-2);
+}
+
+.answer-correction-head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  background: var(--ucla-blue);
+}
+
+.answer-correction-head span {
+  border-right: 3px solid var(--color-border);
+  padding: var(--space-3) var(--space-4);
+  color: #FFFFFF;
+}
+
+.answer-correction-head span:last-child {
+  border-right: 0;
+}
+
+.answer-correction-table .answer-correction {
+  border-width: 3px 0 0;
+  background: transparent;
+}
+
+.answer-correction-table .answer-correction:first-of-type {
+  border-top: 0;
+}
+
+.dark .rules-mini-rule,
+.dark .rules-comparison-board,
+.dark .answer-reference-board .answer-lab-panel {
+  box-shadow: 7px 7px 0 rgba(255, 209, 0, 0.11);
+}
+
+.dark .rules-table-head,
+.dark .answer-correction-head {
+  background: var(--ucla-gold);
+}
+
+.dark .rules-table-head span,
+.dark .answer-correction-head span {
+  color: var(--ucla-blue-deep);
+}
+
+@media (max-width: 1100px) {
+  .rules-reference-grid,
+  .rules-comparison-board {
+    grid-template-columns: 1fr;
+  }
+
+  .rules-prohibited-list {
+    border-top: 3px solid var(--color-border);
+    border-left: 0;
+  }
+}
+
+@media (max-width: 760px) {
+  .rules-table-head {
+    display: none;
+  }
+
+  .rules-table-row,
+  .answer-correction-head,
+  .answer-correction-table .answer-correction {
+    grid-template-columns: 1fr;
+  }
+
+  .rules-table-row > * {
+    border-right: 0;
+    border-bottom: 3px solid var(--color-border);
+  }
+
+  .rules-table-row > *:last-child {
+    border-bottom: 0;
+  }
+
+  .answer-correction-head span,
+  .answer-correction-head span:last-child {
+    border-right: 0;
+    border-bottom: 3px solid var(--color-border);
+  }
+
+  .answer-correction-head span:last-child {
+    border-bottom: 0;
+  }
+}
