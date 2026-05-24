@@ -55,7 +55,7 @@ export default function ArchivePage() {
                 <span className="label-caps">Published Materials</span>
                 <strong>LAMT {year.title}</strong>
                 <p className="section-copy">
-                  Problems, solutions, results, corrections.
+                  Official {year.title} files.
                 </p>
               </div>
               <ArchiveMaterialGrid
