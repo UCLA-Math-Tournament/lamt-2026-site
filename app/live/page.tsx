@@ -15,23 +15,23 @@ const STORAGE_KEYS = {
 
 const STAFF_EMAIL = "uclamathtournament@gmail.com";
 
-const MAP_EMBED_SRC =
-  "https://www.openstreetmap.org/export/embed.html?bbox=-118.4465%2C34.0667%2C-118.4385%2C34.0715&layer=mapnik&marker=34.0690%2C-118.4428";
-
 const VENUES = [
   {
-    label: "MS 4000A / MS 5200",
-    detail: "Primary testing rooms in the Mathematical Sciences Building.",
+    id: "ms",
+    shortLabel: "MS",
+    detail: "Mathematical Sciences Building: MS 4000A and MS 5200.",
     href: "https://www.google.com/maps/search/?api=1&query=UCLA+Mathematical+Sciences+Building",
   },
   {
-    label: "Court of Sciences",
+    id: "court",
+    shortLabel: "Court",
     detail: "Lunch, disputes, and outdoor gathering point.",
     href: "https://www.google.com/maps/search/?api=1&query=Court+of+Sciences+UCLA",
   },
   {
-    label: "Parking Structure 2",
-    detail: "Closest public parking reference for arrival.",
+    id: "parking",
+    shortLabel: "P2",
+    detail: "Parking Structure 2: closest public parking reference.",
     href: "https://www.google.com/maps/search/?api=1&query=UCLA+Parking+Structure+2",
   },
 ];
@@ -177,24 +177,19 @@ function ScheduleTable({ schedule }: { schedule: ScheduleItem[] }) {
 function MapSection() {
   return (
     <section id="map" className="section-row">
-      <h2 className="section-title">Campus Map</h2>
-      <div className="grid gap-5">
-        <div className="h-[420px] min-h-[20rem] border-2 border-[var(--color-border)] bg-[var(--color-surface)]">
-          <iframe
-            title="UCLA Mathematical Sciences and Court of Sciences map"
-            className="map-iframe"
-            src={MAP_EMBED_SRC}
-            allowFullScreen
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-          />
-        </div>
-        <div className="grid gap-3 md:grid-cols-3">
+      <h2 className="section-title">Venue Reference</h2>
+      <div>
+        <p className="section-copy mb-6">
+          LAMT 2026 was centered around the Mathematical Sciences Building, with lunch and disputes at the Court of Sciences.
+        </p>
+        <div className="venue-map-board" aria-label="LAMT 2026 UCLA venue reference">
+          <span className="venue-map-board__label venue-map-board__label--north">UCLA North Campus</span>
+          <span className="venue-map-board__route" aria-hidden="true" />
           {VENUES.map((venue) => (
-            <a key={venue.label} className="lamt-panel p-4 hover:border-[var(--ucla-gold)]" href={venue.href} target="_blank" rel="noopener noreferrer">
-              <h3 className="font-extrabold text-[var(--color-text)]">{venue.label}</h3>
-              <p className="section-copy mt-2 text-sm">{venue.detail}</p>
-              <span className="mt-4 inline-flex text-sm font-extrabold uppercase text-[var(--color-border-strong)]">Open Map</span>
+            <a key={venue.id} className={`venue-marker venue-marker--${venue.id}`} href={venue.href} target="_blank" rel="noopener noreferrer">
+              <strong>{venue.shortLabel}</strong>
+              <span>{venue.detail}</span>
+              <em>Open Map</em>
             </a>
           ))}
         </div>
@@ -375,7 +370,7 @@ export default function LivePage() {
                 Schedule
               </a>
               <a href="#map" className="btn-outline">
-                Campus Map
+                Venue Reference
               </a>
               <a href="#help" className="btn-outline">
                 Contact
