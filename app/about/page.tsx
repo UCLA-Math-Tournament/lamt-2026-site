@@ -80,6 +80,12 @@ export default function AboutPage() {
     },
   ];
 
+  const operatingPrinciples = [
+    { label: 'Student-Run', value: 'Independent UCLA organizers' },
+    { label: 'Contest-First', value: 'Problems, grading, logistics' },
+    { label: 'Accessible', value: 'Free registration' },
+  ];
+
   return (
     <div className="page-shell">
       <header className="page-hero">
@@ -93,31 +99,48 @@ export default function AboutPage() {
             <span className="word">Us</span>
           </h1>
           <p className="page-summary reveal mt-5">
-            The Los Angeles Math Tournament Group hosts and organizes mathematical contests for middle and high school students.
+            The Los Angeles Math Tournament Group hosts math contests for middle and high school students.
           </p>
         </div>
       </header>
 
       <section className="section-row">
         <h2 className="section-title">Mission</h2>
-        <div className="stagger-parent grid gap-5">
-          <p className="section-copy">
-            We strive to encourage mathematical exploration and understanding by introducing concepts not covered in the typical pre-college curricula to students with high mathematical aptitude and interest.
-          </p>
-          <p className="section-copy">
-            Each contest emphasizes collaboration between team members, while still allowing individuals to prove their own ability.
-          </p>
+        <div className="mission-board">
+          <div className="mission-stack stagger-parent">
+            <p className="section-copy">
+              We strive to encourage mathematical exploration and understanding by introducing concepts not covered in the typical pre-college curricula to students with high mathematical aptitude and interest.
+            </p>
+            <p className="section-copy">
+              Each contest emphasizes collaboration between team members, while still allowing individuals to prove their own ability.
+            </p>
+          </div>
+          <div className="mission-principles">
+            {operatingPrinciples.map((item) => (
+              <article key={item.label}>
+                <span>{item.label}</span>
+                <strong>{item.value}</strong>
+              </article>
+            ))}
+          </div>
         </div>
       </section>
 
       <section className="section-row">
         <h2 className="section-title">LAMT Staff</h2>
-        <div className="stagger-parent grid gap-8">
+        <div className="staff-directory stagger-parent">
           {staffGroups.map((group) => (
-            <div key={group.title} className="border-t-2 border-[var(--color-border)] pt-5 first:border-t-0 first:pt-0">
-              <h3 className="mb-3 font-extrabold text-[var(--color-text)]">{group.title}</h3>
-              <p className="section-copy">{group.people.join(', ')}</p>
-            </div>
+            <article key={group.title} className="staff-card">
+              <div className="staff-card__header">
+                <h3>{group.title}</h3>
+                <span>{group.people.length}</span>
+              </div>
+              <div className="staff-people-list">
+                {group.people.map((person) => (
+                  <span key={person}>{person}</span>
+                ))}
+              </div>
+            </article>
           ))}
         </div>
       </section>

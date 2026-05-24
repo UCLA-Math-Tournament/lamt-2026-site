@@ -3,16 +3,17 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import type { ContactMessage, ScheduleItem, Update } from "./types";
+import type { ScheduleItem, Update } from "./types";
 import { DEFAULT_SCHEDULE, DEFAULT_UPDATES } from "./types";
 
-const TOURNAMENT_OVER = false;
+const TOURNAMENT_OVER = true;
 
 const STORAGE_KEYS = {
-  messages: "lamt_messages",
   schedule: "lamt_schedule",
   updates: "lamt_updates",
 };
+
+const STAFF_EMAIL = "uclamathtournament@gmail.com";
 
 const MAP_EMBED_SRC =
   "https://www.openstreetmap.org/export/embed.html?bbox=-118.4465%2C34.0667%2C-118.4385%2C34.0715&layer=mapnik&marker=34.0690%2C-118.4428";
@@ -41,7 +42,7 @@ const HELP_ITEMS = [
   { label: "Restrooms", detail: "Use the MS Building restrooms near the elevators.", href: null },
   { label: "Disputes", detail: "Disputes are handled at Court of Sciences during lunch.", href: null },
   { label: "Emergency", detail: "Call 911 or UCPD at 310-825-4321.", href: "tel:3108254321" },
-  { label: "Contact Staff", detail: "uclamathtournament@gmail.com", href: "mailto:uclamathtournament@gmail.com" },
+  { label: "Contact Staff", detail: STAFF_EMAIL, href: `mailto:${STAFF_EMAIL}` },
 ];
 
 function parseTime(value: string): number {
@@ -94,6 +95,8 @@ function LiveStatus({ schedule }: { schedule: ScheduleItem[] }) {
   const { currentIdx, nextIdx, progress } = getTimelineState(schedule, now);
   const current = schedule[currentIdx];
   const next = current ? schedule[currentIdx + 1] : schedule[nextIdx];
+  const displayEvent = TOURNAMENT_OVER ? "LAMT 2026 has concluded." : current?.event || next?.event || "Thanks for joining LAMT.";
+  const displayMeta = TOURNAMENT_OVER ? "May 17, 2026 / UCLA" : `${(current || next)?.time}-${(current || next)?.end} / ${(current || next)?.location}`;
 
   return (
     <section className="lamt-panel">
@@ -101,7 +104,7 @@ function LiveStatus({ schedule }: { schedule: ScheduleItem[] }) {
         <div>
           <p className="label-caps">Status</p>
           <h2 className="mt-1 text-xl font-extrabold text-[var(--color-text)]">
-            {current ? "Happening Now" : next ? "Next Up" : "Schedule Complete"}
+            {TOURNAMENT_OVER ? "Tournament Complete" : current ? "Happening Now" : next ? "Next Up" : "Schedule Complete"}
           </h2>
         </div>
         {!TOURNAMENT_OVER && (
@@ -112,13 +115,13 @@ function LiveStatus({ schedule }: { schedule: ScheduleItem[] }) {
       </div>
 
       <div className="lamt-panel-body">
-        <p className="text-2xl font-extrabold text-[var(--color-text)]">{current?.event || next?.event || "Thanks for joining LAMT."}</p>
-        {(current || next) && (
+        <p className="text-2xl font-extrabold text-[var(--color-text)]">{displayEvent}</p>
+        {(TOURNAMENT_OVER || current || next) && (
           <p className="mt-2 text-lg font-bold text-[var(--color-text-secondary)]">
-            {(current || next)?.time}-{(current || next)?.end} / {(current || next)?.location}
+            {displayMeta}
           </p>
         )}
-        {current && (
+        {!TOURNAMENT_OVER && current && (
           <>
             <div className="mt-5 h-3 border-2 border-[var(--color-border)] bg-[var(--color-surface-2)]">
               <div className="h-full bg-[var(--ucla-gold)]" style={{ width: `${progress}%` }} />
@@ -126,7 +129,7 @@ function LiveStatus({ schedule }: { schedule: ScheduleItem[] }) {
             {next && <p className="mt-3 text-sm font-bold text-[var(--color-text-muted)]">Next: {next.event} at {next.time}</p>}
           </>
         )}
-        {!current && next && <p className="mt-3 text-sm font-bold text-[var(--color-text-muted)]">The next scheduled event starts at {next.time}.</p>}
+        {!TOURNAMENT_OVER && !current && next && <p className="mt-3 text-sm font-bold text-[var(--color-text-muted)]">The next scheduled event starts at {next.time}.</p>}
       </div>
     </section>
   );
@@ -200,21 +203,30 @@ function MapSection() {
   );
 }
 
-function UpdatesFeed({ updates }: { updates: Update[] }) {
+function UpdatesFeed({ updates, previewMode }: { updates: Update[]; previewMode: boolean }) {
   return (
     <section className="lamt-panel">
       <div className="lamt-panel-header">
         <div>
-          <p className="label-caps">Live Updates</p>
+          <p className="label-caps">Announcements</p>
           <h2 className="mt-1 text-xl font-extrabold text-[var(--color-text)]">Staff Announcements</h2>
         </div>
-        <span className="font-bold text-[var(--color-text-muted)]">
-          {updates.length} {updates.length === 1 ? "update" : "updates"}
-        </span>
+        <div className="flex flex-wrap items-center justify-end gap-2">
+          <span className="font-bold text-[var(--color-text-muted)]">
+            {updates.length} {updates.length === 1 ? "update" : "updates"}
+          </span>
+          <span className={`feed-mode-badge ${previewMode ? "feed-mode-badge--preview" : ""}`}>
+            {previewMode ? "Local Preview" : "Official"}
+          </span>
+        </div>
       </div>
       {updates.length === 0 ? (
         <div className="lamt-panel-body">
-          <p className="section-copy">Updates will appear here throughout the day.</p>
+          <p className="section-copy">
+            {previewMode
+              ? "Local preview updates from this browser will appear here. They are not public."
+              : "Official tournament announcements will appear here."}
+          </p>
         </div>
       ) : (
         <div>
@@ -234,6 +246,23 @@ function UpdatesFeed({ updates }: { updates: Update[] }) {
           ))}
         </div>
       )}
+    </section>
+  );
+}
+
+function PreviewModeNotice() {
+  return (
+    <section className="local-mode-notice" aria-label="Local preview notice">
+      <div>
+        <p className="label-caps">Local Preview</p>
+        <h2>Showing this browser&apos;s admin draft data.</h2>
+      </div>
+      <p>
+        Public visitors see the deployed schedule and deployed announcements. This preview does not publish changes or sync across devices.
+      </p>
+      <Link href="/live" className="btn-outline">
+        Open Official Page
+      </Link>
     </section>
   );
 }
@@ -266,78 +295,23 @@ function HelpSection() {
   );
 }
 
-function ContactForm() {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [message, setMessage] = useState("");
-  const [status, setStatus] = useState<"idle" | "sent">("idle");
-
-  function submit(event: React.FormEvent) {
-    event.preventDefault();
-
-    try {
-      const existing = readStored<ContactMessage[]>(STORAGE_KEYS.messages, []);
-      window.localStorage.setItem(
-        STORAGE_KEYS.messages,
-        JSON.stringify([
-          {
-            id: Date.now(),
-            name,
-            email,
-            message,
-            timestamp: new Date().toLocaleString("en-US", {
-              month: "short",
-              day: "numeric",
-              hour: "numeric",
-              minute: "2-digit",
-            }),
-            resolved: false,
-            replies: [],
-          },
-          ...existing,
-        ])
-      );
-    } catch {}
-
-    setStatus("sent");
-    setName("");
-    setEmail("");
-    setMessage("");
-  }
-
+function ContactStaffSection() {
+  const mailto = `mailto:${STAFF_EMAIL}?subject=${encodeURIComponent("LAMT tournament-day question")}`;
   return (
     <section className="section-row">
       <h2 className="section-title">Message Staff</h2>
       <div className="lamt-panel">
-        {status === "sent" ? (
-          <div className="lamt-panel-body">
-            <h3 className="text-xl font-extrabold text-[var(--color-text)]">Message received.</h3>
-            <p className="section-copy mt-2">Staff will reply to your email soon.</p>
-            <button type="button" onClick={() => setStatus("idle")} className="btn-outline mt-5">
-              Send Another
-            </button>
+        <div className="lamt-panel-body grid gap-4 md:grid-cols-[1fr_auto] md:items-center">
+          <div>
+            <h3 className="text-xl font-extrabold text-[var(--color-text)]">Use email or the info desk for staff help.</h3>
+            <p className="section-copy mt-2">
+              Email reaches tournament staff. During the tournament, urgent questions should go to the info desk.
+            </p>
           </div>
-        ) : (
-          <form onSubmit={submit} className="lamt-panel-body grid gap-4">
-            <div className="grid gap-4 lg:grid-cols-2">
-              <label className="grid gap-2">
-                <span className="label-caps">Name</span>
-                <input className="lamt-input" value={name} onChange={(event) => setName(event.target.value)} placeholder="Your name" required />
-              </label>
-              <label className="grid gap-2">
-                <span className="label-caps">Email</span>
-                <input className="lamt-input" type="email" value={email} onChange={(event) => setEmail(event.target.value)} placeholder="you@example.com" required />
-              </label>
-            </div>
-            <label className="grid gap-2">
-              <span className="label-caps">Message</span>
-              <textarea className="lamt-textarea" value={message} onChange={(event) => setMessage(event.target.value)} placeholder="Questions, concerns, anything..." required />
-            </label>
-            <button type="submit" disabled={!name || !email || !message} className="btn-outline justify-self-start disabled:opacity-40">
-              Send Message
-            </button>
-          </form>
-        )}
+          <a href={mailto} className="btn-filled">
+            Email Staff
+          </a>
+        </div>
       </div>
     </section>
   );
@@ -346,8 +320,19 @@ function ContactForm() {
 export default function LivePage() {
   const [schedule, setSchedule] = useState<ScheduleItem[]>(DEFAULT_SCHEDULE);
   const [updates, setUpdates] = useState<Update[]>(DEFAULT_UPDATES);
+  const [previewMode, setPreviewMode] = useState(false);
 
   useEffect(() => {
+    setPreviewMode(new URLSearchParams(window.location.search).get("preview") === "1");
+  }, []);
+
+  useEffect(() => {
+    if (!previewMode) {
+      setSchedule(DEFAULT_SCHEDULE);
+      setUpdates(DEFAULT_UPDATES);
+      return;
+    }
+
     function syncStoredData() {
       try {
         setSchedule(readStored<ScheduleItem[]>(STORAGE_KEYS.schedule, DEFAULT_SCHEDULE));
@@ -365,13 +350,13 @@ export default function LivePage() {
 
     window.addEventListener("storage", onStorage);
     return () => window.removeEventListener("storage", onStorage);
-  }, []);
+  }, [previewMode]);
 
   return (
     <div className="page-shell">
       <header className="page-hero">
         <div>
-          <p className="page-kicker">Live Operations</p>
+          <p className="page-kicker">Tournament Day</p>
           <span className="gold-rule" />
         </div>
         <div className="grid gap-6 lg:grid-cols-[1fr_auto] lg:items-end">
@@ -401,9 +386,11 @@ export default function LivePage() {
         </div>
       </header>
 
+      {previewMode && <PreviewModeNotice />}
+
       <section id="announcements" className="section-row">
         <h2 className="section-title">Announcements</h2>
-        <UpdatesFeed updates={updates} />
+        <UpdatesFeed updates={updates} previewMode={previewMode} />
       </section>
 
       <section id="schedule" className="section-row">
@@ -420,7 +407,7 @@ export default function LivePage() {
         <HelpSection />
       </div>
 
-      <ContactForm />
+      <ContactStaffSection />
     </div>
   );
 }

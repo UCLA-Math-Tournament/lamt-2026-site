@@ -4,16 +4,18 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { ArrowTopRightIcon, Cross2Icon, HamburgerMenuIcon } from '@radix-ui/react-icons';
+import DarkModeToggle from './DarkModeToggle';
 
 const navLinks = [
-  { href: '/', label: 'HOME' },
-//   { href: '/tournament', label: 'LAMT 2026' },
-  { href: '/archive', label: 'ARCHIVE' },
-  { href: '/rules', label: 'RULES' },
+  { href: '/', label: 'Home' },
+  { href: '/archive', label: 'Archive' },
+  { href: '/rules', label: 'Rules' },
   { href: '/faq', label: 'FAQ' },
-  { href: '/about', label: 'ABOUT' },
-  { href: 'https://contestdojo.com/public/BoJ8sPuig3IJ4BQeC97u', label: 'REGISTER', external: true },
+  { href: '/about', label: 'About' },
 ];
+
+const ctaLink = { href: 'https://discord.gg/tqR3bGjVke', label: 'Discord' };
 
 export default function NavbarClient() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -23,79 +25,58 @@ export default function NavbarClient() {
     setMenuOpen(false);
   }, [pathname]);
 
-  const linkClass = 'font-extrabold text-xl tracking-widest uppercase text-white transition-opacity duration-200 hover:opacity-70';
-
   return (
-    <header className="w-full bg-[#2774AE] transition-colors duration-300 dark:bg-black">
-      <div className="mx-auto hidden h-20 max-w-[1600px] items-center justify-between px-4 md:flex md:px-6">
-        <Link href="/" className="flex items-center gap-3 font-extrabold uppercase tracking-wide text-white transition-all hover:opacity-70">
-          <Image src="/LAMTBear.png" alt="Logo" width={60} height={60} className="object-contain" />
+    <header className="site-header">
+      <div className="site-header__inner site-pad">
+        <Link href="/" className="site-brand" aria-label="LAMT home">
+          <Image src="/LAMTBear.png" alt="" width={58} height={58} className="site-brand__mark" priority />
+          <span>
+            <strong>LAMT</strong>
+            <small>Los Angeles Math Tournament</small>
+          </span>
         </Link>
-        <nav className="flex items-center gap-16">
-          {navLinks.map(({ href, label, external }) => {
+
+        <nav className="site-nav" aria-label="Primary navigation">
+          {navLinks.map(({ href, label }) => {
             const active = pathname === href;
-            return external ? (
-              <a key={href} href={href} target="_blank" rel="noreferrer" className={linkClass}>
-                {label}
-              </a>
-            ) : (
-              <Link
-                key={href}
-                href={href}
-                className={linkClass}
-                style={{
-                  textDecoration: active ? 'underline' : 'none',
-                  textUnderlineOffset: '6px',
-                  textDecorationThickness: '2px',
-                }}
-              >
+            return (
+              <Link key={href} href={href} className={`site-nav-link ${active ? 'is-active' : ''}`}>
                 {label}
               </Link>
             );
           })}
+          <a href={ctaLink.href} target="_blank" rel="noreferrer" className="btn-premium btn-premium--gold">
+            {ctaLink.label}
+            <ArrowTopRightIcon />
+          </a>
         </nav>
-      </div>
 
-      <div className="flex h-16 items-center justify-between px-4 md:hidden">
-        <Link href="/" className="flex items-center gap-2 font-extrabold uppercase tracking-wide text-white">
-          <Image src="/LAMTBear.png" alt="Logo" width={28} height={28} className="object-contain" />
-          LAMT
-        </Link>
-        <button type="button" onClick={() => setMenuOpen((open) => !open)} aria-label="Toggle menu" className="flex flex-col gap-1.5 p-1">
-          <span className={`block h-0.5 w-6 bg-white transition-all duration-300 ${menuOpen ? 'translate-y-2 rotate-45' : ''}`} />
-          <span className={`block h-0.5 w-6 bg-white transition-all duration-300 ${menuOpen ? 'opacity-0' : ''}`} />
-          <span className={`block h-0.5 w-6 bg-white transition-all duration-300 ${menuOpen ? '-translate-y-2 -rotate-45' : ''}`} />
+        <DarkModeToggle />
+
+        <button type="button" onClick={() => setMenuOpen((open) => !open)} aria-label="Toggle menu" className="site-menu-button">
+          {menuOpen ? <Cross2Icon /> : <HamburgerMenuIcon />}
         </button>
       </div>
 
       {menuOpen && (
-        <nav className="overflow-hidden border-t border-white/20 bg-[#2774AE] dark:bg-black md:hidden">
-          <div className="flex flex-col gap-6 px-6 py-4">
-            {navLinks.map(({ href, label, external }) => {
+        <nav className="site-mobile-nav site-pad" aria-label="Mobile navigation">
+          {navLinks.map(({ href, label }) => {
               const active = pathname === href;
-              const mobileClass = 'text-lg font-extrabold uppercase tracking-widest text-white transition-opacity hover:opacity-70';
-
-              return external ? (
-                <a key={href} href={href} target="_blank" rel="noreferrer" className={mobileClass} onClick={() => setMenuOpen(false)}>
-                  {label}
-                </a>
-              ) : (
+              return (
                 <Link
                   key={href}
                   href={href}
-                  className={mobileClass}
-                  style={{
-                    textDecoration: active ? 'underline' : 'none',
-                    textUnderlineOffset: '6px',
-                    textDecorationThickness: '2px',
-                  }}
+                  className={`site-nav-link site-nav-link--mobile ${active ? 'is-active' : ''}`}
                   onClick={() => setMenuOpen(false)}
                 >
                   {label}
                 </Link>
               );
             })}
-          </div>
+          <a href={ctaLink.href} target="_blank" rel="noreferrer" className="btn-premium btn-premium--gold" onClick={() => setMenuOpen(false)}>
+            {ctaLink.label}
+            <ArrowTopRightIcon />
+          </a>
         </nav>
       )}
     </header>

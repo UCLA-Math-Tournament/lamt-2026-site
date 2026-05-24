@@ -4,7 +4,6 @@ import { useEffect } from 'react';
 
 /* ─── ANIMATION ENGINE ────────────────────────────────────────────────────────
    Installs all site-wide animations once in RootLayout.
-   • Scroll reveals  – staggered clip-path + opacity (no CLS)
    • Counter anim    – [data-count] integers count up on entry
    • Magnetic btns   – .btn-magnetic follows cursor (max 10px)
    • Parallax        – .parallax-[slow|med|fast] depth on scroll
@@ -149,7 +148,7 @@ function initCounters() {
 // ─── 3. MAGNETIC BUTTONS ─────────────────────────────────────────────────────
 function initMagnetic() {
   const btns = document.querySelectorAll<HTMLElement>(
-    '.btn-premium, .btn-magnetic, .btn-filled, .lamt-button'
+    '.btn-premium, .btn-magnetic, .btn-filled, .btn-outline, .lamt-button, .hero-button'
   );
 
   const MAX = 10;
@@ -350,7 +349,7 @@ function initCursorTrail() {
 // ─── 8. GOLD RIPPLE ON CLICK ─────────────────────────────────────────────────
 function initRipple() {
   const targets = document.querySelectorAll<HTMLElement>(
-    '.btn-premium, .btn-filled, .lamt-button, .btn-ripple'
+    '.btn-premium, .btn-filled, .btn-outline, .lamt-button, .hero-button, .btn-ripple'
   );
 
   const cleanups: (() => void)[] = [];
@@ -475,23 +474,17 @@ export default function AnimationEngine() {
     if (reducedMotion) return;
 
     const cleanups = [
-      initReveal(),
       initCounters(),
       initMagnetic(),
       initParallax(),
       initTimelineDraw(),
       initNavMorph(),
-      initCursorTrail(),
       initRipple(),
       initTypewriter(),
       initProofHover(),
     ];
 
-    // Fire hero entrance after a brief paint settle
-    const t = setTimeout(initHeroEntrance, 60);
-
     return () => {
-      clearTimeout(t);
       cleanups.forEach((fn) => fn?.());
     };
   }, []);

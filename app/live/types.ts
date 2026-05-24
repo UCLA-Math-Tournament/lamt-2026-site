@@ -33,7 +33,8 @@ export interface ContactMessage {
 }
 
 // ─── SCHEDULE DATA ────────────────────────────────────────────────────────────
-// Edit times/events here to update the schedule on the live page.
+// This project is database-less. Edit times/events here and redeploy to update
+// the official public /live page. /admin only writes local preview data.
 export const DEFAULT_SCHEDULE: ScheduleItem[] = [
   { time: "8:00 AM",  end: "8:45 AM",  event: "Contestant Check-In",   location: "Outside MS 4000A" },
   { time: "8:45 AM",  end: "9:15 AM",  event: "Opening Ceremony",       location: "MS 4000A" },
@@ -48,7 +49,8 @@ export const DEFAULT_SCHEDULE: ScheduleItem[] = [
 ];
 
 // ─── LIVE UPDATES ─────────────────────────────────────────────────────────────
-// To post an update: prepend an object to this array and push.
+// To publish an official update for all visitors: prepend an object to this
+// array, commit the change, and redeploy.
 // { id: Date.now(), timestamp: "10:45 AM", title: "Optional bold title", body: "Your update text." }
 export const DEFAULT_UPDATES: Update[] = [
   // Example (remove before tournament):

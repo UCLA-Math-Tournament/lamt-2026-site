@@ -1,5 +1,4 @@
 export default function ArchivePage() {
-
     const pastFiles = [
         {
             title: '2026',
@@ -29,6 +28,11 @@ export default function ArchivePage() {
         }
     ]
 
+  const totalFiles = pastFiles.reduce(
+    (sum, year) => sum + Object.values(year.files).reduce((yearSum, items) => yearSum + Object.keys(items).length, 0),
+    0
+  );
+
   return (
     <div className="page-shell">
       <header className="page-hero">
@@ -39,25 +43,52 @@ export default function ArchivePage() {
         <div>
           <h1 className="page-title">Archive</h1>
           <p className="page-summary mt-5">
-            See our past tournament exams, solutions, and results.
+            Tournament papers, official solutions, and results from published LAMT seasons.
           </p>
         </div>
       </header>
 
-      <div>
+      <section className="section-row">
+        <h2 className="section-title">Archive Summary</h2>
+        <div className="archive-command-bar">
+          <div>
+            <p className="label-caps">Published Archive</p>
+            <h3>2026 materials are available.</h3>
+          </div>
+          <div className="archive-command-stat">
+            <span>{pastFiles.length}</span>
+            <strong>{pastFiles.length === 1 ? 'season' : 'seasons'}</strong>
+          </div>
+          <div className="archive-command-stat">
+            <span>{totalFiles}</span>
+            <strong>files</strong>
+          </div>
+        </div>
+      </section>
+
+      <div className="archive-years">
         {pastFiles.map((year) => (
             <section key={year.title} className="section-row">
             <h2 className="section-title">{year.title}</h2>
-            <div className="grid gap-8">
-            {Object.entries(year.files).map(([category, items]) => (
-                <div key={category} className="border-t-2 border-[var(--color-border)] pt-5 first:border-t-0 first:pt-0">
-                    <h3 className="mb-3 font-extrabold text-[var(--color-text)]">{category}</h3>
-                    
-
-                    <ul className="section-copy">
+            <div className="archive-year-board">
+              <div className="archive-year-meta">
+                <span className="label-caps">Season Index</span>
+                <strong>LAMT {year.title}</strong>
+                <p className="section-copy">
+                  Problems, solutions, results, and corrections for LAMT {year.title}.
+                </p>
+              </div>
+              <div className="archive-grid">
+              {Object.entries(year.files).map(([category, items]) => (
+                  <div key={category} className="archive-card">
+                    <div className="archive-card__header">
+                      <span className="label-caps">{category}</span>
+                      <strong>{Object.keys(items as Record<string, string>).length}</strong>
+                    </div>
+                    <ul>
                         {Object.entries(items as Record<string, string>).map(([name, value]) => (
                         <li key={name}>
-                            <a href={value} target="_blank" rel="noreferrer" className="text-blue-600 underline hover:text-blue-800">
+                            <a href={value} target="_blank" rel="noreferrer" className="archive-link">
                                 {name}
                             </a>
                         </li>
@@ -65,9 +96,10 @@ export default function ArchivePage() {
                         
                         ))}
                     </ul>
-                </div>
+                  </div>
                 
-            ))}
+              ))}
+              </div>
             </div>
             </section>
         ))}

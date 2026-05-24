@@ -22,7 +22,7 @@ const FacebookIcon = () => (
 
 export default function FooterClient() {
   const socialLinks = [
-    { title: 'Email', href: 'mailto:team@lamt.net', icon: <EnvelopeClosedIcon width={18} height={18} /> },
+    { title: 'Email', href: 'mailto:uclamathtournament@gmail.com', icon: <EnvelopeClosedIcon width={18} height={18} /> },
     { title: 'Instagram', href: 'https://www.instagram.com/lamathtournament/', icon: <InstagramIcon /> },
     { title: 'Facebook', href: 'https://www.facebook.com/groups/1429462591976204/', icon: <FacebookIcon /> },
     { title: 'LinkedIn', href: 'https://www.linkedin.com/company/la-math-tournament/', icon: <LinkedInLogoIcon width={18} height={18} /> },
@@ -30,7 +30,7 @@ export default function FooterClient() {
   ];
 
   return (
-    <footer className="bg-[#2774AE] text-white dark:bg-black">
+    <footer className="site-footer">
       <div className="mx-auto max-w-[1600px] px-4 py-10 md:px-8">
         <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-[auto_1fr_auto]">
           <div className="flex justify-center lg:justify-start">
@@ -39,19 +39,29 @@ export default function FooterClient() {
             </Link>
           </div>
           <div className="flex justify-center pl-8">
-            <div className="flex items-center gap-4">
-              {socialLinks.map((item) => (
-                <a
-                  key={item.title}
-                  href={item.href}
-                  target="_blank"
-                  rel="noreferrer"
-                  aria-label={item.title}
-                  className="flex h-11 w-11 items-center justify-center rounded-full border-2 border-white bg-white text-[#2774AE] shadow-md transition-all duration-200 hover:scale-110 hover:shadow-xl dark:bg-black dark:text-white"
-                >
-                  {item.icon}
-                </a>
-              ))}
+            <div className="grid justify-items-center gap-4">
+              <div className="flex items-center gap-4">
+                {socialLinks.map((item) => (
+                  <a
+                    key={item.title}
+                    href={item.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label={item.title}
+                    className="site-social-link"
+                  >
+                    {item.icon}
+                  </a>
+                ))}
+              </div>
+              <div className="flex flex-wrap justify-center gap-3">
+                <Link href="/live" className="footer-utility-link">
+                  Live Page
+                </Link>
+                <Link href="/admin" className="footer-utility-link">
+                  Staff Admin
+                </Link>
+              </div>
             </div>
           </div>
           <div className="flex justify-center lg:justify-end">

@@ -1,15 +1,15 @@
 export default function TournamentPage() {
   const schedule = [
-    { time: '8:00 AM', event: 'Contestant Check-In', location: 'Outside MS 4000A' },
-    { time: '8:45 AM', event: 'Opening Ceremony', location: 'MS 4000A' },
-    { time: '9:15 AM', event: 'Secret Team Round', location: 'MS 4000A, 5200' },
-    { time: '10:30 AM', event: 'Algebra / Number Theory', location: 'MS 4000A, 5200' },
-    { time: '11:30 AM', event: 'Combinatorics', location: 'MS 4000A, 5200' },
-    { time: '12:30 PM', event: 'Lunch & Disputes', location: 'Court of Sciences' },
-    { time: '1:30 PM', event: 'Geometry', location: 'MS 4000A, 5200' },
-    { time: '2:45 PM', event: 'Guts Round', location: 'MS 4000A, 5200' },
-    { time: '4:15 PM', event: 'Activities', location: 'MS 4000A, 5200' },
-    { time: '6:00 PM', event: 'Awards Ceremony', location: 'MS 4000A' },
+    { time: '8:00 AM', end: '8:45 AM', event: 'Contestant Check-In', location: 'Outside MS 4000A', note: 'Teams arrived, received materials, and checked in with chaperones.' },
+    { time: '8:45 AM', end: '9:15 AM', event: 'Opening Ceremony', location: 'MS 4000A', note: 'Contest rules, staff introductions, and UCLA logistics.' },
+    { time: '9:15 AM', end: '10:30 AM', event: 'Secret Team Round', location: 'MS 4000A, MS 5200', note: 'Collaborative opening round with a format revealed on site.' },
+    { time: '10:30 AM', end: '11:30 AM', event: 'Algebra / Number Theory', location: 'MS 4000A, MS 5200', note: 'Individual exact-answer round.' },
+    { time: '11:30 AM', end: '12:30 PM', event: 'Combinatorics', location: 'MS 4000A, MS 5200', note: 'Individual exact-answer round.' },
+    { time: '12:30 PM', end: '1:30 PM', event: 'Lunch & Disputes', location: 'Court of Sciences', note: 'Food break, score checks, and dispute window.' },
+    { time: '1:30 PM', end: '2:45 PM', event: 'Geometry', location: 'MS 4000A, MS 5200', note: 'Individual exact-answer round.' },
+    { time: '2:45 PM', end: '4:15 PM', event: 'Guts Round', location: 'MS 4000A, MS 5200', note: 'Sequential team sets with fast submission strategy.' },
+    { time: '4:15 PM', end: '6:00 PM', event: 'Activities', location: 'MS 4000A, MS 5200', note: 'Post-contest programming while scores were finalized.' },
+    { time: '6:00 PM', end: '7:30 PM', event: 'Awards Ceremony', location: 'MS 4000A', note: 'Final rankings, recognition, and closing.' },
   ];
 
   const eligibility = [
@@ -21,9 +21,16 @@ export default function TournamentPage() {
   ];
 
   const format = [
-    { name: 'Individual Rounds', desc: 'Each individual round consists of 10 questions plus a tiebreaker problem, with a 50-minute time limit. Topics may vary by round.' },
-    { name: 'Mystery Round', desc: 'Format to be determined. Details will be released closer to the tournament date.' },
+    { name: 'Individual Rounds', desc: 'Each individual round consisted of 10 questions plus a tiebreaker problem, with a 50-minute time limit.' },
+    { name: 'Secret Team Round', desc: 'A collaborative team round with the exact format revealed on tournament day.' },
     { name: 'Guts Round', desc: 'A standard guts round consisting of 8 sets of 3 problems plus 1 set of estimation problems, delivered to teams in order. Any topics from the individual rounds may also appear on team exams.' },
+  ];
+
+  const facts = [
+    { label: 'Date', value: 'May 17, 2026' },
+    { label: 'Campus', value: 'UCLA' },
+    { label: 'Capacity', value: '250 students' },
+    { label: 'Fee', value: '$0' },
   ];
 
   return (
@@ -35,18 +42,30 @@ export default function TournamentPage() {
         </div>
         <div>
           <h1 className="page-title hero-animate-words">
-            <span className="word">(This page is outdated.) LAMT 2026:</span>{' '}
-            <span className="word">May 17, 2026</span>
+            <span className="word">LAMT 2026</span>{' '}
+            <span className="word">Tournament Brief</span>
           </h1>
           <p className="page-summary reveal mt-5">
-            LAMT 2026 will take place on <strong>May 17, 2026</strong> on the UCLA Campus. We will be inviting approximately <strong>250 students (~60-75 teams)</strong> to compete. There is <strong>no registration fee</strong> for this tournament, but each participant is responsible for their own travel, housing, and related expenses.
+            LAMT 2026 took place on <strong>May 17, 2026</strong> on the UCLA campus. This page covers eligibility, format, location, and schedule.
           </p>
         </div>
       </header>
 
       <section className="section-row">
+        <h2 className="section-title">At A Glance</h2>
+        <div className="tournament-fact-grid">
+          {facts.map((fact) => (
+            <article key={fact.label} className="tournament-fact">
+              <span>{fact.label}</span>
+              <strong>{fact.value}</strong>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="section-row">
         <h2 className="section-title">Eligibility</h2>
-        <ul className="dash-list stagger-parent">
+        <ul className="rule-chip-grid stagger-parent">
           {eligibility.map((item) => (
             <li key={item}>{item}</li>
           ))}
@@ -55,10 +74,11 @@ export default function TournamentPage() {
 
       <section className="section-row">
         <h2 className="section-title">Format</h2>
-        <div className="stagger-parent grid gap-6">
-          {format.map(({ name, desc }) => (
-            <div key={name} className="border-t-2 border-[var(--color-border)] pt-5 first:border-t-0 first:pt-0">
-              <h3 className="font-extrabold text-[var(--color-text)]">{name}</h3>
+        <div className="format-grid stagger-parent">
+          {format.map(({ name, desc }, index) => (
+            <div key={name} className="format-card">
+              <span>0{index + 1}</span>
+              <h3>{name}</h3>
               <p className="section-copy mt-2">{desc}</p>
             </div>
           ))}
@@ -66,26 +86,23 @@ export default function TournamentPage() {
       </section>
 
       <section className="section-row">
-        <h2 className="section-title">Tentative Schedule</h2>
-        <div className="reveal--scale overflow-x-auto">
-          <table className="lamt-table">
-            <thead>
-              <tr>
-                <th>Time</th>
-                <th>Event</th>
-                <th>Location</th>
-              </tr>
-            </thead>
-            <tbody>
-              {schedule.map(({ time, event, location }) => (
-                <tr key={`${time}-${event}`}>
-                  <td className="tabular-nums text-[var(--color-text-secondary)]">{time}</td>
-                  <td className="font-bold text-[var(--color-text)]">{event}</td>
-                  <td className="text-[var(--color-text-secondary)]">{location}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+        <h2 className="section-title">Dayflow</h2>
+        <div className="lamt-timeline" aria-label="LAMT 2026 tournament day timeline">
+          {schedule.map(({ time, end, event, location, note }, index) => (
+            <article key={`${time}-${event}`} className="lamt-timeline-item">
+              <div className="lamt-timeline-node" aria-hidden="true">
+                <span>{String(index + 1).padStart(2, '0')}</span>
+              </div>
+              <div className="lamt-timeline-card">
+                <div>
+                  <span className="lamt-timeline-time">{time}-{end}</span>
+                  <h3>{event}</h3>
+                </div>
+                <p>{note}</p>
+                <strong>{location}</strong>
+              </div>
+            </article>
+          ))}
         </div>
       </section>
 
@@ -93,7 +110,7 @@ export default function TournamentPage() {
         <h2 className="section-title">Location</h2>
         <div>
           <p className="section-copy reveal mb-6">
-            The tournament will be held at the <strong>Court of Sciences</strong> on the UCLA campus in Los Angeles, California.
+            Testing took place in the <strong>Mathematical Sciences Building</strong>, with lunch and disputes centered around the <strong>Court of Sciences</strong>.
           </p>
           <div className="reveal h-[360px] border-2 border-[var(--color-border)]">
             <iframe
@@ -111,11 +128,11 @@ export default function TournamentPage() {
       <section className="section-row">
         <h2 className="section-title">Actions</h2>
         <div className="stagger-parent flex flex-wrap gap-3">
-          <a href="https://contestdojo.com/public/BoJ8sPuig3IJ4BQeC97u" target="_blank" rel="noopener noreferrer" className="btn-outline btn-ripple">
-            Register Now
+          <a href="/archive" className="btn-filled btn-ripple">
+            View 2026 Archive
           </a>
-          <a href="/live" className="btn-filled btn-ripple">
-            Tournament Day Site
+          <a href="/live" className="btn-outline btn-ripple">
+            Tournament Day Page
           </a>
         </div>
       </section>

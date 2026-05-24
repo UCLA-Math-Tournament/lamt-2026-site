@@ -7,6 +7,7 @@ import type { ScheduleItem, Update, ContactMessage } from "../live/types";
 import { DEFAULT_SCHEDULE, DEFAULT_UPDATES } from "../live/types";
 
 const ADMIN_PW = "BRUINSATLAMT";
+const STAFF_EMAIL = "uclamathtournament@gmail.com";
 
 const STORAGE_KEYS = {
   messages: "lamt_messages",
@@ -26,6 +27,26 @@ function readStored<T>(key: string, fallback: T): T {
 
 function writeStored<T>(key: string, value: T) {
   window.localStorage.setItem(key, JSON.stringify(value));
+}
+
+function StorageModeNotice({ compact = false }: { compact?: boolean }) {
+  return (
+    <section className={`local-mode-notice ${compact ? "local-mode-notice--compact" : ""}`} aria-label="Serverless publishing notice">
+      <div>
+        <p className="label-caps">Serverless Mode</p>
+        <h2>Admin edits are local preview data.</h2>
+      </div>
+      <p>
+        This site has no shared database. To publish official announcements or schedule changes for everyone, update the defaults in{" "}
+        <code>app/live/types.ts</code> and redeploy.
+      </p>
+      {!compact && (
+        <Link href="/live?preview=1" className="btn-outline">
+          Open Local Preview
+        </Link>
+      )}
+    </section>
+  );
 }
 
 function LoginScreen({ onLogin }: { onLogin: () => void }) {
@@ -51,7 +72,7 @@ function LoginScreen({ onLogin }: { onLogin: () => void }) {
         <div className="grid gap-6 lg:grid-cols-[1fr_auto] lg:items-end">
           <div>
             <h1 className="page-title">LAMT Admin Panel</h1>
-            <p className="page-summary mt-5">Post live announcements, update the schedule, and respond to tournament-day messages.</p>
+            <p className="page-summary mt-5">Preview tournament-day announcements and schedule changes without implying database-backed publishing.</p>
           </div>
           <Image src="/LAMTBear.png" alt="LAMT" width={128} height={128} priority className="hidden h-32 w-32 border-2 border-[var(--ucla-gold)] bg-[var(--color-surface)] p-3 object-contain lg:block" />
         </div>
@@ -59,24 +80,27 @@ function LoginScreen({ onLogin }: { onLogin: () => void }) {
 
       <section className="section-row">
         <h2 className="section-title">Access</h2>
-        <form onSubmit={submit} className="lamt-panel w-full max-w-md">
-          <div className="lamt-panel-body">
-            <label className="grid gap-2">
-              <span className="label-caps">Password</span>
-              <input
-                className={`lamt-input ${err ? "border-[#B33A2B]" : ""}`}
-                type="password"
-                value={pw}
-                onChange={(event) => setPw(event.target.value)}
-                autoFocus
-              />
-            </label>
-            {err && <p className="mt-3 text-sm font-bold text-[#B33A2B]">Incorrect password</p>}
-            <button type="submit" className="btn-filled mt-5 w-full">
-              Sign In
-            </button>
-          </div>
-        </form>
+        <div className="grid gap-5">
+          <StorageModeNotice compact />
+          <form onSubmit={submit} className="lamt-panel w-full max-w-md">
+            <div className="lamt-panel-body">
+              <label className="grid gap-2">
+                <span className="label-caps">Password</span>
+                <input
+                  className={`lamt-input ${err ? "border-[#B33A2B]" : ""}`}
+                  type="password"
+                  value={pw}
+                  onChange={(event) => setPw(event.target.value)}
+                  autoFocus
+                />
+              </label>
+              {err && <p className="mt-3 text-sm font-bold text-[#B33A2B]">Incorrect password</p>}
+              <button type="submit" className="btn-filled mt-5 w-full">
+                Sign In
+              </button>
+            </div>
+          </form>
+        </div>
       </section>
     </div>
   );
@@ -159,8 +183,8 @@ function MessagesTab({ onUnreadChange }: { onUnreadChange: (count: number) => vo
     return (
       <section className="lamt-panel">
         <div className="lamt-panel-body py-16 text-center">
-          <p className="text-xl font-extrabold text-[var(--color-text)]">No messages yet</p>
-          <p className="section-copy mt-2">Messages from the /live contact form will appear here.</p>
+          <p className="text-xl font-extrabold text-[var(--color-text)]">No local messages</p>
+          <p className="section-copy mt-2">The public /live page uses email instead of a fake localStorage inbox.</p>
         </div>
       </section>
     );
@@ -168,6 +192,15 @@ function MessagesTab({ onUnreadChange }: { onUnreadChange: (count: number) => vo
 
   return (
     <div className="grid gap-5">
+      <section className="lamt-panel">
+        <div className="lamt-panel-body">
+          <p className="font-extrabold text-[var(--color-text)]">Local message scratchpad</p>
+          <p className="section-copy mt-2 text-sm">
+            These records live only in this browser. Replies open your mail client so the actual response leaves through email.
+          </p>
+        </div>
+      </section>
+
       {unresolved > 0 && (
         <div className="border-2 border-[var(--ucla-gold)] bg-[var(--ucla-gold)] p-4 font-extrabold text-[var(--ucla-blue-deep)]">
           {unresolved} unresolved {unresolved === 1 ? "message" : "messages"}
@@ -271,31 +304,43 @@ function AnnouncementsTab({ updates, setUpdates }: {
     persist(updates.filter((update) => update.id !== id));
   }
 
+  function resetUpdates() {
+    persist(DEFAULT_UPDATES);
+  }
+
   return (
     <div className="grid gap-5">
       <section className="lamt-panel">
         <div className="lamt-panel-header">
           <div>
-            <p className="label-caps">Post New Update</p>
+            <p className="label-caps">Local Preview</p>
             <h2 className="mt-1 text-xl font-extrabold text-[var(--color-text)]">Announcement Composer</h2>
           </div>
         </div>
         <div className="lamt-panel-body grid gap-4">
+          <p className="section-copy">
+            Saves to this browser only. For official public announcements, edit <code>app/live/types.ts</code> and redeploy the static site.
+          </p>
           <input className="lamt-input" value={title} onChange={(event) => setTitle(event.target.value)} placeholder="Title (optional)" />
           <textarea className="lamt-textarea" value={body} onChange={(event) => setBody(event.target.value)} placeholder="Update text..." />
-          <button type="button" onClick={addUpdate} disabled={!body.trim()} className="btn-outline justify-self-start disabled:opacity-40">
-            Post Update
-          </button>
+          <div className="flex flex-wrap gap-3">
+            <button type="button" onClick={addUpdate} disabled={!body.trim()} className="btn-outline disabled:opacity-40">
+              Save Preview Update
+            </button>
+            <button type="button" onClick={resetUpdates} className="btn-outline">
+              Reset to Official
+            </button>
+          </div>
         </div>
       </section>
 
       <section className="lamt-panel">
         <div className="lamt-panel-header">
-          <h2 className="text-xl font-extrabold text-[var(--color-text)]">Posted Updates</h2>
+          <h2 className="text-xl font-extrabold text-[var(--color-text)]">Preview Updates</h2>
           <span className="font-bold text-[var(--color-text-muted)]">{updates.length}</span>
         </div>
         {updates.length === 0 ? (
-          <div className="lamt-panel-body text-center text-[var(--color-text-muted)]">No updates posted yet.</div>
+          <div className="lamt-panel-body text-center text-[var(--color-text-muted)]">No preview updates saved.</div>
         ) : (
           updates.map((update) => (
             <article key={update.id} className="border-b-2 border-[var(--color-border)] p-5 last:border-b-0">
@@ -332,6 +377,10 @@ function ScheduleTab({ schedule, setSchedule }: {
     persist(schedule.map((item, itemIndex) => (itemIndex === index ? { ...item, [field]: value } : item)));
   }
 
+  function resetSchedule() {
+    persist(DEFAULT_SCHEDULE);
+  }
+
   return (
     <section className="lamt-panel">
       <div className="lamt-panel-header">
@@ -341,7 +390,14 @@ function ScheduleTab({ schedule, setSchedule }: {
         </div>
       </div>
       <div className="lamt-panel-body">
-        <p className="section-copy mb-5">Edit event times, rooms, and delay notes. Changes sync to the /live page for this browser session.</p>
+        <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
+          <p className="section-copy max-w-3xl">
+            Edit event times, rooms, and delay notes for the local preview only. The official /live page keeps using the deployed schedule.
+          </p>
+          <button type="button" onClick={resetSchedule} className="btn-outline">
+            Reset to Official
+          </button>
+        </div>
         <div className="grid gap-4">
           {schedule.map((item, index) => (
             <div key={`${item.event}-${index}`} className="border-2 border-[var(--color-border)] p-4">
@@ -423,12 +479,15 @@ export default function AdminPage() {
         <div className="grid gap-6 lg:grid-cols-[1fr_auto] lg:items-end">
           <div>
             <h1 className="page-title">LAMT Admin Panel</h1>
-            <p className="page-summary mt-5">Post announcements, adjust the schedule, and handle live-page messages for tournament day.</p>
+            <p className="page-summary mt-5">Draft local previews, check the official live page, and keep real publishing tied to static deploys.</p>
             <div className="mt-6 flex flex-wrap gap-3">
-              <Link href="/live" className="btn-filled">
-                Open Live Page
+              <Link href="/live?preview=1" className="btn-filled">
+                Open Local Preview
               </Link>
-              <a href="mailto:uclamathtournament@gmail.com" className="btn-outline">
+              <Link href="/live" className="btn-outline">
+                Official Live Page
+              </Link>
+              <a href={`mailto:${STAFF_EMAIL}`} className="btn-outline">
                 Email Staff
               </a>
             </div>
@@ -437,12 +496,14 @@ export default function AdminPage() {
         </div>
       </header>
 
+      <StorageModeNotice />
+
       <section className="section-row">
         <h2 className="section-title">Control Room</h2>
         <div className="grid gap-4 md:grid-cols-3">
-          <AdminMetric label="Updates" value={updates.length} detail="Posted announcements" />
-          <AdminMetric label="Schedule" value={schedule.length} detail="Timeline rows" />
-          <AdminMetric label="Messages" value={msgCount} detail="Pending replies" />
+          <AdminMetric label="Updates" value={updates.length} detail="Local preview announcements" />
+          <AdminMetric label="Schedule" value={schedule.length} detail="Local preview rows" />
+          <AdminMetric label="Messages" value={msgCount} detail="Local message records" />
         </div>
       </section>
 

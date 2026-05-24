@@ -58,8 +58,8 @@ export default function RulesPage() {
   ];
 
   const testFormats = [
-    { name: 'Individual Rounds', desc: '10 questions plus a tiebreaker problem. 50-minute time limit per round. Topics vary by round.' },
-    { name: 'Mystery Round', desc: 'Format to be determined and announced closer to the tournament date.' },
+    { name: 'Individual Rounds', desc: '10 questions plus a tiebreaker problem. 50-minute time limit per round.' },
+    { name: 'Secret Team Round', desc: 'A collaborative team round with the exact structure revealed on tournament day.' },
     { name: 'Guts Round', desc: '8 sets of 3 problems plus 1 set of estimation problems, delivered to teams in sequential order.' },
   ];
 
@@ -70,6 +70,12 @@ export default function RulesPage() {
     'Communication devices, such as cell phones and computers',
     'Any drawing aids (rulers, compasses, protractors)',
     'Graph paper',
+  ];
+
+  const ruleSignals = [
+    { label: 'Exact', text: 'Answers should be exact unless a problem states otherwise.' },
+    { label: 'Simplified', text: 'Equivalent expressions may still be rejected if left unsimplified.' },
+    { label: 'No Devices', text: 'Calculators, computers, phones, and communication devices are not contest aids.' },
   ];
 
   return (
@@ -84,16 +90,29 @@ export default function RulesPage() {
         <div>
           <h1 className="page-title">Rules</h1>
           <p className="page-summary mt-5">
-            Rules for testing format, honor code expectations, and acceptable mathematical answers.
+            Testing format, honor code expectations, and answer standards for LAMT competitors.
           </p>
         </div>
       </header>
 
       <section className="section-row">
+        <h2 className="section-title">Rule Signals</h2>
+        <div className="rules-signal-grid">
+          {ruleSignals.map((item) => (
+            <article key={item.label} className="rules-signal-card">
+              <span>{item.label}</span>
+              <p>{item.text}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="section-row">
         <h2 className="section-title">Test Format</h2>
-        <div className="grid gap-6">
-          {testFormats.map(({ name, desc }) => (
-            <div key={name} className="border-t-2 border-[var(--color-border)] pt-5 first:border-t-0 first:pt-0">
+        <div className="format-grid">
+          {testFormats.map(({ name, desc }, index) => (
+            <div key={name} className="format-card">
+              <span>0{index + 1}</span>
               <h3 className="font-extrabold text-[var(--color-text)]">{name}</h3>
               <p className="section-copy mt-2">{desc}</p>
             </div>
@@ -103,14 +122,14 @@ export default function RulesPage() {
 
       <section className="section-row">
         <h2 className="section-title">Honor Code</h2>
-        <div>
+        <div className="rules-callout">
           <p className="section-copy mb-6">
             We expect that when taking their individual tests, the only aid or resource students will use are those explicitly specified below. Students may not access the internet or communicate with other people. For team-based tests, students may communicate with their teammates, but otherwise the same expectations hold.
           </p>
           <p className="mb-4 font-extrabold text-[var(--color-text)]">
             The following may not be used during any testing portion of the contest:
           </p>
-          <ul className="dash-list">
+          <ul className="rule-chip-grid">
             {prohibited.map((item) => (
               <li key={item}>{item}</li>
             ))}
@@ -125,52 +144,33 @@ export default function RulesPage() {
             Answers must be written in correct mathematical notation. Unless otherwise specified, all answers must be exact and simplified. Graders will take a reasonably lenient interpretation of &quot;simplified.&quot; The decisions of the LAMT coordinators are final.
           </p>
 
-          <div className="grid gap-10">
-            <div>
+          <div className="answer-lab">
+            <div className="answer-lab-panel">
               <h3 className="mb-4 font-extrabold text-[var(--color-text)]">Examples of Acceptable Answers</h3>
-              <div className="overflow-x-auto">
-                <table className="lamt-table">
-                  <tbody>
-                    {Array.from({ length: Math.ceil(acceptableExamples.length / 2) }).map((_, rowIndex) => (
-                      <tr key={rowIndex}>
-                        <td className="w-1/2 text-center text-lg text-[var(--color-text)]">
-                          <InlineMath math={acceptableExamples[rowIndex * 2].math} />
-                        </td>
-                        <td className="w-1/2 text-center text-lg text-[var(--color-text)]">
-                          {acceptableExamples[rowIndex * 2 + 1] && (
-                            <InlineMath math={acceptableExamples[rowIndex * 2 + 1].math} />
-                          )}
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
+              <div className="answer-chip-grid">
+                {acceptableExamples.map((item) => (
+                  <span key={item.math} className="answer-chip">
+                    <InlineMath math={item.math} />
+                  </span>
+                ))}
               </div>
             </div>
 
-            <div>
+            <div className="answer-lab-panel">
               <h3 className="mb-4 font-extrabold text-[var(--color-text)]">Examples of Unacceptable Answers</h3>
-              <div className="overflow-x-auto">
-                <table className="lamt-table">
-                  <thead>
-                    <tr>
-                      <th>Unsimplified</th>
-                      <th>Simplified</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {unacceptableExamples.map((item) => (
-                      <tr key={item.unsimplified}>
-                        <td className="text-center text-[var(--color-text-secondary)] line-through">
-                          <InlineMath math={item.unsimplified} />
-                        </td>
-                        <td className="text-center text-lg text-[var(--color-text)]">
-                          <InlineMath math={item.acceptable} />
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
+              <div className="answer-correction-grid">
+                {unacceptableExamples.map((item) => (
+                  <article key={item.unsimplified} className="answer-correction">
+                    <div>
+                      <span className="label-caps">Rejected</span>
+                      <p className="line-through"><InlineMath math={item.unsimplified} /></p>
+                    </div>
+                    <div>
+                      <span className="label-caps">Accepted</span>
+                      <p><InlineMath math={item.acceptable} /></p>
+                    </div>
+                  </article>
+                ))}
               </div>
             </div>
           </div>
