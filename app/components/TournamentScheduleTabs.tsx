@@ -1,5 +1,6 @@
 'use client';
 
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { useMemo, useState } from 'react';
 
 type ScheduleEntry = {
@@ -39,6 +40,7 @@ function getPeriod(item: ScheduleEntry): Exclude<PeriodId, 'all'> {
 }
 
 export default function TournamentScheduleTabs({ schedule }: { schedule: ScheduleEntry[] }) {
+  const reduceMotion = useReducedMotion();
   const [activePeriod, setActivePeriod] = useState<PeriodId>('all');
   const annotatedSchedule = useMemo(
     () => schedule.map((item, index) => ({ ...item, index, period: getPeriod(item) })),
@@ -60,6 +62,7 @@ export default function TournamentScheduleTabs({ schedule }: { schedule: Schedul
       <div className="schedule-tab-list" role="tablist" aria-label="Schedule filters">
         {periods.map((period) => {
           const isActive = period.id === activePeriod;
+
           return (
             <button
               key={period.id}
@@ -71,7 +74,14 @@ export default function TournamentScheduleTabs({ schedule }: { schedule: Schedul
               className="schedule-tab"
               onClick={() => setActivePeriod(period.id)}
             >
-              <span>{period.label}</span>
+              {isActive ? (
+                <motion.span
+                  className="schedule-tab-marker"
+                  layoutId="schedule-tab-marker"
+                  transition={reduceMotion ? { duration: 0 } : { type: 'spring', stiffness: 420, damping: 36 }}
+                />
+              ) : null}
+              <span className="schedule-tab-label">{period.label}</span>
               <strong>{counts[period.id]}</strong>
             </button>
           );
@@ -86,23 +96,43 @@ export default function TournamentScheduleTabs({ schedule }: { schedule: Schedul
         role="tabpanel"
         aria-live="polite"
       >
-        <div className="lamt-timeline" aria-label={`${activeMeta.label} LAMT 2026 schedule`}>
-          {visibleSchedule.map(({ time, end, event, location, note, index }) => (
-            <article key={`${time}-${event}`} className="lamt-timeline-item">
-              <div className="lamt-timeline-node" aria-hidden="true">
-                <span>{String(index + 1).padStart(2, '0')}</span>
-              </div>
-              <div className="lamt-timeline-card">
-                <div>
-                  <span className="lamt-timeline-time">{time}-{end}</span>
-                  <h3>{event}</h3>
+        <AnimatePresence mode="wait" initial={false}>
+          <motion.div
+            key={activePeriod}
+            className="lamt-timeline"
+            aria-label={`${activeMeta.label} LAMT 2026 schedule`}
+            initial={reduceMotion ? false : { opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={reduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: -6 }}
+            transition={reduceMotion ? { duration: 0 } : { duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
+          >
+            {visibleSchedule.map(({ time, end, event, location, note, index }, visibleIndex) => (
+              <motion.article
+                key={`${time}-${event}`}
+                className="lamt-timeline-item"
+                initial={reduceMotion ? false : { opacity: 0, x: -8 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={
+                  reduceMotion
+                    ? { duration: 0 }
+                    : { duration: 0.18, delay: Math.min(visibleIndex * 0.025, 0.12), ease: [0.16, 1, 0.3, 1] }
+                }
+              >
+                <div className="lamt-timeline-node" aria-hidden="true">
+                  <span>{String(index + 1).padStart(2, '0')}</span>
                 </div>
-                <p>{note}</p>
-                <strong>{location}</strong>
-              </div>
-            </article>
-          ))}
-        </div>
+                <div className="lamt-timeline-card">
+                  <div>
+                    <span className="lamt-timeline-time">{time}-{end}</span>
+                    <h3>{event}</h3>
+                  </div>
+                  <p>{note}</p>
+                  <strong>{location}</strong>
+                </div>
+              </motion.article>
+            ))}
+          </motion.div>
+        </AnimatePresence>
       </div>
     </div>
   );

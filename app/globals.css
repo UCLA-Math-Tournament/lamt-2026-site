@@ -3960,6 +3960,9 @@ body {
 }
 
 .schedule-tab {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
   display: inline-grid;
   grid-template-columns: minmax(0, 1fr) auto;
   min-width: 11rem;
@@ -3982,22 +3985,39 @@ body {
     transform 200ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.schedule-tab:hover,
-.schedule-tab[aria-selected="true"] {
+.schedule-tab:hover {
   border-color: var(--ucla-gold);
-  background: var(--ucla-gold);
-  color: var(--ucla-blue-deep);
+  background: var(--color-surface);
   box-shadow: 6px 6px 0 rgba(39, 116, 174, 0.16);
   transform: translateY(-2px);
 }
 
-.schedule-tab span {
+.schedule-tab[aria-selected="true"] {
+  border-color: var(--ucla-gold);
+  color: var(--ucla-blue-deep);
+  box-shadow: 6px 6px 0 rgba(39, 116, 174, 0.16);
+}
+
+.schedule-tab-marker {
+  position: absolute;
+  inset: -1px;
+  z-index: 0;
+  display: block;
+  background: var(--ucla-gold);
+  pointer-events: none;
+}
+
+.schedule-tab-label {
+  position: relative;
+  z-index: 1;
   min-width: 0;
   font-size: var(--text-sm);
   line-height: 1;
 }
 
 .schedule-tab strong {
+  position: relative;
+  z-index: 1;
   display: inline-flex;
   min-width: 2rem;
   height: 2rem;
