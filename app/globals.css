@@ -2459,6 +2459,116 @@ body {
   color: var(--ucla-blue-deep);
 }
 
+.live-schedule-list {
+  display: grid;
+}
+
+.live-schedule-item {
+  display: grid;
+  grid-template-columns: minmax(8.75rem, 0.32fr) minmax(0, 1fr);
+  gap: 0;
+  align-items: stretch;
+  border-bottom: 2px solid var(--color-border);
+  background: var(--color-surface);
+  transition:
+    background-color 160ms ease,
+    transform 180ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.live-schedule-item:last-child {
+  border-bottom: 0;
+}
+
+.live-schedule-item:hover {
+  background: var(--color-surface-2);
+  transform: translateX(3px);
+}
+
+.live-schedule-time,
+.live-schedule-main,
+.live-schedule-place {
+  padding: var(--space-4);
+}
+
+.live-schedule-time {
+  display: grid;
+  grid-row: 1 / span 2;
+  align-content: start;
+  gap: var(--space-2);
+  border-right: 2px solid var(--color-border);
+  background:
+    linear-gradient(90deg, rgba(39, 116, 174, 0.06) 1px, transparent 1px),
+    linear-gradient(0deg, rgba(39, 116, 174, 0.045) 1px, transparent 1px),
+    var(--color-surface-2);
+  background-size: 1.8rem 1.8rem;
+}
+
+.live-schedule-time span {
+  color: var(--color-text-muted);
+  font-size: var(--text-xs);
+  font-weight: 900;
+  line-height: 1;
+  text-decoration: line-through;
+  text-transform: uppercase;
+}
+
+.live-schedule-time strong {
+  color: var(--ucla-blue);
+  font-size: var(--text-sm);
+  font-weight: 950;
+  line-height: 1.1;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.live-schedule-main h3 {
+  color: var(--color-text);
+  font-size: var(--text-lg);
+  font-weight: 950;
+  line-height: 1.1;
+}
+
+.live-schedule-main p {
+  margin-top: var(--space-2);
+  color: #9F2A18;
+  font-size: var(--text-sm);
+  font-weight: 850;
+  line-height: 1.35;
+}
+
+.live-schedule-place {
+  display: grid;
+  grid-column: 2;
+  align-content: center;
+  border-top: 2px solid var(--color-border);
+  color: var(--color-text-secondary);
+  font-size: var(--text-sm);
+  font-weight: 850;
+  line-height: 1.35;
+}
+
+.live-schedule-item[data-state="now"] .live-schedule-time,
+.live-schedule-item[data-state="next"] .live-schedule-time {
+  border-right-color: var(--ucla-gold);
+  background: var(--ucla-gold);
+}
+
+.live-schedule-item[data-state="now"] .live-schedule-time strong,
+.live-schedule-item[data-state="next"] .live-schedule-time strong {
+  color: var(--ucla-blue-deep);
+}
+
+.dark .live-schedule-time {
+  background:
+    linear-gradient(90deg, rgba(255, 209, 0, 0.05) 1px, transparent 1px),
+    linear-gradient(0deg, rgba(255, 209, 0, 0.045) 1px, transparent 1px),
+    var(--color-surface-2);
+}
+
+.dark .live-schedule-time strong {
+  color: var(--ucla-gold);
+}
+
 .local-mode-notice {
   display: grid;
   grid-template-columns: minmax(12rem, 0.85fr) minmax(0, 1.35fr) auto;
@@ -2565,6 +2675,23 @@ body {
   .page-hero {
     padding: var(--space-5);
     box-shadow: 7px 7px 0 rgba(39, 116, 174, 0.12);
+  }
+
+  .live-schedule-item {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .live-schedule-time {
+    grid-row: auto;
+    border-right: 0;
+    border-bottom: 2px solid var(--color-border);
+  }
+
+  .live-schedule-place {
+    grid-column: auto;
+    border-top: 2px solid var(--color-border);
+    align-content: start;
   }
 }
 

@@ -135,40 +135,43 @@ function LiveStatus({ schedule }: { schedule: ScheduleItem[] }) {
   );
 }
 
-function ScheduleTable({ schedule }: { schedule: ScheduleItem[] }) {
+function ScheduleTimeline({ schedule }: { schedule: ScheduleItem[] }) {
+  const { currentIdx, nextIdx } = getTimelineState(schedule, new Date());
+
   return (
     <section className="lamt-panel">
       <div className="lamt-panel-header">
         <div>
           <p className="label-caps">Schedule</p>
-          <h2 className="mt-1 text-xl font-extrabold text-[var(--color-text)]">Tournament Day Timeline</h2>
+          <h2 className="mt-1 text-xl font-extrabold text-[var(--color-text)]">LAMT 2026 Schedule</h2>
         </div>
       </div>
-      <div className="lamt-panel-body overflow-x-auto">
-        <table className="lamt-table">
-          <thead>
-            <tr>
-              <th>Time</th>
-              <th>Event</th>
-              <th>Location</th>
-            </tr>
-          </thead>
-          <tbody>
-            {schedule.map((item) => (
-              <tr key={`${item.time}-${item.event}`}>
-                <td className="tabular-nums text-[var(--color-text-secondary)]">
-                  {item.originalTime && <span className="mb-1 block text-sm text-[var(--color-text-muted)] line-through">{item.originalTime}</span>}
-                  {item.time}-{item.end}
-                </td>
-                <td>
-                  <span className="font-extrabold text-[var(--color-text)]">{item.event}</span>
-                  {item.adjustmentReason && <span className="mt-1 block text-sm font-bold text-[#9F2A18]">{item.adjustmentReason}</span>}
-                </td>
-                <td className="text-[var(--color-text-secondary)]">{item.location}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+      <div className="live-schedule-list" aria-label="LAMT 2026 tournament day schedule">
+        {schedule.map((item, index) => {
+          const state = TOURNAMENT_OVER
+            ? "archive"
+            : index === currentIdx
+              ? "now"
+              : index === nextIdx
+                ? "next"
+                : index < currentIdx
+                  ? "done"
+                  : "upcoming";
+
+          return (
+            <article key={`${item.time}-${item.event}`} className="live-schedule-item" data-state={state}>
+              <div className="live-schedule-time">
+                {item.originalTime && <span>{item.originalTime}</span>}
+                <strong>{item.time}-{item.end}</strong>
+              </div>
+              <div className="live-schedule-main">
+                <h3>{item.event}</h3>
+                {item.adjustmentReason && <p>{item.adjustmentReason}</p>}
+              </div>
+              <div className="live-schedule-place">{item.location}</div>
+            </article>
+          );
+        })}
       </div>
     </section>
   );
@@ -206,20 +209,22 @@ function UpdatesFeed({ updates, previewMode }: { updates: Update[]; previewMode:
           <p className="label-caps">Announcements</p>
           <h2 className="mt-1 text-xl font-extrabold text-[var(--color-text)]">Staff Announcements</h2>
         </div>
-        <div className="flex flex-wrap items-center justify-end gap-2">
-          <span className="font-bold text-[var(--color-text-muted)]">
-            {updates.length} {updates.length === 1 ? "update" : "updates"}
-          </span>
-          <span className={`feed-mode-badge ${previewMode ? "feed-mode-badge--preview" : ""}`}>
-            {previewMode ? "Local Preview" : "Official"}
-          </span>
-        </div>
+        {(updates.length > 0 || previewMode) && (
+          <div className="flex flex-wrap items-center justify-end gap-2">
+            <span className="font-bold text-[var(--color-text-muted)]">
+              {updates.length === 0 ? "No updates" : `${updates.length} ${updates.length === 1 ? "update" : "updates"}`}
+            </span>
+            <span className={`feed-mode-badge ${previewMode ? "feed-mode-badge--preview" : ""}`}>
+              {previewMode ? "Staff Draft" : "Posted"}
+            </span>
+          </div>
+        )}
       </div>
       {updates.length === 0 ? (
         <div className="lamt-panel-body">
           <p className="section-copy">
             {previewMode
-              ? "Local preview updates from this browser will appear here. They are not public."
+              ? "Staff draft announcements for review will appear here."
               : TOURNAMENT_OVER
                 ? "No additional tournament announcements are posted."
                 : "Official tournament announcements will appear here."}
@@ -249,16 +254,16 @@ function UpdatesFeed({ updates, previewMode }: { updates: Update[]; previewMode:
 
 function PreviewModeNotice() {
   return (
-    <section className="local-mode-notice" aria-label="Local preview notice">
+    <section className="local-mode-notice" aria-label="Staff draft notice">
       <div>
-        <p className="label-caps">Local Preview</p>
-        <h2>Showing this browser&apos;s admin draft data.</h2>
+        <p className="label-caps">Staff Draft</p>
+        <h2>Showing draft schedule and announcements.</h2>
       </div>
       <p>
-        Public visitors see the deployed schedule and deployed announcements. This preview does not publish changes or sync across devices.
+        Use this view to review staff drafts before publishing official tournament updates.
       </p>
       <Link href="/live" className="btn-outline">
-        Open Official Page
+        Open Event Page
       </Link>
     </section>
   );
@@ -392,9 +397,9 @@ export default function LivePage() {
 
       <section id="schedule" className="section-row">
         <h2 className="section-title">Schedule</h2>
-        <div className="grid gap-5 xl:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)]">
+        <div className="grid items-start gap-5 xl:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)]">
           <LiveStatus schedule={schedule} />
-          <ScheduleTable schedule={schedule} />
+          <ScheduleTimeline schedule={schedule} />
         </div>
       </section>
 

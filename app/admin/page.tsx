@@ -31,18 +31,17 @@ function writeStored<T>(key: string, value: T) {
 
 function StorageModeNotice({ compact = false }: { compact?: boolean }) {
   return (
-    <section className={`local-mode-notice ${compact ? "local-mode-notice--compact" : ""}`} aria-label="Serverless publishing notice">
+    <section className={`local-mode-notice ${compact ? "local-mode-notice--compact" : ""}`} aria-label="Draft publishing notice">
       <div>
-        <p className="label-caps">Serverless Mode</p>
-        <h2>Admin edits are local preview data.</h2>
+        <p className="label-caps">Draft Mode</p>
+        <h2>Drafts stay on this device.</h2>
       </div>
       <p>
-        This site has no shared database. To publish official announcements or schedule changes for everyone, update the defaults in{" "}
-        <code>app/live/types.ts</code> and redeploy.
+        Use drafts for rehearsal. Official public changes should be reviewed, committed, and deployed before use.
       </p>
       {!compact && (
         <Link href="/live?preview=1" className="btn-outline">
-          Open Local Preview
+          Open Draft Preview
         </Link>
       )}
     </section>
@@ -72,7 +71,7 @@ function LoginScreen({ onLogin }: { onLogin: () => void }) {
         <div className="grid gap-6 lg:grid-cols-[1fr_auto] lg:items-end">
           <div>
             <h1 className="page-title">LAMT Admin Panel</h1>
-            <p className="page-summary mt-5">Preview tournament-day announcements and schedule changes without implying database-backed publishing.</p>
+            <p className="page-summary mt-5">Review tournament-day announcement drafts, schedule changes, and staff message notes.</p>
           </div>
           <Image src="/LAMTBear.png" alt="LAMT" width={128} height={128} priority className="hidden h-32 w-32 border-2 border-[var(--ucla-gold)] bg-[var(--color-surface)] p-3 object-contain lg:block" />
         </div>
@@ -183,8 +182,8 @@ function MessagesTab({ onUnreadChange }: { onUnreadChange: (count: number) => vo
     return (
       <section className="lamt-panel">
         <div className="lamt-panel-body py-16 text-center">
-          <p className="text-xl font-extrabold text-[var(--color-text)]">No local messages</p>
-          <p className="section-copy mt-2">The public /live page uses email instead of a fake localStorage inbox.</p>
+          <p className="text-xl font-extrabold text-[var(--color-text)]">No saved messages</p>
+          <p className="section-copy mt-2">Questions from visitors should go through email or the info desk.</p>
         </div>
       </section>
     );
@@ -194,9 +193,9 @@ function MessagesTab({ onUnreadChange }: { onUnreadChange: (count: number) => vo
     <div className="grid gap-5">
       <section className="lamt-panel">
         <div className="lamt-panel-body">
-          <p className="font-extrabold text-[var(--color-text)]">Local message scratchpad</p>
+          <p className="font-extrabold text-[var(--color-text)]">Message Notes</p>
           <p className="section-copy mt-2 text-sm">
-            These records live only in this browser. Replies open your mail client so the actual response leaves through email.
+            Notes stay on this device. Replies open your mail client so the actual response leaves through email.
           </p>
         </div>
       </section>
@@ -313,19 +312,19 @@ function AnnouncementsTab({ updates, setUpdates }: {
       <section className="lamt-panel">
         <div className="lamt-panel-header">
           <div>
-            <p className="label-caps">Local Preview</p>
+            <p className="label-caps">Staff Draft</p>
             <h2 className="mt-1 text-xl font-extrabold text-[var(--color-text)]">Announcement Composer</h2>
           </div>
         </div>
         <div className="lamt-panel-body grid gap-4">
           <p className="section-copy">
-            Saves to this browser only. For official public announcements, edit <code>app/live/types.ts</code> and redeploy the static site.
+            Save announcement drafts for review. Publish official updates only after they are approved and deployed.
           </p>
           <input className="lamt-input" value={title} onChange={(event) => setTitle(event.target.value)} placeholder="Title (optional)" />
           <textarea className="lamt-textarea" value={body} onChange={(event) => setBody(event.target.value)} placeholder="Update text..." />
           <div className="flex flex-wrap gap-3">
             <button type="button" onClick={addUpdate} disabled={!body.trim()} className="btn-outline disabled:opacity-40">
-              Save Preview Update
+              Save Draft Update
             </button>
             <button type="button" onClick={resetUpdates} className="btn-outline">
               Reset to Official
@@ -340,7 +339,7 @@ function AnnouncementsTab({ updates, setUpdates }: {
           <span className="font-bold text-[var(--color-text-muted)]">{updates.length}</span>
         </div>
         {updates.length === 0 ? (
-          <div className="lamt-panel-body text-center text-[var(--color-text-muted)]">No preview updates saved.</div>
+          <div className="lamt-panel-body text-center text-[var(--color-text-muted)]">No draft updates saved.</div>
         ) : (
           updates.map((update) => (
             <article key={update.id} className="border-b-2 border-[var(--color-border)] p-5 last:border-b-0">
@@ -392,7 +391,7 @@ function ScheduleTab({ schedule, setSchedule }: {
       <div className="lamt-panel-body">
         <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
           <p className="section-copy max-w-3xl">
-            Edit event times, rooms, and delay notes for the local preview only. The official /live page keeps using the deployed schedule.
+            Edit event times, rooms, and delay notes for staff review before publishing.
           </p>
           <button type="button" onClick={resetSchedule} className="btn-outline">
             Reset to Official
@@ -479,13 +478,13 @@ export default function AdminPage() {
         <div className="grid gap-6 lg:grid-cols-[1fr_auto] lg:items-end">
           <div>
             <h1 className="page-title">LAMT Admin Panel</h1>
-            <p className="page-summary mt-5">Draft local previews, check the official live page, and keep real publishing tied to static deploys.</p>
+            <p className="page-summary mt-5">Prepare staff drafts, review the event page, and keep official updates deliberate.</p>
             <div className="mt-6 flex flex-wrap gap-3">
               <Link href="/live?preview=1" className="btn-filled">
-                Open Local Preview
+                Open Draft Preview
               </Link>
               <Link href="/live" className="btn-outline">
-                Official Live Page
+                Open Event Page
               </Link>
               <a href={`mailto:${STAFF_EMAIL}`} className="btn-outline">
                 Email Staff
@@ -501,9 +500,9 @@ export default function AdminPage() {
       <section className="section-row">
         <h2 className="section-title">Control Room</h2>
         <div className="grid gap-4 md:grid-cols-3">
-          <AdminMetric label="Updates" value={updates.length} detail="Local preview announcements" />
-          <AdminMetric label="Schedule" value={schedule.length} detail="Local preview rows" />
-          <AdminMetric label="Messages" value={msgCount} detail="Local message records" />
+          <AdminMetric label="Updates" value={updates.length} detail="Draft announcements" />
+          <AdminMetric label="Schedule" value={schedule.length} detail="Draft schedule rows" />
+          <AdminMetric label="Messages" value={msgCount} detail="Saved message notes" />
         </div>
       </section>
 
