@@ -37,12 +37,12 @@ const VENUES = [
 ];
 
 const HELP_ITEMS = [
-  { label: "Info Desk", detail: "Outside MS 4000A starting at 8:00 AM.", href: null },
-  { label: "Wi-Fi", detail: "Use UCLA-WEB; no password is required.", href: null },
-  { label: "Restrooms", detail: "Use the MS Building restrooms near the elevators.", href: null },
-  { label: "Disputes", detail: "Disputes are handled at Court of Sciences during lunch.", href: null },
-  { label: "Emergency", detail: "Call 911 or UCPD at 310-825-4321.", href: "tel:3108254321" },
-  { label: "Contact Staff", detail: STAFF_EMAIL, href: `mailto:${STAFF_EMAIL}` },
+  { label: "Info Desk", tag: "Check-In", detail: "Outside MS 4000A during morning arrival.", href: null },
+  { label: "Wi-Fi", tag: "Campus", detail: "UCLA-WEB was available without a password.", href: null },
+  { label: "Restrooms", tag: "Building", detail: "MS Building restrooms are near the elevators.", href: null },
+  { label: "Disputes", tag: "Scoring", detail: "Disputes were handled at Court of Sciences during lunch.", href: null },
+  { label: "Emergency", tag: "Safety", detail: "Call 911 or UCPD at 310-825-4321.", href: "tel:3108254321", action: "Call", tone: "alert" },
+  { label: "Email LAMT", tag: "Contact", detail: STAFF_EMAIL, href: `mailto:${STAFF_EMAIL}`, action: "Email" },
 ];
 
 function parseTime(value: string): number {
@@ -202,12 +202,14 @@ function MapSection() {
 }
 
 function UpdatesFeed({ updates, previewMode }: { updates: Update[]; previewMode: boolean }) {
+  const heading = previewMode ? "Draft Announcements" : "Tournament Announcements";
+
   return (
     <section className="lamt-panel">
       <div className="lamt-panel-header">
         <div>
           <p className="label-caps">Announcements</p>
-          <h2 className="mt-1 text-xl font-extrabold text-[var(--color-text)]">Staff Announcements</h2>
+          <h2 className="mt-1 text-xl font-extrabold text-[var(--color-text)]">{heading}</h2>
         </div>
         {(updates.length > 0 || previewMode) && (
           <div className="flex flex-wrap items-center justify-end gap-2">
@@ -226,7 +228,7 @@ function UpdatesFeed({ updates, previewMode }: { updates: Update[]; previewMode:
             {previewMode
               ? "Staff draft announcements for review will appear here."
               : TOURNAMENT_OVER
-                ? "No additional tournament announcements are posted."
+                ? "No additional announcements were posted for LAMT 2026."
                 : "Official tournament announcements will appear here."}
           </p>
         </div>
@@ -272,22 +274,24 @@ function PreviewModeNotice() {
 function HelpSection() {
   return (
     <section className="section-row">
-      <h2 className="section-title">Info & Help</h2>
-      <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+      <h2 className="section-title">Tournament Day Reference</h2>
+      <div className="live-help-grid">
         {HELP_ITEMS.map((item) => {
           const content = (
             <>
-              <h3 className="font-extrabold text-[var(--color-text)]">{item.label}</h3>
-              <p className="section-copy mt-2 text-sm">{item.detail}</p>
+              <span className="live-help-card__tag">{item.tag}</span>
+              <h3>{item.label}</h3>
+              <p>{item.detail}</p>
+              {item.action && <em>{item.action}</em>}
             </>
           );
 
           return item.href ? (
-            <a key={item.label} href={item.href} className="lamt-panel p-4 hover:border-[var(--ucla-gold)]">
+            <a key={item.label} href={item.href} className="live-help-card live-help-card--link" data-tone={item.tone}>
               {content}
             </a>
           ) : (
-            <article key={item.label} className="lamt-panel p-4">
+            <article key={item.label} className="live-help-card">
               {content}
             </article>
           );
@@ -298,20 +302,20 @@ function HelpSection() {
 }
 
 function ContactStaffSection() {
-  const mailto = `mailto:${STAFF_EMAIL}?subject=${encodeURIComponent("LAMT tournament-day question")}`;
+  const mailto = `mailto:${STAFF_EMAIL}?subject=${encodeURIComponent("LAMT 2026 follow-up question")}`;
   return (
-    <section className="section-row">
-      <h2 className="section-title">Message Staff</h2>
+    <section id="contact" className="section-row">
+      <h2 className="section-title">Contact</h2>
       <div className="lamt-panel">
         <div className="lamt-panel-body grid gap-4 md:grid-cols-[1fr_auto] md:items-center">
           <div>
-            <h3 className="text-xl font-extrabold text-[var(--color-text)]">Use email or the info desk for staff help.</h3>
+            <h3 className="text-xl font-extrabold text-[var(--color-text)]">Email LAMT for post-tournament questions.</h3>
             <p className="section-copy mt-2">
-              Email reaches tournament staff. During the tournament, urgent questions should go to the info desk.
+              For LAMT 2026 follow-up, use the tournament email address.
             </p>
           </div>
           <a href={mailto} className="btn-filled">
-            Email Staff
+            Email LAMT
           </a>
         </div>
       </div>
@@ -365,7 +369,7 @@ export default function LivePage() {
           <div>
             <h1 className="page-title">LAMT 2026 Event Archive</h1>
             <p className="page-summary mt-5">
-              Final status, schedule, UCLA venue directions, and staff contact information from Sunday, May 17, 2026.
+              Final schedule, posted announcements, UCLA venue references, and contact links from Sunday, May 17, 2026.
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
               <a href="#announcements" className="btn-filled">
@@ -377,7 +381,7 @@ export default function LivePage() {
               <a href="#map" className="btn-outline">
                 Venue Reference
               </a>
-              <a href="#help" className="btn-outline">
+              <a href="#contact" className="btn-outline">
                 Contact
               </a>
             </div>
@@ -405,7 +409,7 @@ export default function LivePage() {
 
       <MapSection />
 
-      <div id="help">
+      <div id="reference">
         <HelpSection />
       </div>
 
