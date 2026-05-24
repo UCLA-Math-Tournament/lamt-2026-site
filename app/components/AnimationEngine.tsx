@@ -42,6 +42,14 @@ function initReveal() {
   // Set initial state (invisible, not displacing layout)
   all.forEach((el) => {
     if (el.classList.contains('is-visible') || el.dataset.revealed) return;
+    const rect = el.getBoundingClientRect();
+    const initiallyVisible = rect.top < window.innerHeight - 40 && rect.bottom > 0;
+    if (initiallyVisible) {
+      el.dataset.revealed = '1';
+      el.classList.add('is-visible');
+      return;
+    }
+
     if (el.classList.contains('reveal--scale')) {
       el.style.opacity = '0';
       el.style.transform = 'scale(0.88)';
@@ -449,6 +457,8 @@ function initHeroEntrance() {
       };
     });
   });
+
+  return () => {};
 }
 
 // ─── 11. PROOF CHAPTER HOVER LIFT ────────────────────────────────────────────
@@ -481,6 +491,7 @@ export default function AnimationEngine() {
       initNavMorph(),
       initRipple(),
       initTypewriter(),
+      initHeroEntrance(),
       initProofHover(),
     ];
 

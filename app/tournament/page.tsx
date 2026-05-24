@@ -1,4 +1,5 @@
 import TournamentScheduleTabs from '../components/TournamentScheduleTabs';
+import VenueMap from '../components/VenueMap';
 
 export default function TournamentPage() {
   const schedule = [
@@ -33,27 +34,6 @@ export default function TournamentPage() {
     { label: 'Campus', value: 'UCLA' },
     { label: 'Capacity', value: '250 students' },
     { label: 'Fee', value: '$0' },
-  ];
-
-  const venues = [
-    {
-      id: 'ms',
-      detail: 'Mathematical Sciences Building: MS 4000A and MS 5200.',
-      shortLabel: 'MS',
-      href: 'https://www.google.com/maps/search/?api=1&query=UCLA+Mathematical+Sciences+Building',
-    },
-    {
-      id: 'court',
-      detail: 'Court of Sciences: lunch, disputes, and outdoor gathering point.',
-      shortLabel: 'Court',
-      href: 'https://www.google.com/maps/search/?api=1&query=Court+of+Sciences+UCLA',
-    },
-    {
-      id: 'parking',
-      detail: 'Parking Structure 2: closest public parking reference.',
-      shortLabel: 'P2',
-      href: 'https://www.google.com/maps/search/?api=1&query=UCLA+Parking+Structure+2',
-    },
   ];
 
   return (
@@ -119,17 +99,7 @@ export default function TournamentPage() {
           <p className="section-copy reveal mb-6">
             Testing took place in the <strong>Mathematical Sciences Building</strong>, with lunch and disputes centered around the <strong>Court of Sciences</strong>.
           </p>
-          <div className="venue-map-board" aria-label="LAMT 2026 UCLA venue reference">
-            <span className="venue-map-board__label venue-map-board__label--north">UCLA North Campus</span>
-            <span className="venue-map-board__route" aria-hidden="true" />
-            {venues.map((venue) => (
-              <a key={venue.id} className={`venue-marker venue-marker--${venue.id}`} href={venue.href} target="_blank" rel="noopener noreferrer">
-                <strong>{venue.shortLabel}</strong>
-                <span>{venue.detail}</span>
-                <em>Open Map</em>
-              </a>
-            ))}
-          </div>
+          <VenueMap />
         </div>
       </section>
 

@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import VenueMap from "../components/VenueMap";
 import type { ScheduleItem, Update } from "./types";
 import { DEFAULT_SCHEDULE, DEFAULT_UPDATES } from "./types";
 
@@ -14,27 +15,6 @@ const STORAGE_KEYS = {
 };
 
 const STAFF_EMAIL = "uclamathtournament@gmail.com";
-
-const VENUES = [
-  {
-    id: "ms",
-    shortLabel: "MS",
-    detail: "Mathematical Sciences Building: MS 4000A and MS 5200.",
-    href: "https://www.google.com/maps/search/?api=1&query=UCLA+Mathematical+Sciences+Building",
-  },
-  {
-    id: "court",
-    shortLabel: "Court",
-    detail: "Lunch, disputes, and outdoor gathering point.",
-    href: "https://www.google.com/maps/search/?api=1&query=Court+of+Sciences+UCLA",
-  },
-  {
-    id: "parking",
-    shortLabel: "P2",
-    detail: "Parking Structure 2: closest public parking reference.",
-    href: "https://www.google.com/maps/search/?api=1&query=UCLA+Parking+Structure+2",
-  },
-];
 
 const HELP_ITEMS = [
   { label: "Info Desk", tag: "Check-In", detail: "Outside MS 4000A during morning arrival.", href: null },
@@ -185,17 +165,7 @@ function MapSection() {
         <p className="section-copy mb-6">
           LAMT 2026 was centered around the Mathematical Sciences Building, with lunch and disputes at the Court of Sciences.
         </p>
-        <div className="venue-map-board" aria-label="LAMT 2026 UCLA venue reference">
-          <span className="venue-map-board__label venue-map-board__label--north">UCLA North Campus</span>
-          <span className="venue-map-board__route" aria-hidden="true" />
-          {VENUES.map((venue) => (
-            <a key={venue.id} className={`venue-marker venue-marker--${venue.id}`} href={venue.href} target="_blank" rel="noopener noreferrer">
-              <strong>{venue.shortLabel}</strong>
-              <span>{venue.detail}</span>
-              <em>Open Map</em>
-            </a>
-          ))}
-        </div>
+        <VenueMap />
       </div>
     </section>
   );

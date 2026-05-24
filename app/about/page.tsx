@@ -85,9 +85,9 @@ export default function AboutPage() {
   ];
 
   const operatingPrinciples = [
-    { label: 'Student-Run', value: 'Independent UCLA organizers' },
-    { label: 'Contest-First', value: 'Problems, grading, logistics' },
-    { label: 'Accessible', value: 'Free registration' },
+    { label: 'Organizers', value: 'UCLA students' },
+    { label: 'Audience', value: 'Middle and high school students' },
+    { label: 'Cost', value: 'Free registration' },
   ];
   const [activeGroup, setActiveGroup] = useState(staffGroups[0].title);
   const selectedGroup = staffGroups.find((group) => group.title === activeGroup) || staffGroups[0];
@@ -105,7 +105,7 @@ export default function AboutPage() {
             <span className="word">Us</span>
           </h1>
           <p className="page-summary reveal mt-5">
-            The Los Angeles Math Tournament Group hosts math contests for middle and high school students.
+            The Los Angeles Math Tournament Group runs a free in-person math contest for middle and high school students.
           </p>
         </div>
       </header>
@@ -115,10 +115,10 @@ export default function AboutPage() {
         <div className="mission-board">
           <div className="mission-stack stagger-parent">
             <p className="section-copy">
-              We strive to encourage mathematical exploration and understanding by introducing concepts not covered in the typical pre-college curricula to students with high mathematical aptitude and interest.
+              LAMT gives students a full contest day at UCLA with individual rounds, team rounds, lunch, disputes, and awards.
             </p>
             <p className="section-copy">
-              Each contest emphasizes collaboration between team members, while still allowing individuals to prove their own ability.
+              The tournament is built around clear logistics, strong problem writing, and a collaborative team experience.
             </p>
           </div>
           <div className="mission-principles">
@@ -172,12 +172,6 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="section-row">
-        <h2 className="section-title">UC Disclaimer</h2>
-        <p className="section-copy reveal">
-          We are a student group acting independently of the University of California; we take full responsibility for our organization and this website.
-        </p>
-      </section>
     </div>
   );
 }
