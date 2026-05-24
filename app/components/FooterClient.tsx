@@ -61,8 +61,8 @@ export default function FooterClient() {
                 href={item.href}
                 target={item.href.startsWith('mailto:') ? undefined : '_blank'}
                 rel={item.href.startsWith('mailto:') ? undefined : 'noreferrer'}
-                aria-label={item.title}
-                title={item.title}
+                aria-label={`LAMT ${item.title}`}
+                title={`LAMT ${item.title}`}
                 className="site-social-link"
                 data-platform={item.title.toLowerCase()}
                 data-state={activeSocial === item.title ? 'active' : undefined}
@@ -71,8 +71,9 @@ export default function FooterClient() {
                 whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-24px' }}
                 transition={{ duration: 0.22, delay: index * 0.025, ease: [0.16, 1, 0.3, 1] }}
-                whileHover={reduceMotion ? undefined : { y: -3 }}
-                whileTap={reduceMotion ? undefined : { scale: 0.98 }}
+                layout
+                whileHover={reduceMotion ? undefined : { y: -2 }}
+                whileTap={reduceMotion ? undefined : { scale: 0.985 }}
                 onBlur={() => setActiveSocial(null)}
                 onFocus={() => setActiveSocial(item.title)}
                 onMouseEnter={() => setActiveSocial(item.title)}
