@@ -6144,3 +6144,42 @@ body {
     animation-duration: 1ms !important;
   }
 }
+
+/* 21st.dev adapted scroll-tilt: archive cards rise into focus as materials enter view. */
+.archive-grid--motion {
+  perspective: 900px;
+  transform-style: preserve-3d;
+}
+
+.archive-card--motion {
+  transform-origin: center top;
+  will-change: transform, opacity;
+}
+
+.archive-card--motion .archive-link {
+  position: relative;
+  overflow: hidden;
+}
+
+.archive-card--motion .archive-link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
+  transform: translateX(-130%);
+  transition: transform 560ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.archive-card--motion .archive-link:hover::after,
+.archive-card--motion .archive-link:focus-visible::after {
+  transform: translateX(130%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .archive-grid--motion,
+  .archive-card--motion,
+  .archive-card--motion * {
+    transition-duration: 1ms !important;
+    animation-duration: 1ms !important;
+  }
+}

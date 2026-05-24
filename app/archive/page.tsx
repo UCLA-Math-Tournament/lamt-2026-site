@@ -1,3 +1,5 @@
+import ArchiveMaterialGrid from '../components/ArchiveMaterialGrid';
+
 export default function ArchivePage() {
   const pastFiles = [
     {
@@ -56,31 +58,16 @@ export default function ArchivePage() {
                   Problems, solutions, results, and corrections for LAMT {year.title}.
                 </p>
               </div>
-              <div className="archive-grid">
-                {Object.entries(year.files).map(([category, items]) => {
-                  const entries = Object.entries(items as Record<string, string>);
-                  return (
-                    <div key={category} className="archive-card">
-                      <div className="archive-card__header">
-                        <span className="label-caps">{category}</span>
-                        <strong>{entries.length}</strong>
-                      </div>
-                      <ul>
-                        {entries.map(([name, value]) => (
-                          <li key={name}>
-                            <a href={value} target="_blank" rel="noreferrer" className="archive-link">
-                              <span className="archive-link__title">{name}</span>
-                              <span className="archive-link__meta">
-                                <em>{fileType(value)}</em>
-                              </span>
-                            </a>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  );
-                })}
-              </div>
+              <ArchiveMaterialGrid
+                groups={Object.entries(year.files).map(([category, items]) => ({
+                  category,
+                  items: Object.entries(items as Record<string, string>).map(([name, value]) => ({
+                    name,
+                    href: value,
+                    type: fileType(value),
+                  })),
+                }))}
+              />
             </div>
           </section>
         ))}
