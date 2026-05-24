@@ -2,6 +2,14 @@
 
 import { useEffect, useState } from 'react';
 import KaTeXLoader from '../components/KaTeXLoader';
+import RulesSectionNav, { type RulesSectionLink } from '../components/RulesSectionNav';
+
+const rulesSections: RulesSectionLink[] = [
+  { id: 'key-rules', label: 'Key Rules' },
+  { id: 'test-format', label: 'Test Format' },
+  { id: 'allowed-not-allowed', label: 'Allowed / Not Allowed' },
+  { id: 'answer-format', label: 'Answer Format' },
+];
 
 function InlineMath({ math }: { math: string }) {
   const [html, setHtml] = useState<string | null>(null);
@@ -104,7 +112,9 @@ export default function RulesPage() {
         </div>
       </header>
 
-      <section className="section-row">
+      <RulesSectionNav sections={rulesSections} />
+
+      <section id="key-rules" className="section-row">
         <h2 className="section-title">Key Rules</h2>
         <div className="rules-reference-grid">
           {keyRules.map((item) => (
@@ -116,7 +126,7 @@ export default function RulesPage() {
         </div>
       </section>
 
-      <section className="section-row">
+      <section id="test-format" className="section-row">
         <h2 className="section-title">Test Format</h2>
         <div className="format-grid">
           {testFormats.map(({ name, desc }, index) => (
@@ -129,7 +139,7 @@ export default function RulesPage() {
         </div>
       </section>
 
-      <section className="section-row">
+      <section id="allowed-not-allowed" className="section-row">
         <h2 className="section-title">Allowed / Not Allowed</h2>
         <div className="rules-comparison-board">
           <div className="rules-comparison-table" role="table" aria-label="LAMT rules reference">
@@ -155,7 +165,7 @@ export default function RulesPage() {
         </div>
       </section>
 
-      <section className="section-row">
+      <section id="answer-format" className="section-row">
         <h2 className="section-title">Answer Format</h2>
         <div>
           <p className="section-copy mb-8">
