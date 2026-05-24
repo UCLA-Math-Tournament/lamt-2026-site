@@ -8766,8 +8766,12 @@ html {
 }
 
 .site-brand__mark,
-.site-footer__mark {
-  filter: drop-shadow(0 1px 0 rgba(255, 209, 0, 0.26)) !important;
+.site-footer__mark,
+.lamt-timeline-node span,
+.rules-section-nav,
+.archive-year-meta {
+  box-shadow: none !important;
+  filter: none !important;
 }
 
 @media (max-width: 900px) {
