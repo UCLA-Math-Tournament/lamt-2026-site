@@ -63,15 +63,6 @@ export default function RulesPage() {
     { name: 'Guts Round', desc: '8 sets of 3 problems plus 1 set of estimation problems, delivered to teams in sequential order.' },
   ];
 
-  const prohibited = [
-    'Calculators',
-    'Other computational aids, such as slide rules and abaci',
-    'Reference materials, such as books and notes',
-    'Communication devices, such as cell phones and computers',
-    'Any drawing aids (rulers, compasses, protractors)',
-    'Graph paper',
-  ];
-
   const keyRules = [
     { label: 'Answers', text: 'Exact and simplified unless the problem states otherwise.' },
     { label: 'Individual Tests', text: 'No internet access and no communication with other people.' },
@@ -150,19 +141,16 @@ export default function RulesPage() {
             {ruleTable.map((row) => (
               <div key={row.category} className="rules-table-row" role="row">
                 <strong role="cell">{row.category}</strong>
-                <p role="cell">{row.allowed}</p>
-                <p role="cell">{row.notAllowed}</p>
+                <p role="cell">
+                  <span className="rules-cell-label">Allowed</span>
+                  {row.allowed}
+                </p>
+                <p role="cell">
+                  <span className="rules-cell-label">Not Allowed</span>
+                  {row.notAllowed}
+                </p>
               </div>
             ))}
-          </div>
-
-          <div className="rules-prohibited-list">
-            <h3>Not permitted during testing</h3>
-            <ul>
-              {prohibited.map((item) => (
-                <li key={item}>{item}</li>
-              ))}
-            </ul>
           </div>
         </div>
       </section>
