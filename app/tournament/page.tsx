@@ -33,6 +33,27 @@ export default function TournamentPage() {
     { label: 'Fee', value: '$0' },
   ];
 
+  const venues = [
+    {
+      id: 'ms',
+      detail: 'Mathematical Sciences Building: MS 4000A and MS 5200.',
+      shortLabel: 'MS',
+      href: 'https://www.google.com/maps/search/?api=1&query=UCLA+Mathematical+Sciences+Building',
+    },
+    {
+      id: 'court',
+      detail: 'Court of Sciences: lunch, disputes, and outdoor gathering point.',
+      shortLabel: 'Court',
+      href: 'https://www.google.com/maps/search/?api=1&query=Court+of+Sciences+UCLA',
+    },
+    {
+      id: 'parking',
+      detail: 'Parking Structure 2: closest public parking reference.',
+      shortLabel: 'P2',
+      href: 'https://www.google.com/maps/search/?api=1&query=UCLA+Parking+Structure+2',
+    },
+  ];
+
   return (
     <div className="page-shell">
       <header className="page-hero">
@@ -112,15 +133,16 @@ export default function TournamentPage() {
           <p className="section-copy reveal mb-6">
             Testing took place in the <strong>Mathematical Sciences Building</strong>, with lunch and disputes centered around the <strong>Court of Sciences</strong>.
           </p>
-          <div className="reveal h-[360px] border-2 border-[var(--color-border)]">
-            <iframe
-              title="Court of Sciences UCLA map"
-              className="map-iframe"
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3305.7!2d-118.4417!3d34.0683!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80c2bc85b3b3b3b3%3A0x0!2sCourt+of+Sciences%2C+UCLA!5e0!3m2!1sen!2sus!4v1617000000000!5m2!1sen!2sus"
-              allowFullScreen
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-            />
+          <div className="venue-map-board" aria-label="LAMT 2026 UCLA venue reference">
+            <span className="venue-map-board__label venue-map-board__label--north">UCLA North Campus</span>
+            <span className="venue-map-board__route" aria-hidden="true" />
+            {venues.map((venue) => (
+              <a key={venue.id} className={`venue-marker venue-marker--${venue.id}`} href={venue.href} target="_blank" rel="noopener noreferrer">
+                <strong>{venue.shortLabel}</strong>
+                <span>{venue.detail}</span>
+                <em>Open Map</em>
+              </a>
+            ))}
           </div>
         </div>
       </section>
