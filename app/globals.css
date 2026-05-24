@@ -3226,8 +3226,7 @@ body {
 
 .faq-console {
   display: grid;
-  grid-template-columns: minmax(14rem, 0.32fr) minmax(0, 1fr);
-  gap: var(--space-5);
+  gap: var(--space-4);
   align-items: start;
 }
 
@@ -3240,43 +3239,23 @@ body {
 }
 
 .faq-control-panel {
-  position: sticky;
-  top: 6.5rem;
   display: grid;
+  grid-template-columns: minmax(14rem, 0.42fr) minmax(0, 1fr);
   gap: var(--space-4);
+  align-items: end;
   padding: var(--space-5);
 }
 
 .faq-category-grid {
-  display: grid;
+  display: flex;
+  flex-wrap: wrap;
   gap: var(--space-2);
+  justify-content: flex-end;
 }
 
 .faq-category-grid .lamt-button {
-  justify-content: flex-start;
-  width: 100%;
-}
-
-.faq-count-box {
-  border: 3px solid var(--ucla-gold);
-  background: var(--ucla-gold);
-  color: var(--ucla-blue-deep);
-  padding: var(--space-4);
-}
-
-.faq-count-box span {
-  display: block;
-  font-size: var(--text-2xl);
-  font-weight: 950;
-  line-height: 1;
-}
-
-.faq-count-box strong {
-  display: block;
-  margin-top: var(--space-2);
-  font-size: var(--text-xs);
-  font-weight: 950;
-  text-transform: uppercase;
+  min-height: 2.75rem;
+  padding-inline: 1rem;
 }
 
 .faq-accordion {
@@ -3446,14 +3425,21 @@ body {
 
   .archive-year-board,
   .mission-board,
-  .about-directory,
-  .faq-console {
+  .about-directory {
     grid-template-columns: 1fr;
   }
 
-  .archive-year-meta,
-  .faq-control-panel {
+  .archive-year-meta {
     position: static;
+  }
+
+  .faq-control-panel {
+    grid-template-columns: 1fr;
+    align-items: stretch;
+  }
+
+  .faq-category-grid {
+    justify-content: flex-start;
   }
 }
 
@@ -3497,6 +3483,11 @@ body {
   .faq-accordion-trigger {
     grid-template-columns: 2.8rem minmax(0, 1fr) 2.5rem;
     gap: var(--space-3);
+  }
+
+  .faq-category-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .faq-accordion-content {

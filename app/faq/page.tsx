@@ -57,9 +57,9 @@ export default function FAQPage() {
       </header>
 
       <section className="section-row">
-        <h2 className="section-title">Find Answers</h2>
+        <h2 className="section-title">Common Questions</h2>
         <div className="faq-console">
-          <aside className="faq-control-panel" aria-label="FAQ filters">
+          <div className="faq-control-panel" aria-label="FAQ filters">
             <label className="grid gap-2">
               <span className="label-caps">Search FAQ</span>
               <input
@@ -78,17 +78,13 @@ export default function FAQPage() {
                   onClick={() => setCategory(item)}
                   className="lamt-button"
                   data-state={category === item ? 'selected' : undefined}
+                  aria-pressed={category === item}
                 >
                   {item}
                 </button>
               ))}
             </div>
-
-            <div className="faq-count-box">
-              <span>{filtered.length}</span>
-              <strong>{filtered.length === 1 ? 'answer' : 'answers'}</strong>
-            </div>
-          </aside>
+          </div>
 
           <div className="faq-accordion" aria-live="polite">
             {filtered.length === 0 ? (
