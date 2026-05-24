@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import AboutStickyReveal from '../components/AboutStickyReveal';
 
 export default function AboutPage() {
   const staffGroups = [
@@ -129,6 +130,11 @@ export default function AboutPage() {
             ))}
           </div>
         </div>
+      </section>
+
+      <section className="section-row">
+        <h2 className="section-title">What LAMT Is</h2>
+        <AboutStickyReveal />
       </section>
 
       <section className="section-row">
