@@ -487,7 +487,46 @@ main {
   line-height: 0.94;
 }
 
-.home-stat-card span {
+.stat-value-animated {
+  display: inline-flex;
+  min-height: 1em;
+  align-items: baseline;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+.stat-value-animated__slot {
+  position: relative;
+  display: inline-block;
+  width: 0.62em;
+  height: 1em;
+  overflow: hidden;
+  vertical-align: top;
+}
+
+.stat-value-animated__column {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: inline-flex;
+  width: 100%;
+  flex-direction: column;
+}
+
+.stat-value-animated__column-digit,
+.stat-value-animated__static-digit {
+  display: block;
+  height: 1em;
+  line-height: 1;
+  text-align: center;
+}
+
+.stat-value-animated__literal {
+  display: inline-block;
+  white-space: pre;
+}
+
+.home-stat-card > span {
   position: relative;
   z-index: 1;
   display: block;

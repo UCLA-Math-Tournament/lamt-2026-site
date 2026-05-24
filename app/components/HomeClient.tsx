@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { ArrowRightIcon, DiscordLogoIcon, FileTextIcon } from '@radix-ui/react-icons';
+import AnimatedStatValue from './AnimatedStatValue';
 
 const homeButtonClass =
   'btn-ripple hero-button inline-flex min-h-12 items-center justify-center gap-2 px-5 py-3 text-sm font-extrabold uppercase text-white';
@@ -81,11 +82,11 @@ export default function HomeClient({
   const regDiff = useCountdown('2026-05-10T23:59:59-07:00');
   const regClosed = regDiff <= 0;
   const tournamentComplete = tournamentDiff <= 0;
-  const highlightStats: Array<{ value: string; label: string; count?: number; prefix?: string; suffix?: string }> = [
-    { value: '250+', label: 'students invited', count: 250, suffix: '+' },
+  const highlightStats = [
+    { value: '250+', label: 'students invited' },
     { value: 'May 17', label: '2026 tournament' },
     { value: 'UCLA', label: 'campus host' },
-    { value: '$0', label: 'registration fee', count: 0, prefix: '$' },
+    { value: '$0', label: 'registration fee' },
   ];
   const roundCards = [
     { title: 'Individual Rounds', text: 'Algebra / number theory, combinatorics, and geometry.' },
@@ -153,23 +154,14 @@ export default function HomeClient({
         </div>
 
         <div className="home-hero__stats">
-          {highlightStats.map((stat) => {
-            const countProps =
-              typeof stat.count === 'number'
-                ? {
-                    'data-count': stat.count,
-                    'data-count-prefix': stat.prefix ?? '',
-                    'data-count-suffix': stat.suffix ?? '',
-                  }
-                : {};
-
-            return (
-              <div key={stat.label} className="home-stat-card">
-                <strong {...countProps}>{stat.value}</strong>
-                <span>{stat.label}</span>
-              </div>
-            );
-          })}
+          {highlightStats.map((stat) => (
+            <div key={stat.label} className="home-stat-card">
+              <strong>
+                <AnimatedStatValue value={stat.value} />
+              </strong>
+              <span>{stat.label}</span>
+            </div>
+          ))}
         </div>
       </section>
 
