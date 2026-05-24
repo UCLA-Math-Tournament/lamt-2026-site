@@ -1,3 +1,7 @@
+'use client';
+
+import { useState } from 'react';
+
 export default function AboutPage() {
   const staffGroups = [
     {
@@ -85,6 +89,8 @@ export default function AboutPage() {
     { label: 'Contest-First', value: 'Problems, grading, logistics' },
     { label: 'Accessible', value: 'Free registration' },
   ];
+  const [activeGroup, setActiveGroup] = useState(staffGroups[0].title);
+  const selectedGroup = staffGroups.find((group) => group.title === activeGroup) || staffGroups[0];
 
   return (
     <div className="page-shell">
@@ -128,20 +134,41 @@ export default function AboutPage() {
 
       <section className="section-row">
         <h2 className="section-title">LAMT Staff</h2>
-        <div className="staff-directory stagger-parent">
-          {staffGroups.map((group) => (
-            <article key={group.title} className="staff-card">
-              <div className="staff-card__header">
-                <h3>{group.title}</h3>
-                <span>{group.people.length}</span>
+        <div className="about-directory">
+          <nav className="about-directory__nav" aria-label="Staff groups" role="tablist">
+            {staffGroups.map((group) => {
+              const isActive = group.title === selectedGroup.title;
+              return (
+                <button
+                  key={group.title}
+                  type="button"
+                  role="tab"
+                  aria-selected={isActive}
+                  aria-controls="staff-group-panel"
+                  className="about-directory__tab"
+                  onClick={() => setActiveGroup(group.title)}
+                >
+                  <span>{group.title}</span>
+                  <strong>{group.people.length}</strong>
+                </button>
+              );
+            })}
+          </nav>
+
+          <article className="about-directory__panel" id="staff-group-panel" role="tabpanel">
+            <div className="about-directory__header">
+              <div>
+                <p className="label-caps">Staff Group</p>
+                <h3>{selectedGroup.title}</h3>
               </div>
-              <div className="staff-people-list">
-                {group.people.map((person) => (
-                  <span key={person}>{person}</span>
-                ))}
-              </div>
-            </article>
-          ))}
+              <span>{selectedGroup.people.length}</span>
+            </div>
+            <div className="staff-people-list">
+              {selectedGroup.people.map((person) => (
+                <span key={person}>{person}</span>
+              ))}
+            </div>
+          </article>
         </div>
       </section>
 
