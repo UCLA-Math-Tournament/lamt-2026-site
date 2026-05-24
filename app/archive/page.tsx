@@ -22,7 +22,9 @@ export default function ArchivePage() {
         Results: {
           Results: '/lamt2026/lamt2026results',
         },
-        Corrections: {
+        'Schedule / Rules': {
+          Schedule: '/tournament',
+          Rules: '/rules',
           'Correction Notice': '/lamt2026/Apology Letter.pdf',
         },
       },
