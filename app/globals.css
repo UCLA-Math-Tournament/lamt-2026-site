@@ -3169,6 +3169,8 @@ body {
   border-bottom: 2px solid var(--color-border);
   background: var(--color-surface);
   padding: 0;
+  animation: lamt-notice-in 420ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: var(--notice-delay, 0ms);
   transition:
     background-color 160ms ease,
     border-color 160ms ease,
@@ -3179,25 +3181,23 @@ body {
   border-bottom: 0;
 }
 
-.live-announcement-card::before {
-  content: "";
+.live-announcement-rail {
   position: absolute;
   inset-block: var(--space-5);
   left: 0;
   width: 5px;
   background: var(--color-border);
-  transform: scaleY(0.68);
   transform-origin: top;
+  animation: lamt-notice-rail 520ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: var(--notice-rail-delay, 60ms);
   transition:
-    background-color 180ms ease,
-    transform 220ms cubic-bezier(0.16, 1, 0.3, 1);
+    background-color 180ms ease;
 }
 
-.live-announcement-card[data-latest="true"]::before,
-.live-announcement-card[data-mode="archive"]::before,
-.live-announcement-card:hover::before {
+.live-announcement-card[data-latest="true"] .live-announcement-rail,
+.live-announcement-card[data-mode="archive"] .live-announcement-rail,
+.live-announcement-card:hover .live-announcement-rail {
   background: var(--ucla-gold);
-  transform: scaleY(1);
 }
 
 .live-announcement-card:hover {
@@ -3250,6 +3250,8 @@ body {
 .live-announcement-copy {
   display: grid;
   gap: var(--space-3);
+  animation: lamt-notice-copy 320ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: var(--notice-detail-delay, 90ms);
 }
 
 .live-announcement-copy h3 {
@@ -3302,9 +3304,41 @@ body {
 
 @media (prefers-reduced-motion: reduce) {
   .live-announcement-card,
-  .live-announcement-card::before,
+  .live-announcement-rail,
   .live-announcement-badge {
+    animation: none;
     transition: none;
+  }
+
+  .live-announcement-copy {
+    animation: none;
+  }
+}
+
+@keyframes lamt-notice-in {
+  from {
+    opacity: 0.01;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes lamt-notice-rail {
+  from {
+    transform: scaleY(0);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
+
+@keyframes lamt-notice-copy {
+  from {
+    opacity: 0.01;
+  }
+  to {
+    opacity: 1;
   }
 }
 

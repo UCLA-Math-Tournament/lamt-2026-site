@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, type CSSProperties } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
@@ -192,18 +192,15 @@ function UpdatesFeed({ updates, previewMode }: { updates: Update[]; previewMode:
   const displayedUpdates = useArchiveUpdates ? ARCHIVE_UPDATES : updates;
   const heading = previewMode ? "Draft Announcements" : useArchiveUpdates ? "Event Notices" : "Tournament Announcements";
   const reduceMotion = useReducedMotion();
-  const entrance = reduceMotion
-    ? {}
-    : {
-        initial: { opacity: 0, y: 22 },
-        animate: { opacity: 1, y: 0 },
-      };
-  const detailReveal = reduceMotion
-    ? {}
-    : {
-        initial: { opacity: 0, y: 10 },
-        animate: { opacity: 1, y: 0 },
-      };
+  const noticeHover = reduceMotion ? undefined : { x: 2 };
+
+  function noticeStyle(index: number): CSSProperties {
+    return {
+      "--notice-delay": `${Math.min(index * 55, 180)}ms`,
+      "--notice-rail-delay": `${Math.min(index * 55 + 60, 220)}ms`,
+      "--notice-detail-delay": `${Math.min(index * 55 + 90, 250)}ms`,
+    } as CSSProperties;
+  }
 
   return (
     <section className="lamt-panel" aria-live="polite">
@@ -227,9 +224,12 @@ function UpdatesFeed({ updates, previewMode }: { updates: Update[]; previewMode:
         <div className="live-announcement-list" role="status">
           <motion.div
             className="live-announcement-card live-announcement-card--empty"
-            {...entrance}
-            transition={{ duration: 0.42, ease: [0.16, 1, 0.3, 1] }}
+            data-mode={previewMode ? "preview" : TOURNAMENT_OVER ? "archive" : "posted"}
+            style={noticeStyle(0)}
+            whileHover={noticeHover}
+            transition={{ duration: 0.18, ease: [0.16, 1, 0.3, 1] }}
           >
+            <span className="live-announcement-rail" aria-hidden="true" />
             <div className="live-announcement-shell">
               <span className="live-announcement-badge" aria-hidden="true">
                 {previewMode ? "D" : TOURNAMENT_OVER ? "A" : "L"}
@@ -240,9 +240,9 @@ function UpdatesFeed({ updates, previewMode }: { updates: Update[]; previewMode:
                     {previewMode ? "Draft" : TOURNAMENT_OVER ? "Archive" : "Official"}
                   </span>
                 </div>
-                <motion.p className="section-copy" {...detailReveal} transition={{ delay: 0.08, duration: 0.28, ease: [0.16, 1, 0.3, 1] }}>
+                <p className="section-copy live-announcement-copy">
                   {previewMode ? "No draft announcements." : "No announcements yet."}
-                </motion.p>
+                </p>
               </div>
             </div>
           </motion.div>
@@ -260,13 +260,11 @@ function UpdatesFeed({ updates, previewMode }: { updates: Update[]; previewMode:
               data-latest={index === 0 ? "true" : undefined}
               data-mode={useArchiveUpdates ? "archive" : previewMode ? "preview" : "posted"}
               role="listitem"
-              {...entrance}
-              transition={{
-                duration: 0.42,
-                delay: Math.min(index * 0.055, 0.18),
-                ease: [0.16, 1, 0.3, 1],
-              }}
+              style={noticeStyle(index)}
+              whileHover={noticeHover}
+              transition={{ duration: 0.18, ease: [0.16, 1, 0.3, 1] }}
             >
+              <span className="live-announcement-rail" aria-hidden="true" />
               <div className="live-announcement-shell">
                 <span className="live-announcement-badge" aria-hidden="true">{badge}</span>
                 <div className="live-announcement-content">
@@ -276,18 +274,10 @@ function UpdatesFeed({ updates, previewMode }: { updates: Update[]; previewMode:
                     </span>
                     <span className="live-announcement-time">{update.timestamp}</span>
                   </div>
-                  <motion.div
-                    className="live-announcement-copy"
-                    {...detailReveal}
-                    transition={{
-                      duration: 0.3,
-                      delay: reduceMotion ? 0 : Math.min(index * 0.055 + 0.08, 0.22),
-                      ease: [0.16, 1, 0.3, 1],
-                    }}
-                  >
+                  <div className="live-announcement-copy">
                     {update.title && <h3>{update.title}</h3>}
                     <p className="section-copy whitespace-pre-line">{update.body}</p>
-                  </motion.div>
+                  </div>
                 </div>
               </div>
             </motion.article>
