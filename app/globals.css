@@ -2778,6 +2778,26 @@ body {
   background: var(--color-surface-2);
 }
 
+.archive-year-meta .label-caps,
+.archive-card__header .label-caps {
+  color: var(--color-text);
+  font-weight: 950;
+}
+
+.archive-card__header strong {
+  display: inline-flex;
+  min-width: 2.25rem;
+  height: 2.25rem;
+  align-items: center;
+  justify-content: center;
+  border: 3px solid var(--ucla-gold);
+  background: var(--ucla-gold);
+  color: var(--ucla-blue-deep);
+  font-size: var(--text-sm);
+  font-weight: 950;
+  line-height: 1;
+}
+
 .staff-card__header span {
   display: inline-flex;
   min-width: 2.4rem;
@@ -2797,20 +2817,33 @@ body {
 }
 
 .archive-link {
-  display: flex;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
   min-height: 2.8rem;
   align-items: center;
-  justify-content: space-between;
   gap: var(--space-3);
   border-left: 5px solid var(--ucla-blue);
   background: var(--color-surface-2);
   padding: 0.7rem 0.9rem;
   color: var(--color-text);
   font-weight: 900;
+  transition:
+    background-color 160ms ease,
+    border-color 160ms ease,
+    color 160ms ease,
+    transform 180ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.archive-link span {
+.archive-link__title {
   min-width: 0;
+  line-height: 1.2;
+}
+
+.archive-link__meta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: end;
+  gap: var(--space-2);
 }
 
 .archive-link em {
@@ -2829,6 +2862,7 @@ body {
   border-left-color: var(--ucla-gold);
   background: var(--ucla-blue);
   color: #FFFFFF;
+  transform: translateX(4px);
 }
 
 .archive-link:hover em {
