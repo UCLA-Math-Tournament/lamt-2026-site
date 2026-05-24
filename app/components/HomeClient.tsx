@@ -83,15 +83,15 @@ export default function HomeClient({
   const regClosed = regDiff <= 0;
   const tournamentComplete = tournamentDiff <= 0;
   const highlightStats = [
-    { value: '250+', label: 'students invited' },
-    { value: 'May 17', label: '2026 tournament' },
-    { value: 'UCLA', label: 'campus host' },
-    { value: '$0', label: 'registration fee' },
+    { value: '250+', label: 'students' },
+    { value: 'May 17', label: '2026' },
+    { value: 'UCLA', label: 'campus' },
+    { value: '$0', label: 'fee' },
   ];
   const roundCards = [
     { title: 'Individual Rounds', text: 'Algebra / number theory, combinatorics, and geometry.' },
     { title: 'Team Rounds', text: 'Secret Team Round and Guts Round.' },
-    { title: 'Eligibility', text: 'Students in grade 12 or below; teams of up to 6.' },
+    { title: 'Eligibility', text: 'Grade 12 or below; teams up to 6.' },
   ];
 
   return (
@@ -170,7 +170,7 @@ export default function HomeClient({
           <p className="page-kicker">Contest</p>
           <h2>Format</h2>
           <p>
-            Individual tests, team rounds, lunch, disputes, awards.
+            Individual, team, Guts.
           </p>
         </div>
         <div className="home-bento__grid stagger-parent">
@@ -183,7 +183,7 @@ export default function HomeClient({
           ))}
           <article className="bento-card bento-card--accent">
             <span>Archive</span>
-            <h3>2026 papers, solutions, and results are published.</h3>
+            <h3>2026 papers, solutions, results.</h3>
             <Link href="/archive" className="bento-link">
               Open Archive <ArrowRightIcon />
             </Link>
@@ -196,7 +196,7 @@ export default function HomeClient({
           <p className="page-kicker">Status</p>
           <h2>{regClosed ? 'Registration is closed.' : 'Registration is open.'}</h2>
           <p>
-            LAMT 2026 was May 17 at UCLA. Archive open.
+            LAMT 2026: May 17, UCLA.
           </p>
         </div>
         <div className="stagger-parent flex flex-wrap items-center gap-4">

@@ -41,7 +41,7 @@ export default function ArchivePage() {
         <div>
           <h1 className="page-title">Archive</h1>
           <p className="page-summary mt-5">
-            Papers, solutions, results, corrections.
+            2026 papers, solutions, results.
           </p>
         </div>
       </header>
@@ -52,10 +52,10 @@ export default function ArchivePage() {
             <h2 className="section-title">{year.title}</h2>
             <div className="archive-year-board">
               <div className="archive-year-meta">
-                <span className="label-caps">Published Materials</span>
+                <span className="label-caps">Files</span>
                 <strong>LAMT {year.title}</strong>
                 <p className="section-copy">
-                  Official {year.title} files.
+                  Problems, solutions, results.
                 </p>
               </div>
               <ArchiveMaterialGrid

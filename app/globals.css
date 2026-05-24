@@ -6757,6 +6757,93 @@ body {
   }
 }
 
+/* Final density pass: compact public copy and footer footprint. */
+.page-summary {
+  max-width: 56ch;
+  line-height: 1.45;
+}
+
+.section-copy {
+  line-height: 1.55;
+}
+
+.contact-strip {
+  grid-template-columns: minmax(0, 1fr) auto;
+  padding: var(--space-4);
+}
+
+.mission-board {
+  align-items: start;
+}
+
+.mission-stack {
+  align-content: start;
+  gap: var(--space-3);
+  padding: var(--space-4);
+}
+
+.site-footer__inner {
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: var(--space-3);
+  padding: var(--space-3) max(3%, var(--space-4));
+}
+
+.site-footer__brand-link {
+  padding: 0.32rem;
+}
+
+.site-footer__mark {
+  width: clamp(2.75rem, 4vw, 3.35rem);
+}
+
+.site-footer__eyebrow {
+  display: none;
+}
+
+.site-footer__contact {
+  gap: 0;
+}
+
+.site-footer__socials {
+  gap: 0.45rem;
+}
+
+.site-footer .site-social-link {
+  width: 2.5rem;
+  min-width: 2.5rem;
+  height: 2.5rem;
+  min-height: 2.5rem;
+}
+
+.site-footer .site-social-link__icon {
+  width: 1.76rem;
+  height: 1.76rem;
+}
+
+.site-footer .site-social-link__status {
+  width: 0.34rem;
+  height: 0.34rem;
+}
+
+.site-footer__note {
+  max-width: 14rem;
+  font-size: 0.68rem;
+  line-height: 1.25;
+}
+
+@media (max-width: 760px) {
+  .site-footer__inner {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+
+  .site-footer__note {
+    grid-column: 1 / -1;
+    max-width: 100%;
+    justify-self: start;
+    text-align: left;
+  }
+}
+
 /* 21st.dev adapted animated tabs: moving material marker and restrained panel reveal. */
 .archive-material-tab__marker,
 .archive-material-panel,

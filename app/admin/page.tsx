@@ -34,10 +34,10 @@ function StorageModeNotice({ compact = false }: { compact?: boolean }) {
     <section className={`local-mode-notice ${compact ? "local-mode-notice--compact" : ""}`} aria-label="Draft publishing notice">
       <div>
         <p className="label-caps">Draft Review</p>
-        <h2>Drafts do not publish.</h2>
+        <h2>Drafts only.</h2>
       </div>
       <p>
-        Review schedule and announcement changes before posting.
+        Commit approved updates to publish.
       </p>
       {!compact && (
         <Link href="/live?preview=1" className="btn-outline">
@@ -71,7 +71,7 @@ function LoginScreen({ onLogin }: { onLogin: () => void }) {
         <div className="grid gap-6 lg:grid-cols-[1fr_auto] lg:items-end">
           <div>
             <h1 className="page-title">LAMT Admin Panel</h1>
-            <p className="page-summary mt-5">Draft announcements. Edit schedule. Review notes.</p>
+            <p className="page-summary mt-5">Announcements, schedule, notes.</p>
           </div>
           <Image src="/LAMTBear.png" alt="LAMT" width={128} height={128} priority className="hidden h-32 w-32 border-2 border-[var(--ucla-gold)] bg-[var(--color-surface)] p-3 object-contain lg:block" />
         </div>
@@ -185,7 +185,7 @@ function MessagesTab({ onUnreadChange }: { onUnreadChange: (count: number) => vo
       <section className="lamt-panel">
         <div className="lamt-panel-body py-16 text-center">
           <p className="text-xl font-extrabold text-[var(--color-text)]">No saved messages</p>
-          <p className="section-copy mt-2">Use email or the info desk for questions.</p>
+          <p className="section-copy mt-2">Email or info desk.</p>
         </div>
       </section>
     );
@@ -197,7 +197,7 @@ function MessagesTab({ onUnreadChange }: { onUnreadChange: (count: number) => vo
         <div className="lamt-panel-body">
           <p className="font-extrabold text-[var(--color-text)]">Message Notes</p>
           <p className="section-copy mt-2 text-sm">
-            Message notes are for staff tracking. Replies open your mail client.
+            Replies open mail.
           </p>
         </div>
       </section>
@@ -248,7 +248,7 @@ function MessagesTab({ onUnreadChange }: { onUnreadChange: (count: number) => vo
               className="lamt-textarea min-h-24"
               value={replyMap[message.id] || ""}
               onChange={(event) => setReplyMap((prev) => ({ ...prev, [message.id]: event.target.value }))}
-              placeholder="Type a reply. Sending opens your mail client."
+              placeholder="Reply text..."
             />
             <div className="flex flex-wrap gap-3">
               <button type="button" onClick={() => sendReply(message.id)} disabled={!(replyMap[message.id] || "").trim()} className="btn-outline disabled:opacity-40">
@@ -320,13 +320,13 @@ function AnnouncementsTab({ updates, setUpdates }: {
         </div>
         <div className="lamt-panel-body grid gap-4">
           <p className="section-copy">
-            Save announcement drafts for review. Announce official updates only after staff approval.
+            Local drafts only. Commit approved updates to publish.
           </p>
           <input className="lamt-input" value={title} onChange={(event) => setTitle(event.target.value)} placeholder="Title (optional)" />
           <textarea className="lamt-textarea" value={body} onChange={(event) => setBody(event.target.value)} placeholder="Update text..." />
           <div className="flex flex-wrap gap-3">
             <button type="button" onClick={addUpdate} disabled={!body.trim()} className="btn-outline disabled:opacity-40">
-              Save Draft Update
+              Save Draft
             </button>
             <button type="button" onClick={resetUpdates} className="btn-outline">
               Reset to Official
@@ -393,7 +393,7 @@ function ScheduleTab({ schedule, setSchedule }: {
       <div className="lamt-panel-body">
         <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
           <p className="section-copy max-w-3xl">
-            Edit event times, rooms, and delay notes for staff review.
+            Edit draft times, rooms, delay notes.
           </p>
           <button type="button" onClick={resetSchedule} className="btn-outline">
             Reset to Official
@@ -423,7 +423,7 @@ function ScheduleTab({ schedule, setSchedule }: {
               </div>
               <label className="mt-3 grid gap-2">
                 <span className="label-caps">Delay Reason</span>
-                <input className="lamt-input" value={item.adjustmentReason || ""} onChange={(event) => update(index, "adjustmentReason", event.target.value)} placeholder="Shown on /live when present" />
+                <input className="lamt-input" value={item.adjustmentReason || ""} onChange={(event) => update(index, "adjustmentReason", event.target.value)} placeholder="Public note" />
               </label>
             </div>
           ))}
@@ -480,7 +480,7 @@ export default function AdminPage() {
         <div className="grid gap-6 lg:grid-cols-[1fr_auto] lg:items-end">
           <div>
             <h1 className="page-title">LAMT Admin Panel</h1>
-            <p className="page-summary mt-5">Draft announcements. Edit schedule. Review notes.</p>
+            <p className="page-summary mt-5">Announcements, schedule, notes.</p>
             <div className="mt-6 flex flex-wrap gap-3">
               <Link href="/live?preview=1" className="btn-filled">
                 Open Draft View
@@ -502,9 +502,9 @@ export default function AdminPage() {
       <section className="section-row">
         <h2 className="section-title">Control Room</h2>
         <div className="grid gap-4 md:grid-cols-3">
-          <AdminMetric label="Updates" value={updates.length} detail="Draft updates" />
-          <AdminMetric label="Schedule" value={schedule.length} detail="Schedule rows" />
-          <AdminMetric label="Messages" value={msgCount} detail="Open notes" />
+          <AdminMetric label="Updates" value={updates.length} detail="Drafts" />
+          <AdminMetric label="Schedule" value={schedule.length} detail="Rows" />
+          <AdminMetric label="Messages" value={msgCount} detail="Open" />
         </div>
       </section>
 

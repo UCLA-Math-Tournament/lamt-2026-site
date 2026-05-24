@@ -18,11 +18,11 @@ const STORAGE_KEYS = {
 const STAFF_EMAIL = "uclamathtournament@gmail.com";
 
 const HELP_ITEMS = [
-  { label: "Info Desk", tag: "Check-In", detail: "Outside MS 4000A during morning arrival.", href: null },
-  { label: "Wi-Fi", tag: "Campus", detail: "UCLA-WEB was available without a password.", href: null },
-  { label: "Restrooms", tag: "Building", detail: "MS Building restrooms are near the elevators.", href: null },
-  { label: "Disputes", tag: "Scoring", detail: "Disputes were handled at Court of Sciences during lunch.", href: null },
-  { label: "Emergency", tag: "Safety", detail: "Call 911 or UCPD at 310-825-4321.", href: "tel:3108254321", action: "Call", tone: "alert" },
+  { label: "Info Desk", tag: "Check-In", detail: "Outside MS 4000A.", href: null },
+  { label: "Wi-Fi", tag: "Campus", detail: "UCLA-WEB.", href: null },
+  { label: "Restrooms", tag: "Building", detail: "Near MS elevators.", href: null },
+  { label: "Disputes", tag: "Scoring", detail: "Court of Sciences at lunch.", href: null },
+  { label: "Emergency", tag: "Safety", detail: "911 or UCPD: 310-825-4321.", href: "tel:3108254321", action: "Call", tone: "alert" },
   { label: "Email LAMT", tag: "Contact", detail: STAFF_EMAIL, href: `mailto:${STAFF_EMAIL}`, action: "Email" },
 ];
 
@@ -76,7 +76,7 @@ function LiveStatus({ schedule }: { schedule: ScheduleItem[] }) {
   const { currentIdx, nextIdx, progress } = getTimelineState(schedule, now);
   const current = schedule[currentIdx];
   const next = current ? schedule[currentIdx + 1] : schedule[nextIdx];
-  const displayEvent = TOURNAMENT_OVER ? "LAMT 2026 has concluded." : current?.event || next?.event || "Thanks for joining LAMT.";
+  const displayEvent = TOURNAMENT_OVER ? "LAMT 2026 concluded." : current?.event || next?.event || "Thanks for joining LAMT.";
   const displayMeta = TOURNAMENT_OVER ? "May 17, 2026 / UCLA" : `${(current || next)?.time}-${(current || next)?.end} / ${(current || next)?.location}`;
 
   return (
@@ -164,7 +164,7 @@ function MapSection() {
       <h2 className="section-title">Venue</h2>
       <div>
         <p className="section-copy mb-6">
-          Mathematical Sciences: testing, opening, awards. Court of Sciences: lunch and disputes.
+          Mathematical Sciences and Court of Sciences.
         </p>
         <VenueMap />
       </div>
@@ -257,10 +257,10 @@ function PreviewModeNotice() {
     <section className="local-mode-notice" aria-label="Staff draft notice">
       <div>
         <p className="label-caps">Staff Draft</p>
-        <h2>Draft schedule and announcements.</h2>
+        <h2>Draft view.</h2>
       </div>
       <p>
-        Review before posting.
+        Staff only.
       </p>
       <Link href="/live" className="btn-outline">
         Open Event Page
@@ -307,10 +307,7 @@ function ContactStaffSection() {
       <div className="lamt-panel">
         <div className="lamt-panel-body grid gap-4 md:grid-cols-[1fr_auto] md:items-center">
           <div>
-            <h3 className="text-xl font-extrabold text-[var(--color-text)]">Email LAMT</h3>
-            <p className="section-copy mt-2">
-              {STAFF_EMAIL}
-            </p>
+            <h3 className="text-xl font-extrabold text-[var(--color-text)]">{STAFF_EMAIL}</h3>
           </div>
           <a href={mailto} className="btn-filled">
             Email LAMT
@@ -367,7 +364,7 @@ export default function LivePage() {
           <div>
             <h1 className="page-title">LAMT 2026 Event Archive</h1>
             <p className="page-summary mt-5">
-              May 17, 2026 at UCLA. Schedule, announcements, venue map, contact.
+              May 17, 2026. UCLA. Schedule, announcements, map.
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
               <a href="#announcements" className="btn-filled">

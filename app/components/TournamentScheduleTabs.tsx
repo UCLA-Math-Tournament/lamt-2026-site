@@ -14,7 +14,7 @@ type ScheduleEntry = {
 type PeriodId = 'all' | 'morning' | 'afternoon' | 'closing';
 
 const periods: Array<{ id: PeriodId; label: string; summary: string }> = [
-  { id: 'all', label: 'All', summary: 'Full LAMT 2026 schedule.' },
+  { id: 'all', label: 'All', summary: 'Full schedule.' },
   { id: 'morning', label: 'Morning', summary: 'Check-in through individual rounds.' },
   { id: 'afternoon', label: 'Afternoon', summary: 'Lunch, disputes, Geometry, and Guts.' },
   { id: 'closing', label: 'Closing', summary: 'Activities and awards.' },

@@ -15,10 +15,10 @@ type ArchiveGroup = {
 };
 
 const categoryCopy: Record<string, string> = {
-  Problems: "Contest papers by round.",
-  Solutions: "Official solutions.",
-  Results: "Final standings.",
-  Corrections: "Notices and updates.",
+  Problems: "Papers.",
+  Solutions: "Solutions.",
+  Results: "Standings.",
+  Corrections: "Corrections.",
 };
 
 function panelId(category: string) {

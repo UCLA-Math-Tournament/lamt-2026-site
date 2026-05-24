@@ -101,11 +101,10 @@ export default function AboutPage() {
         </div>
         <div>
           <h1 className="page-title hero-animate-words">
-            <span className="word">About</span>{' '}
-            <span className="word">Us</span>
+            <span className="word">About</span>
           </h1>
           <p className="page-summary reveal mt-5">
-            Free in-person contest for middle and high school students.
+            Student-run. Free. In person at UCLA.
           </p>
         </div>
       </header>
@@ -115,10 +114,10 @@ export default function AboutPage() {
         <div className="mission-board">
           <div className="mission-stack stagger-parent">
             <p className="section-copy">
-              LAMT runs a full contest day at UCLA: individual rounds, team rounds, lunch, disputes, awards.
+              UCLA students run the contest day: rounds, lunch, disputes, awards.
             </p>
             <p className="section-copy">
-              UCLA students handle logistics, problem writing, staffing, and outreach.
+              Free registration for middle and high school students.
             </p>
           </div>
           <div className="mission-principles">

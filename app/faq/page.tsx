@@ -91,7 +91,7 @@ export default function FAQPage() {
           {filtered.length === 0 ? (
             <article className="faq-empty">
               <h3>No matching answers</h3>
-              <p className="section-copy">Try a broader search or email staff directly.</p>
+              <p className="section-copy">Try search or email staff.</p>
             </article>
           ) : (
             <AccordionPrimitive.Root
@@ -137,8 +137,8 @@ export default function FAQPage() {
         <h2 className="section-title">Contact</h2>
         <div className="contact-strip">
           <div>
-            <p className="label-caps">Still Need Help?</p>
-            <h3>Email the LAMT team.</h3>
+            <p className="label-caps">Contact</p>
+            <h3>{STAFF_EMAIL}</h3>
           </div>
           <a href={`mailto:${STAFF_EMAIL}`} className="btn-outline btn-ripple">
             Email Staff

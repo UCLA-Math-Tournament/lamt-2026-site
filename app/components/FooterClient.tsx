@@ -34,16 +34,15 @@ export default function FooterClient() {
   const reduceMotion = useReducedMotion();
   const socialLinks: {
     title: string;
-    detail: string;
     href: string;
     icon: ReactNode;
     accent: string;
   }[] = [
-    { title: 'Email', detail: 'uclamathtournament@gmail.com', href: 'mailto:uclamathtournament@gmail.com', icon: <EnvelopeClosedIcon width={22} height={22} />, accent: '#FFD100' },
-    { title: 'Instagram', detail: '@lamathtournament', href: 'https://www.instagram.com/lamathtournament/', icon: <InstagramIcon />, accent: '#E4405F' },
-    { title: 'Facebook', detail: 'LAMT group', href: 'https://www.facebook.com/groups/1429462591976204/', icon: <FacebookIcon />, accent: '#1877F2' },
-    { title: 'LinkedIn', detail: 'LAMT page', href: 'https://www.linkedin.com/company/la-math-tournament/', icon: <LinkedInIcon />, accent: '#0A66C2' },
-    { title: 'Discord', detail: 'Community', href: DISCORD_URL, icon: <DiscordLogoIcon width={22} height={22} />, accent: '#5865F2' },
+    { title: 'Email', href: 'mailto:uclamathtournament@gmail.com', icon: <EnvelopeClosedIcon width={22} height={22} />, accent: '#FFD100' },
+    { title: 'Instagram', href: 'https://www.instagram.com/lamathtournament/', icon: <InstagramIcon />, accent: '#E4405F' },
+    { title: 'Facebook', href: 'https://www.facebook.com/groups/1429462591976204/', icon: <FacebookIcon />, accent: '#1877F2' },
+    { title: 'LinkedIn', href: 'https://www.linkedin.com/company/la-math-tournament/', icon: <LinkedInIcon />, accent: '#0A66C2' },
+    { title: 'Discord', href: DISCORD_URL, icon: <DiscordLogoIcon width={22} height={22} />, accent: '#5865F2' },
   ];
 
   return (
@@ -83,7 +82,6 @@ export default function FooterClient() {
                 <span className="site-social-link__icon" aria-hidden="true">{item.icon}</span>
                 <span className="site-social-link__copy">
                   <strong>{item.title}</strong>
-                  <small>{item.detail}</small>
                 </span>
                 <span className="site-social-link__status" aria-hidden="true" />
               </motion.a>
@@ -92,7 +90,7 @@ export default function FooterClient() {
         </div>
 
         <p className="site-footer__note">
-          Independent student group. Not an official University of California site.
+          Student-run. Not an official UC site.
         </p>
       </div>
     </footer>
