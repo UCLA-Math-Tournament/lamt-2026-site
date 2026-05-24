@@ -7152,17 +7152,23 @@ body {
 /* 21st.dev Social Connect adaptation: compact logo links, not fake connect cards. */
 .site-footer .site-social-link {
   display: inline-grid;
-  grid-template-columns: 1.8rem 0fr;
+  grid-template-columns: 1.95rem 0fr;
   width: auto;
-  min-width: 2.5rem;
-  max-width: 2.5rem;
-  height: 2.5rem;
-  min-height: 2.5rem;
+  min-width: 2.72rem;
+  max-width: 2.72rem;
+  height: 2.72rem;
+  min-height: 2.72rem;
   column-gap: 0;
   align-items: center;
   justify-content: start;
-  padding: 0.27rem;
+  padding: 0.32rem;
   border-radius: 0;
+  border-color: rgba(0, 59, 92, 0.72);
+  background: #ffffff;
+  color: var(--ucla-blue-deep);
+  box-shadow: 2px 2px 0 rgba(2, 13, 24, 0.18);
+  animation: footer-social-in 360ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: var(--social-delay, 0ms);
   transition:
     max-width 260ms cubic-bezier(0.16, 1, 0.3, 1),
     column-gap 220ms cubic-bezier(0.16, 1, 0.3, 1),
@@ -7173,14 +7179,26 @@ body {
     color 160ms ease;
 }
 
+@keyframes footer-social-in {
+  from {
+    opacity: 0;
+    transform: translateY(0.35rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .site-footer .site-social-link::after {
   content: "";
   position: absolute;
   inset-block: 0;
   inset-inline-start: 0;
-  width: 0.22rem;
+  width: 0.18rem;
   background: var(--social-accent);
-  transform: scaleY(0.42);
+  transform: scaleY(0.34);
   transform-origin: center;
   transition:
     transform 240ms cubic-bezier(0.16, 1, 0.3, 1),
@@ -7188,17 +7206,20 @@ body {
 }
 
 .site-footer .site-social-link__icon {
-  width: 1.8rem;
-  height: 1.8rem;
+  position: relative;
+  z-index: 1;
+  width: 1.95rem;
+  height: 1.95rem;
   border: 0;
-  background: #FFFFFF;
+  background: transparent;
   color: var(--social-accent);
-  box-shadow: inset 0 0 0 1px rgba(2, 13, 24, 0.18);
+  box-shadow: none;
 }
 
 .site-footer .site-social-link__icon svg {
-  width: 1.24rem;
-  height: 1.24rem;
+  width: 1.36rem;
+  height: 1.36rem;
+  display: block;
 }
 
 .site-footer .site-social-link__copy {
@@ -7229,10 +7250,10 @@ body {
 
 .site-footer .site-social-link__status {
   inset-block-start: auto;
-  inset-inline-start: 0.27rem;
+  inset-inline-start: 0.32rem;
   inset-inline-end: auto;
-  inset-block-end: 0.25rem;
-  width: 1.8rem;
+  inset-block-end: 0.24rem;
+  width: 1.95rem;
   height: 0.16rem;
   border: 0;
   background: var(--social-accent);
@@ -7244,17 +7265,28 @@ body {
 .site-footer .site-social-link:hover,
 .site-footer .site-social-link:focus-visible,
 .site-footer .site-social-link[data-state="active"] {
-  grid-template-columns: 1.8rem minmax(3.1rem, auto);
-  max-width: 8.65rem;
-  column-gap: 0.48rem;
-  padding-inline: 0.27rem 0.68rem;
+  grid-template-columns: 1.95rem minmax(3.1rem, auto);
+  max-width: 8.9rem;
+  column-gap: 0.5rem;
+  padding-inline: 0.32rem 0.72rem;
+  border-color: var(--ucla-gold);
+  background: var(--ucla-gold);
+  color: var(--ucla-blue-deep);
+  box-shadow: 4px 4px 0 rgba(2, 13, 24, 0.24);
 }
 
 .site-footer .site-social-link:hover::after,
 .site-footer .site-social-link:focus-visible::after,
 .site-footer .site-social-link[data-state="active"]::after {
-  background: var(--ucla-blue-deep);
+  background: var(--social-accent);
   transform: scaleY(1);
+}
+
+.site-footer .site-social-link:hover .site-social-link__icon,
+.site-footer .site-social-link:focus-visible .site-social-link__icon,
+.site-footer .site-social-link[data-state="active"] .site-social-link__icon {
+  color: var(--ucla-blue-deep);
+  transform: translateX(0.08rem);
 }
 
 .site-footer .site-social-link:hover .site-social-link__copy,
@@ -7277,5 +7309,26 @@ body {
   .site-footer .site-social-link:focus-visible,
   .site-footer .site-social-link[data-state="active"] {
     max-width: 7.9rem;
+  }
+}
+
+.dark .site-footer .site-social-link {
+  border-color: rgba(255, 209, 0, 0.55);
+  background: rgba(2, 13, 24, 0.96);
+  color: #ffffff;
+  box-shadow: 2px 2px 0 rgba(255, 209, 0, 0.18);
+}
+
+.dark .site-footer .site-social-link:hover,
+.dark .site-footer .site-social-link:focus-visible,
+.dark .site-footer .site-social-link[data-state="active"] {
+  border-color: var(--ucla-gold);
+  background: var(--ucla-gold);
+  color: var(--ucla-blue-deep);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-footer .site-social-link {
+    animation: none;
   }
 }
