@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { useState, useEffect, useRef, type KeyboardEvent } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import type { ScheduleItem, Update, ContactMessage } from "../live/types";
@@ -14,6 +15,16 @@ const STORAGE_KEYS = {
   schedule: "lamt_schedule",
   updates: "lamt_updates",
 };
+
+type AdminTabKey = "announcements" | "schedule" | "messages";
+
+function adminTabId(key: AdminTabKey) {
+  return `admin-tools-${key}`;
+}
+
+function adminPanelId(key: AdminTabKey) {
+  return `admin-tools-panel-${key}`;
+}
 
 function countUnresolved(messages: ContactMessage[]) {
   return messages.filter((message) => !message.resolved).length;
@@ -435,10 +446,12 @@ function ScheduleTab({ schedule, setSchedule }: {
 
 export default function AdminPage() {
   const [authed, setAuthed] = useState(false);
-  const [tab, setTab] = useState<"announcements" | "schedule" | "messages">("announcements");
+  const [tab, setTab] = useState<AdminTabKey>("announcements");
   const [updates, setUpdates] = useState<Update[]>(DEFAULT_UPDATES);
   const [schedule, setSchedule] = useState<ScheduleItem[]>(DEFAULT_SCHEDULE);
   const [msgCount, setMsgCount] = useState(0);
+  const reduceMotion = useReducedMotion();
+  const previousTabIndex = useRef(0);
 
   useEffect(() => {
     if (!authed) return;
@@ -464,11 +477,51 @@ export default function AdminPage() {
 
   if (!authed) return <LoginScreen onLogin={() => setAuthed(true)} />;
 
-  const tabs: { key: typeof tab; label: string; badge?: number }[] = [
+  const tabs: { key: AdminTabKey; label: string; badge?: number }[] = [
     { key: "announcements", label: "Announcements" },
     { key: "schedule", label: "Schedule" },
     { key: "messages", label: "Messages", badge: msgCount },
   ];
+  const activeTabIndex = Math.max(0, tabs.findIndex((item) => item.key === tab));
+
+  function activateTab(nextTab: AdminTabKey, shouldFocus = false) {
+    const nextIndex = tabs.findIndex((item) => item.key === nextTab);
+    if (nextIndex === -1) return;
+    previousTabIndex.current = activeTabIndex;
+    setTab(nextTab);
+
+    if (shouldFocus) {
+      window.requestAnimationFrame(() => document.getElementById(adminTabId(nextTab))?.focus());
+    }
+  }
+
+  function onToolsTabKeyDown(event: KeyboardEvent<HTMLButtonElement>, index: number) {
+    if (event.key === "ArrowRight" || event.key === "ArrowDown") {
+      event.preventDefault();
+      activateTab(tabs[(index + 1) % tabs.length].key, true);
+    }
+
+    if (event.key === "ArrowLeft" || event.key === "ArrowUp") {
+      event.preventDefault();
+      activateTab(tabs[(index - 1 + tabs.length) % tabs.length].key, true);
+    }
+
+    if (event.key === "Home") {
+      event.preventDefault();
+      activateTab(tabs[0].key, true);
+    }
+
+    if (event.key === "End") {
+      event.preventDefault();
+      activateTab(tabs[tabs.length - 1].key, true);
+    }
+  }
+
+  function renderActivePanel() {
+    if (tab === "announcements") return <AnnouncementsTab updates={updates} setUpdates={setUpdates} />;
+    if (tab === "schedule") return <ScheduleTab schedule={schedule} setSchedule={setSchedule} />;
+    return <MessagesTab onUnreadChange={setMsgCount} />;
+  }
 
   return (
     <div className="page-shell">
@@ -511,24 +564,54 @@ export default function AdminPage() {
       <section className="section-row">
         <h2 className="section-title">Tools</h2>
         <div className="grid gap-6">
-          <nav className="admin-tools-nav" aria-label="Admin sections">
-            {tabs.map((item) => (
+          <nav className="admin-tools-nav" role="tablist" aria-label="Admin sections">
+            {tabs.map((item, index) => {
+              const isSelected = tab === item.key;
+
+              return (
               <button
                 key={item.key}
+                id={adminTabId(item.key)}
                 type="button"
-                onClick={() => setTab(item.key)}
+                role="tab"
+                aria-selected={isSelected}
+                aria-controls={adminPanelId(item.key)}
+                tabIndex={isSelected ? 0 : -1}
+                onClick={() => activateTab(item.key)}
+                onKeyDown={(event) => onToolsTabKeyDown(event, index)}
                 className="admin-tools-tab"
-                data-state={tab === item.key ? "selected" : undefined}
+                data-state={isSelected ? "selected" : undefined}
               >
+                {isSelected ? (
+                  <motion.span
+                    className="admin-tools-tab-marker"
+                    layoutId="admin-tools-tab-marker"
+                    transition={reduceMotion ? { duration: 0 } : { type: "spring", stiffness: 430, damping: 36 }}
+                  />
+                ) : null}
                 <span>{item.label}</span>
                 {(item.badge ?? 0) > 0 && <strong>{item.badge}</strong>}
               </button>
-            ))}
+              );
+            })}
           </nav>
 
-          {tab === "announcements" && <AnnouncementsTab updates={updates} setUpdates={setUpdates} />}
-          {tab === "schedule" && <ScheduleTab schedule={schedule} setSchedule={setSchedule} />}
-          {tab === "messages" && <MessagesTab onUnreadChange={setMsgCount} />}
+          <AnimatePresence mode="wait" initial={false}>
+            <motion.div
+              key={tab}
+              id={adminPanelId(tab)}
+              className="admin-tools-panel"
+              role="tabpanel"
+              tabIndex={-1}
+              aria-labelledby={adminTabId(tab)}
+              initial={reduceMotion ? false : { opacity: 0, x: activeTabIndex >= previousTabIndex.current ? 14 : -14 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={reduceMotion ? { opacity: 1, x: 0 } : { opacity: 0, x: activeTabIndex >= previousTabIndex.current ? -10 : 10 }}
+              transition={reduceMotion ? { duration: 0 } : { duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
+            >
+              {renderActivePanel()}
+            </motion.div>
+          </AnimatePresence>
         </div>
       </section>
     </div>

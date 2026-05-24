@@ -3590,15 +3590,18 @@ body {
 }
 
 .admin-tools-tab {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
   display: inline-grid;
   grid-template-columns: minmax(0, 1fr) auto;
   flex: 1 1 12rem;
   min-height: 3rem;
   align-items: center;
   gap: var(--space-3);
-  border: 2px solid var(--color-border);
+  border: 3px solid transparent;
   border-radius: 0;
-  background: var(--color-surface-2);
+  background: var(--color-surface);
   color: var(--color-text);
   padding: 0.75rem 0.9rem;
   text-align: left;
@@ -3615,12 +3618,30 @@ body {
 }
 
 .admin-tools-tab:hover,
+.admin-tools-tab:focus-visible {
+  border-color: var(--ucla-gold);
+  box-shadow: 5px 5px 0 rgba(39, 116, 174, 0.16);
+  outline: none;
+  transform: translateY(-2px);
+}
+
 .admin-tools-tab[data-state="selected"] {
   border-color: var(--ucla-gold);
-  background: var(--ucla-gold);
   color: var(--ucla-blue-deep);
-  box-shadow: 5px 5px 0 rgba(39, 116, 174, 0.16);
-  transform: translateY(-2px);
+}
+
+.admin-tools-tab-marker {
+  position: absolute;
+  inset: -1px;
+  z-index: 0;
+  background: var(--ucla-gold);
+  pointer-events: none;
+}
+
+.admin-tools-tab > span:not(.admin-tools-tab-marker),
+.admin-tools-tab strong {
+  position: relative;
+  z-index: 1;
 }
 
 .admin-tools-tab strong {
@@ -3633,6 +3654,16 @@ body {
   font-weight: 950;
 }
 
+.admin-tools-panel {
+  min-width: 0;
+  will-change: transform, opacity;
+}
+
+.admin-tools-panel:focus-visible {
+  outline: 3px solid var(--ucla-gold);
+  outline-offset: 3px;
+}
+
 .dark .admin-metric,
 .dark .admin-tools-nav {
   box-shadow: 7px 7px 0 rgba(255, 209, 0, 0.1);
@@ -3640,6 +3671,7 @@ body {
 
 .dark .admin-metric:hover,
 .dark .admin-tools-tab:hover,
+.dark .admin-tools-tab:focus-visible,
 .dark .admin-tools-tab[data-state="selected"] {
   box-shadow: 7px 7px 0 rgba(255, 209, 0, 0.14);
 }
@@ -7154,7 +7186,9 @@ body {
   }
 }
 
-/* 21st.dev adapted animated tabs: moving material marker and restrained panel reveal. */
+/* 21st.dev adapted animated tabs: moving markers and restrained panel reveal. */
+.admin-tools-tab-marker,
+.admin-tools-panel,
 .archive-material-tab__marker,
 .archive-material-panel,
 .archive-material-links li {
@@ -7162,6 +7196,8 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .admin-tools-nav,
+  .admin-tools-nav *,
   .archive-material-tabs,
   .archive-material-tabs * {
     transition-duration: 1ms !important;
