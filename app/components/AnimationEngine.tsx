@@ -485,14 +485,8 @@ export default function AnimationEngine() {
 
     const cleanups = [
       initCounters(),
-      initMagnetic(),
-      initParallax(),
       initTimelineDraw(),
-      initNavMorph(),
-      initRipple(),
       initTypewriter(),
-      initHeroEntrance(),
-      initProofHover(),
     ];
 
     return () => {

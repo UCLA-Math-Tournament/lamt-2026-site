@@ -32,9 +32,6 @@ export default function DarkModeToggle() {
       aria-label="Toggle dark mode"
       aria-pressed={dark}
       className="theme-toggle"
-      whileHover={shouldReduceMotion ? undefined : { y: -2 }}
-      whileTap={shouldReduceMotion ? undefined : { scale: 0.9 }}
-      transition={shouldReduceMotion ? { duration: 0 } : { type: 'spring', stiffness: 420, damping: 28 }}
     >
       <motion.svg
         aria-hidden="true"

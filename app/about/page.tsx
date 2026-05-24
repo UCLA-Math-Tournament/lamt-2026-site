@@ -1,7 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import AboutStickyReveal from '../components/AboutStickyReveal';
 
 export default function AboutPage() {
   const staffGroups = [
@@ -90,6 +89,11 @@ export default function AboutPage() {
     { label: 'Audience', value: 'Middle and high school students' },
     { label: 'Cost', value: 'Free registration' },
   ];
+  const briefItems = [
+    { title: 'Campus', text: 'In person at UCLA.' },
+    { title: 'Rounds', text: 'Individual, team, and Guts.' },
+    { title: 'Archive', text: 'Problems, solutions, and results stay posted.' },
+  ];
   const [activeGroup, setActiveGroup] = useState(staffGroups[0].title);
   const selectedGroup = staffGroups.find((group) => group.title === activeGroup) || staffGroups[0];
 
@@ -134,7 +138,14 @@ export default function AboutPage() {
 
       <section className="section-row">
         <h2 className="section-title">What LAMT Is</h2>
-        <AboutStickyReveal />
+        <div className="about-brief-list">
+          {briefItems.map((item) => (
+            <article key={item.title} className="about-brief-item">
+              <h3>{item.title}</h3>
+              <p>{item.text}</p>
+            </article>
+          ))}
+        </div>
       </section>
 
       <section className="section-row">
