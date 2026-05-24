@@ -9,8 +9,9 @@ import DarkModeToggle from './DarkModeToggle';
 
 const navLinks = [
   { href: '/', label: 'Home' },
-  { href: '/archive', label: 'Archive' },
+  { href: '/tournament', label: 'Tournament' },
   { href: '/rules', label: 'Rules' },
+  { href: '/archive', label: 'Archive' },
   { href: '/faq', label: 'FAQ' },
   { href: '/about', label: 'About' },
 ];

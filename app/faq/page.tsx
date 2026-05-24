@@ -140,7 +140,7 @@ export default function FAQPage() {
             <p className="label-caps">Contact</p>
             <h3>{STAFF_EMAIL}</h3>
           </div>
-          <a href={`mailto:${STAFF_EMAIL}`} className="btn-outline btn-ripple">
+          <a href={`mailto:${STAFF_EMAIL}`} className="btn-outline">
             Email Staff
           </a>
         </div>

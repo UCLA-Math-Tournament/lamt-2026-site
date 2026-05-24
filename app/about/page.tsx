@@ -125,9 +125,9 @@ export default function AboutPage() {
               Free registration for middle and high school students.
             </p>
           </div>
-          <div className="mission-principles">
+          <div className="lamt-line-list mission-principles">
             {operatingPrinciples.map((item) => (
-              <article key={item.label}>
+              <article key={item.label} className="lamt-line-item">
                 <span>{item.label}</span>
                 <strong>{item.value}</strong>
               </article>
@@ -138,9 +138,9 @@ export default function AboutPage() {
 
       <section className="section-row">
         <h2 className="section-title">What LAMT Is</h2>
-        <div className="about-brief-list">
+        <div className="lamt-line-list about-brief-list">
           {briefItems.map((item) => (
-            <article key={item.title} className="about-brief-item">
+            <article key={item.title} className="lamt-line-item about-brief-item">
               <h3>{item.title}</h3>
               <p>{item.text}</p>
             </article>

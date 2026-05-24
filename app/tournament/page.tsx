@@ -45,8 +45,7 @@ export default function TournamentPage() {
         </div>
         <div>
           <h1 className="page-title hero-animate-words">
-            <span className="word">LAMT 2026</span>{' '}
-            <span className="word">Details</span>
+            <span className="word">Tournament</span>
           </h1>
           <p className="page-summary reveal mt-5">
             May 17, 2026. UCLA. Free. Teams up to 6.
@@ -56,9 +55,9 @@ export default function TournamentPage() {
 
       <section className="section-row">
         <h2 className="section-title">At a Glance</h2>
-        <div className="tournament-fact-grid">
+        <div className="lamt-line-list tournament-fact-grid">
           {facts.map((fact) => (
-            <article key={fact.label} className="tournament-fact">
+            <article key={fact.label} className="lamt-line-item tournament-fact">
               <span>{fact.label}</span>
               <strong>{fact.value}</strong>
             </article>
@@ -68,22 +67,25 @@ export default function TournamentPage() {
 
       <section className="section-row">
         <h2 className="section-title">Eligibility</h2>
-        <ul className="rule-chip-grid stagger-parent">
-          {eligibility.map((item) => (
-            <li key={item}>{item}</li>
+        <ul className="lamt-line-list lamt-line-list--compact stagger-parent">
+          {eligibility.map((item, index) => (
+            <li key={item} className="lamt-line-item">
+              <span>{String(index + 1).padStart(2, '0')}</span>
+              <p>{item}</p>
+            </li>
           ))}
         </ul>
       </section>
 
       <section className="section-row">
         <h2 className="section-title">Format</h2>
-        <div className="format-grid stagger-parent">
+        <div className="lamt-line-list format-grid stagger-parent">
           {format.map(({ name, desc }, index) => (
-            <div key={name} className="format-card">
+            <article key={name} className="lamt-line-item format-card">
               <span>0{index + 1}</span>
               <h3>{name}</h3>
               <p className="section-copy mt-2">{desc}</p>
-            </div>
+            </article>
           ))}
         </div>
       </section>
@@ -105,11 +107,11 @@ export default function TournamentPage() {
 
       <section className="section-row">
         <h2 className="section-title">Links</h2>
-        <div className="stagger-parent flex flex-wrap gap-3">
-          <a href="/archive" className="btn-filled btn-ripple">
+        <div className="lamt-action-row stagger-parent">
+          <a href="/archive" className="btn-filled">
             View 2026 Archive
           </a>
-          <a href="/rules" className="btn-outline btn-ripple">
+          <a href="/rules" className="btn-outline">
             Read Competition Rules
           </a>
         </div>

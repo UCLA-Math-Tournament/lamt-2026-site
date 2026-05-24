@@ -310,7 +310,7 @@ function HelpSection() {
   return (
     <section className="section-row">
       <h2 className="section-title">Day-of Info</h2>
-      <div className="live-help-grid">
+      <div className="lamt-line-list live-help-grid">
         {HELP_ITEMS.map((item) => {
           const content = (
             <>
@@ -322,11 +322,11 @@ function HelpSection() {
           );
 
           return item.href ? (
-            <a key={item.label} href={item.href} className="live-help-card live-help-card--link" data-tone={item.tone}>
+            <a key={item.label} href={item.href} className="lamt-line-item live-help-card live-help-card--link" data-tone={item.tone}>
               {content}
             </a>
           ) : (
-            <article key={item.label} className="live-help-card">
+            <article key={item.label} className="lamt-line-item live-help-card">
               {content}
             </article>
           );
@@ -341,15 +341,14 @@ function ContactStaffSection() {
   return (
     <section id="contact" className="section-row">
       <h2 className="section-title">Contact</h2>
-      <div className="lamt-panel">
-        <div className="lamt-panel-body grid gap-4 md:grid-cols-[1fr_auto] md:items-center">
-          <div>
-            <h3 className="text-xl font-extrabold text-[var(--color-text)]">{STAFF_EMAIL}</h3>
-          </div>
-          <a href={mailto} className="btn-filled">
-            Email LAMT
-          </a>
+      <div className="contact-strip">
+        <div>
+          <p className="label-caps">Email</p>
+          <h3>{STAFF_EMAIL}</h3>
         </div>
+        <a href={mailto} className="btn-filled">
+          Email LAMT
+        </a>
       </div>
     </section>
   );
@@ -399,7 +398,7 @@ export default function LivePage() {
         </div>
         <div className="grid gap-6 lg:grid-cols-[1fr_auto] lg:items-end">
           <div>
-            <h1 className="page-title">LAMT 2026 Event Archive</h1>
+            <h1 className="page-title">Event Archive</h1>
             <p className="page-summary mt-5">
               May 17, 2026. UCLA. Schedule, announcements, map.
             </p>

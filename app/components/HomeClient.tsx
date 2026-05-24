@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 import { ArrowRightIcon, DiscordLogoIcon, FileTextIcon } from '@radix-ui/react-icons';
 
 const homeButtonClass =
-  'btn-ripple hero-button inline-flex min-h-12 items-center justify-center gap-2 px-5 py-3 text-sm font-extrabold uppercase text-white';
+  'hero-button inline-flex min-h-12 items-center justify-center gap-2 px-5 py-3 text-sm font-extrabold uppercase text-white';
 
 function useCountdown(targetISO: string) {
   const target = new Date(targetISO).getTime();
@@ -87,10 +87,11 @@ export default function HomeClient({
     { value: 'UCLA', label: 'campus' },
     { value: '$0', label: 'fee' },
   ];
-  const roundCards = [
-    { title: 'Individual Rounds', text: 'Algebra / number theory, combinatorics, and geometry.' },
-    { title: 'Team Rounds', text: 'Secret Team Round and Guts Round.' },
-    { title: 'Eligibility', text: 'Grade 12 or below; teams up to 6.' },
+  const programRows = [
+    { title: 'Date', text: 'May 17, 2026 at UCLA.' },
+    { title: 'Eligibility', text: 'Grade 12 or below; teams up to 6 students.' },
+    { title: 'Rounds', text: 'Secret Team, Algebra / Number Theory, Combinatorics, Geometry, and Guts.' },
+    { title: 'Archive', text: 'Problems, solutions, and results are posted.' },
   ];
 
   return (
@@ -164,48 +165,44 @@ export default function HomeClient({
 
       <section className="home-bento site-pad">
         <div className="home-bento__intro">
-          <p className="page-kicker">Contest</p>
-          <h2>Format</h2>
+          <p className="page-kicker">LAMT 2026</p>
+          <h2>Contest Day</h2>
           <p>
-            Individual, team, Guts.
+            The essentials for competitors and coaches.
           </p>
         </div>
-        <div className="home-bento__grid stagger-parent">
-          {roundCards.map((card, index) => (
-            <article key={card.title} className={`bento-card ${index === 0 ? 'bento-card--wide' : ''}`}>
-              <span>0{index + 1}</span>
-              <h3>{card.title}</h3>
-              <p>{card.text}</p>
+        <div className="lamt-line-list home-program-list">
+          {programRows.map((row, index) => (
+            <article key={row.title} className="lamt-line-item">
+              <span>{String(index + 1).padStart(2, '0')}</span>
+              <h3>{row.title}</h3>
+              <p>{row.text}</p>
             </article>
           ))}
-          <article className="bento-card bento-card--accent">
-            <span>Archive</span>
-            <h3>2026 papers, solutions, results.</h3>
-            <Link href="/archive" className="bento-link">
-              Open Archive <ArrowRightIcon />
-            </Link>
-          </article>
         </div>
       </section>
 
       <section id="register" className="registration-showcase site-pad">
         <div>
-          <p className="page-kicker">Status</p>
-          <h2>{regClosed ? 'Registration is closed.' : 'Registration is open.'}</h2>
+          <p className="page-kicker">Next</p>
+          <h2>{regClosed ? 'Use the 2026 archive.' : 'Register for LAMT 2026.'}</h2>
           <p>
-            LAMT 2026: May 17, UCLA.
+            Rules, results, and tournament materials are available.
           </p>
         </div>
         <div className="stagger-parent flex flex-wrap items-center gap-4">
           {!regClosed && (
-            <Link href={registerUrl} target="_blank" rel="noreferrer" className="btn-filled btn-ripple">
+            <Link href={registerUrl} target="_blank" rel="noreferrer" className="btn-filled">
               Register on ContestDojo
             </Link>
           )}
-          <Link href="/archive" className="btn-filled btn-ripple">
+          <Link href="/archive" className="btn-filled">
             Browse Archive
           </Link>
-          <Link href={discordUrl} target="_blank" rel="noreferrer" className="btn-outline btn-ripple">
+          <Link href="/tournament" className="btn-outline">
+            Tournament Info
+          </Link>
+          <Link href={discordUrl} target="_blank" rel="noreferrer" className="btn-outline">
             Join Discord
           </Link>
         </div>

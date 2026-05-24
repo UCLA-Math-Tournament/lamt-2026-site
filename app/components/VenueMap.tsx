@@ -97,10 +97,9 @@ export default function VenueMap({ className = "" }: { className?: string }) {
             href={venue.href}
             target="_blank"
             rel="noopener noreferrer"
-            className="venue-real-map__venue"
+            className="lamt-line-item venue-real-map__venue"
             initial={reduceMotion ? false : { opacity: 0, y: 10 }}
             whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
-            whileHover={reduceMotion ? undefined : { y: -3 }}
             transition={{ delay: index * 0.04, duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
           >
             <span className="venue-real-map__pin" aria-hidden="true">{index + 1}</span>

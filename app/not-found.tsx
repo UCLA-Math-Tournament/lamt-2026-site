@@ -31,7 +31,7 @@ export default function NotFound() {
             </Link>
           ))}
         </div>
-        <Link href="/" className="btn-filled btn-ripple not-found-home">
+        <Link href="/" className="btn-filled not-found-home">
           Return to lamt.net
         </Link>
       </section>
