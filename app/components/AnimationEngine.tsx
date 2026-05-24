@@ -43,7 +43,19 @@ function initCounters() {
 }
 
 function initReveals() {
-  const els = document.querySelectorAll<HTMLElement>('.reveal, .stagger-parent > *');
+  const els = document.querySelectorAll<HTMLElement>(
+    [
+      '.reveal',
+      '.stagger-parent > *',
+      '.home-hero__content > *',
+      '.hero-animate-words .word',
+      '.page-title',
+      '.lamt-line-item',
+      '.archive-material-link',
+      '.lamt-timeline-item',
+      '.faq-accordion-item',
+    ].join(', ')
+  );
   if (!els.length) return () => {};
 
   els.forEach((el) => {

@@ -8644,6 +8644,7 @@ html {
   align-items: start !important;
   width: auto !important;
   margin-inline: -3vw !important;
+  margin-bottom: 0 !important;
   border-inline: 0 !important;
   padding-inline: 3vw !important;
   padding-block: clamp(2rem, 4.2vw, 4.5rem) !important;
@@ -8684,6 +8685,109 @@ html {
 .page-hero a[aria-label="Back to LAMT home"],
 .page-hero img[alt="LAMT"] {
   display: none !important;
+}
+
+/* Reference-grade hero composition: message, action, facts in one view. */
+.home-hero {
+  min-height: calc(82svh - 5rem) !important;
+  align-content: center !important;
+  padding-block: clamp(3.8rem, 7vw, 6.5rem) clamp(2.4rem, 5vw, 4.2rem) !important;
+}
+
+.home-hero__content {
+  max-width: min(100%, 70rem) !important;
+}
+
+.home-hero h1 {
+  max-width: min(100%, 72rem) !important;
+  margin-top: clamp(1rem, 2vw, 1.45rem) !important;
+  font-size: clamp(3.8rem, 8.35vw, 8.9rem) !important;
+  line-height: 0.86 !important;
+}
+
+.home-hero .gold-shimmer-text {
+  white-space: nowrap !important;
+}
+
+.cinema-lede {
+  max-width: 38rem !important;
+  margin-top: clamp(1rem, 2vw, 1.45rem) !important;
+}
+
+.cinema-actions {
+  margin-top: clamp(1.2rem, 2.2vw, 1.9rem) !important;
+}
+
+.home-hero__content .home-hero__stats {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  width: min(100%, 48rem) !important;
+  margin-top: clamp(1.25rem, 2.5vw, 2rem) !important;
+  border-top: 1px solid rgba(255, 209, 0, 0.48) !important;
+}
+
+.home-hero__content .home-stat-card {
+  flex: 1 1 8rem !important;
+  padding-top: clamp(0.75rem, 1.4vw, 1rem) !important;
+}
+
+.home-hero__content .home-stat-card strong {
+  font-size: clamp(1.45rem, 2.6vw, 2.25rem) !important;
+}
+
+.home-hero__content .home-stat-card > span {
+  margin-top: 0.35rem !important;
+}
+
+.home-hero__bear {
+  right: max(-13rem, -10vw) !important;
+  opacity: 0.035 !important;
+  transform: none !important;
+}
+
+.lamt-line-item {
+  position: relative !important;
+}
+
+.lamt-line-item::after {
+  content: "" !important;
+  position: absolute !important;
+  inset: auto 0 -1px 0 !important;
+  height: 1px !important;
+  background: var(--ucla-gold) !important;
+  transform: scaleX(0) !important;
+  transform-origin: left !important;
+  transition: transform 260ms cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.lamt-line-item:hover::after,
+.lamt-line-item:focus-visible::after {
+  transform: scaleX(1) !important;
+}
+
+.site-brand__mark,
+.site-footer__mark {
+  filter: drop-shadow(0 1px 0 rgba(255, 209, 0, 0.26)) !important;
+}
+
+@media (max-width: 900px) {
+  .home-hero {
+    min-height: auto !important;
+  }
+
+  .home-hero__content .home-hero__stats {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  .home-hero__content .home-stat-card {
+    border-right: 0 !important;
+    border-bottom: 1px solid rgba(255, 209, 0, 0.28) !important;
+  }
+
+  .home-hero .gold-shimmer-text {
+    white-space: normal !important;
+  }
 }
 
 @media (max-width: 900px) {

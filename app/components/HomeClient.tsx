@@ -89,9 +89,9 @@ export default function HomeClient({
   ];
   const programRows = [
     { title: 'Date', text: 'May 17, 2026 at UCLA.' },
-    { title: 'Eligibility', text: 'Grade 12 or below; teams up to 6 students.' },
-    { title: 'Rounds', text: 'Secret Team, Algebra / Number Theory, Combinatorics, Geometry, and Guts.' },
-    { title: 'Archive', text: 'Problems, solutions, and results are posted.' },
+    { title: 'Who', text: 'Middle and high school students; teams up to 6.' },
+    { title: 'Contest', text: 'Individual rounds, Secret Team, and Guts.' },
+    { title: 'After', text: 'Problems, solutions, and results stay in Archive.' },
   ];
 
   return (
@@ -109,6 +109,7 @@ export default function HomeClient({
           </div>
           <h1 className="hero-animate-words">
             <span className="word">Los Angeles</span>
+            {' '}
             <span className="word gold-shimmer-text">Math Tournament</span>
           </h1>
           <p className="cinema-lede">
@@ -151,24 +152,24 @@ export default function HomeClient({
               </div>
             </div>
           )}
-        </div>
 
-        <div className="home-hero__stats">
-          {highlightStats.map((stat) => (
-            <div key={stat.label} className="home-stat-card">
-              <strong>{stat.value}</strong>
-              <span>{stat.label}</span>
-            </div>
-          ))}
+          <div className="home-hero__stats">
+            {highlightStats.map((stat) => (
+              <div key={stat.label} className="home-stat-card">
+                <strong>{stat.value}</strong>
+                <span>{stat.label}</span>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
       <section className="home-bento site-pad">
         <div className="home-bento__intro">
           <p className="page-kicker">LAMT 2026</p>
-          <h2>Contest Day</h2>
+          <h2>A Day at UCLA</h2>
           <p>
-            The essentials for competitors and coaches.
+            What competitors and coaches need to know.
           </p>
         </div>
         <div className="lamt-line-list home-program-list">
