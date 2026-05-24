@@ -1,3 +1,5 @@
+import TournamentScheduleTabs from '../components/TournamentScheduleTabs';
+
 export default function TournamentPage() {
   const schedule = [
     { time: '8:00 AM', end: '8:45 AM', event: 'Contestant Check-In', location: 'Outside MS 4000A', note: 'Teams arrived, received materials, and checked in with chaperones.' },
@@ -108,23 +110,7 @@ export default function TournamentPage() {
 
       <section className="section-row">
         <h2 className="section-title">Schedule</h2>
-        <div className="lamt-timeline" aria-label="LAMT 2026 tournament day timeline">
-          {schedule.map(({ time, end, event, location, note }, index) => (
-            <article key={`${time}-${event}`} className="lamt-timeline-item">
-              <div className="lamt-timeline-node" aria-hidden="true">
-                <span>{String(index + 1).padStart(2, '0')}</span>
-              </div>
-              <div className="lamt-timeline-card">
-                <div>
-                  <span className="lamt-timeline-time">{time}-{end}</span>
-                  <h3>{event}</h3>
-                </div>
-                <p>{note}</p>
-                <strong>{location}</strong>
-              </div>
-            </article>
-          ))}
-        </div>
+        <TournamentScheduleTabs schedule={schedule} />
       </section>
 
       <section className="section-row">
