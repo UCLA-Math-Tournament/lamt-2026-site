@@ -32,7 +32,7 @@ export default function SponsorsSection({
         <div>
           <h2 className="page-title">Our Sponsors</h2>
           <p className="page-summary mt-5">
-            LAMT 2026 is made possible by the generous support of our sponsors.
+            Sponsor support keeps LAMT free for students.
           </p>
         </div>
       </div>
@@ -69,14 +69,14 @@ export default function SponsorsSection({
       ) : (
         <div className="section-row sponsor-empty-state">
           <h3 className="section-title">Sponsor Announcements</h3>
-          <p className="section-copy">Sponsor information will be posted when available.</p>
+          <p className="section-copy">No sponsor announcements yet.</p>
         </div>
       )}
 
       <div className="section-row">
         <h3 className="section-title">Sponsor LAMT</h3>
         <div>
-          <p className="section-copy mb-6">Interested in sponsoring LAMT?</p>
+          <p className="section-copy mb-6">Support a free student math tournament.</p>
           <a href="mailto:uclamathtournament@gmail.com" className="btn-outline">
             Contact Us
           </a>

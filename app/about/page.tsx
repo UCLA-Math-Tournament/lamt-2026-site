@@ -105,7 +105,7 @@ export default function AboutPage() {
             <span className="word">Us</span>
           </h1>
           <p className="page-summary reveal mt-5">
-            The Los Angeles Math Tournament Group runs a free in-person math contest for middle and high school students.
+            Free in-person contest for middle and high school students.
           </p>
         </div>
       </header>
@@ -115,10 +115,10 @@ export default function AboutPage() {
         <div className="mission-board">
           <div className="mission-stack stagger-parent">
             <p className="section-copy">
-              LAMT gives students a full contest day at UCLA with individual rounds, team rounds, lunch, disputes, and awards.
+              LAMT runs a full contest day at UCLA: individual rounds, team rounds, lunch, disputes, awards.
             </p>
             <p className="section-copy">
-              The tournament is built around clear logistics, strong problem writing, and a collaborative team experience.
+              UCLA students handle logistics, problem writing, staffing, and outreach.
             </p>
           </div>
           <div className="mission-principles">

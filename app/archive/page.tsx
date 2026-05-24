@@ -41,7 +41,7 @@ export default function ArchivePage() {
         <div>
           <h1 className="page-title">Archive</h1>
           <p className="page-summary mt-5">
-            Tournament papers, official solutions, and results from published LAMT seasons.
+            Papers, solutions, results, corrections.
           </p>
         </div>
       </header>
@@ -55,7 +55,7 @@ export default function ArchivePage() {
                 <span className="label-caps">Published Materials</span>
                 <strong>LAMT {year.title}</strong>
                 <p className="section-copy">
-                  Problems, solutions, results, and corrections for LAMT {year.title}.
+                  Problems, solutions, results, corrections.
                 </p>
               </div>
               <ArchiveMaterialGrid

@@ -3158,6 +3158,136 @@ body {
   color: var(--ucla-blue-deep);
 }
 
+.live-announcement-list {
+  display: grid;
+}
+
+.live-announcement-card {
+  position: relative;
+  display: grid;
+  gap: var(--space-3);
+  overflow: hidden;
+  border-bottom: 2px solid var(--color-border);
+  background: var(--color-surface);
+  padding: var(--space-5) var(--space-5) var(--space-5) calc(var(--space-5) + 1rem);
+  transition:
+    background-color 160ms ease,
+    box-shadow 180ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.live-announcement-card:last-child {
+  border-bottom: 0;
+}
+
+.live-announcement-card::before {
+  content: "";
+  position: absolute;
+  top: var(--space-5);
+  bottom: var(--space-5);
+  left: var(--space-5);
+  width: 3px;
+  background: var(--color-border);
+  transform: scaleY(0.72);
+  transform-origin: top;
+  transition:
+    background-color 180ms ease,
+    transform 220ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.live-announcement-card[data-latest="true"]::before,
+.live-announcement-card:hover::before {
+  background: var(--ucla-gold);
+  transform: scaleY(1);
+}
+
+.live-announcement-card:hover {
+  background: var(--color-surface-2);
+  box-shadow: inset 4px 0 0 var(--ucla-gold);
+}
+
+.live-announcement-meta {
+  display: flex;
+  min-height: 1.65rem;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.live-announcement-time {
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+  font-weight: 900;
+  line-height: 1.2;
+}
+
+.live-latest-badge {
+  position: relative;
+  isolation: isolate;
+  display: inline-flex;
+  min-height: 1.65rem;
+  align-items: center;
+  overflow: hidden;
+  border: 2px solid var(--ucla-gold);
+  border-radius: 0;
+  background: var(--ucla-gold);
+  color: var(--ucla-blue-deep);
+  padding: 0.22rem 0.55rem;
+  font-size: var(--text-xs);
+  font-weight: 950;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.live-latest-badge__shine {
+  position: absolute;
+  inset: -2px;
+  z-index: 0;
+  background: linear-gradient(110deg, transparent 0%, rgba(255, 255, 255, 0.62) 45%, transparent 62%);
+  transform: translateX(-125%);
+  animation: live-latest-shine 3.1s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+}
+
+.live-latest-badge span:last-child {
+  position: relative;
+  z-index: 1;
+}
+
+.dark .live-announcement-card {
+  background: var(--color-surface);
+}
+
+.dark .live-announcement-card:hover {
+  background: var(--color-surface-2);
+}
+
+.dark .live-latest-badge__shine {
+  background: linear-gradient(110deg, transparent 0%, rgba(255, 255, 255, 0.42) 45%, transparent 62%);
+}
+
+@keyframes live-latest-shine {
+  0%,
+  42% {
+    transform: translateX(-125%);
+  }
+
+  72%,
+  100% {
+    transform: translateX(125%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .live-announcement-card,
+  .live-announcement-card::before {
+    transition: none;
+  }
+
+  .live-latest-badge__shine {
+    display: none;
+    animation: none;
+  }
+}
+
 .live-schedule-list {
   display: grid;
 }

@@ -92,8 +92,7 @@ export default function FooterClient() {
         </div>
 
         <p className="site-footer__note">
-          Student group acting independently of the University of California.
-          Full responsibility for this website belongs to LAMT.
+          Independent student group. Not an official University of California site.
         </p>
       </div>
     </footer>

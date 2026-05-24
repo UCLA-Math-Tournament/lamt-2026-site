@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { motion, useReducedMotion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import VenueMap from "../components/VenueMap";
@@ -163,7 +164,7 @@ function MapSection() {
       <h2 className="section-title">Venue Reference</h2>
       <div>
         <p className="section-copy mb-6">
-          LAMT 2026 was centered around the Mathematical Sciences Building, with lunch and disputes at the Court of Sciences.
+          Mathematical Sciences: testing, opening, awards. Court of Sciences: lunch and disputes.
         </p>
         <VenueMap />
       </div>
@@ -173,9 +174,10 @@ function MapSection() {
 
 function UpdatesFeed({ updates, previewMode }: { updates: Update[]; previewMode: boolean }) {
   const heading = previewMode ? "Draft Announcements" : "Tournament Announcements";
+  const reduceMotion = useReducedMotion();
 
   return (
-    <section className="lamt-panel">
+    <section className="lamt-panel" aria-live="polite">
       <div className="lamt-panel-header">
         <div>
           <p className="label-caps">Announcements</p>
@@ -193,30 +195,56 @@ function UpdatesFeed({ updates, previewMode }: { updates: Update[]; previewMode:
         )}
       </div>
       {updates.length === 0 ? (
-        <div className="lamt-panel-body">
-          <p className="section-copy">
-            {previewMode
-              ? "Staff draft announcements for review will appear here."
-              : TOURNAMENT_OVER
-                ? "No additional announcements were posted for LAMT 2026."
-                : "Official tournament announcements will appear here."}
-          </p>
+        <div className="live-announcement-list" role="status">
+          <motion.div
+            className="live-announcement-card live-announcement-card--empty"
+            initial={reduceMotion ? false : { opacity: 0, y: 18 }}
+            animate={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+            transition={{ duration: 0.42, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <div className="live-announcement-meta">
+              <span className="live-latest-badge live-latest-badge--quiet">
+                <span className="live-latest-badge__shine" aria-hidden="true" />
+                <span>{previewMode ? "Draft" : TOURNAMENT_OVER ? "Archive" : "Official"}</span>
+              </span>
+            </div>
+            <p className="section-copy">
+              {previewMode
+                ? "No draft announcements."
+                : TOURNAMENT_OVER
+                  ? "No announcements posted."
+                  : "No announcements yet."}
+            </p>
+          </motion.div>
         </div>
       ) : (
-        <div>
+        <div className="live-announcement-list" role="list">
           {updates.map((update, index) => (
-            <article key={update.id} className="border-b-2 border-[var(--color-border)] p-5 last:border-b-0">
-              <div className="mb-3 flex flex-wrap items-center gap-3">
+            <motion.article
+              key={update.id}
+              className="live-announcement-card"
+              data-latest={index === 0 ? "true" : undefined}
+              role="listitem"
+              initial={reduceMotion ? false : { opacity: 0, y: 18 }}
+              animate={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+              transition={{
+                duration: 0.42,
+                delay: Math.min(index * 0.055, 0.18),
+                ease: [0.16, 1, 0.3, 1],
+              }}
+            >
+              <div className="live-announcement-meta">
                 {index === 0 && (
-                  <span className="border-2 border-[var(--ucla-gold)] bg-[var(--ucla-gold)] px-2 py-1 text-xs font-extrabold uppercase text-[var(--ucla-blue-deep)]">
-                    Latest
+                  <span className="live-latest-badge" aria-label="Latest announcement">
+                    <span className="live-latest-badge__shine" aria-hidden="true" />
+                    <span>Latest</span>
                   </span>
                 )}
-                <span className="text-sm font-bold text-[var(--color-text-muted)]">{update.timestamp}</span>
+                <span className="live-announcement-time">{update.timestamp}</span>
               </div>
               {update.title && <h3 className="mb-3 text-xl font-extrabold text-[var(--color-text)]">{update.title}</h3>}
               <p className="section-copy whitespace-pre-line">{update.body}</p>
-            </article>
+            </motion.article>
           ))}
         </div>
       )}
@@ -229,10 +257,10 @@ function PreviewModeNotice() {
     <section className="local-mode-notice" aria-label="Staff draft notice">
       <div>
         <p className="label-caps">Staff Draft</p>
-        <h2>Showing draft schedule and announcements.</h2>
+        <h2>Draft schedule and announcements.</h2>
       </div>
       <p>
-        Use this view to review staff drafts before publishing official tournament updates.
+        Review before posting.
       </p>
       <Link href="/live" className="btn-outline">
         Open Event Page
@@ -272,16 +300,16 @@ function HelpSection() {
 }
 
 function ContactStaffSection() {
-  const mailto = `mailto:${STAFF_EMAIL}?subject=${encodeURIComponent("LAMT 2026 follow-up question")}`;
+  const mailto = `mailto:${STAFF_EMAIL}?subject=${encodeURIComponent("LAMT 2026 question")}`;
   return (
     <section id="contact" className="section-row">
       <h2 className="section-title">Contact</h2>
       <div className="lamt-panel">
         <div className="lamt-panel-body grid gap-4 md:grid-cols-[1fr_auto] md:items-center">
           <div>
-            <h3 className="text-xl font-extrabold text-[var(--color-text)]">Email LAMT for post-tournament questions.</h3>
+            <h3 className="text-xl font-extrabold text-[var(--color-text)]">Email LAMT.</h3>
             <p className="section-copy mt-2">
-              For LAMT 2026 follow-up, use the tournament email address.
+              {STAFF_EMAIL}
             </p>
           </div>
           <a href={mailto} className="btn-filled">
@@ -339,7 +367,7 @@ export default function LivePage() {
           <div>
             <h1 className="page-title">LAMT 2026 Event Archive</h1>
             <p className="page-summary mt-5">
-              Final schedule, posted announcements, UCLA venue references, and contact links from Sunday, May 17, 2026.
+              May 17, 2026 at UCLA. Schedule, announcements, venue map, contact.
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
               <a href="#announcements" className="btn-filled">

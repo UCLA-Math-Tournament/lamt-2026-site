@@ -34,10 +34,10 @@ function StorageModeNotice({ compact = false }: { compact?: boolean }) {
     <section className={`local-mode-notice ${compact ? "local-mode-notice--compact" : ""}`} aria-label="Draft publishing notice">
       <div>
         <p className="label-caps">Draft Review</p>
-        <h2>Drafts are for staff rehearsal.</h2>
+        <h2>Drafts do not publish.</h2>
       </div>
       <p>
-        Use this panel to prepare schedule and announcement changes before they are announced publicly.
+        Review schedule and announcement changes before posting.
       </p>
       {!compact && (
         <Link href="/live?preview=1" className="btn-outline">
@@ -71,7 +71,7 @@ function LoginScreen({ onLogin }: { onLogin: () => void }) {
         <div className="grid gap-6 lg:grid-cols-[1fr_auto] lg:items-end">
           <div>
             <h1 className="page-title">LAMT Admin Panel</h1>
-            <p className="page-summary mt-5">Review tournament-day announcement drafts, schedule changes, and staff message notes.</p>
+            <p className="page-summary mt-5">Draft announcements. Edit schedule. Review notes.</p>
           </div>
           <Image src="/LAMTBear.png" alt="LAMT" width={128} height={128} priority className="hidden h-32 w-32 border-2 border-[var(--ucla-gold)] bg-[var(--color-surface)] p-3 object-contain lg:block" />
         </div>
@@ -185,7 +185,7 @@ function MessagesTab({ onUnreadChange }: { onUnreadChange: (count: number) => vo
       <section className="lamt-panel">
         <div className="lamt-panel-body py-16 text-center">
           <p className="text-xl font-extrabold text-[var(--color-text)]">No saved messages</p>
-          <p className="section-copy mt-2">Questions from visitors should go through email or the info desk.</p>
+          <p className="section-copy mt-2">Use email or the info desk for questions.</p>
         </div>
       </section>
     );
@@ -480,7 +480,7 @@ export default function AdminPage() {
         <div className="grid gap-6 lg:grid-cols-[1fr_auto] lg:items-end">
           <div>
             <h1 className="page-title">LAMT Admin Panel</h1>
-            <p className="page-summary mt-5">Prepare staff drafts, review the event page, and keep official updates deliberate.</p>
+            <p className="page-summary mt-5">Draft announcements. Edit schedule. Review notes.</p>
             <div className="mt-6 flex flex-wrap gap-3">
               <Link href="/live?preview=1" className="btn-filled">
                 Open Draft View

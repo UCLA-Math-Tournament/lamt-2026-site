@@ -112,7 +112,7 @@ export default function HomeClient({
             <span className="word gold-shimmer-text">Math Tournament</span>
           </h1>
           <p className="cinema-lede">
-            A free high school math tournament at UCLA.
+            Free in-person math contest for middle and high school students.
           </p>
 
           {tournamentComplete ? (
@@ -170,7 +170,7 @@ export default function HomeClient({
           <p className="page-kicker">Contest</p>
           <h2>Format</h2>
           <p>
-            The 2026 tournament included individual and team rounds.
+            Individual tests, team rounds, lunch, disputes, awards.
           </p>
         </div>
         <div className="home-bento__grid stagger-parent">
@@ -196,7 +196,7 @@ export default function HomeClient({
           <p className="page-kicker">Status</p>
           <h2>{regClosed ? 'Registration is closed.' : 'Registration is open.'}</h2>
           <p>
-            LAMT 2026 took place on May 17 at UCLA.
+            LAMT 2026 was May 17 at UCLA. Archive open.
           </p>
         </div>
         <div className="stagger-parent flex flex-wrap items-center gap-4">

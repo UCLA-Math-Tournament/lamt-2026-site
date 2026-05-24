@@ -7,16 +7,16 @@ import { MinusIcon, PlusIcon } from '@radix-ui/react-icons';
 const STAFF_EMAIL = 'uclamathtournament@gmail.com';
 
 const faqs = [
-  { id: 'eligibility', category: 'Eligibility', q: 'Who is eligible to compete at LAMT?', a: 'Any student enrolled in grade 12 or below as of May 2026 was eligible. LAMT did not have a geographic restriction.' },
-  { id: 'fee', category: 'Registration', q: 'Was there a registration fee?', a: 'No. LAMT 2026 had no registration fee. Each participant was responsible for travel, housing, and related expenses.' },
-  { id: 'team-size', category: 'Teams', q: 'How large could a team be?', a: 'Teams could include at most 6 students. Students on an eligible team had to come from the same school or organization.' },
-  { id: 'individual', category: 'Teams', q: 'Could students compete individually?', a: 'Yes. Students who could not form an eligible team could apply as individual competitors, with their own accompanying chaperone.' },
-  { id: 'multiple-teams', category: 'Teams', q: 'Could a school send more than one team?', a: 'Yes. A school or organization could apply to send multiple eligible teams, with each team requiring its own accompanying chaperone.' },
-  { id: 'topics', category: 'Contest', q: 'What topics were covered on the individual rounds?', a: 'LAMT used individual rounds in algebra / number theory, combinatorics, and geometry. Team rounds could draw from the same general contest math areas.' },
-  { id: 'guts', category: 'Contest', q: 'What was the format of the Guts Round?', a: 'The Guts Round used 8 sets of 3 problems plus 1 set of estimation problems, delivered to teams in sequential order.' },
-  { id: 'calculators', category: 'Rules', q: 'Were calculators allowed?', a: 'No. Calculators and other computational aids were prohibited during all testing portions of the contest.' },
-  { id: 'location', category: 'Logistics', q: 'Where did LAMT 2026 take place?', a: 'LAMT 2026 was held on the UCLA campus on May 17, 2026. Testing rooms were in the Mathematical Sciences Building, with lunch and disputes around the Court of Sciences.' },
-  { id: 'registration-closed', category: 'Registration', q: 'Can I still register for LAMT 2026?', a: 'No. LAMT 2026 registration is closed because the tournament took place on May 17, 2026. Use the archive for 2026 materials and Discord for future announcements.' },
+  { id: 'eligibility', category: 'Eligibility', q: 'Who is eligible to compete at LAMT?', a: 'Grade 12 or below as of May 2026. No geographic restriction.' },
+  { id: 'fee', category: 'Registration', q: 'Was there a registration fee?', a: 'No. LAMT 2026 was free. Participants covered travel and housing.' },
+  { id: 'team-size', category: 'Teams', q: 'How large could a team be?', a: 'Up to 6 students from the same school or organization.' },
+  { id: 'individual', category: 'Teams', q: 'Could students compete individually?', a: 'Yes. Individuals needed their own accompanying chaperone.' },
+  { id: 'multiple-teams', category: 'Teams', q: 'Could a school send more than one team?', a: 'Yes. Each team needed its own chaperone.' },
+  { id: 'topics', category: 'Contest', q: 'What topics were covered on the individual rounds?', a: 'Algebra / number theory, combinatorics, and geometry.' },
+  { id: 'guts', category: 'Contest', q: 'What was the format of the Guts Round?', a: '8 sets of 3 problems plus 1 estimation set, delivered in order.' },
+  { id: 'calculators', category: 'Rules', q: 'Were calculators allowed?', a: 'No calculators or computational aids during testing.' },
+  { id: 'location', category: 'Logistics', q: 'Where did LAMT 2026 take place?', a: 'UCLA, May 17, 2026. Mathematical Sciences for testing; Court of Sciences for lunch and disputes.' },
+  { id: 'registration-closed', category: 'Registration', q: 'Can I still register for LAMT 2026?', a: 'No. LAMT 2026 is complete. Use Archive for materials and Discord for future announcements.' },
 ];
 
 const categories = ['All', ...Array.from(new Set(faqs.map((item) => item.category)))];
@@ -53,7 +53,7 @@ export default function FAQPage() {
             FAQ
           </h1>
           <p className="page-summary mt-5">
-            Common answers about eligibility, teams, rules, and logistics.
+            Eligibility, teams, rules, logistics.
           </p>
         </div>
       </header>

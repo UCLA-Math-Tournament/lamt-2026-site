@@ -66,9 +66,9 @@ export default function RulesPage() {
   ];
 
   const testFormats = [
-    { name: 'Individual Rounds', desc: '10 questions plus a tiebreaker problem. 50-minute time limit per round.' },
-    { name: 'Secret Team Round', desc: 'A collaborative team round with the exact structure revealed on tournament day.' },
-    { name: 'Guts Round', desc: '8 sets of 3 problems plus 1 set of estimation problems, delivered to teams in sequential order.' },
+    { name: 'Individual Rounds', desc: '10 questions plus tiebreaker. 50 minutes.' },
+    { name: 'Secret Team Round', desc: 'Team round. Structure revealed on tournament day.' },
+    { name: 'Guts Round', desc: '8 sets of 3 problems plus 1 estimation set. Sequential delivery.' },
   ];
 
   const keyRules = [
@@ -80,18 +80,18 @@ export default function RulesPage() {
   const ruleTable = [
     {
       category: 'Contest aids',
-      allowed: 'Materials explicitly provided or approved by LAMT staff.',
+      allowed: 'Materials provided or approved by LAMT staff.',
       notAllowed: 'Calculators, slide rules, abaci, books, notes, graph paper, rulers, compasses, and protractors.',
     },
     {
       category: 'Communication',
       allowed: 'Team discussion during team-based tests.',
-      notAllowed: 'Phones, computers, internet access, or communication outside the permitted team format.',
+      notAllowed: 'Phones, computers, internet, or outside communication.',
     },
     {
       category: 'Answer form',
-      allowed: 'Correct mathematical notation, exact values, and simplified expressions.',
-      notAllowed: 'Unsimplified expressions or unsupported approximations unless a problem requests them.',
+      allowed: 'Exact values and simplified expressions.',
+      notAllowed: 'Unsimplified expressions or unrequested approximations.',
     },
   ];
 
@@ -107,7 +107,7 @@ export default function RulesPage() {
         <div>
           <h1 className="page-title">Rules</h1>
           <p className="page-summary mt-5">
-            Testing format, honor code expectations, and answer standards for LAMT competitors.
+            Exact answers. No calculators. Team communication only during team rounds.
           </p>
         </div>
       </header>
@@ -169,7 +169,7 @@ export default function RulesPage() {
         <h2 className="section-title">Answer Format</h2>
         <div>
           <p className="section-copy mb-8">
-            Answers must be written in correct mathematical notation. Unless otherwise specified, all answers must be exact and simplified. Graders will take a reasonably lenient interpretation of &quot;simplified.&quot; The decisions of the LAMT coordinators are final.
+            Unless stated otherwise: exact, simplified, correct notation. LAMT coordinators make final grading decisions.
           </p>
 
           <div className="answer-reference-board">
