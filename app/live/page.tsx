@@ -161,7 +161,7 @@ function ScheduleTimeline({ schedule }: { schedule: ScheduleItem[] }) {
 function MapSection() {
   return (
     <section id="map" className="section-row">
-      <h2 className="section-title">Venue Reference</h2>
+      <h2 className="section-title">Venue</h2>
       <div>
         <p className="section-copy mb-6">
           Mathematical Sciences: testing, opening, awards. Court of Sciences: lunch and disputes.
@@ -272,7 +272,7 @@ function PreviewModeNotice() {
 function HelpSection() {
   return (
     <section className="section-row">
-      <h2 className="section-title">Tournament Day Reference</h2>
+      <h2 className="section-title">Day-of Info</h2>
       <div className="live-help-grid">
         {HELP_ITEMS.map((item) => {
           const content = (
@@ -307,7 +307,7 @@ function ContactStaffSection() {
       <div className="lamt-panel">
         <div className="lamt-panel-body grid gap-4 md:grid-cols-[1fr_auto] md:items-center">
           <div>
-            <h3 className="text-xl font-extrabold text-[var(--color-text)]">Email LAMT.</h3>
+            <h3 className="text-xl font-extrabold text-[var(--color-text)]">Email LAMT</h3>
             <p className="section-copy mt-2">
               {STAFF_EMAIL}
             </p>
@@ -377,7 +377,7 @@ export default function LivePage() {
                 Schedule
               </a>
               <a href="#map" className="btn-outline">
-                Venue Reference
+                Venue
               </a>
               <a href="#contact" className="btn-outline">
                 Contact
