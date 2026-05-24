@@ -33,11 +33,11 @@ function StorageModeNotice({ compact = false }: { compact?: boolean }) {
   return (
     <section className={`local-mode-notice ${compact ? "local-mode-notice--compact" : ""}`} aria-label="Draft publishing notice">
       <div>
-        <p className="label-caps">Draft Mode</p>
-        <h2>Drafts stay on this device.</h2>
+        <p className="label-caps">Draft Review</p>
+        <h2>Drafts are for staff rehearsal.</h2>
       </div>
       <p>
-        Use drafts for rehearsal. Official public changes should be reviewed, committed, and deployed before use.
+        Use this panel to prepare schedule and announcement changes before they are announced publicly.
       </p>
       {!compact && (
         <Link href="/live?preview=1" className="btn-outline">
@@ -107,10 +107,12 @@ function LoginScreen({ onLogin }: { onLogin: () => void }) {
 
 function AdminMetric({ label, value, detail }: { label: string; value: string | number; detail: string }) {
   return (
-    <div className="lamt-panel p-4">
-      <p className="label-caps">{label}</p>
-      <p className="mt-2 text-2xl font-extrabold text-[var(--color-text)]">{value}</p>
-      <p className="section-copy mt-1 text-sm">{detail}</p>
+    <div className="admin-metric">
+      <div>
+        <p className="label-caps">{label}</p>
+        <p className="admin-metric__detail">{detail}</p>
+      </div>
+      <strong>{value}</strong>
     </div>
   );
 }
@@ -195,7 +197,7 @@ function MessagesTab({ onUnreadChange }: { onUnreadChange: (count: number) => vo
         <div className="lamt-panel-body">
           <p className="font-extrabold text-[var(--color-text)]">Message Notes</p>
           <p className="section-copy mt-2 text-sm">
-            Notes stay on this device. Replies open your mail client so the actual response leaves through email.
+            Message notes are for staff tracking. Replies open your mail client.
           </p>
         </div>
       </section>
@@ -318,7 +320,7 @@ function AnnouncementsTab({ updates, setUpdates }: {
         </div>
         <div className="lamt-panel-body grid gap-4">
           <p className="section-copy">
-            Save announcement drafts for review. Publish official updates only after they are approved and deployed.
+            Save announcement drafts for review. Announce official updates only after staff approval.
           </p>
           <input className="lamt-input" value={title} onChange={(event) => setTitle(event.target.value)} placeholder="Title (optional)" />
           <textarea className="lamt-textarea" value={body} onChange={(event) => setBody(event.target.value)} placeholder="Update text..." />
@@ -391,7 +393,7 @@ function ScheduleTab({ schedule, setSchedule }: {
       <div className="lamt-panel-body">
         <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
           <p className="section-copy max-w-3xl">
-            Edit event times, rooms, and delay notes for staff review before publishing.
+            Edit event times, rooms, and delay notes for staff review.
           </p>
           <button type="button" onClick={resetSchedule} className="btn-outline">
             Reset to Official
@@ -500,33 +502,33 @@ export default function AdminPage() {
       <section className="section-row">
         <h2 className="section-title">Control Room</h2>
         <div className="grid gap-4 md:grid-cols-3">
-          <AdminMetric label="Updates" value={updates.length} detail="Draft announcements" />
-          <AdminMetric label="Schedule" value={schedule.length} detail="Draft schedule rows" />
-          <AdminMetric label="Messages" value={msgCount} detail="Saved message notes" />
+          <AdminMetric label="Updates" value={updates.length} detail="Draft updates" />
+          <AdminMetric label="Schedule" value={schedule.length} detail="Schedule rows" />
+          <AdminMetric label="Messages" value={msgCount} detail="Open notes" />
         </div>
       </section>
 
       <section className="section-row">
         <h2 className="section-title">Tools</h2>
         <div className="grid gap-6">
-        <nav className="flex flex-wrap gap-2 border-b-2 border-[var(--color-border)] pb-4" aria-label="Admin sections">
-          {tabs.map((item) => (
-            <button
-              key={item.key}
-              type="button"
-              onClick={() => setTab(item.key)}
-              className="lamt-button"
-              data-state={tab === item.key ? "selected" : undefined}
-            >
-              {item.label}
-              {(item.badge ?? 0) > 0 ? ` (${item.badge})` : ""}
-            </button>
-          ))}
-        </nav>
+          <nav className="admin-tools-nav" aria-label="Admin sections">
+            {tabs.map((item) => (
+              <button
+                key={item.key}
+                type="button"
+                onClick={() => setTab(item.key)}
+                className="admin-tools-tab"
+                data-state={tab === item.key ? "selected" : undefined}
+              >
+                <span>{item.label}</span>
+                {(item.badge ?? 0) > 0 && <strong>{item.badge}</strong>}
+              </button>
+            ))}
+          </nav>
 
-        {tab === "announcements" && <AnnouncementsTab updates={updates} setUpdates={setUpdates} />}
-        {tab === "schedule" && <ScheduleTab schedule={schedule} setSchedule={setSchedule} />}
-        {tab === "messages" && <MessagesTab onUnreadChange={setMsgCount} />}
+          {tab === "announcements" && <AnnouncementsTab updates={updates} setUpdates={setUpdates} />}
+          {tab === "schedule" && <ScheduleTab schedule={schedule} setSchedule={setSchedule} />}
+          {tab === "messages" && <MessagesTab onUnreadChange={setMsgCount} />}
         </div>
       </section>
     </div>
