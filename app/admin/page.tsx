@@ -61,6 +61,11 @@ function StorageModeNotice({ compact = false }: { compact?: boolean }) {
 function LoginScreen({ onLogin }: { onLogin: () => void }) {
   const [pw, setPw] = useState("");
   const [err, setErr] = useState(false);
+  const passwordRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    passwordRef.current?.focus({ preventScroll: true });
+  }, []);
 
   function submit(event: React.FormEvent) {
     event.preventDefault();
@@ -93,11 +98,11 @@ function LoginScreen({ onLogin }: { onLogin: () => void }) {
               <label className="grid gap-2">
                 <span className="label-caps">Password</span>
                 <input
+                  ref={passwordRef}
                   className={`lamt-input ${err ? "border-[#B33A2B]" : ""}`}
                   type="password"
                   value={pw}
                   onChange={(event) => setPw(event.target.value)}
-                  autoFocus
                 />
               </label>
               {err && <p className="mt-3 text-sm font-bold text-[#B33A2B]">Incorrect password</p>}

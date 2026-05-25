@@ -11033,3 +11033,87 @@ body.is-scrolled .site-brand__mark {
   background: var(--ucla-gold) !important;
   color: var(--ucla-blue-deep) !important;
 }
+
+/* Live archive pass: readable line items, no announcement cards. */
+.live-announcement-list {
+  border-top: 1px solid var(--lamt-rule-soft) !important;
+}
+
+.live-announcement-card,
+.live-announcement-card[data-mode="archive"],
+.live-announcement-card--empty {
+  opacity: 1 !important;
+  overflow: visible !important;
+  border: 0 !important;
+  border-bottom: 1px solid var(--lamt-rule-soft) !important;
+  border-top: 0 !important;
+  background: transparent !important;
+  padding: 0 !important;
+  animation: none !important;
+  box-shadow: none !important;
+}
+
+.live-announcement-card:hover,
+.live-announcement-card:focus-visible {
+  border-bottom-color: var(--lamt-rule-strong) !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+
+.live-announcement-shell {
+  display: block !important;
+  padding: clamp(1.05rem, 2vw, 1.45rem) 0 !important;
+}
+
+.live-announcement-content {
+  display: grid !important;
+  grid-template-columns: minmax(7rem, 0.2fr) minmax(0, 1fr) !important;
+  gap: clamp(1rem, 3vw, 2.5rem) !important;
+  align-items: start !important;
+}
+
+.live-announcement-copy {
+  opacity: 1 !important;
+  animation: none !important;
+}
+
+.live-announcement-copy h3 {
+  color: var(--color-text) !important;
+}
+
+.live-announcement-copy p {
+  max-width: 44rem !important;
+  color: var(--color-text-secondary) !important;
+}
+
+.live-announcement-meta {
+  display: grid !important;
+  gap: 0.35rem !important;
+  min-height: 0 !important;
+}
+
+.live-latest-badge,
+.live-latest-badge--quiet {
+  display: none !important;
+}
+
+.live-announcement-time {
+  color: var(--ucla-blue) !important;
+  font-size: 0.82rem !important;
+  font-weight: 900 !important;
+  letter-spacing: 0.04em !important;
+  text-transform: uppercase !important;
+}
+
+.dark .live-announcement-time,
+[data-theme="dark"] .live-announcement-time {
+  color: var(--ucla-gold) !important;
+}
+
+@media (max-width: 700px) {
+  .live-announcement-content {
+    grid-template-columns: 1fr !important;
+    gap: 0.5rem !important;
+  }
+}

@@ -20,14 +20,14 @@ const ARCHIVE_UPDATES: Update[] = [
   {
     id: -1,
     timestamp: "May 17, 2026",
-    title: "LAMT 2026 complete",
-    body: "Problems, solutions, results, and the final schedule are available for review.",
+    title: "2026 materials posted",
+    body: "Problems, solutions, results, and schedule are available.",
   },
   {
     id: -2,
     timestamp: "Post-contest",
-    title: "Questions after the tournament",
-    body: `Email ${STAFF_EMAIL}. Include your school, team name, and the event you are asking about.`,
+    title: "Questions",
+    body: `Email ${STAFF_EMAIL} with your school, team name, and event.`,
   },
 ];
 
