@@ -84,11 +84,6 @@ export default function AboutPage() {
     },
   ];
 
-  const operatingPrinciples = [
-    { label: 'Organizers', value: 'UCLA students' },
-    { label: 'Audience', value: 'Middle and high school students' },
-    { label: 'Cost', value: 'Free registration' },
-  ];
   const briefItems = [
     { title: 'Campus', text: 'In person at UCLA.' },
     { title: 'Rounds', text: 'Individual, team, and Guts.' },
@@ -113,28 +108,6 @@ export default function AboutPage() {
           </p>
         </div>
       </header>
-
-      <section className="section-row">
-        <h2 className="section-title">Mission</h2>
-        <div className="mission-board">
-          <div className="mission-stack stagger-parent">
-            <p className="section-copy">
-              UCLA students organize the contest from check-in through awards.
-            </p>
-            <p className="section-copy">
-              Registration is free for middle and high school students.
-            </p>
-          </div>
-          <div className="lamt-line-list mission-principles">
-            {operatingPrinciples.map((item) => (
-              <article key={item.label} className="lamt-line-item">
-                <span>{item.label}</span>
-                <strong>{item.value}</strong>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
 
       <section className="section-row">
         <h2 className="section-title">LAMT</h2>

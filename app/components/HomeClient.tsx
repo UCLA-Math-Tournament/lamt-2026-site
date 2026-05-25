@@ -165,10 +165,7 @@ export default function HomeClient({
       <section className="home-bento site-pad">
         <div className="home-bento__intro">
           <p className="page-kicker">LAMT 2026</p>
-          <h2>A Day at UCLA</h2>
-          <p>
-            The essentials for competitors and coaches.
-          </p>
+          <h2>Event Day</h2>
         </div>
         <div className="lamt-line-list home-program-list">
           {programRows.map((row, index) => (

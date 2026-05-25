@@ -39,25 +39,6 @@ function writeStored<T>(key: string, value: T) {
   window.localStorage.setItem(key, JSON.stringify(value));
 }
 
-function StorageModeNotice({ compact = false }: { compact?: boolean }) {
-  return (
-    <section className={`local-mode-notice ${compact ? "local-mode-notice--compact" : ""}`} aria-label="Draft publishing notice">
-      <div>
-        <p className="label-caps">Drafts</p>
-        <h2>Not public.</h2>
-      </div>
-      <p>
-        Commit approved updates to publish.
-      </p>
-      {!compact && (
-        <Link href="/live?preview=1" className="btn-outline">
-          Open Draft View
-        </Link>
-      )}
-    </section>
-  );
-}
-
 function LoginScreen({ onLogin }: { onLogin: () => void }) {
   const [pw, setPw] = useState("");
   const [err, setErr] = useState(false);
@@ -85,14 +66,12 @@ function LoginScreen({ onLogin }: { onLogin: () => void }) {
         </div>
         <div>
           <h1 className="page-title">Admin</h1>
-          <p className="page-summary mt-5">Drafts, schedule, messages.</p>
         </div>
       </header>
 
       <section className="section-row admin-access-row">
-        <h2 className="section-title">Access</h2>
+        <h2 className="section-title">Staff</h2>
         <div className="admin-login-stack">
-          <StorageModeNotice compact />
           <form onSubmit={submit} className="lamt-panel w-full max-w-md">
             <div className="lamt-panel-body">
               <label className="grid gap-2">
@@ -197,7 +176,6 @@ function MessagesTab({ onUnreadChange }: { onUnreadChange: (count: number) => vo
       <section className="lamt-panel">
         <div className="lamt-panel-body py-16 text-center">
           <p className="text-xl font-extrabold text-[var(--color-text)]">No saved messages</p>
-          <p className="section-copy mt-2">Email or info desk.</p>
         </div>
       </section>
     );
@@ -205,15 +183,6 @@ function MessagesTab({ onUnreadChange }: { onUnreadChange: (count: number) => vo
 
   return (
     <div className="grid gap-5">
-      <section className="lamt-panel">
-        <div className="lamt-panel-body">
-          <p className="font-extrabold text-[var(--color-text)]">Message Notes</p>
-          <p className="section-copy mt-2 text-sm">
-            Replies open mail.
-          </p>
-        </div>
-      </section>
-
       {unresolved > 0 && (
         <div className="admin-alert-line">
           {unresolved} unresolved {unresolved === 1 ? "message" : "messages"}
@@ -326,19 +295,16 @@ function AnnouncementsTab({ updates, setUpdates }: {
       <section className="lamt-panel">
         <div className="lamt-panel-header">
           <div>
-            <p className="label-caps">Staff Draft</p>
-            <h2 className="mt-1 text-xl font-extrabold text-[var(--color-text)]">Announcement Composer</h2>
+            <p className="label-caps">Notices</p>
+            <h2 className="mt-1 text-xl font-extrabold text-[var(--color-text)]">Event Notices</h2>
           </div>
         </div>
         <div className="lamt-panel-body grid gap-4">
-          <p className="section-copy">
-            Drafts are not public. Commit approved updates to publish.
-          </p>
           <input className="lamt-input" value={title} onChange={(event) => setTitle(event.target.value)} placeholder="Title (optional)" />
           <textarea className="lamt-textarea" value={body} onChange={(event) => setBody(event.target.value)} placeholder="Update text..." />
           <div className="flex flex-wrap gap-3">
             <button type="button" onClick={addUpdate} disabled={!body.trim()} className="btn-outline disabled:opacity-40">
-              Save Draft
+              Save Notice
             </button>
             <button type="button" onClick={resetUpdates} className="btn-outline">
               Reset to Official
@@ -349,14 +315,14 @@ function AnnouncementsTab({ updates, setUpdates }: {
 
       <section className="lamt-panel">
         <div className="lamt-panel-header">
-          <h2 className="text-xl font-extrabold text-[var(--color-text)]">Draft Updates</h2>
+          <h2 className="text-xl font-extrabold text-[var(--color-text)]">Saved Notices</h2>
           <span className="font-bold text-[var(--color-text-muted)]">{updates.length}</span>
         </div>
         {updates.length === 0 ? (
-          <div className="lamt-panel-body text-center text-[var(--color-text-muted)]">No draft updates saved.</div>
+          <div className="lamt-panel-body text-center text-[var(--color-text-muted)]">No saved notices.</div>
         ) : (
           updates.map((update) => (
-            <article key={update.id} className="admin-draft-row">
+            <article key={update.id} className="admin-notice-row">
               <div className="flex flex-wrap items-start justify-between gap-4">
                 <div>
                   <p className="text-sm font-bold text-[var(--color-text-muted)]">{update.timestamp}</p>
@@ -405,7 +371,7 @@ function ScheduleTab({ schedule, setSchedule }: {
       <div className="lamt-panel-body">
         <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
           <p className="section-copy max-w-3xl">
-            Edit draft times, rooms, delay notes.
+            Edit times, rooms, and delay notes.
           </p>
           <button type="button" onClick={resetSchedule} className="btn-outline">
             Reset to Official
@@ -535,28 +501,25 @@ export default function AdminPage() {
         </div>
         <div>
           <h1 className="page-title">Admin</h1>
-          <p className="page-summary mt-5">Drafts, schedule, messages.</p>
           <div className="mt-6 flex flex-wrap gap-3">
             <Link href="/live?preview=1" className="btn-filled">
-              Open Draft View
+              Preview Event Page
             </Link>
             <Link href="/live" className="btn-outline">
-              Open Event Page
+              Event Page
             </Link>
             <a href={`mailto:${STAFF_EMAIL}`} className="btn-outline">
-              Email Staff
+              Email
             </a>
           </div>
         </div>
       </header>
 
-      <StorageModeNotice compact />
-
       <section className="section-row">
-        <h2 className="section-title">Overview</h2>
+        <h2 className="section-title">Status</h2>
         <div className="grid gap-4 md:grid-cols-3">
-          <AdminMetric label="Updates" value={updates.length} detail="Drafts" />
-          <AdminMetric label="Schedule" value={schedule.length} detail="Rows" />
+          <AdminMetric label="Notices" value={updates.length} detail="Saved" />
+          <AdminMetric label="Schedule" value={schedule.length} detail="Items" />
           <AdminMetric label="Messages" value={msgCount} detail="Open" />
         </div>
       </section>
