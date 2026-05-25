@@ -14048,7 +14048,7 @@ body {
   }
 }
 
-/* Eleventh audit pass: Gemini critique implementation, stricter restraint. */
+/* Eleventh audit pass: stricter restraint. */
 .page-hero {
   padding-block: clamp(1.55rem, 3vw, 2.75rem) clamp(1.55rem, 3vw, 2.85rem) !important;
 }
@@ -14240,4 +14240,286 @@ body > main {
 
 .site-footer {
   flex-shrink: 0 !important;
+}
+
+/* Twelfth audit pass: restrained controls, tighter reading rhythm. */
+@media (min-width: 901px) {
+  .section-row {
+    grid-template-columns: minmax(6.75rem, 8.75rem) minmax(0, min(100%, 60rem)) !important;
+    gap: clamp(1.05rem, 2.2vw, 2.45rem) !important;
+    justify-content: start !important;
+  }
+
+  .admin-page .section-row {
+    grid-template-columns: minmax(6.75rem, 8.75rem) minmax(0, min(100%, 68rem)) !important;
+  }
+}
+
+.site-header .btn-premium--gold {
+  gap: 0 !important;
+}
+
+.site-footer__inner {
+  grid-template-columns: auto minmax(0, 1fr) auto !important;
+  align-items: center !important;
+}
+
+.site-footer__theme {
+  justify-self: end !important;
+}
+
+.site-footer__note {
+  grid-column: 1 / -1 !important;
+}
+
+.theme-toggle {
+  width: auto !important;
+  min-width: 44px !important;
+  gap: 0.45rem !important;
+  padding-inline: 0.2rem !important;
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  color: var(--color-text-secondary) !important;
+}
+
+.theme-toggle__label {
+  display: inline-block !important;
+  color: currentColor !important;
+  font-size: 12px !important;
+  font-weight: 820 !important;
+  line-height: 1 !important;
+  white-space: nowrap !important;
+}
+
+.theme-toggle:hover,
+.theme-toggle:focus-visible {
+  background: transparent !important;
+  color: var(--ucla-gold) !important;
+  transform: none !important;
+}
+
+.theme-toggle::before,
+.theme-toggle::after {
+  display: none !important;
+}
+
+.event-day-nav,
+.faq-category-grid,
+.rules-section-nav__items,
+.schedule-tab-list,
+.archive-material-tab-list,
+.answer-format-tab-list,
+.about-directory__nav,
+.admin-tools-nav {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: clamp(0.85rem, 2.2vw, 1.45rem) !important;
+  border: 0 !important;
+  border-bottom: 1px solid var(--lamt-rule-soft) !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.event-day-nav a,
+.faq-category-grid .lamt-button,
+.rules-section-nav__button,
+.schedule-tab,
+.archive-material-tab,
+.answer-format-tab,
+.about-directory__tab,
+.admin-tools-tab {
+  width: auto !important;
+  min-width: 0 !important;
+  min-height: 44px !important;
+  border: 0 !important;
+  border-bottom: 2px solid transparent !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  color: var(--color-text-secondary) !important;
+  padding: 0.72rem 0 0.62rem !important;
+  text-align: left !important;
+  text-transform: uppercase !important;
+  transition:
+    border-color 150ms cubic-bezier(0.16, 1, 0.3, 1),
+    color 150ms cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.event-day-nav a {
+  display: inline-flex !important;
+  align-items: center !important;
+  font-size: 13px !important;
+  font-weight: 860 !important;
+  line-height: 1.1 !important;
+}
+
+.page-hero .event-day-nav a {
+  color: #DAEBFE !important;
+}
+
+.page-hero .event-day-nav a:hover,
+.page-hero .event-day-nav a:focus-visible {
+  color: #FFFFFF !important;
+}
+
+.event-day-nav a:hover,
+.event-day-nav a:focus-visible,
+.faq-category-grid .lamt-button:hover,
+.faq-category-grid .lamt-button:focus-visible,
+.faq-category-grid .lamt-button[data-state="selected"],
+.rules-section-nav__button:hover,
+.rules-section-nav__button:focus-visible,
+.rules-section-nav__button[data-active="true"],
+.schedule-tab:hover,
+.schedule-tab:focus-visible,
+.schedule-tab[aria-selected="true"],
+.archive-material-tab:hover,
+.archive-material-tab:focus-visible,
+.archive-material-tab[aria-selected="true"],
+.answer-format-tab:hover,
+.answer-format-tab:focus-visible,
+.answer-format-tab[aria-selected="true"],
+.about-directory__tab:hover,
+.about-directory__tab:focus-visible,
+.about-directory__tab[aria-selected="true"],
+.admin-tools-tab:hover,
+.admin-tools-tab:focus-visible,
+.admin-tools-tab[data-state="selected"] {
+  border-bottom-color: var(--ucla-gold) !important;
+  background: transparent !important;
+  color: var(--color-text) !important;
+}
+
+.faq-category-grid .lamt-button::before,
+.faq-category-grid .lamt-button::after,
+.rules-section-nav__button::before,
+.rules-section-nav__button::after,
+.schedule-tab::before,
+.schedule-tab::after,
+.archive-material-tab::before,
+.archive-material-tab::after,
+.answer-format-tab::before,
+.answer-format-tab::after,
+.about-directory__tab::before,
+.about-directory__tab::after,
+.admin-tools-tab::before,
+.admin-tools-tab::after,
+.rules-section-nav__marker,
+.schedule-tab-marker,
+.archive-material-tab__marker,
+.answer-format-tab__marker,
+.admin-tools-tab-marker {
+  display: none !important;
+}
+
+.rules-section-nav {
+  position: sticky !important;
+  overflow: visible !important;
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.rules-section-nav__button {
+  grid-template-columns: minmax(0, 1fr) !important;
+}
+
+.lamt-line-item--plain,
+.format-card,
+.rules-mini-rule {
+  grid-template-columns: minmax(0, 1fr) !important;
+}
+
+.lamt-line-item--plain p,
+.format-card h3,
+.rules-mini-rule > span:first-child {
+  grid-column: 1 !important;
+}
+
+.format-card > span,
+.rules-section-nav__index {
+  display: none !important;
+}
+
+.rules-mini-rule {
+  padding-left: 0 !important;
+}
+
+.live-page .page-summary,
+.page-summary {
+  text-wrap: balance !important;
+}
+
+.local-mode-notice--preview {
+  grid-template-columns: auto auto !important;
+  justify-content: start !important;
+  align-items: center !important;
+  gap: clamp(0.9rem, 2vw, 1.25rem) !important;
+}
+
+.local-mode-notice--preview .btn-outline {
+  min-height: 2.55rem !important;
+  padding-block: 0.62rem !important;
+}
+
+.faq-control-panel .lamt-input,
+.admin-login-stack .lamt-input,
+.admin-page #admin-tools-panel-announcements .lamt-input,
+.admin-page #admin-tools-panel-messages .lamt-input {
+  width: min(100%, 26rem) !important;
+  max-width: 26rem !important;
+}
+
+.admin-page #admin-tools-panel-announcements .lamt-textarea,
+.admin-page #admin-tools-panel-messages .lamt-textarea {
+  width: min(100%, 40rem) !important;
+  max-width: 40rem !important;
+}
+
+.admin-page #admin-tools-panel-schedule .lamt-input {
+  max-width: none !important;
+}
+
+.site-footer .theme-toggle {
+  color: #DAEBFE !important;
+}
+
+.site-footer .theme-toggle:hover,
+.site-footer .theme-toggle:focus-visible {
+  color: var(--ucla-gold) !important;
+}
+
+@media (max-width: 900px) {
+  .site-footer__inner {
+    grid-template-columns: auto minmax(0, 1fr) !important;
+  }
+
+  .site-footer__theme {
+    grid-column: 1 / -1 !important;
+    justify-self: start !important;
+  }
+
+  .event-day-nav,
+  .faq-category-grid,
+  .rules-section-nav__items,
+  .schedule-tab-list,
+  .archive-material-tab-list,
+  .answer-format-tab-list,
+  .about-directory__nav,
+  .admin-tools-nav {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 0 !important;
+  }
+
+  .event-day-nav a,
+  .faq-category-grid .lamt-button,
+  .rules-section-nav__button,
+  .schedule-tab,
+  .archive-material-tab,
+  .answer-format-tab,
+  .about-directory__tab,
+  .admin-tools-tab {
+    width: 100% !important;
+  }
 }

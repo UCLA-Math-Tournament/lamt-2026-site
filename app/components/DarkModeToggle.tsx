@@ -29,7 +29,7 @@ export default function DarkModeToggle() {
   return (
     <motion.button
       onClick={toggle}
-      aria-label="Toggle dark mode"
+      aria-label={dark ? 'Switch to light mode' : 'Switch to dark mode'}
       aria-pressed={dark}
       className="theme-toggle"
     >
@@ -88,6 +88,7 @@ export default function DarkModeToggle() {
           <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
         </motion.g>
       </motion.svg>
+      <span className="theme-toggle__label">{dark ? 'Light mode' : 'Dark mode'}</span>
     </motion.button>
   );
 }

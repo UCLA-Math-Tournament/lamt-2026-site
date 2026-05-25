@@ -84,11 +84,6 @@ export default function AboutPage() {
     },
   ];
 
-  const briefItems = [
-    { title: 'Campus', text: 'In person at UCLA.' },
-    { title: 'Rounds', text: 'Individual, team, and Guts.' },
-    { title: 'Archive', text: '2026 papers, solutions, and results.' },
-  ];
   const [activeGroup, setActiveGroup] = useState(staffGroups[0].title);
   const selectedGroup = staffGroups.find((group) => group.title === activeGroup) || staffGroups[0];
 
@@ -108,18 +103,6 @@ export default function AboutPage() {
           </p>
         </div>
       </header>
-
-      <section className="section-row">
-        <h2 className="section-title">LAMT</h2>
-        <div className="lamt-line-list about-brief-list">
-          {briefItems.map((item) => (
-            <article key={item.title} className="lamt-line-item about-brief-item">
-              <h3>{item.title}</h3>
-              <p>{item.text}</p>
-            </article>
-          ))}
-        </div>
-      </section>
 
       <section className="section-row">
         <h2 className="section-title">LAMT Staff</h2>

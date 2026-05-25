@@ -1,6 +1,5 @@
 'use client';
 
-import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { ArrowRightIcon, FileTextIcon } from '@radix-ui/react-icons';
@@ -88,20 +87,10 @@ export default function HomeClient({
     { value: '250+', label: 'students' },
     { value: '$0', label: 'fee' },
   ];
-  const programRows = [
-    { title: 'Date', text: 'May 17, 2026 at UCLA.' },
-    { title: 'Who', text: 'Middle and high school students, teams up to 6.' },
-    { title: 'Contest', text: 'Individual, team, and Guts rounds.' },
-    { title: 'Archive', text: '2026 papers, solutions, results.' },
-  ];
-
   return (
     <>
       <section className="home-hero">
         <div aria-hidden className="home-hero__mesh" />
-        <div className="home-hero__bear parallax-slow">
-          <Image src="/LAMTBear.png" alt="" width={760} height={760} className="hero-bear-img" priority />
-        </div>
 
         <div className="home-hero__content">
           <div className="hero-badge">
@@ -119,11 +108,11 @@ export default function HomeClient({
 
           {tournamentComplete ? (
             <div className="cinema-actions">
-              <Link href="/archive" className={homeButtonClass}>
-                <FileTextIcon /> View 2026 Archive
-              </Link>
-              <Link href="/tournament" className={`${homeButtonClass} hero-button--ghost`}>
+              <Link href="/tournament" className={homeButtonClass}>
                 Tournament <ArrowRightIcon />
+              </Link>
+              <Link href="/archive" className={`${homeButtonClass} hero-button--ghost`}>
+                <FileTextIcon /> 2026 Archive
               </Link>
             </div>
           ) : (
@@ -161,23 +150,6 @@ export default function HomeClient({
           </div>
         </div>
       </section>
-
-      <section className="home-bento site-pad">
-        <div className="home-bento__intro">
-          <p className="page-kicker">LAMT 2026</p>
-          <h2>Event Day</h2>
-        </div>
-        <div className="lamt-line-list home-program-list">
-          {programRows.map((row, index) => (
-            <article key={row.title} className="lamt-line-item">
-              <span>{String(index + 1).padStart(2, '0')}</span>
-              <h3>{row.title}</h3>
-              <p>{row.text}</p>
-            </article>
-          ))}
-        </div>
-      </section>
-
     </>
   );
 }

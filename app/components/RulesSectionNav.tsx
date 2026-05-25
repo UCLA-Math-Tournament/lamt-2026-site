@@ -80,7 +80,7 @@ export default function RulesSectionNav({ sections }: { sections: RulesSectionLi
         />
       </div>
       <div className="rules-section-nav__items">
-        {sections.map((section, index) => {
+        {sections.map((section) => {
           const active = section.id === activeId;
 
           return (
@@ -92,7 +92,6 @@ export default function RulesSectionNav({ sections }: { sections: RulesSectionLi
               aria-current={active ? 'location' : undefined}
               onClick={() => scrollToSection(section.id)}
             >
-              <span className="rules-section-nav__index">{String(index + 1).padStart(2, '0')}</span>
               <span className="rules-section-nav__label">{section.label}</span>
               {active ? (
                 <motion.span

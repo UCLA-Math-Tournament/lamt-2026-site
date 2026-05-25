@@ -68,9 +68,8 @@ export default function TournamentPage() {
       <section className="section-row">
         <h2 className="section-title">Eligibility</h2>
         <ul className="lamt-line-list lamt-line-list--compact stagger-parent">
-          {eligibility.map((item, index) => (
-            <li key={item} className="lamt-line-item">
-              <span>{String(index + 1).padStart(2, '0')}</span>
+          {eligibility.map((item) => (
+            <li key={item} className="lamt-line-item lamt-line-item--plain">
               <p>{item}</p>
             </li>
           ))}
@@ -80,9 +79,8 @@ export default function TournamentPage() {
       <section className="section-row">
         <h2 className="section-title">Format</h2>
         <div className="lamt-line-list format-grid stagger-parent">
-          {format.map(({ name, desc }, index) => (
+          {format.map(({ name, desc }) => (
             <article key={name} className="lamt-line-item format-card">
-              <span>0{index + 1}</span>
               <h3>{name}</h3>
               <p className="section-copy mt-2">{desc}</p>
             </article>

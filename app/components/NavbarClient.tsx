@@ -4,8 +4,7 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { ArrowTopRightIcon, Cross2Icon, HamburgerMenuIcon } from '@radix-ui/react-icons';
-import DarkModeToggle from './DarkModeToggle';
+import { Cross2Icon, HamburgerMenuIcon } from '@radix-ui/react-icons';
 
 const navLinks = [
   { href: '/', label: 'Home' },
@@ -48,11 +47,8 @@ export default function NavbarClient() {
           })}
           <a href={ctaLink.href} target="_blank" rel="noreferrer" className="btn-premium btn-premium--gold">
             {ctaLink.label}
-            <ArrowTopRightIcon />
           </a>
         </nav>
-
-        <DarkModeToggle />
 
         <button type="button" onClick={() => setMenuOpen((open) => !open)} aria-label="Toggle menu" className="site-menu-button">
           {menuOpen ? <Cross2Icon /> : <HamburgerMenuIcon />}
@@ -76,7 +72,6 @@ export default function NavbarClient() {
             })}
           <a href={ctaLink.href} target="_blank" rel="noreferrer" className="btn-premium btn-premium--gold" onClick={() => setMenuOpen(false)}>
             {ctaLink.label}
-            <ArrowTopRightIcon />
           </a>
         </nav>
       )}

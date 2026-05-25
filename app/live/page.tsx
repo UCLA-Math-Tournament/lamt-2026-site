@@ -291,7 +291,7 @@ function UpdatesFeed({ updates, previewMode }: { updates: Update[]; previewMode:
 
 function PreviewModeNotice() {
   return (
-    <section className="local-mode-notice" aria-label="Staff preview notice">
+    <section className="local-mode-notice local-mode-notice--preview" aria-label="Staff preview notice">
       <div>
         <p className="label-caps">Preview</p>
         <h2>Staff only.</h2>
@@ -396,19 +396,19 @@ export default function LivePage() {
         <div>
           <h1 className="page-title">Event Day</h1>
           <p className="page-summary mt-5">
-            May 17, 2026. Notices, schedule, venue.
+            May 17, 2026.
           </p>
-          <div className="mt-6 flex flex-wrap gap-3">
-            <a href="#announcements" className="btn-filled">
+          <nav className="event-day-nav mt-6" aria-label="Event day sections">
+            <a href="#announcements">
               Notices
             </a>
-            <a href="#schedule" className="btn-outline">
+            <a href="#schedule">
               Schedule
             </a>
-            <a href="#map" className="btn-outline">
+            <a href="#map">
               Venue
             </a>
-          </div>
+          </nav>
         </div>
       </header>
 

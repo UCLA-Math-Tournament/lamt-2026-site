@@ -4,6 +4,7 @@ import type { ReactNode } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { DiscordLogoIcon, EnvelopeClosedIcon, InstagramLogoIcon } from '@radix-ui/react-icons';
+import DarkModeToggle from './DarkModeToggle';
 
 const DISCORD_URL = 'https://discord.gg/tqR3bGjVke';
 
@@ -66,6 +67,10 @@ export default function FooterClient() {
               </a>
             ))}
           </div>
+        </div>
+
+        <div className="site-footer__theme">
+          <DarkModeToggle />
         </div>
 
         <p className="site-footer__note">

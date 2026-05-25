@@ -257,9 +257,8 @@ export default function RulesPage() {
       <section id="key-rules" className="section-row">
         <h2 className="section-title">Key Rules</h2>
         <div className="lamt-line-list rules-reference-grid">
-          {keyRules.map((item, index) => (
+          {keyRules.map((item) => (
             <article key={item.label} className="lamt-line-item rules-mini-rule">
-              <span>{String(index + 1).padStart(2, '0')}</span>
               <span>{item.label}</span>
               <p>{item.text}</p>
             </article>
@@ -270,9 +269,8 @@ export default function RulesPage() {
       <section id="test-format" className="section-row">
         <h2 className="section-title">Test Format</h2>
         <div className="lamt-line-list format-grid">
-          {testFormats.map(({ name, desc }, index) => (
+          {testFormats.map(({ name, desc }) => (
             <article key={name} className="lamt-line-item format-card">
-              <span>0{index + 1}</span>
               <h3 className="font-extrabold text-[var(--color-text)]">{name}</h3>
               <p className="section-copy mt-2">{desc}</p>
             </article>
