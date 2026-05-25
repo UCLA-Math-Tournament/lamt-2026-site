@@ -13442,3 +13442,322 @@ body {
     font-size: 0.75rem !important;
   }
 }
+
+/* Eighth audit pass: target size, scan rhythm, and hidden-page control polish. */
+.site-nav-link,
+.btn-premium,
+.theme-toggle,
+.site-menu-button,
+.venue-map-attribution,
+.faq-toggle {
+  min-height: 2.75rem !important;
+}
+
+.theme-toggle,
+.site-menu-button,
+.faq-toggle {
+  min-width: 2.75rem !important;
+}
+
+.site-nav-link,
+.btn-premium,
+.btn-filled,
+.btn-outline,
+.hero-button,
+.lamt-button,
+.schedule-tab,
+.archive-material-tab,
+.rules-section-nav__button,
+.about-directory__tab,
+.admin-tools-tab,
+.answer-format-tab {
+  font-size: 0.84rem !important;
+  line-height: 1.1 !important;
+}
+
+.label-caps,
+.page-kicker,
+.section-title,
+.schedule-tab strong,
+.archive-material-tab strong,
+.about-directory__tab strong,
+.admin-tools-tab strong,
+.answer-format-tab strong {
+  font-size: 0.82rem !important;
+  line-height: 1.32 !important;
+}
+
+.site-brand small,
+.site-footer .site-social-link__copy strong,
+.home-hero__content .home-stat-card > span,
+.venue-map-attribution,
+.schedule-tab span,
+.archive-material-tab span,
+.rules-section-nav__button span,
+.about-directory__tab span,
+.admin-tools-tab span,
+.faq-category-grid .lamt-button,
+.answer-format-tab span {
+  font-size: 0.82rem !important;
+  line-height: 1.18 !important;
+}
+
+.faq-accordion-heading,
+.faq-accordion-trigger,
+.faq-question,
+.faq-question strong,
+.faq-question small {
+  line-height: 1.24 !important;
+}
+
+.faq-accordion-trigger {
+  grid-template-columns: 2.35rem minmax(0, 1fr) 2.75rem !important;
+  gap: 0.85rem !important;
+}
+
+.faq-question small {
+  font-size: 0.78rem !important;
+  line-height: 1.25 !important;
+}
+
+.archive-material-link,
+.archive-material-panel__header p,
+.lamt-timeline-time,
+.lamt-timeline-card p,
+.lamt-timeline-card strong,
+.live-schedule-time strong,
+.live-schedule-place,
+.venue-real-map__venue small {
+  font-size: 0.86rem !important;
+  line-height: 1.36 !important;
+}
+
+.live-schedule-main h3 {
+  line-height: 1.18 !important;
+}
+
+.site-footer__note {
+  font-size: 0.82rem !important;
+  line-height: 1.38 !important;
+}
+
+@media (max-width: 900px) {
+  .site-menu-button,
+  .theme-toggle {
+    min-width: 2.85rem !important;
+    min-height: 2.85rem !important;
+  }
+
+  .site-header__inner {
+    min-height: 4.85rem !important;
+  }
+
+  .site-brand {
+    gap: 0.62rem !important;
+  }
+
+  .site-brand__mark {
+    width: 2.85rem !important;
+    height: 2.85rem !important;
+  }
+
+  .site-brand strong {
+    font-size: 1.18rem !important;
+    line-height: 0.96 !important;
+  }
+
+  .site-brand small {
+    max-width: 11rem !important;
+    font-size: 0.82rem !important;
+    line-height: 1.02 !important;
+  }
+
+  .label-caps,
+  .page-kicker,
+  .section-title {
+    font-size: 0.82rem !important;
+  }
+
+  .schedule-tab,
+  .archive-material-tab,
+  .rules-section-nav__button,
+  .about-directory__tab,
+  .admin-tools-tab,
+  .faq-category-grid .lamt-button {
+    min-height: 3rem !important;
+    padding-block: 0.82rem !important;
+  }
+
+  .live-schedule-item {
+    grid-template-columns: minmax(8.25rem, 0.48fr) minmax(0, 1fr) !important;
+    column-gap: 0.82rem !important;
+  }
+
+  .live-schedule-time strong,
+  .live-schedule-place {
+    font-size: 0.84rem !important;
+    line-height: 1.34 !important;
+  }
+
+  .live-schedule-main h3 {
+    font-size: 1.12rem !important;
+    line-height: 1.16 !important;
+  }
+
+  .faq-accordion-trigger {
+    grid-template-columns: 2rem minmax(0, 1fr) 2.75rem !important;
+    min-height: 4.4rem !important;
+  }
+
+  .faq-question strong {
+    line-height: 1.18 !important;
+  }
+
+  .venue-map-attribution {
+    min-height: 2.5rem !important;
+    font-size: 0.82rem !important;
+  }
+}
+
+@media (max-width: 420px) {
+  .site-brand small {
+    max-width: 10.4rem !important;
+    font-size: 0.78rem !important;
+  }
+
+  .site-brand strong {
+    font-size: 1.12rem !important;
+  }
+}
+
+/* Ninth audit pass: pixel floors for controls where rem scaling was too small. */
+.site-nav-link,
+.btn-premium,
+.btn-premium--gold,
+.btn-filled,
+.btn-outline,
+.hero-button,
+.lamt-button,
+.schedule-tab,
+.archive-material-tab,
+.rules-section-nav__button,
+.about-directory__tab,
+.admin-tools-tab,
+.answer-format-tab,
+.venue-map-attribution,
+.theme-toggle,
+.site-menu-button,
+.faq-toggle {
+  min-height: 44px !important;
+}
+
+.site-nav-link,
+.theme-toggle,
+.site-menu-button,
+.faq-toggle {
+  min-width: 44px !important;
+}
+
+.site-nav-link,
+.btn-premium,
+.btn-premium--gold,
+.btn-filled,
+.btn-outline,
+.hero-button,
+.lamt-button,
+.schedule-tab,
+.archive-material-tab,
+.rules-section-nav__button,
+.about-directory__tab,
+.admin-tools-tab,
+.answer-format-tab,
+.venue-map-attribution {
+  font-size: 13px !important;
+  line-height: 1.15 !important;
+}
+
+.site-brand small,
+.label-caps,
+.page-kicker,
+.section-title,
+.schedule-tab span,
+.schedule-tab strong,
+.archive-material-tab span,
+.archive-material-tab strong,
+.rules-section-nav__button span,
+.about-directory__tab span,
+.about-directory__tab strong,
+.admin-tools-tab span,
+.admin-tools-tab strong,
+.faq-category-grid .lamt-button,
+.answer-format-tab span,
+.answer-format-tab strong,
+.site-footer .site-social-link__copy strong {
+  font-size: 13px !important;
+  line-height: 1.2 !important;
+}
+
+.faq-question small,
+.rules-cell-label,
+.answer-panel-heading span,
+.answer-correction-head span,
+.answer-correction__label,
+.archive-material-link em,
+.venue-real-map__toolbar p,
+.venue-map-marker span {
+  font-size: 13px !important;
+  line-height: 1.25 !important;
+}
+
+.btn-premium,
+.btn-premium--gold {
+  padding-block: 12px !important;
+}
+
+.rules-section-nav__button,
+.about-directory__tab,
+.admin-tools-tab,
+.faq-category-grid .lamt-button {
+  padding-block: 13px !important;
+}
+
+.home-hero .hero-button,
+.page-hero .btn-filled,
+.page-hero .btn-outline,
+.contact-strip .btn-filled,
+.contact-strip .btn-outline,
+.sponsor-section .btn-outline {
+  font-size: 13px !important;
+  min-height: 44px !important;
+}
+
+@media (max-width: 900px) {
+  .site-brand small {
+    font-size: 13px !important;
+  }
+
+  .site-brand strong {
+    line-height: 1 !important;
+  }
+
+  .faq-question small,
+  .archive-material-link em,
+  .rules-cell-label,
+  .venue-real-map__toolbar p,
+  .venue-map-marker span {
+    font-size: 13px !important;
+  }
+}
+
+.site-header .btn-premium--gold {
+  height: 44px !important;
+  min-height: 44px !important;
+  padding-block: 0 !important;
+  font-size: 13px !important;
+  line-height: 1.15 !important;
+}
+
+.rules-table-head span {
+  font-size: 13px !important;
+  line-height: 1.25 !important;
+}
