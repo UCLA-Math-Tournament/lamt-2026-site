@@ -260,7 +260,7 @@ export default function RulesPage() {
 
       <header className="page-hero">
         <div>
-          <p className="page-kicker">Competition Rules</p>
+          <p className="page-kicker">Competition</p>
           <span className="gold-rule" />
         </div>
         <div>

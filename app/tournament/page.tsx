@@ -40,7 +40,7 @@ export default function TournamentPage() {
     <div className="page-shell">
       <header className="page-hero">
         <div>
-          <p className="page-kicker">Tournament</p>
+          <p className="page-kicker">LAMT 2026</p>
           <span className="gold-rule" />
         </div>
         <div>

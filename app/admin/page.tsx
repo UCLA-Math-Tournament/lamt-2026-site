@@ -3,7 +3,6 @@
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { useState, useEffect, useRef, type KeyboardEvent } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import type { ScheduleItem, Update, ContactMessage } from "../live/types";
 import { DEFAULT_SCHEDULE, DEFAULT_UPDATES } from "../live/types";
 
@@ -79,12 +78,9 @@ function LoginScreen({ onLogin }: { onLogin: () => void }) {
           <p className="page-kicker">Admin</p>
           <span className="gold-rule" />
         </div>
-        <div className="grid gap-6 lg:grid-cols-[1fr_auto] lg:items-end">
-          <div>
-            <h1 className="page-title">LAMT Admin Panel</h1>
-            <p className="page-summary mt-5">Announcements, schedule, notes.</p>
-          </div>
-          <Image src="/LAMTBear.png" alt="LAMT" width={128} height={128} priority className="hidden h-32 w-32 border-2 border-[var(--ucla-gold)] bg-[var(--color-surface)] p-3 object-contain lg:block" />
+        <div>
+          <h1 className="page-title">LAMT Admin Panel</h1>
+          <p className="page-summary mt-5">Announcements, schedule, notes.</p>
         </div>
       </header>
 
@@ -214,7 +210,7 @@ function MessagesTab({ onUnreadChange }: { onUnreadChange: (count: number) => vo
       </section>
 
       {unresolved > 0 && (
-        <div className="border-2 border-[var(--ucla-gold)] bg-[var(--ucla-gold)] p-4 font-extrabold text-[var(--ucla-blue-deep)]">
+        <div className="admin-alert-line">
           {unresolved} unresolved {unresolved === 1 ? "message" : "messages"}
         </div>
       )}
@@ -230,7 +226,7 @@ function MessagesTab({ onUnreadChange }: { onUnreadChange: (count: number) => vo
             </div>
             <div className="flex flex-wrap items-center gap-2">
               <span className="text-sm text-[var(--color-text-muted)]">{message.timestamp}</span>
-              <span className={`border-2 px-2 py-1 text-xs font-extrabold uppercase ${message.resolved ? "border-[var(--color-border)] text-[var(--color-text-muted)]" : "border-[var(--ucla-gold)] bg-[var(--ucla-gold)] text-[var(--ucla-blue-deep)]"}`}>
+              <span className={`admin-status ${message.resolved ? "admin-status--quiet" : ""}`}>
                 {message.resolved ? "Resolved" : "Pending"}
               </span>
             </div>
@@ -241,9 +237,9 @@ function MessagesTab({ onUnreadChange }: { onUnreadChange: (count: number) => vo
           </div>
 
           {(message.replies || []).length > 0 && (
-            <div className="border-t-2 border-[var(--color-border)] bg-[var(--color-surface-2)]">
+            <div className="admin-reply-list">
               {(message.replies || []).map((reply) => (
-                <div key={reply.id} className="border-b-2 border-[var(--color-border)] p-4 last:border-b-0">
+                <div key={reply.id} className="admin-reply">
                   <div className="mb-2 flex items-center gap-3">
                     <span className="font-extrabold text-[var(--color-text)]">Staff</span>
                     <span className="text-sm text-[var(--color-text-muted)]">{reply.timestamp}</span>
@@ -254,7 +250,7 @@ function MessagesTab({ onUnreadChange }: { onUnreadChange: (count: number) => vo
             </div>
           )}
 
-          <div className="grid gap-3 border-t-2 border-[var(--color-border)] p-4">
+          <div className="admin-message-actions">
             <textarea
               className="lamt-textarea min-h-24"
               value={replyMap[message.id] || ""}
@@ -274,7 +270,7 @@ function MessagesTab({ onUnreadChange }: { onUnreadChange: (count: number) => vo
                   Mark Resolved
                 </button>
               )}
-              <button type="button" onClick={() => deleteMsg(message.id)} className="border-2 border-[#B33A2B] px-4 py-2 font-extrabold uppercase text-[#B33A2B] hover:bg-[#B33A2B] hover:text-white">
+              <button type="button" onClick={() => deleteMsg(message.id)} className="admin-danger-button">
                 Delete
               </button>
             </div>
@@ -355,14 +351,14 @@ function AnnouncementsTab({ updates, setUpdates }: {
           <div className="lamt-panel-body text-center text-[var(--color-text-muted)]">No draft updates saved.</div>
         ) : (
           updates.map((update) => (
-            <article key={update.id} className="border-b-2 border-[var(--color-border)] p-5 last:border-b-0">
+            <article key={update.id} className="admin-draft-row">
               <div className="flex flex-wrap items-start justify-between gap-4">
                 <div>
                   <p className="text-sm font-bold text-[var(--color-text-muted)]">{update.timestamp}</p>
                   {update.title && <h3 className="mt-2 font-extrabold text-[var(--color-text)]">{update.title}</h3>}
                   <p className="section-copy mt-2 whitespace-pre-line">{update.body}</p>
                 </div>
-                <button type="button" onClick={() => deleteUpdate(update.id)} className="border-2 border-[#B33A2B] px-4 py-2 font-extrabold uppercase text-[#B33A2B] hover:bg-[#B33A2B] hover:text-white">
+                <button type="button" onClick={() => deleteUpdate(update.id)} className="admin-danger-button">
                   Delete
                 </button>
               </div>
@@ -412,7 +408,7 @@ function ScheduleTab({ schedule, setSchedule }: {
         </div>
         <div className="grid gap-4">
           {schedule.map((item, index) => (
-            <div key={`${item.event}-${index}`} className="border-2 border-[var(--color-border)] p-4">
+            <div key={`${item.event}-${index}`} className="admin-schedule-row">
               <p className="mb-3 font-extrabold text-[var(--color-text)]">{item.event}</p>
               <div className="grid gap-3 lg:grid-cols-4">
                 <label className="grid gap-2">
@@ -532,23 +528,20 @@ export default function AdminPage() {
           <p className="page-kicker">Admin</p>
           <span className="gold-rule" />
         </div>
-        <div className="grid gap-6 lg:grid-cols-[1fr_auto] lg:items-end">
-          <div>
-            <h1 className="page-title">LAMT Admin Panel</h1>
-            <p className="page-summary mt-5">Announcements, schedule, notes.</p>
-            <div className="mt-6 flex flex-wrap gap-3">
-              <Link href="/live?preview=1" className="btn-filled">
-                Open Draft View
-              </Link>
-              <Link href="/live" className="btn-outline">
-                Open Event Page
-              </Link>
-              <a href={`mailto:${STAFF_EMAIL}`} className="btn-outline">
-                Email Staff
-              </a>
-            </div>
+        <div>
+          <h1 className="page-title">LAMT Admin Panel</h1>
+          <p className="page-summary mt-5">Announcements, schedule, notes.</p>
+          <div className="mt-6 flex flex-wrap gap-3">
+            <Link href="/live?preview=1" className="btn-filled">
+              Open Draft View
+            </Link>
+            <Link href="/live" className="btn-outline">
+              Open Event Page
+            </Link>
+            <a href={`mailto:${STAFF_EMAIL}`} className="btn-outline">
+              Email Staff
+            </a>
           </div>
-          <Image src="/LAMTBear.png" alt="LAMT" width={150} height={150} priority className="hidden h-36 w-36 border-2 border-[var(--ucla-gold)] bg-[var(--color-surface)] p-4 object-contain lg:block" />
         </div>
       </header>
 

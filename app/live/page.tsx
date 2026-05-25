@@ -2,7 +2,6 @@
 
 import { useEffect, useState, type CSSProperties } from "react";
 import { motion, useReducedMotion } from "framer-motion";
-import Image from "next/image";
 import Link from "next/link";
 import VenueMap from "../components/VenueMap";
 import type { ScheduleItem, Update } from "./types";
@@ -390,33 +389,28 @@ export default function LivePage() {
     <div className="page-shell">
       <header className="page-hero">
         <div>
-          <p className="page-kicker">Event Archive</p>
+          <p className="page-kicker">LAMT 2026</p>
           <span className="gold-rule" />
         </div>
-        <div className="grid gap-6 lg:grid-cols-[1fr_auto] lg:items-end">
-          <div>
-            <h1 className="page-title">Event Archive</h1>
-            <p className="page-summary mt-5">
-              May 17, 2026. UCLA. Schedule, announcements, map.
-            </p>
-            <div className="mt-6 flex flex-wrap gap-3">
-              <a href="#announcements" className="btn-filled">
-                Announcements
-              </a>
-              <a href="#schedule" className="btn-filled">
-                Schedule
-              </a>
-              <a href="#map" className="btn-outline">
-                Venue
-              </a>
-              <a href="#contact" className="btn-outline">
-                Contact
-              </a>
-            </div>
+        <div>
+          <h1 className="page-title">Event Archive</h1>
+          <p className="page-summary mt-5">
+            May 17, 2026. Announcements, schedule, venue.
+          </p>
+          <div className="mt-6 flex flex-wrap gap-3">
+            <a href="#announcements" className="btn-filled">
+              Announcements
+            </a>
+            <a href="#schedule" className="btn-filled">
+              Schedule
+            </a>
+            <a href="#map" className="btn-outline">
+              Venue
+            </a>
+            <a href="#contact" className="btn-outline">
+              Contact
+            </a>
           </div>
-          <Link href="/" aria-label="Back to LAMT home" className="hidden border-2 border-[var(--ucla-gold)] bg-[var(--color-surface)] p-4 lg:block">
-            <Image src="/LAMTBear.png" alt="LAMT" width={150} height={150} priority className="h-36 w-36 object-contain" />
-          </Link>
         </div>
       </header>
 
@@ -437,9 +431,11 @@ export default function LivePage() {
 
       <MapSection />
 
-      <div id="reference">
-        <HelpSection />
-      </div>
+      {!TOURNAMENT_OVER && (
+        <div id="reference">
+          <HelpSection />
+        </div>
+      )}
 
       <ContactStaffSection />
     </div>
