@@ -60,8 +60,8 @@ function initReveals() {
 
   els.forEach((el) => {
     if (el.dataset.revealed) return;
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(10px)';
+    el.style.opacity = '0.72';
+    el.style.transform = 'translateY(6px)';
   });
 
   const observer = new IntersectionObserver(
@@ -77,11 +77,11 @@ function initReveals() {
         el.dataset.revealed = '1';
         el.animate(
           [
-            { opacity: 0, transform: 'translateY(10px)' },
+            { opacity: 0.72, transform: 'translateY(6px)' },
             { opacity: 1, transform: 'translateY(0)' },
           ],
           {
-            duration: 420,
+            duration: 320,
             delay: Math.min(index * 35, 140),
             easing: EASE,
             fill: 'forwards',

@@ -455,6 +455,8 @@ export default function AdminPage() {
 
   useEffect(() => {
     if (!authed) return;
+    window.scrollTo(0, 0);
+
     function syncStoredData() {
       try {
         setSchedule(readStored<ScheduleItem[]>(STORAGE_KEYS.schedule, DEFAULT_SCHEDULE));
