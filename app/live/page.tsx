@@ -187,7 +187,7 @@ function MapSection() {
 function UpdatesFeed({ updates, previewMode }: { updates: Update[]; previewMode: boolean }) {
   const useArchiveUpdates = !previewMode && TOURNAMENT_OVER && updates.length === 0;
   const displayedUpdates = useArchiveUpdates ? ARCHIVE_UPDATES : updates;
-  const heading = previewMode ? "Draft Announcements" : useArchiveUpdates ? "Event Notices" : "Tournament Announcements";
+  const heading = previewMode ? "Draft Announcements" : "Notices";
   const reduceMotion = useReducedMotion();
   const noticeHover = reduceMotion ? undefined : { x: 2 };
 
@@ -208,11 +208,13 @@ function UpdatesFeed({ updates, previewMode }: { updates: Update[]; previewMode:
         {(displayedUpdates.length > 0 || previewMode) && (
           <div className="flex flex-wrap items-center justify-end gap-2">
             <span className="font-bold text-[var(--color-text-muted)]">
-              {displayedUpdates.length === 0 ? "No updates" : `${displayedUpdates.length} ${displayedUpdates.length === 1 ? "update" : "updates"}`}
+              {displayedUpdates.length === 0 ? "No notices" : `${displayedUpdates.length} ${displayedUpdates.length === 1 ? "notice" : "notices"}`}
             </span>
-            <span className={`feed-mode-badge ${previewMode ? "feed-mode-badge--preview" : ""}`}>
-              {previewMode ? "Staff Draft" : useArchiveUpdates ? "Archive" : "Posted"}
-            </span>
+            {previewMode && (
+              <span className="feed-mode-badge feed-mode-badge--preview">
+                Staff Draft
+              </span>
+            )}
           </div>
         )}
       </div>
@@ -246,8 +248,8 @@ function UpdatesFeed({ updates, previewMode }: { updates: Update[]; previewMode:
       ) : (
         <div className="live-announcement-list" role="list">
           {displayedUpdates.map((update, index) => {
-            const status = previewMode ? "Draft" : useArchiveUpdates ? "Archive" : index === 0 ? "Latest" : "Posted";
-            const badge = previewMode ? "D" : useArchiveUpdates ? "A" : index === 0 ? "L" : "P";
+            const status = previewMode ? "Draft" : useArchiveUpdates ? "" : index === 0 ? "Latest" : "Posted";
+            const badge = previewMode ? "D" : useArchiveUpdates ? "" : index === 0 ? "L" : "P";
 
             return (
             <motion.article
@@ -262,12 +264,14 @@ function UpdatesFeed({ updates, previewMode }: { updates: Update[]; previewMode:
             >
               <span className="live-announcement-rail" aria-hidden="true" />
               <div className="live-announcement-shell">
-                <span className="live-announcement-badge" aria-hidden="true">{badge}</span>
+                {badge && <span className="live-announcement-badge" aria-hidden="true">{badge}</span>}
                 <div className="live-announcement-content">
                   <div className="live-announcement-meta">
-                    <span className="live-latest-badge" aria-label={`${status} announcement`}>
-                      {status}
-                    </span>
+                    {status && (
+                      <span className="live-latest-badge" aria-label={`${status} announcement`}>
+                        {status}
+                      </span>
+                    )}
                     <span className="live-announcement-time">{update.timestamp}</span>
                   </div>
                   <div className="live-announcement-copy">

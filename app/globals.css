@@ -10677,3 +10677,29 @@ body.is-scrolled .site-brand__mark {
     min-height: 0 !important;
   }
 }
+
+.not-found-page {
+  min-height: calc(100svh - 4.7rem) !important;
+}
+
+.not-found-link {
+  text-decoration: none !important;
+}
+
+.not-found-link:hover strong,
+.not-found-link:focus-visible strong {
+  color: var(--ucla-blue-deep) !important;
+}
+
+.dark .not-found-link:hover strong,
+.dark .not-found-link:focus-visible strong,
+[data-theme="dark"] .not-found-link:hover strong,
+[data-theme="dark"] .not-found-link:focus-visible strong {
+  color: var(--ucla-gold) !important;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth !important;
+  }
+}
