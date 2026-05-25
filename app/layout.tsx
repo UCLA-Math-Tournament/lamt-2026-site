@@ -15,6 +15,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     <html lang="en" suppressHydrationWarning>
       <body className="min-h-screen transition-colors duration-300">
         <KaTeXLoader />
+        <div className="lamt-scroll-progress" aria-hidden="true">
+          <span />
+        </div>
         <AnimationEngine />
         <NavbarClient />
         <main>{children}</main>

@@ -8190,6 +8190,12 @@ html {
   grid-template-columns: minmax(3.75rem, 0.12fr) minmax(0, 1fr) !important;
 }
 
+.mission-principles .lamt-line-item,
+.about-brief-list .lamt-line-item,
+.live-help-grid .lamt-line-item {
+  grid-template-columns: minmax(7.25rem, 0.22fr) minmax(0, 1fr) !important;
+}
+
 .lamt-action-row {
   display: flex !important;
   flex-wrap: wrap !important;
@@ -8774,6 +8780,116 @@ html {
   filter: none !important;
 }
 
+/* Mature motion pass: a single page-level signal, not decorative movement. */
+.lamt-scroll-progress {
+  position: fixed !important;
+  top: 5.35rem !important;
+  left: 0 !important;
+  right: 0 !important;
+  z-index: 90 !important;
+  height: 2px !important;
+  background: transparent !important;
+  pointer-events: none !important;
+}
+
+.lamt-scroll-progress span {
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+  background: var(--ucla-gold) !important;
+  transform: scaleX(0) !important;
+  transform-origin: left !important;
+}
+
+.section-row,
+.home-bento,
+.registration-showcase {
+  transition: border-color 260ms cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.section-row.is-section-active,
+.home-bento.is-section-active,
+.registration-showcase.is-section-active {
+  border-top-color: color-mix(in srgb, var(--ucla-gold) 62%, var(--color-border)) !important;
+}
+
+.section-row.is-section-active > .section-title {
+  color: var(--ucla-blue-deep) !important;
+}
+
+.dark .section-row.is-section-active > .section-title {
+  color: var(--ucla-gold) !important;
+}
+
+.archive-year-meta {
+  position: sticky !important;
+  top: 6.5rem !important;
+  border: 0 !important;
+  border-top: 1px solid var(--color-border) !important;
+  border-bottom: 1px solid var(--color-border) !important;
+  background: transparent !important;
+  padding: clamp(1rem, 2vw, 1.4rem) 0 !important;
+}
+
+.archive-year-meta strong {
+  margin-block: clamp(0.65rem, 1.4vw, 0.95rem) !important;
+}
+
+.rules-section-nav {
+  position: relative !important;
+  top: auto !important;
+  z-index: auto !important;
+  overflow: visible !important;
+  border: 0 !important;
+  border-top: 1px solid var(--color-border) !important;
+  border-bottom: 1px solid var(--color-border) !important;
+  background: transparent !important;
+  margin-top: 0 !important;
+}
+
+.rules-section-nav__progress-track {
+  height: 2px !important;
+  border: 0 !important;
+  background: var(--color-border) !important;
+}
+
+.rules-section-nav__items {
+  gap: 0 !important;
+}
+
+.rules-section-nav__button {
+  min-height: 3.1rem !important;
+  border: 0 !important;
+  background: transparent !important;
+  color: var(--color-text-secondary) !important;
+  padding-inline: clamp(0.85rem, 1.7vw, 1.25rem) !important;
+}
+
+.rules-section-nav__button:hover,
+.rules-section-nav__button:focus-visible,
+.rules-section-nav__button[data-active="true"],
+.dark .rules-section-nav__button:hover,
+.dark .rules-section-nav__button:focus-visible,
+.dark .rules-section-nav__button[data-active="true"] {
+  background: transparent !important;
+  color: var(--color-text) !important;
+}
+
+.rules-section-nav__button[data-active="true"] .rules-section-nav__label,
+.rules-section-nav__button[data-active="true"] .rules-section-nav__index {
+  color: var(--ucla-blue-deep) !important;
+}
+
+.dark .rules-section-nav__button[data-active="true"] .rules-section-nav__label,
+.dark .rules-section-nav__button[data-active="true"] .rules-section-nav__index {
+  color: var(--ucla-gold) !important;
+}
+
+.rules-section-nav__marker {
+  height: 2px !important;
+  background: var(--ucla-gold) !important;
+}
+
 @media (max-width: 900px) {
   .home-hero {
     min-height: auto !important;
@@ -8797,5 +8913,9 @@ html {
 @media (max-width: 900px) {
   .page-hero {
     grid-template-columns: 1fr !important;
+  }
+
+  .lamt-scroll-progress {
+    top: 4.85rem !important;
   }
 }
