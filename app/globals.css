@@ -12401,3 +12401,204 @@ html {
     animation: none !important;
   }
 }
+
+/* Second audit pass: remove hidden overflow and restore small-screen reading rhythm. */
+html,
+body {
+  max-width: 100% !important;
+  overflow-x: hidden !important;
+}
+
+.page-hero {
+  background: var(--lamt-hero-field) !important;
+  box-shadow: 0 0 0 100vmax var(--lamt-hero-field) !important;
+  clip-path: inset(0 -100vmax) !important;
+}
+
+.page-hero::after {
+  display: none !important;
+}
+
+.site-brand small {
+  font-size: 0.72rem !important;
+}
+
+.home-hero__content .home-stat-card > span {
+  font-size: 0.72rem !important;
+  line-height: 1.2 !important;
+}
+
+.site-footer__inner {
+  grid-template-columns: auto minmax(0, 1fr) minmax(17rem, 34rem) !important;
+}
+
+.site-footer .site-social-link {
+  display: inline-flex !important;
+  gap: 0.42rem !important;
+}
+
+.site-footer .site-social-link__copy {
+  position: static !important;
+  display: inline-block !important;
+  width: auto !important;
+  height: auto !important;
+  max-width: 6.2rem !important;
+  clip: auto !important;
+  opacity: 1 !important;
+  overflow: visible !important;
+  transform: none !important;
+}
+
+.site-footer .site-social-link__copy strong {
+  display: block !important;
+  color: currentColor !important;
+  font-size: 0.72rem !important;
+  font-weight: 760 !important;
+  line-height: 1 !important;
+  white-space: nowrap !important;
+}
+
+.site-footer .site-social-link__icon {
+  width: 1.42rem !important;
+  height: 1.42rem !important;
+}
+
+.site-footer .site-social-link__icon svg {
+  width: 1.24rem !important;
+  height: 1.24rem !important;
+}
+
+.venue-real-map__details {
+  display: grid !important;
+  grid-template-columns: 1fr !important;
+  gap: 0 !important;
+  border-top: 1px solid var(--lamt-rule-soft) !important;
+  padding: 0 !important;
+}
+
+.venue-real-map__venue {
+  display: grid !important;
+  grid-template-columns: 2.25rem minmax(0, 1fr) auto !important;
+  min-height: 0 !important;
+  border: 0 !important;
+  border-bottom: 1px solid var(--lamt-rule-soft) !important;
+  background: transparent !important;
+  padding: clamp(0.95rem, 1.8vw, 1.35rem) 0 !important;
+}
+
+.venue-real-map__venue:hover,
+.venue-real-map__venue:focus-visible {
+  border-bottom-color: var(--lamt-rule-strong) !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.venue-real-map__pin {
+  border: 0 !important;
+  background: transparent !important;
+  color: var(--ucla-blue) !important;
+  font-size: 0.82rem !important;
+  letter-spacing: 0.05em !important;
+}
+
+.venue-real-map__venue > span:nth-child(2) {
+  display: grid !important;
+  grid-template-columns: minmax(10rem, 0.32fr) minmax(0, 1fr) !important;
+  gap: 0.25rem clamp(1rem, 2.6vw, 2rem) !important;
+  align-items: start !important;
+}
+
+.venue-real-map__venue strong {
+  grid-column: 1 !important;
+  font-size: clamp(1rem, 1.6vw, 1.32rem) !important;
+}
+
+.venue-real-map__venue em {
+  grid-column: 1 !important;
+  margin-top: 0.18rem !important;
+}
+
+.venue-real-map__venue small {
+  grid-column: 2 !important;
+  grid-row: 1 / span 2 !important;
+  margin-top: 0 !important;
+  max-width: 34rem !important;
+}
+
+.about-directory__tab {
+  grid-template-columns: minmax(0, 1fr) auto !important;
+  column-gap: 1rem !important;
+}
+
+.about-directory__tab strong {
+  color: var(--color-text-muted) !important;
+  font-variant-numeric: tabular-nums !important;
+}
+
+.about-directory__tab strong::before {
+  content: "(";
+}
+
+.about-directory__tab strong::after {
+  content: ")";
+}
+
+.about-directory__tab[aria-selected="true"] strong {
+  color: var(--ucla-blue) !important;
+}
+
+.admin-login-stack form .btn-filled {
+  width: 100% !important;
+}
+
+.faq-accordion-trigger {
+  align-items: start !important;
+}
+
+.faq-index {
+  justify-content: start !important;
+}
+
+@media (max-width: 900px) {
+  .faq-accordion-trigger {
+    grid-template-columns: 2.25rem minmax(0, 1fr) 1.5rem !important;
+    gap: 0.75rem !important;
+  }
+
+  .faq-accordion-content__inner {
+    margin-left: 3rem !important;
+  }
+
+  .live-announcement-shell {
+    grid-template-columns: 1fr !important;
+  }
+
+  .venue-real-map__venue,
+  .venue-real-map__venue > span:nth-child(2) {
+    grid-template-columns: 1fr !important;
+  }
+
+  .venue-real-map__venue small {
+    grid-column: 1 !important;
+    grid-row: auto !important;
+    margin-top: 0.45rem !important;
+  }
+
+  .site-footer__inner {
+    grid-template-columns: auto minmax(0, 1fr) !important;
+  }
+
+  .site-footer .site-social-link__copy {
+    display: none !important;
+  }
+}
+
+@media (max-width: 520px) {
+  .faq-accordion-content__inner {
+    margin-left: 0 !important;
+  }
+
+  .site-brand small {
+    font-size: 0.68rem !important;
+  }
+}
