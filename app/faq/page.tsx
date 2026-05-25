@@ -59,7 +59,7 @@ export default function FAQPage() {
       </header>
 
       <section className="section-row">
-        <h2 className="section-title">Common Questions</h2>
+        <h2 className="section-title">Questions</h2>
         <div className="faq-console">
           <div className="faq-control-panel" aria-label="FAQ filters">
             <label className="grid gap-2">
@@ -91,7 +91,7 @@ export default function FAQPage() {
           {filtered.length === 0 ? (
             <article className="faq-empty">
               <h3>No matching answers</h3>
-              <p className="section-copy">Try search or email staff.</p>
+              <p className="section-copy">Try another search or email staff.</p>
             </article>
           ) : (
             <AccordionPrimitive.Root

@@ -309,7 +309,7 @@ function PreviewModeNotice() {
 function HelpSection() {
   return (
     <section className="section-row">
-      <h2 className="section-title">Day-of Info</h2>
+      <h2 className="section-title">Reference</h2>
       <div className="lamt-line-list live-help-grid">
         {HELP_ITEMS.map((item) => {
           const content = (

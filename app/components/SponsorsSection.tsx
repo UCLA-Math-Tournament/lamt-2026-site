@@ -25,7 +25,7 @@ export default function SponsorsSection({
   return (
     <section id="sponsors" className="page-shell sponsor-section">
       <section className="section-row sponsor-intro">
-        <p className="section-title" aria-hidden="true">Sponsors</p>
+        <p className="section-title" aria-hidden="true">Support</p>
         <div>
           <h2 className="sponsor-title">Sponsors</h2>
           <p className="section-copy">Sponsors keep LAMT free.</p>
@@ -63,13 +63,13 @@ export default function SponsorsSection({
         </div>
       ) : (
         <div className="section-row sponsor-empty-state">
-          <h3 className="section-title">Sponsors</h3>
+          <h3 className="section-title">Support</h3>
           <p className="section-copy">Pending.</p>
         </div>
       )}
 
       <div className="section-row">
-        <h3 className="section-title">Sponsor LAMT</h3>
+        <h3 className="section-title">Support LAMT</h3>
         <div>
           <p className="section-copy mb-6">Keep LAMT free.</p>
           <a href="mailto:uclamathtournament@gmail.com" className="btn-outline">

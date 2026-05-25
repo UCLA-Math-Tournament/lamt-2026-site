@@ -43,8 +43,8 @@ function StorageModeNotice({ compact = false }: { compact?: boolean }) {
   return (
     <section className={`local-mode-notice ${compact ? "local-mode-notice--compact" : ""}`} aria-label="Draft publishing notice">
       <div>
-        <p className="label-caps">Draft Review</p>
-        <h2>Drafts only.</h2>
+        <p className="label-caps">Drafts</p>
+        <h2>Not public.</h2>
       </div>
       <p>
         Commit approved updates to publish.
@@ -327,7 +327,7 @@ function AnnouncementsTab({ updates, setUpdates }: {
         </div>
         <div className="lamt-panel-body grid gap-4">
           <p className="section-copy">
-            Local drafts only. Commit approved updates to publish.
+            Drafts are not public. Commit approved updates to publish.
           </p>
           <input className="lamt-input" value={title} onChange={(event) => setTitle(event.target.value)} placeholder="Title (optional)" />
           <textarea className="lamt-textarea" value={body} onChange={(event) => setBody(event.target.value)} placeholder="Update text..." />
@@ -548,7 +548,7 @@ export default function AdminPage() {
       <StorageModeNotice />
 
       <section className="section-row">
-        <h2 className="section-title">Control Room</h2>
+        <h2 className="section-title">Overview</h2>
         <div className="grid gap-4 md:grid-cols-3">
           <AdminMetric label="Updates" value={updates.length} detail="Drafts" />
           <AdminMetric label="Schedule" value={schedule.length} detail="Rows" />

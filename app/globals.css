@@ -10006,7 +10006,7 @@ body.is-scrolled .site-brand__mark {
   color: var(--ucla-blue-deep) !important;
 }
 
-.dark-mode-toggle,
+.theme-toggle,
 .site-menu-button {
   width: 2.35rem !important;
   min-width: 2.35rem !important;
@@ -10806,5 +10806,105 @@ body.is-scrolled .site-brand__mark {
 
   .sponsor-logo-frame img {
     max-width: min(100%, 15rem) !important;
+  }
+}
+
+/* Final interaction language: rectangular controls, one quiet motion cue. */
+.btn-filled,
+.btn-outline,
+.btn-premium,
+.hero-button,
+.lamt-button,
+.schedule-tab,
+.archive-material-tab,
+.answer-format-tab,
+.admin-tools-tab,
+.about-directory__tab,
+.rules-section-nav__button,
+.site-menu-button,
+.theme-toggle {
+  position: relative !important;
+  isolation: isolate !important;
+  overflow: hidden !important;
+}
+
+.btn-filled::before,
+.btn-outline::before,
+.btn-premium::before,
+.hero-button::before,
+.lamt-button::before,
+.schedule-tab::before,
+.archive-material-tab::before,
+.answer-format-tab::before,
+.admin-tools-tab::before,
+.about-directory__tab::before,
+.rules-section-nav__button::before,
+.site-menu-button::before,
+.theme-toggle::before {
+  content: "" !important;
+  position: absolute !important;
+  inset: 0 auto auto 0 !important;
+  width: 100% !important;
+  height: 2px !important;
+  background: currentColor !important;
+  opacity: 0.55 !important;
+  transform: scaleX(0) !important;
+  transform-origin: left center !important;
+  transition: transform 180ms cubic-bezier(0.16, 1, 0.3, 1) !important;
+  pointer-events: none !important;
+  z-index: 0 !important;
+}
+
+.btn-filled:hover::before,
+.btn-filled:focus-visible::before,
+.btn-outline:hover::before,
+.btn-outline:focus-visible::before,
+.btn-premium:hover::before,
+.btn-premium:focus-visible::before,
+.hero-button:hover::before,
+.hero-button:focus-visible::before,
+.lamt-button:hover::before,
+.lamt-button:focus-visible::before,
+.lamt-button[data-state="selected"]::before,
+.schedule-tab:hover::before,
+.schedule-tab:focus-visible::before,
+.schedule-tab[aria-selected="true"]::before,
+.archive-material-tab:hover::before,
+.archive-material-tab:focus-visible::before,
+.archive-material-tab[aria-selected="true"]::before,
+.answer-format-tab:hover::before,
+.answer-format-tab:focus-visible::before,
+.answer-format-tab[aria-selected="true"]::before,
+.admin-tools-tab:hover::before,
+.admin-tools-tab:focus-visible::before,
+.admin-tools-tab[data-state="selected"]::before,
+.about-directory__tab:hover::before,
+.about-directory__tab:focus-visible::before,
+.about-directory__tab[aria-selected="true"]::before,
+.rules-section-nav__button:hover::before,
+.rules-section-nav__button:focus-visible::before,
+.rules-section-nav__button[data-active="true"]::before,
+.site-menu-button:hover::before,
+.site-menu-button:focus-visible::before,
+.theme-toggle:hover::before,
+.theme-toggle:focus-visible::before {
+  transform: scaleX(1) !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-filled::before,
+  .btn-outline::before,
+  .btn-premium::before,
+  .hero-button::before,
+  .lamt-button::before,
+  .schedule-tab::before,
+  .archive-material-tab::before,
+  .answer-format-tab::before,
+  .admin-tools-tab::before,
+  .about-directory__tab::before,
+  .rules-section-nav__button::before,
+  .site-menu-button::before,
+  .theme-toggle::before {
+    transition: none !important;
   }
 }
