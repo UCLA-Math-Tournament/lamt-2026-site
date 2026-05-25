@@ -9716,6 +9716,31 @@ h3,
   max-width: 34rem !important;
 }
 
+.dark .sponsor-section,
+[data-theme="dark"] .sponsor-section {
+  position: relative !important;
+  isolation: isolate !important;
+  color: #08233B !important;
+}
+
+.dark .sponsor-section::before,
+[data-theme="dark"] .sponsor-section::before {
+  content: "" !important;
+  position: absolute !important;
+  inset: 0 calc(50% - 50vw) !important;
+  z-index: -1 !important;
+  background: #F4F8FC !important;
+}
+
+.dark .sponsor-section .section-title,
+.dark .sponsor-section .sponsor-title,
+.dark .sponsor-section .section-copy,
+[data-theme="dark"] .sponsor-section .section-title,
+[data-theme="dark"] .sponsor-section .sponsor-title,
+[data-theme="dark"] .sponsor-section .section-copy {
+  color: #08233B !important;
+}
+
 .admin-metric strong {
   justify-self: end !important;
   min-width: 0 !important;
@@ -9762,5 +9787,56 @@ h3,
   .about-directory__tab,
   .site-footer .site-social-link {
     transition: none !important;
+  }
+}
+
+/* Hero breathing room: reveal the page beyond the poster. */
+.home-hero {
+  min-height: calc(68svh - 5rem) !important;
+  padding-block: clamp(2.25rem, 4.6vw, 4.6rem) clamp(1.45rem, 3vw, 2.8rem) !important;
+}
+
+.home-hero h1 {
+  max-width: min(100%, 64rem) !important;
+  font-size: clamp(3.4rem, 7.4vw, 7.8rem) !important;
+  line-height: 0.88 !important;
+}
+
+.cinema-lede {
+  max-width: 34rem !important;
+  font-size: clamp(1.02rem, 1.75vw, 1.48rem) !important;
+}
+
+.home-hero__content .home-hero__stats {
+  width: min(100%, 44rem) !important;
+  margin-top: clamp(1rem, 2vw, 1.55rem) !important;
+}
+
+.stat-value-animated__slot,
+.stat-value-animated__literal {
+  transform: translateZ(0);
+}
+
+.stat-value-animated {
+  opacity: 0.78;
+  transform: translateY(0.08em);
+  transition:
+    opacity 340ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 340ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.stat-value-animated[data-visible="true"] {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (max-width: 900px) {
+  .home-hero {
+    min-height: auto !important;
+    padding-block: clamp(2.1rem, 10vw, 3.75rem) clamp(1.7rem, 8vw, 2.8rem) !important;
+  }
+
+  .home-hero h1 {
+    font-size: clamp(2.75rem, 14vw, 4.25rem) !important;
   }
 }

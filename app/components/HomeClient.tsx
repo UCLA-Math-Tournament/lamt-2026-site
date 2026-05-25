@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { ArrowRightIcon, DiscordLogoIcon, FileTextIcon } from '@radix-ui/react-icons';
+import AnimatedStatValue from './AnimatedStatValue';
 
 const homeButtonClass =
   'hero-button inline-flex min-h-12 items-center justify-center gap-2 px-5 py-3 text-sm font-extrabold uppercase text-white';
@@ -156,7 +157,7 @@ export default function HomeClient({
           <div className="home-hero__stats">
             {highlightStats.map((stat) => (
               <div key={stat.label} className="home-stat-card">
-                <strong>{stat.value}</strong>
+                <strong><AnimatedStatValue value={stat.value} /></strong>
                 <span>{stat.label}</span>
               </div>
             ))}

@@ -25,7 +25,7 @@ export default function SponsorsSection({
   return (
     <section id="sponsors" className="page-shell sponsor-section">
       <section className="section-row sponsor-intro">
-        <h2 className="section-title">Sponsors</h2>
+        <p className="section-title" aria-hidden="true">Sponsors</p>
         <div>
           <h2 className="sponsor-title">Sponsors</h2>
           <p className="section-copy">Sponsors keep LAMT free.</p>

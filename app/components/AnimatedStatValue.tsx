@@ -1,146 +1,79 @@
 'use client';
 
-import { motion, useInView, useReducedMotion, useSpring, useTransform } from 'framer-motion';
-import { useEffect, useMemo, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
-type Token =
-  | { kind: 'digit'; value: number }
-  | { kind: 'literal'; value: string };
+function renderCount(value: string, count: number) {
+  const match = value.match(/^(\$?)(\d+)(\+?)$/);
+  if (!match) return value;
 
-const DIGITS = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-
-function tokenize(value: string): Token[] {
-  const tokens: Token[] = [];
-  let literal = '';
-
-  for (const character of value) {
-    if (character >= '0' && character <= '9') {
-      if (literal) {
-        tokens.push({ kind: 'literal', value: literal });
-        literal = '';
-      }
-      tokens.push({ kind: 'digit', value: Number(character) });
-    } else {
-      literal += character;
-    }
-  }
-
-  if (literal) tokens.push({ kind: 'literal', value: literal });
-  return tokens;
-}
-
-function DigitColumn({
-  digit,
-  triggered,
-  reducedMotion,
-  delay,
-}: {
-  digit: number;
-  triggered: boolean;
-  reducedMotion: boolean;
-  delay: number;
-}) {
-  const spring = useSpring(reducedMotion ? digit : 0, {
-    stiffness: 160,
-    damping: 28,
-    mass: 1,
-  });
-  const y = useTransform(spring, (value) => `${-value}em`);
-
-  useEffect(() => {
-    if (!triggered) return;
-
-    if (reducedMotion) {
-      spring.set(digit);
-      return;
-    }
-
-    const timeout = window.setTimeout(() => spring.set(digit), delay * 1000);
-    return () => window.clearTimeout(timeout);
-  }, [delay, digit, reducedMotion, spring, triggered]);
-
-  if (reducedMotion) {
-    return (
-      <span className="stat-value-animated__slot" aria-hidden="true">
-        <span className="stat-value-animated__static-digit">{digit}</span>
-      </span>
-    );
-  }
-
-  return (
-    <span className="stat-value-animated__slot" aria-hidden="true">
-      <motion.span className="stat-value-animated__column" style={{ y }}>
-        {DIGITS.map((item) => (
-          <span key={item} className="stat-value-animated__column-digit">
-            {item}
-          </span>
-        ))}
-      </motion.span>
-    </span>
-  );
-}
-
-function LiteralToken({
-  value,
-  triggered,
-  reducedMotion,
-  delay,
-}: {
-  value: string;
-  triggered: boolean;
-  reducedMotion: boolean;
-  delay: number;
-}) {
-  if (reducedMotion) {
-    return <span className="stat-value-animated__literal">{value}</span>;
-  }
-
-  return (
-    <motion.span
-      className="stat-value-animated__literal"
-      initial={{ opacity: 0, y: '0.18em' }}
-      animate={triggered ? { opacity: 1, y: '0em' } : { opacity: 0, y: '0.18em' }}
-      transition={{ duration: 0.42, delay, ease: [0.16, 1, 0.3, 1] }}
-    >
-      {value}
-    </motion.span>
-  );
+  return `${match[1]}${count}${match[3]}`;
 }
 
 export default function AnimatedStatValue({ value }: { value: string }) {
   const ref = useRef<HTMLSpanElement>(null);
-  const reducedMotion = useReducedMotion() ?? false;
-  const inView = useInView(ref, { once: true, margin: '0px 0px 35% 0px' });
-  const tokens = useMemo(() => tokenize(value), [value]);
-  const triggered = inView || reducedMotion;
+  const [displayValue, setDisplayValue] = useState(value);
+  const [visible, setVisible] = useState(false);
+  const numericText = value.match(/^(\$?)(\d+)(\+?)$/)?.[2] ?? null;
+
+  useEffect(() => {
+    const node = ref.current;
+    if (!node) return;
+
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduceMotion || !('IntersectionObserver' in window)) {
+      setVisible(true);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (!entries.some((entry) => entry.isIntersecting)) return;
+        setVisible(true);
+        observer.disconnect();
+      },
+      { threshold: 0.5 }
+    );
+
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!visible || !numericText) {
+      if (visible) setDisplayValue(value);
+      return;
+    }
+
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduceMotion) {
+      setDisplayValue(value);
+      return;
+    }
+
+    const target = Number(numericText);
+    const duration = 640;
+    const start = performance.now();
+    let frame = 0;
+
+    const tick = (now: number) => {
+      const progress = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      setDisplayValue(renderCount(value, Math.round(target * eased)));
+      if (progress < 1) frame = window.requestAnimationFrame(tick);
+    };
+
+    frame = window.requestAnimationFrame(tick);
+    return () => window.cancelAnimationFrame(frame);
+  }, [numericText, value, visible]);
 
   return (
-    <span ref={ref} className="stat-value-animated" aria-label={value}>
-      {tokens.map((token, index) => {
-        const delay = index * 0.045;
-
-        if (token.kind === 'digit') {
-          return (
-            <DigitColumn
-              key={`${index}-${token.value}`}
-              digit={token.value}
-              triggered={triggered}
-              reducedMotion={reducedMotion}
-              delay={delay}
-            />
-          );
-        }
-
-        return (
-          <LiteralToken
-            key={`${index}-${token.value}`}
-            value={token.value}
-            triggered={triggered}
-            reducedMotion={reducedMotion}
-            delay={delay}
-          />
-        );
-      })}
+    <span
+      ref={ref}
+      className="stat-value-animated"
+      data-visible={visible ? 'true' : undefined}
+      aria-label={value}
+    >
+      {displayValue}
     </span>
   );
 }
