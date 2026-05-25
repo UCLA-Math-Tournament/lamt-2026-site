@@ -9678,7 +9678,7 @@ h3,
 }
 
 .site-footer {
-  background: #003B5C !important;
+  background: var(--ucla-blue-deep) !important;
 }
 
 .dark .site-footer,
@@ -9687,7 +9687,9 @@ h3,
 }
 
 .site-footer__inner {
-  grid-template-columns: auto minmax(0, 1fr) minmax(14rem, 34rem) !important;
+  grid-template-columns: auto minmax(0, 1fr) minmax(14rem, 28rem) !important;
+  gap: clamp(0.85rem, 2vw, 1.7rem) !important;
+  padding-block: 1rem !important;
 }
 
 .site-footer__mark {
@@ -9695,25 +9697,35 @@ h3,
 }
 
 .site-footer__contact {
-  gap: 0.5rem !important;
+  gap: 0 !important;
+}
+
+.site-footer__eyebrow {
+  display: none !important;
 }
 
 .site-footer .site-social-link {
-  width: 2.2rem !important;
-  min-width: 2.2rem !important;
-  max-width: 2.2rem !important;
-  height: 2.2rem !important;
-  min-height: 2.2rem !important;
-  border-color: rgba(255, 255, 255, 0.42) !important;
+  width: 2.25rem !important;
+  min-width: 2.25rem !important;
+  max-width: 2.25rem !important;
+  height: 2.25rem !important;
+  min-height: 2.25rem !important;
+  border-color: rgba(255, 255, 255, 0.48) !important;
+  transform: translateY(0) !important;
+  transition:
+    background-color 150ms cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 150ms cubic-bezier(0.16, 1, 0.3, 1),
+    color 150ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 150ms cubic-bezier(0.16, 1, 0.3, 1) !important;
 }
 
 .site-footer .site-social-link__icon svg {
-  width: 1.04rem !important;
-  height: 1.04rem !important;
+  width: 1.2rem !important;
+  height: 1.2rem !important;
 }
 
 .site-footer__note {
-  max-width: 34rem !important;
+  max-width: 28rem !important;
 }
 
 .dark .sponsor-section,
@@ -9760,7 +9772,7 @@ h3,
 
 @media (max-width: 900px) {
   .home-hero {
-    background: #003B5C !important;
+    background: var(--ucla-blue-deep) !important;
   }
 
   .home-hero__bear {
@@ -9769,6 +9781,54 @@ h3,
 
   .site-footer__inner {
     grid-template-columns: 1fr !important;
+  }
+}
+
+@media (max-width: 760px) {
+  .site-footer__inner {
+    grid-template-columns: auto minmax(0, 1fr) !important;
+    align-items: center !important;
+    gap: 0.7rem 0.85rem !important;
+    padding-block: 0.82rem !important;
+  }
+
+  .site-footer__brand-link {
+    grid-column: 1 !important;
+  }
+
+  .site-footer__mark {
+    width: 2.22rem !important;
+  }
+
+  .site-footer__contact {
+    grid-column: 2 !important;
+    justify-self: end !important;
+  }
+
+  .site-footer__socials {
+    justify-content: flex-end !important;
+    gap: 0.34rem !important;
+  }
+
+  .site-footer .site-social-link {
+    width: 2.06rem !important;
+    min-width: 2.06rem !important;
+    max-width: 2.06rem !important;
+    height: 2.06rem !important;
+    min-height: 2.06rem !important;
+  }
+
+  .site-footer .site-social-link__icon svg {
+    width: 1.12rem !important;
+    height: 1.12rem !important;
+  }
+
+  .site-footer__note {
+    grid-column: 1 / -1 !important;
+    max-width: 100% !important;
+    font-size: 0.62rem !important;
+    line-height: 1.22 !important;
+    text-align: left !important;
   }
 }
 
@@ -9865,7 +9925,7 @@ body {
 
 .site-header {
   border-bottom: 1px solid rgba(255, 209, 0, 0.72) !important;
-  background: #123E5E !important;
+  background: var(--ucla-blue-deep) !important;
   transition:
     background-color 180ms cubic-bezier(0.16, 1, 0.3, 1),
     border-color 180ms cubic-bezier(0.16, 1, 0.3, 1) !important;
@@ -9901,7 +9961,7 @@ body {
 }
 
 body.is-scrolled .site-header {
-  background: #0F3855 !important;
+  background: var(--ucla-blue-deep) !important;
   border-bottom-color: rgba(255, 209, 0, 0.5) !important;
 }
 
@@ -9957,7 +10017,7 @@ body.is-scrolled .site-brand__mark {
 
 .home-hero {
   min-height: calc(63svh - 4.2rem) !important;
-  background: #123E5E !important;
+  background: var(--ucla-blue-deep) !important;
   padding-block: clamp(2.25rem, 4.2vw, 4.25rem) clamp(1.5rem, 2.8vw, 2.5rem) !important;
 }
 
@@ -10093,7 +10153,7 @@ body.is-scrolled .site-brand__mark {
 .page-hero {
   min-height: auto !important;
   border-bottom: 1px solid rgba(255, 209, 0, 0.66) !important;
-  background: #123E5E !important;
+  background: var(--ucla-blue-deep) !important;
   padding-block: clamp(2.65rem, 5.3vw, 4.7rem) clamp(2.65rem, 5.5vw, 4.8rem) !important;
 }
 
