@@ -11014,3 +11014,22 @@ body.is-scrolled .site-brand__mark {
 .staff-people-list span {
   font-weight: 650 !important;
 }
+
+.sponsor-section .btn-outline,
+.dark .sponsor-section .btn-outline,
+[data-theme="dark"] .sponsor-section .btn-outline {
+  border-color: var(--ucla-blue-deep) !important;
+  background: transparent !important;
+  color: var(--ucla-blue-deep) !important;
+}
+
+.sponsor-section .btn-outline:hover,
+.sponsor-section .btn-outline:focus-visible,
+.dark .sponsor-section .btn-outline:hover,
+.dark .sponsor-section .btn-outline:focus-visible,
+[data-theme="dark"] .sponsor-section .btn-outline:hover,
+[data-theme="dark"] .sponsor-section .btn-outline:focus-visible {
+  border-color: var(--ucla-gold) !important;
+  background: var(--ucla-gold) !important;
+  color: var(--ucla-blue-deep) !important;
+}
