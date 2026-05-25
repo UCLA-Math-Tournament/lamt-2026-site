@@ -4,26 +4,42 @@ import { useState } from "react";
 import { EnterFullScreenIcon, ExitFullScreenIcon, ExternalLinkIcon } from "@radix-ui/react-icons";
 import { motion, useReducedMotion } from "framer-motion";
 
-const MAP_SRC = "https://www.google.com/maps?q=UCLA%20Mathematical%20Sciences%20Building%2C%20Los%20Angeles%2C%20CA&output=embed";
+const MAP_ZOOM = 16;
+const MAP_TILE_X_START = 11203;
+const MAP_TILE_Y_START = 26163;
+const MAP_TILE_COLUMNS = 6;
+const MAP_TILE_ROWS = 3;
+const MAP_MARKER = {
+  label: "Mathematical Sciences",
+  left: "52.5%",
+  top: "43%",
+  href: "https://www.openstreetmap.org/?mlat=34.06954&mlon=-118.44278#map=16/34.06954/-118.44278",
+};
+const MAP_TILES = Array.from({ length: MAP_TILE_ROWS }, (_, row) =>
+  Array.from({ length: MAP_TILE_COLUMNS }, (_, column) => ({
+    key: `${row}-${column}`,
+    src: `https://tile.openstreetmap.org/${MAP_ZOOM}/${MAP_TILE_X_START + column}/${MAP_TILE_Y_START + row}.png`,
+  }))
+).flat();
 
 const VENUES = [
   {
     label: "Mathematical Sciences",
     meta: "MS 4000A / MS 5200",
     detail: "Contest rooms and opening ceremony.",
-    href: "https://www.google.com/maps/search/?api=1&query=UCLA+Mathematical+Sciences+Building",
+    href: MAP_MARKER.href,
   },
   {
     label: "Court of Sciences",
     meta: "Lunch / Disputes",
     detail: "Lunch, score checks, and dispute window.",
-    href: "https://www.google.com/maps/search/?api=1&query=Court+of+Sciences+UCLA",
+    href: "https://www.openstreetmap.org/search?query=Court%20of%20Sciences%20UCLA",
   },
   {
     label: "Parking Structure 2",
     meta: "Parking",
     detail: "Closest public parking reference.",
-    href: "https://www.google.com/maps/search/?api=1&query=UCLA+Parking+Structure+2",
+    href: "https://www.openstreetmap.org/search?query=UCLA%20Parking%20Structure%202",
   },
 ];
 
@@ -63,14 +79,29 @@ export default function VenueMap({ className = "" }: { className?: string }) {
         style={reduceMotion ? { height } : undefined}
         transition={{ type: "spring", stiffness: 190, damping: 28, mass: 0.9 }}
       >
-        <iframe
-          className="venue-real-map__iframe"
-          title="Google Map showing UCLA Mathematical Sciences Building"
-          src={MAP_SRC}
-          loading="lazy"
-          referrerPolicy="no-referrer-when-downgrade"
-          allowFullScreen
-        />
+        <div className="venue-map-tile-grid" aria-hidden="true">
+          {MAP_TILES.map((tile) => (
+            <span key={tile.key} className="venue-map-tile" style={{ backgroundImage: `url(${tile.src})` }} />
+          ))}
+        </div>
+        <a
+          href={MAP_MARKER.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="venue-map-marker"
+          style={{ left: MAP_MARKER.left, top: MAP_MARKER.top }}
+          aria-label="Open Mathematical Sciences on OpenStreetMap"
+        >
+          <span>{MAP_MARKER.label}</span>
+        </a>
+        <a
+          href="https://www.openstreetmap.org/copyright"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="venue-map-attribution"
+        >
+          OpenStreetMap
+        </a>
       </motion.div>
 
       <div className="venue-real-map__details">

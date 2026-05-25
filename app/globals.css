@@ -11459,3 +11459,100 @@ body.is-scrolled .site-brand__mark {
     font-size: clamp(2.75rem, 11.6vw, 3.75rem) !important;
   }
 }
+
+/* Real map tiles: rendered in-page so the venue is never an empty iframe. */
+.venue-map-tile-grid {
+  position: absolute !important;
+  inset: 50% auto auto 50% !important;
+  display: grid !important;
+  grid-template-columns: repeat(6, 1fr) !important;
+  grid-template-rows: repeat(3, 1fr) !important;
+  width: 100% !important;
+  min-width: 100% !important;
+  aspect-ratio: 2 / 1 !important;
+  transform: translate(-50%, -50%) !important;
+  filter: saturate(0.78) contrast(0.98) brightness(1.03) !important;
+}
+
+.venue-real-map.is-expanded .venue-map-tile-grid {
+  height: 100% !important;
+  width: auto !important;
+  min-width: 100% !important;
+}
+
+.venue-map-tile {
+  display: block !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  background-size: cover !important;
+}
+
+.venue-map-marker {
+  position: absolute !important;
+  z-index: 2 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 0.45rem !important;
+  color: var(--ucla-blue-deep) !important;
+  text-decoration: none !important;
+  transform: translate(-50%, -100%) !important;
+}
+
+.venue-map-marker::before {
+  content: "" !important;
+  width: 0.85rem !important;
+  height: 0.85rem !important;
+  border: 2px solid var(--ucla-blue-deep) !important;
+  background: var(--ucla-gold) !important;
+  transform: rotate(45deg) !important;
+}
+
+.venue-map-marker span {
+  border-bottom: 2px solid var(--ucla-gold) !important;
+  background: rgba(255, 255, 255, 0.86) !important;
+  padding: 0.18rem 0.34rem !important;
+  font-size: 0.72rem !important;
+  font-weight: 950 !important;
+  letter-spacing: 0.04em !important;
+  line-height: 1 !important;
+  text-transform: uppercase !important;
+}
+
+.venue-map-attribution {
+  position: absolute !important;
+  right: 0.65rem !important;
+  bottom: 0.52rem !important;
+  z-index: 2 !important;
+  color: rgba(2, 13, 24, 0.76) !important;
+  font-size: 0.68rem !important;
+  font-weight: 800 !important;
+  text-decoration: underline !important;
+  text-underline-offset: 0.18em !important;
+}
+
+.dark .venue-map-tile-grid,
+[data-theme="dark"] .venue-map-tile-grid {
+  filter: saturate(0.66) contrast(0.9) brightness(0.72) !important;
+}
+
+.dark .venue-map-marker span,
+[data-theme="dark"] .venue-map-marker span {
+  background: rgba(2, 13, 24, 0.82) !important;
+  color: #FFFFFF !important;
+}
+
+.dark .venue-map-attribution,
+[data-theme="dark"] .venue-map-attribution {
+  color: rgba(255, 255, 255, 0.82) !important;
+}
+
+@media (max-width: 620px) {
+  .venue-map-tile-grid {
+    width: 178% !important;
+  }
+
+  .venue-map-marker span {
+    max-width: 10.5rem !important;
+    white-space: normal !important;
+  }
+}

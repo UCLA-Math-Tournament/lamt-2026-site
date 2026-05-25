@@ -95,7 +95,7 @@ export default function TournamentPage() {
         <TournamentScheduleTabs schedule={schedule} />
       </section>
 
-      <section className="section-row">
+      <section id="venue" className="section-row">
         <h2 className="section-title">Location</h2>
         <div>
           <p className="section-copy reveal mb-6">
