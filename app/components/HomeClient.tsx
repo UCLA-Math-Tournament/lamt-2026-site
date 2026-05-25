@@ -183,31 +183,6 @@ export default function HomeClient({
         </div>
       </section>
 
-      <section id="register" className="registration-showcase site-pad">
-        <div>
-          <p className="page-kicker">Next</p>
-          <h2>{regClosed ? 'Use the 2026 archive.' : 'Register for LAMT 2026.'}</h2>
-          <p>
-            Rules, results, and tournament materials are available.
-          </p>
-        </div>
-        <div className="stagger-parent flex flex-wrap items-center gap-4">
-          {!regClosed && (
-            <Link href={registerUrl} target="_blank" rel="noreferrer" className="btn-filled">
-              Register on ContestDojo
-            </Link>
-          )}
-          <Link href="/archive" className="btn-filled">
-            Browse Archive
-          </Link>
-          <Link href="/tournament" className="btn-outline">
-            Tournament Info
-          </Link>
-          <Link href={discordUrl} target="_blank" rel="noreferrer" className="btn-outline">
-            Join Discord
-          </Link>
-        </div>
-      </section>
     </>
   );
 }

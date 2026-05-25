@@ -23,19 +23,14 @@ export default function SponsorsSection({
   const activeTiers = TIER_ORDER.filter((tier) => sponsorsByTier[tier].length > 0);
 
   return (
-    <section id="sponsors" className="page-shell border-t-4 border-[var(--ucla-gold)] bg-[var(--color-surface)]">
-      <div className="page-hero">
+    <section id="sponsors" className="page-shell sponsor-section">
+      <section className="section-row sponsor-intro">
+        <h2 className="section-title">Sponsors</h2>
         <div>
-          <p className="page-kicker">Sponsors</p>
-          <span className="gold-rule" />
+          <h2 className="sponsor-title">Sponsors</h2>
+          <p className="section-copy">Sponsors keep LAMT free.</p>
         </div>
-        <div>
-          <h2 className="page-title">Our Sponsors</h2>
-          <p className="page-summary mt-5">
-            Sponsors keep LAMT free.
-          </p>
-        </div>
-      </div>
+      </section>
 
       {activeTiers.length > 0 ? (
         <div className="sponsor-tier-stack">
