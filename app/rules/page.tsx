@@ -1,43 +1,26 @@
 'use client';
 
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
-import { useEffect, useState, type KeyboardEvent } from 'react';
-import KaTeXLoader from '../components/KaTeXLoader';
+import { useMemo, useState, type KeyboardEvent } from 'react';
+import katex from 'katex';
 import RulesSectionNav, { type RulesSectionLink } from '../components/RulesSectionNav';
 
 const rulesSections: RulesSectionLink[] = [
   { id: 'key-rules', label: 'Key Rules' },
-  { id: 'test-format', label: 'Test Format' },
-  { id: 'allowed-not-allowed', label: 'Allowed / Not Allowed' },
-  { id: 'answer-format', label: 'Answer Format' },
+  { id: 'test-format', label: 'Format' },
+  { id: 'allowed-not-allowed', label: 'Allowed' },
+  { id: 'answer-format', label: 'Answers' },
 ];
 
 function InlineMath({ math }: { math: string }) {
-  const [html, setHtml] = useState<string | null>(null);
-
-  useEffect(() => {
-    const tryRender = () => {
-      const katex = (window as any).katex;
-      if (!katex) return false;
-
-      setHtml(
-        katex.renderToString(math, {
-          throwOnError: false,
-          displayMode: false,
-        })
-      );
-      return true;
-    };
-
-    if (!tryRender()) {
-      const id = window.setInterval(() => {
-        if (tryRender()) window.clearInterval(id);
-      }, 50);
-      return () => window.clearInterval(id);
-    }
-  }, [math]);
-
-  if (!html) return <span>{math}</span>;
+  const html = useMemo(
+    () =>
+      katex.renderToString(math, {
+        throwOnError: false,
+        displayMode: false,
+      }),
+    [math]
+  );
 
   return <span dangerouslySetInnerHTML={{ __html: html }} />;
 }
@@ -256,8 +239,6 @@ export default function RulesPage() {
 
   return (
     <div className="page-shell">
-      <KaTeXLoader />
-
       <header className="page-hero">
         <div>
           <p className="page-kicker">Competition</p>

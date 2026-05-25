@@ -12602,3 +12602,163 @@ body {
     font-size: 0.68rem !important;
   }
 }
+
+/* Third audit pass: fix hidden content, clipped controls, and over-heavy mobile rhythm. */
+.venue-real-map,
+.venue-real-map__details,
+.venue-real-map__venue {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+.sponsor-intro {
+  align-items: start !important;
+}
+
+.sponsor-title {
+  font-size: clamp(2.6rem, 5.15vw, 4.9rem) !important;
+  line-height: 0.98 !important;
+}
+
+.sponsor-intro .section-copy {
+  margin-top: clamp(0.7rem, 1.1vw, 1rem) !important;
+}
+
+.sponsor-matrix--bronze .sponsor-logo-frame img {
+  max-height: clamp(3.8rem, 6.2vw, 5.35rem) !important;
+}
+
+.sponsor-matrix--friends .sponsor-logo-frame img {
+  max-height: clamp(3.25rem, 5.5vw, 4.75rem) !important;
+}
+
+.sponsor-logo-frame[data-logo-scale="mark"] img {
+  max-height: clamp(4.6rem, 7.4vw, 6.4rem) !important;
+}
+
+.contact-strip {
+  align-items: end !important;
+}
+
+.admin-login-stack .lamt-input {
+  min-height: 3rem !important;
+  border-color: transparent !important;
+  border-bottom-color: var(--lamt-rule-strong) !important;
+  background: transparent !important;
+  padding-inline: 0 !important;
+}
+
+.admin-login-stack .lamt-input:focus {
+  border-bottom-color: var(--ucla-blue) !important;
+  box-shadow: none !important;
+}
+
+@media (max-width: 900px) {
+  .rules-section-nav {
+    overflow: visible !important;
+  }
+
+  .rules-section-nav__items,
+  .schedule-tab-list,
+  .archive-material-tab-list,
+  .faq-category-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    min-width: 0 !important;
+    width: 100% !important;
+    gap: 0 !important;
+  }
+
+  .rules-section-nav__button,
+  .schedule-tab,
+  .archive-material-tab,
+  .faq-category-grid .lamt-button {
+    width: 100% !important;
+    min-width: 0 !important;
+    justify-content: start !important;
+  }
+
+  .rules-section-nav__label,
+  .schedule-tab-label,
+  .archive-material-tab > span:not(.archive-material-tab__marker) {
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+  }
+
+  .archive-material-tabs__top {
+    grid-template-columns: 1fr !important;
+    gap: 0.55rem !important;
+  }
+
+  .faq-control-panel {
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+    align-items: stretch !important;
+  }
+
+  .faq-category-grid .lamt-button {
+    padding-inline: 0.7rem !important;
+  }
+
+  .rules-comparison-board {
+    overflow: visible !important;
+  }
+
+  .rules-table-head {
+    display: none !important;
+  }
+
+  .rules-table-row {
+    border: 0 !important;
+    border-top: 1px solid var(--lamt-rule-soft) !important;
+  }
+
+  .rules-table-row:last-child {
+    border-bottom: 1px solid var(--lamt-rule-soft) !important;
+  }
+
+  .rules-table-row > * {
+    border-right: 0 !important;
+    border-bottom: 1px solid var(--lamt-rule-soft) !important;
+    padding: 0.92rem 0 !important;
+  }
+
+  .rules-table-row > *:last-child {
+    border-bottom: 0 !important;
+  }
+
+  .rules-table-row strong {
+    font-size: 1.05rem !important;
+  }
+
+  .rules-table-row p {
+    font-size: 0.94rem !important;
+    line-height: 1.42 !important;
+  }
+}
+
+@media (max-width: 700px) {
+  .contact-strip {
+    grid-template-columns: 1fr !important;
+    align-items: start !important;
+    gap: 1rem !important;
+  }
+
+  .contact-strip .btn-filled,
+  .contact-strip .btn-outline {
+    width: 100% !important;
+  }
+
+  .contact-strip h3 {
+    font-size: clamp(1.12rem, 5.7vw, 1.45rem) !important;
+  }
+
+  .sponsor-title {
+    font-size: clamp(2.65rem, 14vw, 4rem) !important;
+  }
+
+  .home-bento__intro h2 {
+    font-size: clamp(3rem, 14vw, 4.6rem) !important;
+  }
+}

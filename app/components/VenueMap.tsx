@@ -51,10 +51,7 @@ export default function VenueMap({ className = "" }: { className?: string }) {
   return (
     <motion.section
       className={["venue-real-map", expanded ? "is-expanded" : "", className].filter(Boolean).join(" ")}
-      initial={reduceMotion ? false : { opacity: 0, y: 16 }}
-      whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: 0.36, ease: [0.16, 1, 0.3, 1] }}
+      initial={false}
       aria-label="LAMT UCLA venue map"
     >
       <div className="venue-real-map__toolbar">
@@ -112,9 +109,8 @@ export default function VenueMap({ className = "" }: { className?: string }) {
             target="_blank"
             rel="noopener noreferrer"
             className="lamt-line-item venue-real-map__venue"
-            initial={reduceMotion ? false : { opacity: 0, y: 10 }}
-            whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
-            transition={{ delay: index * 0.04, duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+            whileHover={reduceMotion ? undefined : { x: 2 }}
+            transition={{ duration: 0.18, ease: [0.16, 1, 0.3, 1] }}
           >
             <span className="venue-real-map__pin" aria-hidden="true">{index + 1}</span>
             <span>

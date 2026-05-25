@@ -43,7 +43,11 @@ export default function SponsorsSection({
                 </div>
                 <div className={`sponsor-grid sponsor-matrix sponsor-matrix--${tier}`}>
                   {sponsorsByTier[tier].map((src, index) => (
-                    <div key={src} className="sponsor-card sponsor-logo-frame">
+                    <div
+                      key={src}
+                      className="sponsor-card sponsor-logo-frame"
+                      data-logo-scale={src.includes('imageedit') || src.includes('SCMCLOGO') ? 'mark' : undefined}
+                    >
                       <Image
                         src={src}
                         alt={`${label} sponsor ${index + 1}`}
