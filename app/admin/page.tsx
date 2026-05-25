@@ -89,9 +89,9 @@ function LoginScreen({ onLogin }: { onLogin: () => void }) {
         </div>
       </header>
 
-      <section className="section-row">
+      <section className="section-row admin-access-row">
         <h2 className="section-title">Access</h2>
-        <div className="grid gap-5">
+        <div className="admin-login-stack">
           <StorageModeNotice compact />
           <form onSubmit={submit} className="lamt-panel w-full max-w-md">
             <div className="lamt-panel-body">

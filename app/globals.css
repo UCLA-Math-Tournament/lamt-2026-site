@@ -11890,3 +11890,205 @@ body.is-scrolled .site-brand__mark {
     transform: none !important;
   }
 }
+
+/* Shared page rhythm and control density refinements. */
+.page-shell {
+  gap: clamp(1.45rem, 3vw, 3.35rem) !important;
+}
+
+.page-hero {
+  padding-block: clamp(2.45rem, 4.7vw, 4.25rem) clamp(2.35rem, 4.9vw, 4.35rem) !important;
+}
+
+.page-hero + .section-row,
+.page-hero + .archive-years,
+.page-hero + .rules-section-nav {
+  margin-top: clamp(-1.45rem, -2vw, -0.65rem) !important;
+}
+
+.section-row,
+.home-bento,
+.registration-showcase {
+  padding-top: clamp(1.1rem, 2.2vw, 2.15rem) !important;
+  padding-bottom: clamp(1rem, 1.85vw, 1.65rem) !important;
+}
+
+.section-copy,
+.lamt-line-item p,
+.lamt-line-item small,
+.lamt-line-item em,
+.format-card p,
+.rules-mini-rule p,
+.rules-reference-grid .rules-mini-rule p,
+.live-announcement-copy p,
+.about-brief-item p,
+.local-mode-notice p {
+  max-width: 64ch !important;
+  line-height: 1.52 !important;
+  font-weight: 600 !important;
+}
+
+.page-summary,
+.cinema-lede {
+  line-height: 1.32 !important;
+}
+
+.tournament-fact-grid {
+  grid-template-columns: repeat(4, minmax(8.75rem, 1fr)) !important;
+  gap: clamp(1.25rem, 2.5vw, 2.25rem) !important;
+}
+
+.tournament-fact {
+  display: block !important;
+  min-width: 0 !important;
+  padding-top: clamp(0.85rem, 1.5vw, 1.15rem) !important;
+}
+
+.tournament-fact span {
+  display: block !important;
+  font-size: 0.72rem !important;
+  letter-spacing: 0.07em !important;
+}
+
+.tournament-fact strong {
+  display: block !important;
+  margin-top: 0.45rem !important;
+  font-size: clamp(1.42rem, 2.05vw, 2rem) !important;
+  line-height: 1.02 !important;
+  white-space: nowrap !important;
+}
+
+.archive-material-tab-list,
+.schedule-tab-list,
+.faq-category-grid,
+.answer-format-tab-list,
+.admin-tools-nav,
+.about-directory__tabs,
+.rules-section-nav__items {
+  min-height: 0 !important;
+}
+
+.archive-material-tab,
+.schedule-tab,
+.faq-category-grid .lamt-button,
+.answer-format-tab,
+.admin-tools-tab,
+.about-directory__tab,
+.rules-section-nav__button {
+  min-height: 2.55rem !important;
+  padding-block: 0.72rem 0.62rem !important;
+  font-size: 0.72rem !important;
+  font-weight: 780 !important;
+}
+
+.faq-category-grid .lamt-button {
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+.faq-category-grid .lamt-button::after {
+  content: "" !important;
+  position: absolute !important;
+  inset: auto 0 0 !important;
+  height: 1px !important;
+  background: var(--ucla-gold) !important;
+  transform: scaleX(0) !important;
+  transform-origin: left center !important;
+  transition: transform 180ms cubic-bezier(0.16, 1, 0.3, 1) !important;
+  pointer-events: none !important;
+}
+
+.faq-category-grid .lamt-button:hover::after,
+.faq-category-grid .lamt-button:focus-visible::after,
+.faq-category-grid .lamt-button[data-state="selected"]::after {
+  transform: scaleX(1) !important;
+}
+
+.lamt-input {
+  min-height: 2.65rem !important;
+  color: var(--color-text) !important;
+}
+
+.lamt-input::placeholder {
+  color: color-mix(in srgb, var(--color-text-secondary) 62%, transparent) !important;
+}
+
+.faq-control-panel {
+  grid-template-columns: minmax(15rem, 0.32fr) minmax(0, 1fr) !important;
+  gap: clamp(1.15rem, 2.4vw, 2rem) !important;
+  align-items: end !important;
+}
+
+.rules-section-nav {
+  margin-bottom: clamp(0.55rem, 1.3vw, 1.2rem) !important;
+}
+
+.rules-section-nav + .section-row {
+  margin-top: clamp(-1.2rem, -1.8vw, -0.45rem) !important;
+}
+
+.archive-year-meta strong,
+.archive-material-tabs__top h3,
+.faq-question strong,
+.contact-strip h3,
+.local-mode-notice h2 {
+  line-height: 1.12 !important;
+}
+
+.contact-strip h3 {
+  overflow-wrap: anywhere !important;
+}
+
+.admin-access-row {
+  align-items: start !important;
+}
+
+.admin-login-stack {
+  display: grid !important;
+  max-width: 36rem !important;
+  gap: clamp(1rem, 2vw, 1.4rem) !important;
+}
+
+.admin-login-stack .local-mode-notice {
+  margin-bottom: 0 !important;
+}
+
+.admin-login-stack .lamt-panel {
+  max-width: 24rem !important;
+}
+
+@media (max-width: 900px) {
+  .page-shell {
+    gap: clamp(1.15rem, 5vw, 2rem) !important;
+  }
+
+  .page-hero + .section-row,
+  .page-hero + .archive-years,
+  .page-hero + .rules-section-nav,
+  .rules-section-nav + .section-row {
+    margin-top: 0 !important;
+  }
+
+  .tournament-fact-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  .tournament-fact strong {
+    white-space: normal !important;
+  }
+
+  .faq-control-panel {
+    grid-template-columns: 1fr !important;
+  }
+
+  .admin-login-stack,
+  .admin-login-stack .lamt-panel {
+    max-width: none !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .faq-category-grid .lamt-button::after {
+    transition: none !important;
+  }
+}
