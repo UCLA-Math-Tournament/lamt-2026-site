@@ -12950,3 +12950,243 @@ body {
     min-height: 2rem !important;
   }
 }
+
+/* Fifth audit pass: touch targets, venue density, and restrained mobile rhythm. */
+.site-brand,
+.site-footer__brand-link {
+  min-width: 2.75rem !important;
+  min-height: 2.75rem !important;
+}
+
+.site-nav-link {
+  min-width: 2.35rem !important;
+  justify-content: center !important;
+}
+
+.site-footer .site-social-link {
+  min-width: 2.5rem !important;
+  min-height: 2.5rem !important;
+  justify-content: center !important;
+}
+
+.site-footer .site-social-link__icon {
+  width: 1.7rem !important;
+  height: 1.7rem !important;
+}
+
+.site-footer .site-social-link__icon svg {
+  width: 1.45rem !important;
+  height: 1.45rem !important;
+}
+
+.venue-real-map {
+  border-width: 1px !important;
+  box-shadow: none !important;
+}
+
+.venue-real-map__toolbar {
+  border-bottom-width: 1px !important;
+}
+
+.venue-real-map__toggle {
+  min-width: 7.4rem !important;
+  min-height: 2.75rem !important;
+  justify-content: center !important;
+  border-color: var(--ucla-gold) !important;
+  background: var(--ucla-gold) !important;
+  color: var(--ucla-blue-deep) !important;
+}
+
+.venue-real-map__toggle:hover,
+.venue-real-map__toggle:focus-visible {
+  border-color: var(--ucla-blue) !important;
+  background: var(--color-surface) !important;
+  color: var(--ucla-blue) !important;
+  box-shadow: none !important;
+  transform: translateY(-1px) !important;
+}
+
+.venue-map-attribution {
+  display: inline-flex !important;
+  min-width: 6.5rem !important;
+  min-height: 2.25rem !important;
+  align-items: center !important;
+  justify-content: flex-end !important;
+  font-size: 0.72rem !important;
+  line-height: 1 !important;
+}
+
+.venue-map-marker {
+  min-height: 2.25rem !important;
+  padding-block: 0.25rem !important;
+}
+
+.venue-real-map__venue {
+  min-height: 3.25rem !important;
+}
+
+.faq-toggle {
+  min-width: 2.25rem !important;
+  min-height: 2.25rem !important;
+}
+
+.faq-question strong {
+  letter-spacing: 0 !important;
+}
+
+.live-schedule-time strong,
+.live-schedule-place,
+.lamt-timeline-time,
+.lamt-timeline-card strong {
+  letter-spacing: 0 !important;
+}
+
+@media (max-width: 900px) {
+  .site-mobile-nav {
+    border-bottom: 1px solid var(--ucla-gold) !important;
+  }
+
+  .site-mobile-nav a {
+    min-height: 2.85rem !important;
+    padding-block: 0.78rem !important;
+    font-size: 0.76rem !important;
+    letter-spacing: 0 !important;
+  }
+
+  .site-footer .site-social-link {
+    min-width: 2.65rem !important;
+    min-height: 2.65rem !important;
+  }
+
+  .site-footer .site-social-link__icon svg {
+    width: 1.52rem !important;
+    height: 1.52rem !important;
+  }
+
+  .faq-accordion-trigger {
+    grid-template-columns: 2rem minmax(0, 1fr) 2.25rem !important;
+    min-height: 4rem !important;
+    padding-block: 0.85rem !important;
+  }
+
+  .faq-question strong {
+    font-size: clamp(1.05rem, 4.8vw, 1.22rem) !important;
+    line-height: 1.12 !important;
+  }
+
+  .faq-question small {
+    margin-top: 0.32rem !important;
+  }
+
+  .contact-strip h3 {
+    max-width: 100% !important;
+    font-size: clamp(1.08rem, 5.1vw, 1.34rem) !important;
+    line-height: 1.12 !important;
+  }
+
+  .live-schedule-time strong,
+  .live-schedule-place {
+    font-size: 0.72rem !important;
+    line-height: 1.3 !important;
+  }
+
+  .live-schedule-item {
+    grid-template-columns: minmax(7.35rem, 0.46fr) minmax(0, 1fr) !important;
+  }
+
+  .live-schedule-time strong {
+    white-space: nowrap !important;
+  }
+
+  .live-schedule-main h3 {
+    font-size: 1.05rem !important;
+    line-height: 1.08 !important;
+  }
+
+  .lamt-timeline-time,
+  .lamt-timeline-card strong {
+    font-size: 0.76rem !important;
+    line-height: 1.28 !important;
+  }
+}
+
+@media (max-width: 620px) {
+  .venue-real-map__toolbar {
+    flex-direction: row !important;
+    align-items: end !important;
+    padding: 0.9rem 0 !important;
+  }
+
+  .venue-real-map__toggle {
+    width: auto !important;
+    min-width: 6.9rem !important;
+    padding-inline: 0.72rem !important;
+  }
+
+  .venue-real-map__frame {
+    height: clamp(14.75rem, 68vw, 18rem) !important;
+    min-height: 0 !important;
+  }
+
+  .venue-real-map.is-expanded .venue-real-map__frame {
+    height: clamp(24rem, 112vw, 31rem) !important;
+  }
+
+  .venue-map-marker span {
+    max-width: 8.8rem !important;
+    font-size: 0.68rem !important;
+  }
+
+  .venue-real-map__venue {
+    min-height: 4rem !important;
+    padding-block: 0.78rem !important;
+  }
+
+  .venue-real-map__venue small {
+    font-size: 0.78rem !important;
+    line-height: 1.32 !important;
+  }
+
+  .sponsor-matrix {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  .sponsor-matrix--silver {
+    grid-template-columns: 1fr !important;
+  }
+
+  .sponsor-matrix--bronze .sponsor-logo-frame:last-child:nth-child(odd),
+  .sponsor-matrix--friends .sponsor-logo-frame:last-child:nth-child(odd) {
+    grid-column: 1 / -1 !important;
+    justify-content: center !important;
+  }
+
+  .sponsor-logo-frame {
+    min-height: 5.25rem !important;
+    padding: 0.8rem !important;
+  }
+
+  .sponsor-logo-frame img {
+    max-width: 88% !important;
+    max-height: 3.7rem !important;
+  }
+
+  .sponsor-matrix--silver .sponsor-logo-frame img {
+    max-height: 3.4rem !important;
+  }
+
+  .sponsor-logo-frame[data-logo-scale="mark"] img {
+    max-height: 4.15rem !important;
+  }
+}
+
+@media (max-width: 420px) {
+  .home-hero h1,
+  .page-title {
+    font-size: clamp(2.8rem, 12.8vw, 3.35rem) !important;
+  }
+
+  .site-brand small {
+    font-size: 0.64rem !important;
+  }
+}
