@@ -98,7 +98,6 @@ function LiveStatus({ schedule }: { schedule: ScheduleItem[] }) {
     <section className="lamt-panel">
       <div className="lamt-panel-header">
         <div>
-          <p className="label-caps">Status</p>
           <h2 className="mt-1 text-xl font-extrabold text-[var(--color-text)]">
             {TOURNAMENT_OVER ? "Tournament Complete" : current ? "Happening Now" : next ? "Next Up" : "Schedule Complete"}
           </h2>
@@ -138,7 +137,6 @@ function ScheduleTimeline({ schedule }: { schedule: ScheduleItem[] }) {
     <section className="lamt-panel">
       <div className="lamt-panel-header">
         <div>
-          <p className="label-caps">Schedule</p>
           <h2 className="mt-1 text-xl font-extrabold text-[var(--color-text)]">LAMT 2026 Schedule</h2>
         </div>
       </div>
@@ -206,7 +204,6 @@ function UpdatesFeed({ updates, previewMode }: { updates: Update[]; previewMode:
     <section className="lamt-panel" aria-live="polite">
       <div className="lamt-panel-header">
         <div>
-          <p className="label-caps">Announcements</p>
           <h2 className="mt-1 text-xl font-extrabold text-[var(--color-text)]">{heading}</h2>
         </div>
         {(displayedUpdates.length > 0 || previewMode) && (
