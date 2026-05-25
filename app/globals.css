@@ -10703,3 +10703,108 @@ body.is-scrolled .site-brand__mark {
     scroll-behavior: smooth !important;
   }
 }
+
+/* UCLA brand correction: blue carries the field; gold marks rules and action, not body text. */
+.home-hero .gold-shimmer-text,
+.home-hero__content .home-stat-card strong {
+  color: #FFFFFF !important;
+}
+
+.hero-badge {
+  color: var(--ucla-blue-light) !important;
+}
+
+.hero-badge span::after {
+  content: "" !important;
+  display: inline-block !important;
+  width: 0.45rem !important;
+  height: 0.45rem !important;
+  margin-inline: 0.72rem 0 !important;
+  background: var(--ucla-gold) !important;
+  transform: translateY(-0.08rem) !important;
+}
+
+.site-nav-link {
+  border-bottom: 1px solid transparent !important;
+}
+
+.site-nav-link:hover,
+.site-nav-link:focus-visible,
+.site-nav-link.is-active {
+  border-bottom-color: var(--ucla-gold) !important;
+  color: #FFFFFF !important;
+}
+
+.hero-button--ghost:hover,
+.hero-button--ghost:focus-visible,
+.page-hero .btn-outline:hover,
+.page-hero .btn-outline:focus-visible {
+  border-color: var(--ucla-gold) !important;
+  background: transparent !important;
+  color: #FFFFFF !important;
+}
+
+.sponsor-tier-stack {
+  gap: clamp(1.4rem, 3vw, 2.4rem) !important;
+}
+
+.sponsor-grid {
+  grid-template-columns: repeat(auto-fit, minmax(min(18rem, 100%), 1fr)) !important;
+  gap: 0 !important;
+  border-top: 1px solid var(--lamt-rule-soft) !important;
+}
+
+.sponsor-card,
+.sponsor-logo-frame {
+  display: flex !important;
+  min-height: 0 !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  border-top: 0 !important;
+  border-bottom: 1px solid var(--lamt-rule-soft) !important;
+  padding: clamp(1.15rem, 2.2vw, 1.85rem) clamp(1rem, 2.5vw, 2rem) clamp(1.15rem, 2.2vw, 1.85rem) 0 !important;
+}
+
+.sponsor-logo-frame img {
+  width: auto !important;
+  max-width: min(100%, 18rem) !important;
+  height: auto !important;
+  max-height: clamp(3rem, 7vw, 5.4rem) !important;
+  object-fit: contain !important;
+  transform: none !important;
+}
+
+.sponsor-matrix--silver .sponsor-logo-frame img {
+  max-width: min(100%, 22rem) !important;
+  max-height: clamp(3.4rem, 7.5vw, 6rem) !important;
+}
+
+.sponsor-matrix--friends .sponsor-logo-frame img {
+  max-height: clamp(2.5rem, 5vw, 4rem) !important;
+}
+
+.sponsor-logo-frame:hover img,
+.sponsor-logo-frame:focus-within img {
+  transform: translateY(-1px) !important;
+}
+
+.site-footer__eyebrow {
+  color: var(--ucla-blue-light) !important;
+}
+
+.dark .section-title,
+.dark .section-row.is-section-active > .section-title,
+[data-theme="dark"] .section-title,
+[data-theme="dark"] .section-row.is-section-active > .section-title {
+  color: var(--ucla-blue-light) !important;
+}
+
+@media (max-width: 760px) {
+  .sponsor-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .sponsor-logo-frame img {
+    max-width: min(100%, 15rem) !important;
+  }
+}
