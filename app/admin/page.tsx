@@ -550,7 +550,7 @@ export default function AdminPage() {
         </div>
       </header>
 
-      <StorageModeNotice />
+      <StorageModeNotice compact />
 
       <section className="section-row">
         <h2 className="section-title">Overview</h2>

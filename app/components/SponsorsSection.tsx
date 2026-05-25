@@ -15,6 +15,14 @@ const TIER_CONFIG: Record<Tier, {
 
 const TIER_ORDER: Tier[] = ['gold', 'silver', 'bronze', 'friends'];
 
+function getLogoScale(src: string) {
+  return src.includes('imageedit') || src.includes('SCMCLOGO') ? 'mark' : undefined;
+}
+
+function getLogoTone(src: string) {
+  return src.includes('SUSQUEHANNA') || src.includes('LOGO_stacked') || src.includes('imageedit') ? 'mono' : 'color';
+}
+
 export default function SponsorsSection({
   sponsorsByTier,
 }: {
@@ -46,7 +54,8 @@ export default function SponsorsSection({
                     <div
                       key={src}
                       className="sponsor-card sponsor-logo-frame"
-                      data-logo-scale={src.includes('imageedit') || src.includes('SCMCLOGO') ? 'mark' : undefined}
+                      data-logo-scale={getLogoScale(src)}
+                      data-logo-tone={getLogoTone(src)}
                     >
                       <Image
                         src={src}

@@ -18,7 +18,7 @@ const categoryCopy: Record<string, string> = {
   Problems: "Contest papers.",
   Solutions: "Answer keys.",
   Results: "Placements.",
-  "Schedule / Rules": "Logistics.",
+  Info: "Schedule, rules, correction notice.",
 };
 
 function panelId(category: string) {

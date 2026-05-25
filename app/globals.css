@@ -12762,3 +12762,191 @@ body {
     font-size: clamp(3rem, 14vw, 4.6rem) !important;
   }
 }
+
+/* Fourth audit pass: dark-mode continuity and denser mobile operations pages. */
+.dark .sponsor-section,
+[data-theme="dark"] .sponsor-section {
+  color: var(--color-text) !important;
+  background: transparent !important;
+}
+
+.dark .sponsor-section::before,
+[data-theme="dark"] .sponsor-section::before {
+  display: none !important;
+}
+
+.dark .sponsor-section .section-title,
+.dark .sponsor-section .sponsor-title,
+.dark .sponsor-section .section-copy,
+[data-theme="dark"] .sponsor-section .section-title,
+[data-theme="dark"] .sponsor-section .sponsor-title,
+[data-theme="dark"] .sponsor-section .section-copy {
+  color: var(--color-text) !important;
+}
+
+.dark .sponsor-logo-frame[data-logo-tone="mono"] img,
+[data-theme="dark"] .sponsor-logo-frame[data-logo-tone="mono"] img {
+  filter: brightness(0) invert(1) saturate(0) contrast(0.95) !important;
+}
+
+.dark .sponsor-logo-frame[data-logo-tone="color"] img,
+[data-theme="dark"] .sponsor-logo-frame[data-logo-tone="color"] img {
+  filter: none !important;
+}
+
+.dark .sponsor-grid,
+[data-theme="dark"] .sponsor-grid {
+  background: #f4f8fc !important;
+  border-color: rgba(139, 184, 232, 0.34) !important;
+}
+
+.dark .sponsor-logo-frame,
+[data-theme="dark"] .sponsor-logo-frame {
+  background: #f4f8fc !important;
+  border-bottom-color: rgba(0, 59, 92, 0.14) !important;
+  color: var(--color-text-light) !important;
+}
+
+.dark .sponsor-logo-frame img,
+[data-theme="dark"] .sponsor-logo-frame img,
+.dark .sponsor-logo-frame[data-logo-tone="mono"] img,
+[data-theme="dark"] .sponsor-logo-frame[data-logo-tone="mono"] img {
+  filter: none !important;
+}
+
+.dark .sponsor-logo-frame::before,
+.dark .sponsor-logo-frame::after,
+[data-theme="dark"] .sponsor-logo-frame::before,
+[data-theme="dark"] .sponsor-logo-frame::after {
+  display: none !important;
+}
+
+.dark .sponsor-section .btn-outline,
+[data-theme="dark"] .sponsor-section .btn-outline {
+  border-color: var(--ucla-gold) !important;
+  color: var(--color-text) !important;
+}
+
+.dark .sponsor-section .btn-outline:hover,
+.dark .sponsor-section .btn-outline:focus-visible,
+[data-theme="dark"] .sponsor-section .btn-outline:hover,
+[data-theme="dark"] .sponsor-section .btn-outline:focus-visible {
+  color: var(--ucla-blue) !important;
+}
+
+@media (max-width: 900px) {
+  .home-hero__bear {
+    display: none !important;
+  }
+
+  .page-hero .btn-filled,
+  .page-hero .btn-outline,
+  .home-hero .hero-button,
+  .contact-strip .btn-filled,
+  .contact-strip .btn-outline,
+  .admin-tools-tab,
+  .archive-material-tab,
+  .schedule-tab,
+  .rules-section-nav__button,
+  .faq-category-grid .lamt-button {
+    min-height: 2.75rem !important;
+    font-size: 0.76rem !important;
+  }
+
+  .lamt-timeline-item {
+    grid-template-columns: 2.35rem minmax(0, 1fr) !important;
+    gap: 0.65rem !important;
+    padding-block: 0.82rem !important;
+  }
+
+  .lamt-timeline-card {
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 0.3rem !important;
+  }
+
+  .lamt-timeline-card h3 {
+    margin-top: 0.22rem !important;
+    font-size: clamp(1.18rem, 5.4vw, 1.45rem) !important;
+  }
+
+  .lamt-timeline-card p,
+  .lamt-timeline-card strong {
+    font-size: 0.82rem !important;
+    line-height: 1.32 !important;
+  }
+
+  .live-schedule-item {
+    grid-template-columns: minmax(6.6rem, 0.42fr) minmax(0, 1fr) !important;
+    min-height: 0 !important;
+    column-gap: 0.85rem !important;
+  }
+
+  .live-schedule-time {
+    grid-column: 1 !important;
+    grid-row: 1 / span 2 !important;
+    border-bottom: 0 !important;
+  }
+
+  .live-schedule-main {
+    grid-column: 2 !important;
+  }
+
+  .live-schedule-place {
+    grid-column: 2 !important;
+    border-top: 0 !important;
+  }
+
+  .live-schedule-time,
+  .live-schedule-main,
+  .live-schedule-place {
+    padding: 0.72rem 0 !important;
+  }
+
+  .live-schedule-main h3 {
+    font-size: 1rem !important;
+  }
+
+  .live-schedule-time strong,
+  .live-schedule-place {
+    font-size: 0.72rem !important;
+    line-height: 1.25 !important;
+    white-space: normal !important;
+  }
+
+  .about-brief-item {
+    grid-template-columns: minmax(6.5rem, 0.38fr) minmax(0, 1fr) !important;
+    gap: 0.9rem !important;
+  }
+
+  .about-brief-item h3 {
+    font-size: clamp(1.22rem, 6vw, 1.55rem) !important;
+    line-height: 1.04 !important;
+  }
+
+  .about-brief-item p {
+    font-size: 0.98rem !important;
+    line-height: 1.38 !important;
+  }
+
+  .admin-metric {
+    grid-template-columns: minmax(0, 1fr) auto !important;
+    align-items: end !important;
+  }
+
+  .admin-metric strong {
+    justify-self: end !important;
+    font-size: clamp(2rem, 11vw, 3rem) !important;
+    line-height: 0.95 !important;
+  }
+}
+
+@media (max-width: 520px) {
+  .sponsor-logo-frame[data-logo-scale="mark"] img {
+    max-height: clamp(5.2rem, 19vw, 6.8rem) !important;
+  }
+
+  .site-footer .site-social-link {
+    min-width: 2rem !important;
+    min-height: 2rem !important;
+  }
+}
