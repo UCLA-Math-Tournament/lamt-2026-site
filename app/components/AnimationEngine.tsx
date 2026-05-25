@@ -177,6 +177,31 @@ function initSectionFocus() {
   return () => observer.disconnect();
 }
 
+function initHeaderState() {
+  let frame = 0;
+
+  const update = () => {
+    frame = 0;
+    document.body.classList.toggle('is-scrolled', window.scrollY > 18);
+  };
+
+  const requestUpdate = () => {
+    if (frame) return;
+    frame = window.requestAnimationFrame(update);
+  };
+
+  update();
+  window.addEventListener('scroll', requestUpdate, { passive: true });
+  window.addEventListener('resize', requestUpdate);
+
+  return () => {
+    if (frame) window.cancelAnimationFrame(frame);
+    window.removeEventListener('scroll', requestUpdate);
+    window.removeEventListener('resize', requestUpdate);
+    document.body.classList.remove('is-scrolled');
+  };
+}
+
 export default function AnimationEngine() {
   useEffect(() => {
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -188,6 +213,7 @@ export default function AnimationEngine() {
       initTimelineDraw(),
       initScrollProgress(),
       initSectionFocus(),
+      initHeaderState(),
     ];
 
     return () => cleanups.forEach((cleanup) => cleanup());

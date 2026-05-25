@@ -9866,6 +9866,9 @@ body {
 .site-header {
   border-bottom: 1px solid rgba(255, 209, 0, 0.72) !important;
   background: #123E5E !important;
+  transition:
+    background-color 180ms cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 180ms cubic-bezier(0.16, 1, 0.3, 1) !important;
 }
 
 .dark .site-header,
@@ -9884,6 +9887,7 @@ body {
 .site-brand__mark {
   width: clamp(2.55rem, 3.5vw, 3.15rem) !important;
   height: clamp(2.55rem, 3.5vw, 3.15rem) !important;
+  transition: transform 180ms cubic-bezier(0.16, 1, 0.3, 1) !important;
 }
 
 .site-brand strong {
@@ -9894,6 +9898,20 @@ body {
 .site-brand small {
   font-size: 0.68rem !important;
   line-height: 1 !important;
+}
+
+body.is-scrolled .site-header {
+  background: #0F3855 !important;
+  border-bottom-color: rgba(255, 209, 0, 0.5) !important;
+}
+
+body.is-scrolled .site-brand__mark {
+  transform: scale(0.92) !important;
+}
+
+.dark body.is-scrolled .site-header,
+[data-theme="dark"] body.is-scrolled .site-header {
+  background: #020D18 !important;
 }
 
 .site-nav {
@@ -10251,5 +10269,89 @@ body {
   .hero-button,
   .lamt-button {
     width: auto !important;
+  }
+}
+
+/* Rules page refinement: editorial summaries, not compressed cards. */
+.rules-reference-grid,
+.format-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: clamp(1.25rem, 2.6vw, 2.4rem) !important;
+  border-top: 0 !important;
+}
+
+.rules-reference-grid .rules-mini-rule,
+.format-grid .format-card {
+  display: block !important;
+  min-height: 0 !important;
+  border: 0 !important;
+  border-top: 1px solid var(--lamt-rule-soft) !important;
+  background: transparent !important;
+  padding: clamp(1rem, 1.8vw, 1.35rem) 0 0 !important;
+}
+
+.rules-reference-grid .rules-mini-rule:hover,
+.format-grid .format-card:hover {
+  border-top-color: var(--lamt-rule-strong) !important;
+}
+
+.rules-reference-grid .rules-mini-rule > span:first-child,
+.format-grid .format-card > span:first-child {
+  display: block !important;
+  margin-bottom: 0.65rem !important;
+}
+
+.rules-reference-grid .rules-mini-rule > span:nth-child(2),
+.format-grid .format-card h3 {
+  display: block !important;
+  max-width: 13rem !important;
+  color: var(--color-text) !important;
+  font-size: clamp(1.45rem, 2.4vw, 2.05rem) !important;
+  line-height: 0.98 !important;
+}
+
+.rules-reference-grid .rules-mini-rule p,
+.format-grid .format-card p {
+  max-width: 21rem !important;
+  margin-top: 0.7rem !important;
+  color: var(--color-text-secondary) !important;
+  font-size: clamp(0.98rem, 1.25vw, 1.1rem) !important;
+  line-height: 1.36 !important;
+}
+
+.rules-comparison-board {
+  border: 0 !important;
+  border-top: 1px solid var(--lamt-rule-soft) !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.rules-table-row {
+  border-bottom: 1px solid var(--lamt-rule-soft) !important;
+}
+
+.rules-table-row > * {
+  border-right: 1px solid var(--lamt-rule-soft) !important;
+}
+
+.rules-table-row > *:last-child {
+  border-right: 0 !important;
+}
+
+@media (max-width: 900px) {
+  .rules-reference-grid,
+  .format-grid {
+    grid-template-columns: 1fr !important;
+    gap: 0 !important;
+  }
+
+  .rules-reference-grid .rules-mini-rule,
+  .format-grid .format-card {
+    padding-block: 1.05rem !important;
+  }
+
+  .rules-reference-grid .rules-mini-rule > span:nth-child(2),
+  .format-grid .format-card h3 {
+    max-width: none !important;
   }
 }
