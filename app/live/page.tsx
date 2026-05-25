@@ -397,13 +397,13 @@ export default function LivePage() {
           <span className="gold-rule" />
         </div>
         <div>
-          <h1 className="page-title">Event Archive</h1>
+          <h1 className="page-title">2026 Archive</h1>
           <p className="page-summary mt-5">
-            May 17, 2026. Announcements, schedule, venue.
+            May 17, 2026. Notices, schedule, venue.
           </p>
           <div className="mt-6 flex flex-wrap gap-3">
             <a href="#announcements" className="btn-filled">
-              Announcements
+              Notices
             </a>
             <a href="#schedule" className="btn-outline">
               Schedule

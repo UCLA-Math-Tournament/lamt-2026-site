@@ -11556,3 +11556,145 @@ body.is-scrolled .site-brand__mark {
     white-space: normal !important;
   }
 }
+
+/* Editorial restraint pass: less lift, more intent. */
+@media (min-width: 901px) {
+  .page-hero {
+    padding-block: clamp(3rem, 5.4vw, 5.4rem) clamp(2.75rem, 4.8vw, 4.8rem) !important;
+  }
+}
+
+.section-row {
+  padding-block: clamp(2.35rem, 4.8vw, 4.9rem) !important;
+}
+
+.btn-filled,
+.btn-outline,
+.btn-premium,
+.hero-button,
+.lamt-button,
+.schedule-tab,
+.archive-material-tab,
+.answer-format-tab,
+.admin-tools-tab,
+.about-directory__tab,
+.rules-section-nav__button,
+.site-menu-button,
+.theme-toggle {
+  overflow: hidden !important;
+  transform: none !important;
+  transition:
+    background-color 150ms cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 150ms cubic-bezier(0.16, 1, 0.3, 1),
+    color 150ms cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.btn-filled::after,
+.btn-outline::after,
+.btn-premium::after,
+.hero-button::after,
+.lamt-button::after,
+.schedule-tab::after,
+.archive-material-tab::after,
+.answer-format-tab::after,
+.admin-tools-tab::after,
+.about-directory__tab::after,
+.rules-section-nav__button::after {
+  content: "" !important;
+  position: absolute !important;
+  inset: auto 0 0 !important;
+  width: 100% !important;
+  height: 2px !important;
+  background: currentColor !important;
+  opacity: 0.72 !important;
+  transform: scaleX(0) !important;
+  transform-origin: left center !important;
+  transition: transform 190ms cubic-bezier(0.16, 1, 0.3, 1) !important;
+  pointer-events: none !important;
+}
+
+.btn-filled:hover,
+.btn-filled:focus-visible,
+.btn-outline:hover,
+.btn-outline:focus-visible,
+.btn-premium:hover,
+.btn-premium:focus-visible,
+.hero-button:hover,
+.hero-button:focus-visible,
+.lamt-button:hover,
+.lamt-button:focus-visible,
+.schedule-tab:hover,
+.schedule-tab:focus-visible,
+.archive-material-tab:hover,
+.archive-material-tab:focus-visible,
+.answer-format-tab:hover,
+.answer-format-tab:focus-visible,
+.admin-tools-tab:hover,
+.admin-tools-tab:focus-visible,
+.about-directory__tab:hover,
+.about-directory__tab:focus-visible,
+.rules-section-nav__button:hover,
+.rules-section-nav__button:focus-visible,
+.site-menu-button:hover,
+.site-menu-button:focus-visible,
+.theme-toggle:hover,
+.theme-toggle:focus-visible {
+  transform: none !important;
+}
+
+.btn-filled:hover::after,
+.btn-filled:focus-visible::after,
+.btn-outline:hover::after,
+.btn-outline:focus-visible::after,
+.btn-premium:hover::after,
+.btn-premium:focus-visible::after,
+.hero-button:hover::after,
+.hero-button:focus-visible::after,
+.lamt-button:hover::after,
+.lamt-button:focus-visible::after,
+.schedule-tab:hover::after,
+.schedule-tab:focus-visible::after,
+.archive-material-tab:hover::after,
+.archive-material-tab:focus-visible::after,
+.answer-format-tab:hover::after,
+.answer-format-tab:focus-visible::after,
+.admin-tools-tab:hover::after,
+.admin-tools-tab:focus-visible::after,
+.about-directory__tab:hover::after,
+.about-directory__tab:focus-visible::after,
+.rules-section-nav__button:hover::after,
+.rules-section-nav__button:focus-visible::after {
+  transform: scaleX(1) !important;
+}
+
+.btn-filled:hover,
+.btn-filled:focus-visible,
+.hero-button:not(.hero-button--ghost):hover,
+.hero-button:not(.hero-button--ghost):focus-visible {
+  background: #F4C600 !important;
+  border-color: #F4C600 !important;
+  color: var(--ucla-blue-deep) !important;
+}
+
+.page-hero .btn-outline:hover,
+.page-hero .btn-outline:focus-visible,
+.home-hero .hero-button--ghost:hover,
+.home-hero .hero-button--ghost:focus-visible {
+  background: transparent !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-filled::after,
+  .btn-outline::after,
+  .btn-premium::after,
+  .hero-button::after,
+  .lamt-button::after,
+  .schedule-tab::after,
+  .archive-material-tab::after,
+  .answer-format-tab::after,
+  .admin-tools-tab::after,
+  .about-directory__tab::after,
+  .rules-section-nav__button::after {
+    transition: none !important;
+  }
+}

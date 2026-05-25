@@ -84,8 +84,8 @@ function LoginScreen({ onLogin }: { onLogin: () => void }) {
           <span className="gold-rule" />
         </div>
         <div>
-          <h1 className="page-title">LAMT Admin Panel</h1>
-          <p className="page-summary mt-5">Announcements, schedule, notes.</p>
+          <h1 className="page-title">Admin</h1>
+          <p className="page-summary mt-5">Drafts, schedule, messages.</p>
         </div>
       </header>
 
@@ -534,8 +534,8 @@ export default function AdminPage() {
           <span className="gold-rule" />
         </div>
         <div>
-          <h1 className="page-title">LAMT Admin Panel</h1>
-          <p className="page-summary mt-5">Announcements, schedule, notes.</p>
+          <h1 className="page-title">Admin</h1>
+          <p className="page-summary mt-5">Drafts, schedule, messages.</p>
           <div className="mt-6 flex flex-wrap gap-3">
             <Link href="/live?preview=1" className="btn-filled">
               Open Draft View

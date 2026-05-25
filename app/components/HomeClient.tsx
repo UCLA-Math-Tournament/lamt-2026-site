@@ -123,7 +123,7 @@ export default function HomeClient({
                 <FileTextIcon /> View 2026 Archive
               </Link>
               <Link href="/tournament" className={`${homeButtonClass} hero-button--ghost`}>
-                Tournament Info <ArrowRightIcon />
+                Tournament <ArrowRightIcon />
               </Link>
               <Link href={discordUrl} target="_blank" rel="noreferrer" className={`${homeButtonClass} hero-button--ghost`}>
                 <DiscordLogoIcon /> Join Discord
