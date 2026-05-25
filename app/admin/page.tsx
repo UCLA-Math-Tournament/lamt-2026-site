@@ -399,7 +399,7 @@ function ScheduleTab({ schedule, setSchedule }: {
       <div className="lamt-panel-header">
         <div>
           <p className="label-caps">Schedule</p>
-          <h2 className="mt-1 text-xl font-extrabold text-[var(--color-text)]">Live Timeline Editor</h2>
+          <h2 className="mt-1 text-xl font-extrabold text-[var(--color-text)]">Schedule Editor</h2>
         </div>
       </div>
       <div className="lamt-panel-body">

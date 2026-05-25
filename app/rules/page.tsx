@@ -193,8 +193,8 @@ export default function RulesPage() {
     { math: '\\frac{\\sqrt{2}}{2}' },
     { math: '420!' },
     { math: '\\cos(1)' },
-    { math: '\\binom{10^{100000}}{4}' },
-    { math: '11 \\sqrt[11]{\\frac{27}{4}}' },
+    { math: '\\binom{10}{4}' },
+    { math: '\\frac{3\\pi}{2}' },
   ];
 
   const unacceptableExamples = [

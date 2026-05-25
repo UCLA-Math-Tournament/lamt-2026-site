@@ -187,7 +187,7 @@ function MapSection() {
 function UpdatesFeed({ updates, previewMode }: { updates: Update[]; previewMode: boolean }) {
   const useArchiveUpdates = !previewMode && TOURNAMENT_OVER && updates.length === 0;
   const displayedUpdates = useArchiveUpdates ? ARCHIVE_UPDATES : updates;
-  const heading = previewMode ? "Draft Announcements" : "Notices";
+  const heading = previewMode ? "Drafts" : "Posted";
   const reduceMotion = useReducedMotion();
   const noticeHover = reduceMotion ? undefined : { x: 2 };
 

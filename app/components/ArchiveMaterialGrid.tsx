@@ -15,10 +15,10 @@ type ArchiveGroup = {
 };
 
 const categoryCopy: Record<string, string> = {
-  Problems: "Contest papers.",
-  Solutions: "Answer keys.",
-  Results: "Placements.",
-  Info: "Schedule, rules, correction notice.",
+  Problems: "Contest papers",
+  Solutions: "Solutions",
+  Results: "Results",
+  Info: "Schedule, rules, notice",
 };
 
 function panelId(category: string) {
@@ -80,9 +80,9 @@ export default function ArchiveMaterialGrid({ groups }: { groups: ArchiveGroup[]
       <div className="archive-material-tabs__top">
         <div>
           <span className="label-caps">LAMT 2026</span>
-          <h3>Archive Files</h3>
+          <h3>Materials</h3>
         </div>
-        <strong>{totalItems} links</strong>
+        <strong>{totalItems} files</strong>
       </div>
 
       <div className="archive-material-tab-list" role="tablist" aria-label="Material type">
