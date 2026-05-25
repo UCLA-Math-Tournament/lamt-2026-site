@@ -13190,3 +13190,255 @@ body {
     font-size: 0.64rem !important;
   }
 }
+
+/* Sixth audit pass: readable mobile details and quieter operational density. */
+.site-footer__note {
+  font-size: 0.78rem !important;
+  line-height: 1.42 !important;
+}
+
+.btn-filled,
+.btn-outline,
+.hero-button,
+.btn-premium,
+.about-directory__tab,
+.admin-tools-tab,
+.archive-material-tab,
+.schedule-tab,
+.rules-section-nav__button,
+.faq-category-grid .lamt-button {
+  letter-spacing: 0 !important;
+}
+
+.live-schedule-time strong,
+.live-schedule-place,
+.venue-map-marker span,
+.venue-map-attribution,
+.venue-real-map__venue small,
+.home-hero__content .home-stat-card > span,
+.site-brand small {
+  font-weight: 850 !important;
+}
+
+.venue-map-marker span {
+  font-size: 0.78rem !important;
+  line-height: 1.08 !important;
+  max-width: 10rem !important;
+}
+
+.venue-real-map__venue small {
+  font-size: 0.9rem !important;
+  line-height: 1.34 !important;
+}
+
+.format-grid .format-card p,
+.lamt-line-list--compact .lamt-line-item p,
+.tournament-fact span,
+.rules-reference-grid .lamt-line-item p {
+  font-size: 0.94rem !important;
+  line-height: 1.4 !important;
+}
+
+.lamt-line-list--compact .lamt-line-item {
+  grid-template-columns: 2.9rem minmax(0, 1fr) !important;
+}
+
+.admin-page .page-hero {
+  padding-block: 2.35rem !important;
+}
+
+.admin-page .page-summary {
+  max-width: 28rem !important;
+}
+
+.admin-page .page-hero .btn-filled,
+.admin-page .page-hero .btn-outline {
+  min-height: 2.6rem !important;
+  padding-block: 0.66rem !important;
+}
+
+@media (max-width: 900px) {
+  .site-brand small {
+    font-size: 0.72rem !important;
+    line-height: 1.05 !important;
+  }
+
+  .site-footer__note {
+    font-size: 0.78rem !important;
+    line-height: 1.42 !important;
+  }
+
+  .home-hero .hero-button,
+  .page-hero .btn-filled,
+  .page-hero .btn-outline,
+  .contact-strip .btn-filled,
+  .contact-strip .btn-outline,
+  .sponsor-section .btn-outline {
+    min-height: 2.75rem !important;
+    font-size: 0.8rem !important;
+  }
+
+  .home-hero__content .home-stat-card {
+    min-height: 4.85rem !important;
+    padding: 0.82rem 0.75rem !important;
+  }
+
+  .home-hero__content .home-stat-card > span {
+    font-size: 0.76rem !important;
+    line-height: 1.18 !important;
+  }
+
+  .live-schedule-item {
+    grid-template-columns: minmax(7.9rem, 0.47fr) minmax(0, 1fr) !important;
+    column-gap: 0.78rem !important;
+  }
+
+  .live-schedule-time,
+  .live-schedule-main,
+  .live-schedule-place {
+    padding-block: 0.76rem !important;
+  }
+
+  .live-schedule-time strong,
+  .live-schedule-place {
+    font-size: 0.78rem !important;
+    line-height: 1.28 !important;
+  }
+
+  .live-schedule-main h3 {
+    font-size: 1.08rem !important;
+  }
+
+  .about-directory__tab,
+  .admin-tools-tab,
+  .schedule-tab,
+  .archive-material-tab,
+  .rules-section-nav__button,
+  .faq-category-grid .lamt-button {
+    min-height: 2.75rem !important;
+    font-size: 0.78rem !important;
+    padding-block: 0.72rem !important;
+  }
+
+  .format-grid .format-card p,
+  .lamt-line-list--compact .lamt-line-item p,
+  .tournament-fact span,
+  .rules-reference-grid .lamt-line-item p {
+    font-size: 0.9rem !important;
+    line-height: 1.38 !important;
+  }
+
+  .lamt-line-list--compact .lamt-line-item {
+    grid-template-columns: 2.4rem minmax(0, 1fr) !important;
+    gap: 0.7rem !important;
+  }
+
+  .admin-page .page-hero {
+    padding-block: 1.9rem !important;
+  }
+
+  .admin-page .page-title {
+    font-size: clamp(2.75rem, 13vw, 3.25rem) !important;
+  }
+}
+
+@media (max-width: 620px) {
+  .venue-map-marker span {
+    font-size: 0.76rem !important;
+    max-width: 9.7rem !important;
+  }
+
+  .venue-real-map__venue {
+    min-height: 3.75rem !important;
+  }
+
+  .venue-real-map__venue small {
+    font-size: 0.84rem !important;
+    line-height: 1.32 !important;
+  }
+
+  .sponsor-logo-frame {
+    min-height: 4.85rem !important;
+    padding: 0.72rem !important;
+  }
+
+  .sponsor-logo-frame img {
+    max-height: 3.45rem !important;
+  }
+
+  .sponsor-matrix--silver .sponsor-logo-frame img {
+    max-height: 3.25rem !important;
+  }
+
+  .site-brand small {
+    font-size: 0.7rem !important;
+  }
+}
+
+/* Seventh audit pass: remove remaining sub-12px interface labels. */
+.site-brand small,
+.site-footer .site-social-link__copy strong,
+.home-hero__content .home-stat-card > span,
+.venue-map-attribution,
+.schedule-tab,
+.schedule-tab strong,
+.schedule-tab span,
+.archive-material-tab,
+.archive-material-tab strong,
+.archive-material-tab span,
+.rules-section-nav__button,
+.rules-section-nav__button span,
+.about-directory__tab,
+.about-directory__tab strong,
+.about-directory__tab span,
+.admin-tools-tab,
+.admin-tools-tab strong,
+.admin-tools-tab span,
+.faq-category-grid .lamt-button,
+.answer-format-tab,
+.answer-format-tab span,
+.answer-format-tab strong {
+  font-size: 0.75rem !important;
+  line-height: 1.08 !important;
+}
+
+.btn-filled,
+.btn-outline,
+.hero-button,
+.btn-premium,
+.lamt-button {
+  font-size: 0.8rem !important;
+}
+
+@media (max-width: 900px) {
+  .page-hero {
+    padding-block: 2.18rem !important;
+  }
+
+  .admin-page .page-hero {
+    padding-block: 1.42rem !important;
+  }
+
+  .admin-page .page-hero .mt-6 {
+    margin-top: 0.95rem !important;
+    gap: 0.55rem !important;
+  }
+
+  .site-brand small {
+    font-size: 0.75rem !important;
+  }
+
+  .schedule-tab strong,
+  .archive-material-tab strong,
+  .about-directory__tab strong,
+  .admin-tools-tab strong,
+  .answer-format-tab strong {
+    font-size: 0.78rem !important;
+  }
+}
+
+@media (max-width: 620px) {
+  .site-brand small {
+    font-size: 0.75rem !important;
+  }
+}
