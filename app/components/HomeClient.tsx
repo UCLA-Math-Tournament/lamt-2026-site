@@ -83,9 +83,9 @@ export default function HomeClient({
   const regClosed = regDiff <= 0;
   const tournamentComplete = tournamentDiff <= 0;
   const highlightStats = [
-    { value: '250+', label: 'students' },
     { value: 'May 17', label: '2026' },
     { value: 'UCLA', label: 'campus' },
+    { value: '250+', label: 'students' },
     { value: '$0', label: 'fee' },
   ];
   const programRows = [
