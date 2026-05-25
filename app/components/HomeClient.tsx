@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import { ArrowRightIcon, DiscordLogoIcon, FileTextIcon } from '@radix-ui/react-icons';
+import { ArrowRightIcon, FileTextIcon } from '@radix-ui/react-icons';
 import AnimatedStatValue from './AnimatedStatValue';
 
 const homeButtonClass =
@@ -124,9 +124,6 @@ export default function HomeClient({
               </Link>
               <Link href="/tournament" className={`${homeButtonClass} hero-button--ghost`}>
                 Tournament <ArrowRightIcon />
-              </Link>
-              <Link href={discordUrl} target="_blank" rel="noreferrer" className={`${homeButtonClass} hero-button--ghost`}>
-                <DiscordLogoIcon /> Join Discord
               </Link>
             </div>
           ) : (

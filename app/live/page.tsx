@@ -397,7 +397,7 @@ export default function LivePage() {
           <span className="gold-rule" />
         </div>
         <div>
-          <h1 className="page-title">2026 Archive</h1>
+          <h1 className="page-title">Event Day</h1>
           <p className="page-summary mt-5">
             May 17, 2026. Notices, schedule, venue.
           </p>
@@ -411,9 +411,6 @@ export default function LivePage() {
             <a href="#map" className="btn-outline">
               Venue
             </a>
-            <a href="#contact" className="btn-outline">
-              Contact
-            </a>
           </div>
         </div>
       </header>
@@ -421,7 +418,7 @@ export default function LivePage() {
       {previewMode && <PreviewModeNotice />}
 
       <section id="announcements" className="section-row">
-        <h2 className="section-title">Announcements</h2>
+        <h2 className="section-title">Notices</h2>
         <UpdatesFeed updates={updates} previewMode={previewMode} />
       </section>
 

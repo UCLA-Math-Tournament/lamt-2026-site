@@ -12092,3 +12092,312 @@ body.is-scrolled .site-brand__mark {
     transition: none !important;
   }
 }
+
+/* Ten-point audit pass: smaller hierarchy shifts, clearer lines, shorter motion. */
+html {
+  scroll-padding-top: 5.15rem !important;
+}
+
+.site-nav-link {
+  min-height: 2.25rem !important;
+  padding-block: 0.2rem !important;
+  font-size: 0.81rem !important;
+  font-weight: 840 !important;
+  letter-spacing: 0 !important;
+}
+
+.site-header .btn-premium--gold {
+  min-height: 2.32rem !important;
+  padding: 0.54rem 0.82rem !important;
+  font-size: 0.78rem !important;
+  letter-spacing: 0 !important;
+}
+
+.site-nav-link:hover,
+.site-nav-link:focus-visible,
+.site-nav-link.is-active,
+.btn-filled:hover,
+.btn-filled:focus-visible,
+.btn-outline:hover,
+.btn-outline:focus-visible,
+.btn-premium:hover,
+.btn-premium:focus-visible,
+.hero-button:hover,
+.hero-button:focus-visible,
+.lamt-button:hover,
+.lamt-button:focus-visible {
+  box-shadow: none !important;
+  transform: translateY(-1px) !important;
+}
+
+.home-hero {
+  min-height: calc(82svh - 4rem) !important;
+  padding-block: 4rem 2.35rem !important;
+  animation-duration: 42s !important;
+}
+
+.home-hero::before {
+  opacity: 0.42 !important;
+  animation-duration: 14s !important;
+}
+
+.home-hero__mesh {
+  opacity: 0.18 !important;
+  animation-duration: 32s !important;
+}
+
+.home-hero__bear {
+  right: -4rem !important;
+  bottom: -5rem !important;
+  width: min(48vw, 38rem) !important;
+  opacity: 0.12 !important;
+}
+
+.home-hero h1 {
+  max-width: 12ch !important;
+  margin-top: 1.35rem !important;
+  font-size: 5.3rem !important;
+  line-height: 0.93 !important;
+}
+
+.cinema-lede {
+  max-width: 46rem !important;
+  font-size: 1.15rem !important;
+  line-height: 1.45 !important;
+}
+
+.cinema-actions {
+  gap: 0.65rem !important;
+}
+
+.home-hero .hero-button {
+  min-height: 2.72rem !important;
+  padding: 0.7rem 1rem !important;
+  font-size: 0.78rem !important;
+  letter-spacing: 0 !important;
+}
+
+.home-hero__content .home-hero__stats {
+  max-width: 44rem !important;
+  gap: 1.2rem !important;
+}
+
+.home-hero__content .home-stat-card strong {
+  font-size: 1.85rem !important;
+  line-height: 0.95 !important;
+}
+
+.home-hero__content .home-stat-card > span {
+  font-size: 0.68rem !important;
+  letter-spacing: 0 !important;
+}
+
+.home-bento {
+  margin-block: 1.65rem 2.6rem !important;
+}
+
+.home-bento__intro h2 {
+  max-width: 8ch !important;
+  font-size: 3.65rem !important;
+  line-height: 0.95 !important;
+}
+
+.page-hero {
+  grid-template-columns: minmax(8rem, 0.22fr) minmax(0, 1fr) !important;
+  padding-block: 3rem 3.15rem !important;
+}
+
+.page-title {
+  font-size: 5.35rem !important;
+  line-height: 0.9 !important;
+}
+
+.page-summary {
+  max-width: 44rem !important;
+  font-size: 1.35rem !important;
+  line-height: 1.35 !important;
+}
+
+.section-row,
+.home-bento {
+  gap: clamp(1rem, 2.6vw, 3rem) !important;
+}
+
+.section-title {
+  font-size: 0.82rem !important;
+  letter-spacing: 0 !important;
+}
+
+.lamt-line-item {
+  padding-block: 0.92rem !important;
+}
+
+.lamt-line-list--compact .lamt-line-item {
+  grid-template-columns: 4rem minmax(0, 1fr) !important;
+}
+
+.lamt-line-item h3,
+.lamt-line-item strong,
+.live-announcement-copy h3 {
+  font-size: 1.55rem !important;
+  line-height: 1.08 !important;
+}
+
+.tournament-fact strong {
+  font-size: 1.65rem !important;
+}
+
+.mission-principles .lamt-line-item {
+  grid-template-columns: minmax(7.5rem, 0.42fr) minmax(0, 1fr) !important;
+}
+
+.mission-principles .lamt-line-item strong {
+  font-size: 1.55rem !important;
+}
+
+.about-brief-list .lamt-line-item {
+  padding-block: 1.05rem !important;
+}
+
+.archive-year-board {
+  grid-template-columns: minmax(15.5rem, 0.34fr) minmax(0, 1fr) !important;
+  gap: 2rem !important;
+}
+
+.archive-year-meta strong {
+  font-size: 1.65rem !important;
+}
+
+.archive-material-tab,
+.schedule-tab,
+.faq-category-grid .lamt-button,
+.answer-format-tab,
+.admin-tools-tab,
+.about-directory__tab,
+.rules-section-nav__button {
+  min-height: 2.32rem !important;
+  padding-block: 0.58rem 0.5rem !important;
+  font-size: 0.72rem !important;
+  letter-spacing: 0 !important;
+}
+
+.faq-control-panel {
+  grid-template-columns: minmax(14rem, 0.3fr) minmax(0, 1fr) !important;
+  margin-bottom: 0.35rem !important;
+}
+
+.faq-accordion-trigger {
+  min-height: 0 !important;
+  grid-template-columns: 4.2rem minmax(0, 1fr) 1.4rem !important;
+  padding-block: 1rem !important;
+}
+
+.faq-question strong {
+  font-size: 1.2rem !important;
+}
+
+.faq-accordion-content__inner {
+  margin-left: 5.2rem !important;
+  padding: 0 0 1rem !important;
+}
+
+.lamt-panel {
+  box-shadow: none !important;
+}
+
+#announcements .lamt-panel,
+#schedule .lamt-panel,
+.admin-login-stack .lamt-panel {
+  border: 0 !important;
+  border-top: 1px solid var(--color-border) !important;
+  border-bottom: 1px solid var(--color-border) !important;
+  background: transparent !important;
+}
+
+#announcements .lamt-panel-header,
+#announcements .lamt-panel-body,
+#schedule .lamt-panel-header,
+#schedule .lamt-panel-body {
+  padding-inline: 0 !important;
+}
+
+#announcements .live-announcement-card {
+  padding-inline: 0 !important;
+}
+
+#announcements .live-announcement-badge {
+  display: none !important;
+}
+
+.live-announcement-shell {
+  grid-template-columns: minmax(8.5rem, 0.22fr) minmax(0, 1fr) !important;
+  padding-inline: 0 !important;
+}
+
+.live-announcement-time {
+  letter-spacing: 0 !important;
+}
+
+.site-footer .site-social-link__icon {
+  width: 1.55rem !important;
+  height: 1.55rem !important;
+}
+
+.site-footer .site-social-link__icon svg {
+  width: 1.36rem !important;
+  height: 1.36rem !important;
+  stroke-width: 1.75 !important;
+}
+
+.site-footer .site-social-link__copy strong {
+  font-size: 0.75rem !important;
+  letter-spacing: 0 !important;
+}
+
+.site-footer__note {
+  max-width: 56rem !important;
+  font-size: 0.72rem !important;
+  line-height: 1.45 !important;
+}
+
+@media (max-width: 900px) {
+  .home-hero {
+    min-height: auto !important;
+    padding-block: 3.2rem 2rem !important;
+  }
+
+  .home-hero h1,
+  .page-title {
+    font-size: 3.25rem !important;
+    line-height: 0.94 !important;
+  }
+
+  .page-hero {
+    grid-template-columns: 1fr !important;
+    padding-block: 2.45rem !important;
+  }
+
+  .page-summary {
+    font-size: 1.12rem !important;
+  }
+
+  .archive-year-board,
+  .mission-principles .lamt-line-item,
+  .faq-accordion-trigger,
+  .live-announcement-shell {
+    grid-template-columns: 1fr !important;
+  }
+
+  .faq-accordion-content__inner {
+    margin-left: 0 !important;
+    padding-left: 0 !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-hero,
+  .home-hero::before,
+  .home-hero__mesh {
+    animation: none !important;
+  }
+}
