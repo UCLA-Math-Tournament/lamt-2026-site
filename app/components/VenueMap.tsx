@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { EnterFullScreenIcon, ExitFullScreenIcon, ExternalLinkIcon, GlobeIcon } from "@radix-ui/react-icons";
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { EnterFullScreenIcon, ExitFullScreenIcon, ExternalLinkIcon } from "@radix-ui/react-icons";
+import { motion, useReducedMotion } from "framer-motion";
 
 const MAP_SRC = "https://www.google.com/maps?q=UCLA%20Mathematical%20Sciences%20Building%2C%20Los%20Angeles%2C%20CA&output=embed";
 
@@ -71,23 +71,6 @@ export default function VenueMap({ className = "" }: { className?: string }) {
           referrerPolicy="no-referrer-when-downgrade"
           allowFullScreen
         />
-        <AnimatePresence>
-          {!expanded && (
-            <motion.div
-              className="venue-real-map__overlay"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.18 }}
-              aria-hidden="true"
-            >
-              <span>
-                <GlobeIcon />
-                MS 4000A / MS 5200
-              </span>
-            </motion.div>
-          )}
-        </AnimatePresence>
       </motion.div>
 
       <div className="venue-real-map__details">
