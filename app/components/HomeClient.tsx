@@ -90,9 +90,9 @@ export default function HomeClient({
   ];
   const programRows = [
     { title: 'Date', text: 'May 17, 2026 at UCLA.' },
-    { title: 'Who', text: 'Middle and high school students; teams up to 6.' },
-    { title: 'Contest', text: 'Individual rounds, Secret Team, and Guts.' },
-    { title: 'Archive', text: 'Problems, solutions, and results.' },
+    { title: 'Who', text: 'Middle and high school students, teams up to 6.' },
+    { title: 'Contest', text: 'Individual, team, and Guts rounds.' },
+    { title: 'Archive', text: '2026 papers, solutions, results.' },
   ];
 
   return (

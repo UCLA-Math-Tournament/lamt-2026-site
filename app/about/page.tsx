@@ -5,7 +5,7 @@ import { useState } from 'react';
 export default function AboutPage() {
   const staffGroups = [
     {
-      title: 'Admin',
+      title: 'Leadership',
       people: ['Kenneth Ren', 'Muztaba Syed', 'Arpit Uppal', 'Brooks Wang', 'Thomas Wu', 'Vicky Zhang'],
     },
     {
@@ -30,7 +30,7 @@ export default function AboutPage() {
       ],
     },
     {
-      title: 'Website & Tech',
+      title: 'Technology',
       people: ['Aryan Dalal', 'Nish Tharakan', 'Arpit Uppal'],
     },
     {
@@ -92,7 +92,7 @@ export default function AboutPage() {
   const briefItems = [
     { title: 'Campus', text: 'In person at UCLA.' },
     { title: 'Rounds', text: 'Individual, team, and Guts.' },
-    { title: 'Archive', text: 'Problems, solutions, and results stay posted.' },
+    { title: 'Archive', text: '2026 papers, solutions, and results.' },
   ];
   const [activeGroup, setActiveGroup] = useState(staffGroups[0].title);
   const selectedGroup = staffGroups.find((group) => group.title === activeGroup) || staffGroups[0];
@@ -137,7 +137,7 @@ export default function AboutPage() {
       </section>
 
       <section className="section-row">
-        <h2 className="section-title">What LAMT Is</h2>
+        <h2 className="section-title">LAMT</h2>
         <div className="lamt-line-list about-brief-list">
           {briefItems.map((item) => (
             <article key={item.title} className="lamt-line-item about-brief-item">
