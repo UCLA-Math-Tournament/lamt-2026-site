@@ -109,7 +109,7 @@ export default function AboutPage() {
             <span className="word">About</span>
           </h1>
           <p className="page-summary reveal mt-5">
-            Student-run. Free. In person at UCLA.
+            UCLA students. Free contest. In person.
           </p>
         </div>
       </header>
@@ -119,10 +119,10 @@ export default function AboutPage() {
         <div className="mission-board">
           <div className="mission-stack stagger-parent">
             <p className="section-copy">
-              UCLA students run the contest day: rounds, lunch, disputes, awards.
+              UCLA students organize the contest from check-in through awards.
             </p>
             <p className="section-copy">
-              Free registration for middle and high school students.
+              Registration is free for middle and high school students.
             </p>
           </div>
           <div className="lamt-line-list mission-principles">

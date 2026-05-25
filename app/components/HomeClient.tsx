@@ -92,7 +92,7 @@ export default function HomeClient({
     { title: 'Date', text: 'May 17, 2026 at UCLA.' },
     { title: 'Who', text: 'Middle and high school students; teams up to 6.' },
     { title: 'Contest', text: 'Individual rounds, Secret Team, and Guts.' },
-    { title: 'After', text: 'Problems, solutions, and results stay in Archive.' },
+    { title: 'Archive', text: 'Problems, solutions, and results.' },
   ];
 
   return (
@@ -170,7 +170,7 @@ export default function HomeClient({
           <p className="page-kicker">LAMT 2026</p>
           <h2>A Day at UCLA</h2>
           <p>
-            What competitors and coaches need to know.
+            The essentials for competitors and coaches.
           </p>
         </div>
         <div className="lamt-line-list home-program-list">
