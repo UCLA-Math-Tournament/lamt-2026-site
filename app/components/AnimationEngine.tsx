@@ -120,46 +120,6 @@ function initTimelineDraw() {
   return () => observer.disconnect();
 }
 
-function initScrollProgress() {
-  let createdTrack: HTMLElement | null = null;
-  let bar = document.querySelector<HTMLElement>('.lamt-scroll-progress span');
-
-  if (!bar) {
-    createdTrack = document.createElement('div');
-    createdTrack.className = 'lamt-scroll-progress';
-    createdTrack.setAttribute('aria-hidden', 'true');
-    bar = document.createElement('span');
-    createdTrack.appendChild(bar);
-    document.body.prepend(createdTrack);
-  }
-
-  let frame = 0;
-
-  const update = () => {
-    frame = 0;
-    const doc = document.documentElement;
-    const max = Math.max(1, doc.scrollHeight - window.innerHeight);
-    const progress = Math.min(1, Math.max(0, window.scrollY / max));
-    bar.style.setProperty('transform', `scaleX(${progress})`, 'important');
-  };
-
-  const requestUpdate = () => {
-    if (frame) return;
-    frame = window.requestAnimationFrame(update);
-  };
-
-  update();
-  window.addEventListener('scroll', requestUpdate, { passive: true });
-  window.addEventListener('resize', requestUpdate);
-
-  return () => {
-    if (frame) window.cancelAnimationFrame(frame);
-    window.removeEventListener('scroll', requestUpdate);
-    window.removeEventListener('resize', requestUpdate);
-    createdTrack?.remove();
-  };
-}
-
 function initSectionFocus() {
   const sections = document.querySelectorAll<HTMLElement>('.section-row, .home-bento, .registration-showcase');
   if (!sections.length) return () => {};
@@ -211,7 +171,6 @@ export default function AnimationEngine() {
       initCounters(),
       initReveals(),
       initTimelineDraw(),
-      initScrollProgress(),
       initSectionFocus(),
       initHeaderState(),
     ];

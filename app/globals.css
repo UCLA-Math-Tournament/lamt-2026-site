@@ -11117,3 +11117,89 @@ body.is-scrolled .site-brand__mark {
     gap: 0.5rem !important;
   }
 }
+
+/* Competition-grade restraint: typography, lines, and one quiet motion language. */
+.lamt-scroll-progress {
+  display: none !important;
+}
+
+.home-bento,
+.registration-showcase {
+  margin-block: clamp(2.25rem, 4.8vw, 4.8rem) !important;
+}
+
+.home-bento__intro h2,
+.registration-showcase h2 {
+  max-width: 12ch !important;
+  font-size: clamp(1.85rem, 4.8vw, 4.35rem) !important;
+  line-height: 0.95 !important;
+}
+
+.section-row,
+.home-bento,
+.registration-showcase {
+  gap: clamp(1rem, 3.6vw, 4.5rem) !important;
+}
+
+.btn-filled::before,
+.btn-outline::before,
+.btn-premium::before,
+.hero-button::before,
+.lamt-button::before,
+.schedule-tab::before,
+.archive-material-tab::before,
+.answer-format-tab::before,
+.admin-tools-tab::before,
+.about-directory__tab::before,
+.rules-section-nav__button::before,
+.site-menu-button::before,
+.theme-toggle::before {
+  height: 1px !important;
+  opacity: 0.32 !important;
+}
+
+.schedule-tab:hover,
+.schedule-tab:focus-visible,
+.archive-material-tab:hover,
+.archive-material-tab:focus-visible,
+.answer-format-tab:hover,
+.answer-format-tab:focus-visible,
+.admin-tools-tab:hover,
+.admin-tools-tab:focus-visible,
+.about-directory__tab:hover,
+.about-directory__tab:focus-visible,
+.rules-section-nav__button:hover,
+.rules-section-nav__button:focus-visible,
+.site-footer .site-social-link:hover,
+.site-footer .site-social-link:focus-visible,
+.site-menu-button:hover,
+.site-menu-button:focus-visible,
+.theme-toggle:hover,
+.theme-toggle:focus-visible {
+  transform: none !important;
+}
+
+.page-hero .btn-filled + .btn-outline,
+.home-hero .hero-button--ghost {
+  border-color: rgba(255, 255, 255, 0.52) !important;
+  color: rgba(255, 255, 255, 0.88) !important;
+}
+
+.page-hero .btn-outline:hover,
+.page-hero .btn-outline:focus-visible,
+.home-hero .hero-button--ghost:hover,
+.home-hero .hero-button--ghost:focus-visible {
+  border-color: var(--ucla-gold) !important;
+  color: var(--ucla-gold) !important;
+}
+
+.live-announcement-shell,
+.lamt-timeline-card,
+.live-help-card {
+  padding-block: clamp(0.95rem, 1.7vw, 1.3rem) !important;
+}
+
+.site-footer__inner {
+  min-height: 0 !important;
+  padding-block: clamp(0.62rem, 1.4vw, 0.92rem) !important;
+}

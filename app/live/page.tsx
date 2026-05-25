@@ -405,7 +405,7 @@ export default function LivePage() {
             <a href="#announcements" className="btn-filled">
               Announcements
             </a>
-            <a href="#schedule" className="btn-filled">
+            <a href="#schedule" className="btn-outline">
               Schedule
             </a>
             <a href="#map" className="btn-outline">
