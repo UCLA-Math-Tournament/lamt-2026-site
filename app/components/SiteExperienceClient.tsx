@@ -15,6 +15,7 @@ const REVEAL_SELECTOR = [
   '.live-schedule-item',
   '.rules-table-row',
   '.rules-key-row',
+  '.answer-split',
   '.answer-example-line',
   '.answer-rewrite-row',
   '.faq-row',

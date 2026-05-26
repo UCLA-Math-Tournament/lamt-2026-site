@@ -1,4 +1,5 @@
 import katex from 'katex';
+import AnswerSplitClient from '../components/AnswerSplitClient';
 
 function InlineMath({ math }: { math: string }) {
   const html = katex.renderToString(math, {
@@ -18,6 +19,17 @@ function AnswerFormatExamples({
   acceptableExamples: string[];
   rewriteExamples: RewriteExample[];
 }) {
+  const splitExamples = rewriteExamples.map((item) => ({
+    rejectedHtml: katex.renderToString(item.rejected, {
+      throwOnError: false,
+      displayMode: false,
+    }),
+    acceptedHtml: katex.renderToString(item.accepted, {
+      throwOnError: false,
+      displayMode: false,
+    }),
+  }));
+
   return (
     <div className="answer-format">
       <div className="answer-example-line" aria-label="Accepted answer examples">
@@ -31,18 +43,7 @@ function AnswerFormatExamples({
         </p>
       </div>
 
-      <div className="answer-rewrite-list" aria-label="Rejected and accepted answer rewrites">
-        <div className="answer-rewrite-head" aria-hidden="true">
-          <span>Rejected</span>
-          <span>Accepted</span>
-        </div>
-        {rewriteExamples.map((item) => (
-          <div key={item.rejected} className="answer-rewrite-row">
-            <p className="line-through"><InlineMath math={item.rejected} /></p>
-            <p><InlineMath math={item.accepted} /></p>
-          </div>
-        ))}
-      </div>
+      <AnswerSplitClient examples={splitExamples} />
     </div>
   );
 }
