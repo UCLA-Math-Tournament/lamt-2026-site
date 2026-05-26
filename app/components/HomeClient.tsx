@@ -1,9 +1,10 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { ArrowRightIcon, FileTextIcon } from '@radix-ui/react-icons';
-import { motion, useReducedMotion } from 'framer-motion';
-import { Fragment } from 'react';
+import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion';
+import { Fragment, useRef } from 'react';
 
 const homeButtonClass =
   'hero-button inline-flex min-h-12 items-center justify-center gap-2 px-5 py-3 text-sm font-extrabold uppercase text-white';
@@ -106,12 +107,27 @@ function AnimatedHeroTitle({ reducedMotion }: { reducedMotion: boolean }) {
 
 export default function HomeClient() {
   const reducedMotion = Boolean(useReducedMotion());
+  const heroRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: heroRef,
+    offset: ['start start', 'end start'],
+  });
+  const sealScale = useTransform(scrollYProgress, [0, 1], reducedMotion ? [1, 1] : [0.78, 1.18]);
+  const sealY = useTransform(scrollYProgress, [0, 1], reducedMotion ? [0, 0] : [-14, 48]);
+  const sealOpacity = useTransform(scrollYProgress, [0, 0.62, 1], reducedMotion ? [0.14, 0.14, 0.14] : [0.2, 0.12, 0.04]);
 
   return (
-    <section className="home-hero">
+    <section ref={heroRef} className="home-hero">
       <div className="home-hero__motion" aria-hidden="true">
         <FloatingPaths position={1} tone="blue" reducedMotion={reducedMotion} />
         <FloatingPaths position={-1} tone="gold" reducedMotion={reducedMotion} />
+        <motion.div className="home-hero__seal" style={{ opacity: sealOpacity, scale: sealScale, y: sealY }}>
+          <span className="home-hero__seal-rule home-hero__seal-rule--top" />
+          <span className="home-hero__seal-rule home-hero__seal-rule--right" />
+          <span className="home-hero__seal-rule home-hero__seal-rule--bottom" />
+          <span className="home-hero__seal-rule home-hero__seal-rule--left" />
+          <Image src="/LAMTBear.png" alt="" width={280} height={280} priority />
+        </motion.div>
       </div>
 
       <div className="home-hero__content">

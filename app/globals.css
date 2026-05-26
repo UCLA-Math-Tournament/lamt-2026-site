@@ -647,6 +647,62 @@ textarea {
   transform: translate(-12%, 15%) scale(1.02);
 }
 
+.home-hero__seal {
+  position: absolute;
+  top: clamp(1.5rem, 6vw, 4.5rem);
+  right: clamp(0.2rem, 4.5vw, 3rem);
+  display: grid;
+  width: clamp(13rem, 30vw, 24rem);
+  aspect-ratio: 1;
+  place-items: center;
+  transform-origin: center;
+  will-change: opacity, transform;
+}
+
+.home-hero__seal img {
+  width: 68%;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 1.15rem 1.8rem rgba(0, 59, 92, 0.16));
+}
+
+.home-hero__seal-rule {
+  position: absolute;
+  background: color-mix(in srgb, var(--ucla-blue-dark) 72%, transparent);
+}
+
+.home-hero__seal-rule--top,
+.home-hero__seal-rule--bottom {
+  right: 15%;
+  left: 15%;
+  height: 2px;
+}
+
+.home-hero__seal-rule--top {
+  top: 0;
+}
+
+.home-hero__seal-rule--bottom {
+  bottom: 0;
+  background: color-mix(in srgb, var(--ucla-gold) 82%, transparent);
+}
+
+.home-hero__seal-rule--right,
+.home-hero__seal-rule--left {
+  top: 15%;
+  bottom: 15%;
+  width: 2px;
+}
+
+.home-hero__seal-rule--right {
+  right: 0;
+  background: color-mix(in srgb, var(--ucla-gold) 82%, transparent);
+}
+
+.home-hero__seal-rule--left {
+  left: 0;
+}
+
 .dark .home-hero__motion-set--blue {
   color: var(--ucla-blue);
   opacity: 0.48;
@@ -654,6 +710,10 @@ textarea {
 
 .dark .home-hero__motion-set--gold {
   opacity: 0.4;
+}
+
+.dark .home-hero__seal img {
+  filter: drop-shadow(0 1rem 1.7rem rgba(255, 209, 0, 0.12));
 }
 
 .home-hero__meta,
@@ -2722,6 +2782,12 @@ textarea {
     inset: -20% -36% -24% -28%;
   }
 
+  .home-hero__seal {
+    top: 1rem;
+    right: -1rem;
+    width: 15rem;
+  }
+
   .home-hero h1 {
     font-size: 5rem;
   }
@@ -2907,6 +2973,12 @@ textarea {
 
   .home-hero__motion-set {
     inset: -18% -66% -22% -52%;
+  }
+
+  .home-hero__seal {
+    top: 0.6rem;
+    right: -2rem;
+    width: 11.5rem;
   }
 
   .home-hero h1 {
