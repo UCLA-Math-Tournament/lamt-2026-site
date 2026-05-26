@@ -1,181 +1,64 @@
-'use client';
-
-import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
-import { useMemo, useState, type KeyboardEvent } from 'react';
 import katex from 'katex';
-import RulesSectionNav, { type RulesSectionLink } from '../components/RulesSectionNav';
-
-const rulesSections: RulesSectionLink[] = [
-  { id: 'key-rules', label: 'Key Rules' },
-  { id: 'test-format', label: 'Format' },
-  { id: 'allowed-not-allowed', label: 'Allowed' },
-  { id: 'answer-format', label: 'Answers' },
-];
 
 function InlineMath({ math }: { math: string }) {
-  const html = useMemo(
-    () =>
-      katex.renderToString(math, {
-        throwOnError: false,
-        displayMode: false,
-      }),
-    [math]
-  );
+  const html = katex.renderToString(math, {
+    throwOnError: false,
+    displayMode: false,
+  });
 
   return <span dangerouslySetInnerHTML={{ __html: html }} />;
 }
 
 type AcceptableExample = { math: string };
 type UnacceptableExample = { unsimplified: string; acceptable: string };
-type AnswerTabId = 'accepted' | 'rejected';
 
-function AnswerFormatTabs({
+function AnswerFormatExamples({
   acceptableExamples,
   unacceptableExamples,
 }: {
   acceptableExamples: AcceptableExample[];
   unacceptableExamples: UnacceptableExample[];
 }) {
-  const reduceMotion = useReducedMotion();
-  const [activeTab, setActiveTab] = useState<AnswerTabId>('accepted');
-  const tabs: Array<{ id: AnswerTabId; label: string }> = [
-    { id: 'accepted', label: 'Accepted' },
-    { id: 'rejected', label: 'Rejected' },
-  ];
-
-  const focusTab = (id: AnswerTabId) => {
-    setActiveTab(id);
-    window.requestAnimationFrame(() => document.getElementById(`answer-${id}-tab`)?.focus());
-  };
-
-  const onTabKeyDown = (event: KeyboardEvent<HTMLButtonElement>, index: number) => {
-    if (event.key === 'ArrowRight' || event.key === 'ArrowDown') {
-      event.preventDefault();
-      focusTab(tabs[(index + 1) % tabs.length].id);
-    }
-
-    if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') {
-      event.preventDefault();
-      focusTab(tabs[(index - 1 + tabs.length) % tabs.length].id);
-    }
-
-    if (event.key === 'Home') {
-      event.preventDefault();
-      focusTab(tabs[0].id);
-    }
-
-    if (event.key === 'End') {
-      event.preventDefault();
-      focusTab(tabs[tabs.length - 1].id);
-    }
-  };
-
   return (
-    <div className="answer-format-tabs">
-      <div className="answer-format-tab-list" role="tablist" aria-label="Answer format examples">
-        {tabs.map((tab, index) => {
-          const isActive = tab.id === activeTab;
+    <div className="answer-format-examples">
+      <section className="answer-format-panel" aria-label="Accepted answer examples">
+        <div className="answer-panel-heading">
+          <h3>Accepted</h3>
+        </div>
+        <div className="answer-chip-grid">
+          {acceptableExamples.map((item) => (
+            <span key={item.math} className="answer-chip">
+              <InlineMath math={item.math} />
+            </span>
+          ))}
+        </div>
+      </section>
 
-          return (
-            <button
-              key={tab.id}
-              id={`answer-${tab.id}-tab`}
-              type="button"
-              role="tab"
-              aria-selected={isActive}
-              aria-controls={`answer-${tab.id}-panel`}
-              className="answer-format-tab"
-              onClick={() => setActiveTab(tab.id)}
-              onKeyDown={(event) => onTabKeyDown(event, index)}
-            >
-              {isActive ? (
-                <motion.span
-                  className="answer-format-tab__marker"
-                  layoutId="answer-format-tab-marker"
-                  transition={reduceMotion ? { duration: 0 } : { type: 'spring', stiffness: 430, damping: 36 }}
-                />
-              ) : null}
-              <span>{tab.label}</span>
-            </button>
-          );
-        })}
-      </div>
-
-      <AnimatePresence mode="wait" initial={false}>
-        <motion.div
-          key={activeTab}
-          id={`answer-${activeTab}-panel`}
-          className="answer-format-panel"
-          role="tabpanel"
-          tabIndex={-1}
-          aria-labelledby={`answer-${activeTab}-tab`}
-          initial={reduceMotion ? false : { opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={reduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: -8 }}
-          transition={reduceMotion ? { duration: 0 } : { duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
-        >
-          {activeTab === 'accepted' ? (
-            <>
-              <div className="answer-panel-heading">
-                <h3>Accepted Examples</h3>
+      <section className="answer-format-panel" aria-label="Rejected answer examples">
+        <div className="answer-panel-heading">
+          <h3>Rejected</h3>
+        </div>
+        <div className="answer-correction-list">
+          <div className="answer-correction-head" aria-hidden="true">
+            <span>Rejected</span>
+            <span>Rewrite</span>
+            <span>Accepted</span>
+          </div>
+          {unacceptableExamples.map((item) => (
+            <article key={item.unsimplified} className="answer-correction">
+              <div className="answer-correction__cell answer-correction__cell--rejected">
+                <span className="answer-correction__label">Rejected</span>
+                <p className="line-through"><InlineMath math={item.unsimplified} /></p>
               </div>
-              <div className="answer-chip-grid">
-                {acceptableExamples.map((item, index) => (
-                  <motion.span
-                    key={item.math}
-                    className="answer-chip"
-                    initial={reduceMotion ? false : { opacity: 0, y: 8 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={
-                      reduceMotion
-                        ? { duration: 0 }
-                        : { duration: 0.18, delay: Math.min(index * 0.025, 0.14), ease: [0.16, 1, 0.3, 1] }
-                    }
-                  >
-                    <InlineMath math={item.math} />
-                  </motion.span>
-                ))}
+              <div className="answer-correction__arrow" aria-hidden="true">→</div>
+              <div className="answer-correction__cell answer-correction__cell--accepted">
+                <span className="answer-correction__label">Accepted</span>
+                <p><InlineMath math={item.acceptable} /></p>
               </div>
-            </>
-          ) : (
-            <>
-              <div className="answer-panel-heading">
-                <h3>Rejected Examples</h3>
-              </div>
-              <div className="answer-correction-list" aria-label="Rejected answer examples with accepted rewrites">
-                <div className="answer-correction-head" aria-hidden="true">
-                  <span>Rejected</span>
-                  <span>Rewrite</span>
-                  <span>Accepted</span>
-                </div>
-                {unacceptableExamples.map((item, index) => (
-                  <motion.article
-                    key={item.unsimplified}
-                    className="answer-correction"
-                    initial={reduceMotion ? false : { opacity: 0, x: -8 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={
-                      reduceMotion
-                        ? { duration: 0 }
-                        : { duration: 0.18, delay: Math.min(index * 0.025, 0.14), ease: [0.16, 1, 0.3, 1] }
-                    }
-                  >
-                    <div className="answer-correction__cell answer-correction__cell--rejected">
-                      <span className="answer-correction__label">Rejected</span>
-                      <p className="line-through"><InlineMath math={item.unsimplified} /></p>
-                    </div>
-                    <div className="answer-correction__arrow" aria-hidden="true">→</div>
-                    <div className="answer-correction__cell answer-correction__cell--accepted">
-                      <span className="answer-correction__label">Accepted</span>
-                      <p><InlineMath math={item.acceptable} /></p>
-                    </div>
-                  </motion.article>
-                ))}
-              </div>
-            </>
-          )}
-        </motion.div>
-      </AnimatePresence>
+            </article>
+          ))}
+        </div>
+      </section>
     </div>
   );
 }
@@ -249,8 +132,6 @@ export default function RulesPage() {
         </div>
       </header>
 
-      <RulesSectionNav sections={rulesSections} />
-
       <section id="key-rules" className="section-row">
         <h2 className="section-title">Key Rules</h2>
         <div className="lamt-line-list rules-reference-grid">
@@ -308,7 +189,7 @@ export default function RulesPage() {
             Unless stated otherwise: exact, simplified, correct notation. LAMT coordinators make final grading decisions.
           </p>
 
-          <AnswerFormatTabs
+          <AnswerFormatExamples
             acceptableExamples={acceptableExamples}
             unacceptableExamples={unacceptableExamples}
           />

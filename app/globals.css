@@ -189,10 +189,6 @@ textarea {
 }
 
 .site-nav-link,
-.schedule-tab,
-.faq-category-grid .lamt-button,
-.rules-section-nav__button,
-.answer-format-tab,
 .admin-tools-tab,
 .event-day-nav a,
 .archive-index-link,
@@ -214,10 +210,6 @@ textarea {
 }
 
 .site-nav-link::after,
-.schedule-tab::after,
-.faq-category-grid .lamt-button::after,
-.rules-section-nav__button::after,
-.answer-format-tab::after,
 .admin-tools-tab::after,
 .event-day-nav a::after,
 .archive-index-link::after,
@@ -237,18 +229,6 @@ textarea {
 .site-nav-link:hover,
 .site-nav-link:focus-visible,
 .site-nav-link.is-active,
-.schedule-tab:hover,
-.schedule-tab:focus-visible,
-.schedule-tab[aria-selected="true"],
-.faq-category-grid .lamt-button:hover,
-.faq-category-grid .lamt-button:focus-visible,
-.faq-category-grid .lamt-button[data-state="selected"],
-.rules-section-nav__button:hover,
-.rules-section-nav__button:focus-visible,
-.rules-section-nav__button[data-active="true"],
-.answer-format-tab:hover,
-.answer-format-tab:focus-visible,
-.answer-format-tab[aria-selected="true"],
 .admin-tools-tab:hover,
 .admin-tools-tab:focus-visible,
 .admin-tools-tab[data-state="selected"],
@@ -264,18 +244,6 @@ textarea {
 .dark .site-nav-link:hover,
 .dark .site-nav-link:focus-visible,
 .dark .site-nav-link.is-active,
-.dark .schedule-tab:hover,
-.dark .schedule-tab:focus-visible,
-.dark .schedule-tab[aria-selected="true"],
-.dark .faq-category-grid .lamt-button:hover,
-.dark .faq-category-grid .lamt-button:focus-visible,
-.dark .faq-category-grid .lamt-button[data-state="selected"],
-.dark .rules-section-nav__button:hover,
-.dark .rules-section-nav__button:focus-visible,
-.dark .rules-section-nav__button[data-active="true"],
-.dark .answer-format-tab:hover,
-.dark .answer-format-tab:focus-visible,
-.dark .answer-format-tab[aria-selected="true"],
 .dark .admin-tools-tab:hover,
 .dark .admin-tools-tab:focus-visible,
 .dark .admin-tools-tab[data-state="selected"],
@@ -291,18 +259,6 @@ textarea {
 .site-nav-link:hover::after,
 .site-nav-link:focus-visible::after,
 .site-nav-link.is-active::after,
-.schedule-tab:hover::after,
-.schedule-tab:focus-visible::after,
-.schedule-tab[aria-selected="true"]::after,
-.faq-category-grid .lamt-button:hover::after,
-.faq-category-grid .lamt-button:focus-visible::after,
-.faq-category-grid .lamt-button[data-state="selected"]::after,
-.rules-section-nav__button:hover::after,
-.rules-section-nav__button:focus-visible::after,
-.rules-section-nav__button[data-active="true"]::after,
-.answer-format-tab:hover::after,
-.answer-format-tab:focus-visible::after,
-.answer-format-tab[aria-selected="true"]::after,
 .admin-tools-tab:hover::after,
 .admin-tools-tab:focus-visible::after,
 .admin-tools-tab[data-state="selected"]::after,
@@ -619,6 +575,7 @@ textarea {
 
 .lamt-line-item h3,
 .format-card h3,
+.rules-mini-rule span,
 .rules-mini-rule strong,
 .live-help-card h3,
 .not-found-link strong {
@@ -675,17 +632,6 @@ textarea {
   line-height: 1.42;
 }
 
-.schedule-tabs,
-.faq-console,
-.answer-format-tabs {
-  display: grid;
-  gap: 1.1rem;
-}
-
-.schedule-tab-list,
-.faq-category-grid,
-.rules-section-nav__items,
-.answer-format-tab-list,
 .admin-tools-nav,
 .event-day-nav {
   display: flex;
@@ -694,20 +640,6 @@ textarea {
   border-bottom: 1px solid var(--rule);
 }
 
-.faq-category-grid {
-  flex-wrap: nowrap;
-  overflow-x: auto;
-  scrollbar-width: none;
-}
-
-.faq-category-grid::-webkit-scrollbar {
-  display: none;
-}
-
-.schedule-tab,
-.faq-category-grid .lamt-button,
-.rules-section-nav__button,
-.answer-format-tab,
 .admin-tools-tab,
 .event-day-nav a {
   min-height: 2.8rem;
@@ -716,17 +648,8 @@ textarea {
   padding: 0.35rem 0 0.75rem;
 }
 
-.schedule-tab-marker,
-.rules-section-nav__marker,
-.answer-format-tab__marker,
 .admin-tools-tab-marker {
   display: none;
-}
-
-.schedule-filter-summary {
-  max-width: 40rem;
-  color: var(--text-muted);
-  font-weight: 700;
 }
 
 .lamt-agenda,
@@ -747,6 +670,10 @@ textarea {
 }
 
 .live-schedule-item:first-child {
+  border-top: 0;
+}
+
+.lamt-agenda-item:first-child {
   border-top: 0;
 }
 
@@ -952,11 +879,6 @@ textarea {
   line-height: 1.5;
 }
 
-.faq-control-panel {
-  display: grid;
-  gap: 1rem;
-}
-
 .lamt-input,
 .lamt-textarea {
   width: min(100%, 42rem);
@@ -980,68 +902,58 @@ textarea {
   border-bottom-color: var(--ucla-gold);
 }
 
-.faq-accordion {
+.faq-list {
   display: grid;
-  gap: 0;
-}
-
-.faq-accordion-item {
   border-top: 1px solid var(--rule);
 }
 
-.faq-accordion-trigger {
+.faq-list .faq-row:first-child {
+  border-top: 0;
+}
+
+.faq-row {
+  border-bottom: 1px solid var(--rule);
+}
+
+.faq-row summary {
   display: grid;
-  width: 100%;
   grid-template-columns: minmax(0, 1fr) auto;
   gap: 1rem;
   align-items: center;
+  cursor: pointer;
+  list-style: none;
   padding-block: 1rem;
-  text-align: left;
-}
-
-.faq-question {
-  display: grid;
-  gap: 0.35rem;
-}
-
-.faq-question strong {
   color: var(--text);
   font-size: 1.16rem;
   font-weight: 900;
   line-height: 1.2;
+  transition: color var(--fast) var(--ease), transform var(--fast) var(--ease);
 }
 
-.faq-question small {
+.faq-row summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq-row summary::after {
+  content: "+";
   color: var(--ucla-blue-dark);
-  font-size: 0.78rem;
+  font-size: 1.15rem;
   font-weight: 900;
-  text-transform: uppercase;
 }
 
-.faq-toggle {
-  display: grid;
-  width: 2.1rem;
-  height: 2.1rem;
-  place-items: center;
-  border: 1px solid var(--rule-strong);
-  color: var(--text);
+.faq-row[open] summary::after {
+  content: "-";
 }
 
-.faq-toggle__minus {
-  display: none;
+.faq-row summary:hover,
+.faq-row summary:focus-visible {
+  color: var(--ucla-blue-dark);
+  transform: translateY(-1px);
 }
 
-.faq-accordion-item.is-open .faq-toggle__plus {
-  display: none;
-}
-
-.faq-accordion-item.is-open .faq-toggle__minus {
-  display: block;
-}
-
-.faq-accordion-content__inner {
-  max-width: 54rem;
-  padding: 0 3.1rem 1.2rem 0;
+.faq-row p {
+  max-width: 50rem;
+  padding: 0 3rem 1rem 0;
   color: var(--text-soft);
   font-weight: 680;
   line-height: 1.55;
@@ -1061,16 +973,6 @@ textarea {
   color: var(--text);
   font-size: 1.35rem;
   font-weight: 900;
-}
-
-.rules-section-nav {
-  width: min(100%, var(--page-max));
-  margin: 0 auto;
-  padding-inline: var(--page-x);
-}
-
-.rules-section-nav__progress-track {
-  display: none;
 }
 
 .rules-comparison-table {
@@ -1108,9 +1010,19 @@ textarea {
   display: none;
 }
 
+.answer-format-examples,
 .answer-format-panel {
   display: grid;
   gap: 1rem;
+}
+
+.answer-format-examples {
+  gap: clamp(1.25rem, 3vw, 2.1rem);
+}
+
+.answer-format-panel + .answer-format-panel {
+  border-top: 1px solid var(--rule);
+  padding-top: clamp(1.25rem, 2.4vw, 1.75rem);
 }
 
 .answer-panel-heading h3 {
@@ -1563,6 +1475,7 @@ textarea {
 
   .lamt-line-item h3,
   .format-card h3,
+  .rules-mini-rule span,
   .rules-mini-rule strong,
   .live-help-card h3,
   .not-found-link strong {
@@ -1585,11 +1498,11 @@ textarea {
     font-size: 1rem;
   }
 
-  .faq-question strong {
+  .faq-row summary {
     font-size: 0.98rem;
   }
 
-  .faq-accordion-content__inner {
+  .faq-row p {
     padding-right: 0;
     font-size: 0.98rem;
   }
@@ -1638,25 +1551,12 @@ textarea {
     width: 100%;
   }
 
-  .schedule-tab-list,
-  .faq-category-grid,
-  .rules-section-nav__items,
-  .answer-format-tab-list,
   .admin-tools-nav,
   .event-day-nav {
     display: flex;
     gap: 0.75rem 1rem;
   }
 
-  .faq-category-grid {
-    margin-inline: calc(var(--page-x) * -1);
-    padding-inline: var(--page-x);
-  }
-
-  .schedule-tab,
-  .faq-category-grid .lamt-button,
-  .rules-section-nav__button,
-  .answer-format-tab,
   .admin-tools-tab,
   .event-day-nav a {
     width: auto;

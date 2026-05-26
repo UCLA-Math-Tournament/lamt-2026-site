@@ -1,4 +1,3 @@
-import TournamentScheduleTabs from '../components/TournamentScheduleTabs';
 import VenueMap from '../components/VenueMap';
 
 export default function TournamentPage() {
@@ -72,7 +71,21 @@ export default function TournamentPage() {
 
       <section className="section-row">
         <h2 className="section-title">Schedule</h2>
-        <TournamentScheduleTabs schedule={schedule} />
+        <div className="lamt-agenda" aria-label="LAMT 2026 schedule">
+          {schedule.map(({ time, end, event, location, note }) => (
+            <article key={`${time}-${event}`} className="lamt-agenda-item">
+              <div className="lamt-agenda-time">
+                <span>{time}</span>
+                <small>{end}</small>
+              </div>
+              <div className="lamt-agenda-main">
+                <h3>{event}</h3>
+                <p>{note}</p>
+              </div>
+              <strong className="lamt-agenda-place">{location}</strong>
+            </article>
+          ))}
+        </div>
       </section>
 
       <section id="venue" className="section-row">

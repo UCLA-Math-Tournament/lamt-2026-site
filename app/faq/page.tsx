@@ -1,9 +1,3 @@
-'use client';
-
-import { useEffect, useMemo, useState } from 'react';
-import * as AccordionPrimitive from '@radix-ui/react-accordion';
-import { MinusIcon, PlusIcon } from '@radix-ui/react-icons';
-
 const STAFF_EMAIL = 'uclamathtournament@gmail.com';
 
 const faqs = [
@@ -19,28 +13,9 @@ const faqs = [
   { id: 'registration-closed', category: 'Registration', q: 'Can I still register for LAMT 2026?', a: 'No. LAMT 2026 is complete. Use Archive for materials.' },
 ];
 
-const categories = ['All', ...Array.from(new Set(faqs.map((item) => item.category)))];
+const categories = Array.from(new Set(faqs.map((item) => item.category)));
 
 export default function FAQPage() {
-  const [query, setQuery] = useState('');
-  const [category, setCategory] = useState('All');
-  const [openId, setOpenId] = useState(faqs[0].id);
-
-  const filtered = useMemo(() => {
-    const normalized = query.trim().toLowerCase();
-    return faqs.filter((item) => {
-      const matchesCategory = category === 'All' || item.category === category;
-      const matchesQuery = !normalized || `${item.q} ${item.a} ${item.category}`.toLowerCase().includes(normalized);
-      return matchesCategory && matchesQuery;
-    });
-  }, [category, query]);
-
-  useEffect(() => {
-    if (filtered.length > 0 && !filtered.some((item) => item.id === openId)) {
-      setOpenId(filtered[0].id);
-    }
-  }, [filtered, openId]);
-
   return (
     <div className="page-shell">
       <header className="page-hero">
@@ -58,80 +33,23 @@ export default function FAQPage() {
         </div>
       </header>
 
-      <section className="section-row">
-        <h2 className="section-title">Find</h2>
-        <div className="faq-console">
-          <div className="faq-control-panel" aria-label="FAQ filters">
-            <label className="grid gap-2">
-              <span className="sr-only">Search FAQ</span>
-              <input
-                value={query}
-                onChange={(event) => setQuery(event.target.value)}
-                className="lamt-input"
-                placeholder="Search FAQ"
-              />
-            </label>
-
-            <div className="faq-category-grid" role="list" aria-label="FAQ categories">
-              {categories.map((item) => (
-                <button
-                  key={item}
-                  type="button"
-                  onClick={() => setCategory(item)}
-                  className="lamt-button"
-                  data-state={category === item ? 'selected' : undefined}
-                  aria-pressed={category === item}
-                >
-                  {item}
-                </button>
+      {categories.map((category) => (
+        <section key={category} className="section-row">
+          <h2 className="section-title">{category}</h2>
+          <div className="faq-list">
+            {faqs
+              .filter((item) => item.category === category)
+              .map((item, index) => (
+                <details key={item.id} className="faq-row" open={category === 'Eligibility' && index === 0}>
+                  <summary>
+                    <span>{item.q}</span>
+                  </summary>
+                  <p>{item.a}</p>
+                </details>
               ))}
-            </div>
           </div>
-
-          {filtered.length === 0 ? (
-            <article className="faq-empty">
-              <h3>No matching answers</h3>
-              <p className="section-copy">Try another search or email staff.</p>
-            </article>
-          ) : (
-            <AccordionPrimitive.Root
-              type="single"
-              value={openId}
-              onValueChange={setOpenId}
-              className="faq-accordion"
-              aria-live="polite"
-            >
-              {filtered.map((item) => {
-                const isOpen = openId === item.id;
-                return (
-                  <AccordionPrimitive.Item key={item.id} value={item.id} asChild>
-                    <article className={`faq-accordion-item ${isOpen ? 'is-open' : ''}`}>
-                      <AccordionPrimitive.Header className="faq-accordion-heading">
-                        <AccordionPrimitive.Trigger className="faq-accordion-trigger">
-                          <span className="faq-question">
-                            <strong>{item.q}</strong>
-                            {' '}
-                            <small>{item.category}</small>
-                          </span>
-                          <span className="faq-toggle" aria-hidden="true">
-                            <PlusIcon className="faq-toggle__plus" />
-                            <MinusIcon className="faq-toggle__minus" />
-                          </span>
-                        </AccordionPrimitive.Trigger>
-                      </AccordionPrimitive.Header>
-                      <AccordionPrimitive.Content className="faq-accordion-content">
-                        <div className="faq-accordion-content__inner">
-                          <p>{item.a}</p>
-                        </div>
-                      </AccordionPrimitive.Content>
-                    </article>
-                  </AccordionPrimitive.Item>
-                );
-              })}
-            </AccordionPrimitive.Root>
-          )}
-        </div>
-      </section>
+        </section>
+      ))}
 
       <section className="section-row">
         <h2 className="section-title">Contact</h2>

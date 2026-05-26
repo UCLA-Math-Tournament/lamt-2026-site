@@ -16,7 +16,8 @@ function initReveals() {
       '.lamt-fact-row',
       '.tournament-format-row',
       '.archive-index-group',
-      '.faq-accordion-item',
+      '.faq-row',
+      '.answer-correction',
     ].join(', ')
   );
   if (!els.length) return () => {};

@@ -19,8 +19,8 @@ const ARCHIVE_UPDATES: Update[] = [
   {
     id: -1,
     timestamp: "May 17, 2026",
-    title: "2026 materials posted",
-    body: "Problems, solutions, results, and schedule are available.",
+    title: "Materials posted",
+    body: "Problems, solutions, and results are available.",
   },
   {
     id: -2,
@@ -81,7 +81,6 @@ function ScheduleTimeline({ schedule }: { schedule: ScheduleItem[] }) {
 
   return (
     <section className="live-schedule-block">
-      <h2>LAMT 2026 Schedule</h2>
       <div className="live-schedule-list" aria-label="LAMT 2026 tournament day schedule">
         {schedule.map((item, index) => {
           const state = TOURNAMENT_OVER
@@ -130,11 +129,9 @@ function MapSection() {
 function UpdatesFeed({ updates, previewMode }: { updates: Update[]; previewMode: boolean }) {
   const useArchiveUpdates = !previewMode && TOURNAMENT_OVER && updates.length === 0;
   const displayedUpdates = useArchiveUpdates ? ARCHIVE_UPDATES : updates;
-  const heading = previewMode ? "Preview" : "Updates";
 
   return (
     <section className="live-update-index" aria-live="polite">
-      <h2>{heading}</h2>
       {displayedUpdates.length === 0 ? (
         <p className="section-copy">{previewMode ? "No preview notices." : "No announcements yet."}</p>
       ) : (
@@ -166,7 +163,7 @@ function PreviewModeNotice() {
   return (
     <section className="local-mode-notice local-mode-notice--preview" aria-label="Staff preview notice">
       <div>
-        <p className="label-caps">Preview</p>
+        <p className="label-caps">Staff</p>
         <h2>Preview</h2>
       </div>
       <Link href="/live" className="btn-outline">
