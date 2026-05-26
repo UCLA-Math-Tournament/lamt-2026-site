@@ -21,6 +21,9 @@
   --rule-strong: rgba(0, 59, 92, 0.38);
   --field: rgba(255, 255, 255, 0.38);
   --danger: #a93425;
+  --accent-text: var(--ucla-blue-dark);
+  --interactive-text: var(--ucla-blue-dark);
+  --outline: var(--ucla-blue-dark);
 
   --font-body: var(--font-sans), Arial, Helvetica, sans-serif;
   --font-display: var(--font-headline), var(--font-sans), Arial, Helvetica, sans-serif;
@@ -48,6 +51,9 @@
   --rule: rgba(255, 209, 0, 0.2);
   --rule-strong: rgba(255, 209, 0, 0.42);
   --field: rgba(255, 255, 255, 0.04);
+  --accent-text: #8bb8e8;
+  --interactive-text: var(--ucla-gold);
+  --outline: rgba(139, 184, 232, 0.56);
 }
 
 *,
@@ -96,18 +102,6 @@ textarea {
 ::selection {
   background: var(--ucla-gold);
   color: var(--ucla-blue-deep);
-}
-
-@keyframes lamt-rise {
-  from {
-    opacity: 0.88;
-    transform: translateY(4px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }
 
 .site-pad,
@@ -238,7 +232,7 @@ textarea {
 .archive-reference-row:focus-visible,
 .subtle-link:hover,
 .subtle-link:focus-visible {
-  color: var(--ucla-blue-dark);
+  color: var(--interactive-text);
 }
 
 .dark .site-nav-link:hover,
@@ -277,7 +271,7 @@ textarea {
   height: 2.75rem;
   align-items: center;
   justify-content: center;
-  border: 1px solid var(--ucla-blue-dark);
+  border: 1px solid var(--outline);
   color: var(--text);
 }
 
@@ -290,8 +284,7 @@ textarea {
 .btn-premium,
 .hero-button,
 .lamt-button,
-.admin-danger-button,
-.venue-real-map__toggle {
+.admin-danger-button {
   display: inline-flex;
   min-height: 2.75rem;
   align-items: center;
@@ -317,9 +310,8 @@ textarea {
 
 .btn-outline,
 .hero-button--ghost,
-.lamt-button,
-.venue-real-map__toggle {
-  border: 1px solid var(--ucla-blue-dark);
+.lamt-button {
+  border: 1px solid var(--outline);
   background: transparent;
   color: var(--text);
 }
@@ -341,9 +333,7 @@ textarea {
 .lamt-button:hover,
 .lamt-button:focus-visible,
 .admin-danger-button:hover,
-.admin-danger-button:focus-visible,
-.venue-real-map__toggle:hover,
-.venue-real-map__toggle:focus-visible {
+.admin-danger-button:focus-visible {
   transform: translateY(-1px);
 }
 
@@ -352,8 +342,7 @@ textarea {
 .btn-premium:active,
 .hero-button:active,
 .lamt-button:active,
-.admin-danger-button:active,
-.venue-real-map__toggle:active {
+.admin-danger-button:active {
   transform: translateY(0);
 }
 
@@ -389,7 +378,7 @@ textarea {
 
 .home-hero__meta {
   margin-bottom: clamp(1rem, 2vw, 1.4rem);
-  color: var(--ucla-blue-dark);
+  color: var(--accent-text);
   font-size: 0.78rem;
 }
 
@@ -424,29 +413,6 @@ textarea {
   margin-top: clamp(1.35rem, 2.4vw, 2rem);
 }
 
-.home-hero__meta,
-.home-hero h1,
-.cinema-lede,
-.cinema-actions,
-.page-hero > *,
-.section-row > * {
-  animation: lamt-rise 240ms var(--ease) both;
-}
-
-.home-hero h1 {
-  animation-delay: 30ms;
-}
-
-.cinema-lede,
-.page-hero > :nth-child(2) {
-  animation-delay: 55ms;
-}
-
-.cinema-actions,
-.section-row > :nth-child(2) {
-  animation-delay: 75ms;
-}
-
 .page-hero {
   display: grid;
   grid-template-columns: var(--left-rail) minmax(0, var(--measure));
@@ -455,12 +421,12 @@ textarea {
   padding-block: 3.15rem 1.55rem;
 }
 
-.gold-rule {
-  display: block;
-  width: 2.65rem;
-  height: 2px;
-  margin-top: 0.35rem;
-  background: var(--ucla-gold);
+.page-hero::before {
+  content: "";
+}
+
+.page-hero__body {
+  grid-column: 2;
 }
 
 .page-title {
@@ -550,7 +516,7 @@ textarea {
 }
 
 .lamt-fact-row span {
-  color: var(--ucla-blue-dark);
+  color: var(--accent-text);
   font-size: 0.78rem;
   font-weight: 950;
   text-transform: uppercase;
@@ -593,7 +559,7 @@ textarea {
 .lamt-agenda-item,
 .live-schedule-item {
   display: grid;
-  grid-template-columns: minmax(8.8rem, 0.24fr) minmax(14rem, 1fr) minmax(10rem, 0.36fr);
+  grid-template-columns: minmax(11.35rem, 0.3fr) minmax(0, 1fr) minmax(10rem, 0.34fr);
   gap: clamp(0.9rem, 2vw, 1.6rem);
   align-items: baseline;
   border-top: 1px solid var(--rule);
@@ -616,7 +582,7 @@ textarea {
 
 .lamt-agenda-time,
 .live-schedule-time {
-  color: var(--ucla-blue-dark);
+  color: var(--accent-text);
   font-weight: 900;
   line-height: 1.2;
 }
@@ -782,7 +748,7 @@ textarea {
 }
 
 .archive-round-head {
-  color: var(--ucla-blue-dark);
+  color: var(--accent-text);
   font-size: 0.78rem;
   font-weight: 950;
   text-transform: uppercase;
@@ -856,7 +822,7 @@ textarea {
 .lamt-textarea {
   width: min(100%, 42rem);
   border: 0;
-  border-bottom: 1px solid var(--ucla-blue-dark);
+  border-bottom: 1px solid var(--outline);
   border-radius: 0;
   background: transparent;
   color: var(--text);
@@ -909,7 +875,7 @@ textarea {
 
 .faq-row summary::after {
   content: "+";
-  color: var(--ucla-blue-dark);
+  color: var(--accent-text);
   font-size: 1.15rem;
   font-weight: 900;
 }
@@ -920,7 +886,7 @@ textarea {
 
 .faq-row summary:hover,
 .faq-row summary:focus-visible {
-  color: var(--ucla-blue-dark);
+  color: var(--interactive-text);
   transform: translateY(-1px);
 }
 
@@ -962,7 +928,7 @@ textarea {
 }
 
 .rules-table-head {
-  color: var(--ucla-blue-dark);
+  color: var(--accent-text);
   font-size: 0.78rem;
   font-weight: 950;
   text-transform: uppercase;
@@ -1034,7 +1000,7 @@ textarea {
 }
 
 .answer-correction-head {
-  color: var(--ucla-blue-dark);
+  color: var(--accent-text);
   font-size: 0.78rem;
   font-weight: 950;
   text-transform: uppercase;
@@ -1046,28 +1012,29 @@ textarea {
 }
 
 .answer-correction__arrow {
-  color: var(--ucla-blue-dark);
+  color: var(--accent-text);
   font-weight: 900;
   text-align: center;
 }
 
-.venue-real-map {
+.venue-map {
   display: grid;
-  gap: 1rem;
+  gap: clamp(0.9rem, 2vw, 1.35rem);
 }
 
-.venue-real-map__toolbar {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 1rem;
-}
-
-.venue-real-map__frame {
+.venue-map__frame {
   position: relative;
+  display: block;
   min-height: 18rem;
   overflow: hidden;
   border: 1px solid var(--rule);
+  transition: border-color var(--fast) var(--ease), transform var(--fast) var(--ease);
+}
+
+.venue-map__frame:hover,
+.venue-map__frame:focus-visible {
+  border-color: var(--rule-strong);
+  transform: translateY(-1px);
 }
 
 .venue-map-tile-grid {
@@ -1108,30 +1075,40 @@ textarea {
   font-weight: 800;
 }
 
-.venue-real-map__details {
+.venue-map__details {
   display: grid;
   gap: 0;
+  border-top: 1px solid var(--rule);
 }
 
-.venue-real-map__venue {
+.venue-map__venue {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
   gap: 1rem;
   align-items: center;
   color: var(--text);
+  border-bottom: 1px solid var(--rule);
+  padding-block: 0.72rem;
+  transition: color var(--fast) var(--ease), transform var(--fast) var(--ease);
 }
 
-.venue-real-map__venue span {
+.venue-map__venue:hover,
+.venue-map__venue:focus-visible {
+  color: var(--interactive-text);
+  transform: translateX(2px);
+}
+
+.venue-map__venue span {
   display: grid;
   gap: 0.2rem;
 }
 
-.venue-real-map__venue strong {
+.venue-map__venue strong {
   color: var(--text);
   font-size: 1.08rem;
 }
 
-.venue-real-map__venue em {
+.venue-map__venue em {
   color: var(--text-soft);
   font-style: normal;
   font-weight: 700;
@@ -1193,7 +1170,7 @@ textarea {
 }
 
 .admin-status {
-  color: var(--ucla-blue-dark);
+  color: var(--accent-text);
   font-size: 0.78rem;
   font-weight: 900;
   text-transform: uppercase;
@@ -1250,7 +1227,7 @@ textarea {
 
 .site-social-link:hover,
 .site-social-link:focus-visible {
-  color: var(--ucla-blue-dark);
+  color: var(--interactive-text);
   opacity: 1;
   transform: translateY(-1px);
 }
@@ -1270,7 +1247,7 @@ textarea {
 
 .theme-toggle:hover,
 .theme-toggle:focus-visible {
-  color: var(--ucla-blue-dark);
+  color: var(--interactive-text);
   transform: translateY(-1px);
 }
 
@@ -1339,8 +1316,12 @@ textarea {
     grid-template-columns: 1fr;
   }
 
-  .gold-rule {
-    margin-top: 0;
+  .page-hero::before {
+    display: none;
+  }
+
+  .page-hero__body {
+    grid-column: 1;
   }
 
   .rules-reference-grid,
@@ -1548,9 +1529,6 @@ textarea {
     text-align: left;
   }
 
-  .venue-real-map__toolbar {
-    justify-content: flex-start;
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -1,6 +1,5 @@
 "use client";
 
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { useState, useEffect, useRef, type KeyboardEvent } from "react";
 import Link from "next/link";
 import type { ScheduleItem, Update, ContactMessage } from "../live/types";
@@ -60,10 +59,7 @@ function LoginScreen({ onLogin }: { onLogin: () => void }) {
   return (
     <div className="page-shell admin-page">
       <header className="page-hero">
-        <div>
-          <span className="gold-rule" />
-        </div>
-        <div>
+        <div className="page-hero__body">
           <h1 className="page-title">Admin</h1>
         </div>
       </header>
@@ -397,8 +393,6 @@ export default function AdminPage() {
   const [updates, setUpdates] = useState<Update[]>(DEFAULT_UPDATES);
   const [schedule, setSchedule] = useState<ScheduleItem[]>(DEFAULT_SCHEDULE);
   const [msgCount, setMsgCount] = useState(0);
-  const reduceMotion = useReducedMotion();
-  const previousTabIndex = useRef(0);
 
   useEffect(() => {
     if (!authed) return;
@@ -431,12 +425,10 @@ export default function AdminPage() {
     { key: "schedule", label: "Schedule" },
     { key: "messages", label: "Messages", badge: msgCount },
   ];
-  const activeTabIndex = Math.max(0, tabs.findIndex((item) => item.key === tab));
 
   function activateTab(nextTab: AdminTabKey, shouldFocus = false) {
     const nextIndex = tabs.findIndex((item) => item.key === nextTab);
     if (nextIndex === -1) return;
-    previousTabIndex.current = activeTabIndex;
     setTab(nextTab);
 
     if (shouldFocus) {
@@ -475,10 +467,7 @@ export default function AdminPage() {
   return (
     <div className="page-shell admin-page">
       <header className="page-hero">
-        <div>
-          <span className="gold-rule" />
-        </div>
-        <div>
+        <div className="page-hero__body">
           <h1 className="page-title">Admin</h1>
           <div className="mt-6 flex flex-wrap gap-3">
             <Link href="/live?preview=1" className="btn-filled">
@@ -522,22 +511,16 @@ export default function AdminPage() {
             })}
           </nav>
 
-          <AnimatePresence mode="wait" initial={false}>
-            <motion.div
-              key={tab}
-              id={adminPanelId(tab)}
-              className="admin-tools-panel"
-              role="tabpanel"
-              tabIndex={-1}
-              aria-labelledby={adminTabId(tab)}
-              initial={reduceMotion ? false : { opacity: 0, x: activeTabIndex >= previousTabIndex.current ? 14 : -14 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={reduceMotion ? { opacity: 1, x: 0 } : { opacity: 0, x: activeTabIndex >= previousTabIndex.current ? -10 : 10 }}
-              transition={reduceMotion ? { duration: 0 } : { duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
-            >
-              {renderActivePanel()}
-            </motion.div>
-          </AnimatePresence>
+          <div
+            key={tab}
+            id={adminPanelId(tab)}
+            className="admin-tools-panel"
+            role="tabpanel"
+            tabIndex={-1}
+            aria-labelledby={adminTabId(tab)}
+          >
+            {renderActivePanel()}
+          </div>
         </div>
       </section>
     </div>

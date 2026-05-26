@@ -1,8 +1,6 @@
 "use client";
 
-import { useState } from "react";
-import { EnterFullScreenIcon, ExitFullScreenIcon, ExternalLinkIcon } from "@radix-ui/react-icons";
-import { motion, useReducedMotion } from "framer-motion";
+import { ExternalLinkIcon } from "@radix-ui/react-icons";
 
 const MAP_ZOOM = 16;
 const MAP_TILE_X_START = 11203;
@@ -41,78 +39,51 @@ const VENUES = [
 ];
 
 export default function VenueMap({ className = "" }: { className?: string }) {
-  const [expanded, setExpanded] = useState(false);
-  const reduceMotion = useReducedMotion();
-  const height = expanded ? 540 : 360;
-
   return (
-    <motion.section
-      className={["venue-real-map", expanded ? "is-expanded" : "", className].filter(Boolean).join(" ")}
-      initial={false}
+    <section
+      className={["venue-map", className].filter(Boolean).join(" ")}
       aria-label="LAMT UCLA venue map"
     >
-      <div className="venue-real-map__toolbar">
-        <button
-          type="button"
-          className="venue-real-map__toggle"
-          aria-expanded={expanded}
-          onClick={() => setExpanded((current) => !current)}
-        >
-          {expanded ? <ExitFullScreenIcon aria-hidden="true" /> : <EnterFullScreenIcon aria-hidden="true" />}
-          <span>{expanded ? "Collapse" : "Expand"}</span>
-        </button>
-      </div>
-
-      <motion.div
-        className="venue-real-map__frame"
-        animate={reduceMotion ? undefined : { height }}
-        style={reduceMotion ? { height } : undefined}
-        transition={{ type: "spring", stiffness: 190, damping: 28, mass: 0.9 }}
+      <a
+        href={MAP_MARKER.href}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="venue-map__frame"
+        aria-label="Open Mathematical Sciences on OpenStreetMap"
       >
         <div className="venue-map-tile-grid" aria-hidden="true">
           {MAP_TILES.map((tile) => (
             <span key={tile.key} className="venue-map-tile" style={{ backgroundImage: `url(${tile.src})` }} />
           ))}
         </div>
-        <a
-          href={MAP_MARKER.href}
-          target="_blank"
-          rel="noopener noreferrer"
+        <span
           className="venue-map-marker"
           style={{ left: MAP_MARKER.left, top: MAP_MARKER.top }}
-          aria-label="Open Mathematical Sciences on OpenStreetMap"
         >
           <span>{MAP_MARKER.label}</span>
-        </a>
-        <a
-          href="https://www.openstreetmap.org/copyright"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="venue-map-attribution"
-        >
+        </span>
+        <span className="venue-map-attribution">
           OpenStreetMap
-        </a>
-      </motion.div>
+        </span>
+      </a>
 
-      <div className="venue-real-map__details">
+      <div className="venue-map__details">
         {VENUES.map((venue) => (
-          <motion.a
+          <a
             key={venue.label}
             href={venue.href}
             target="_blank"
             rel="noopener noreferrer"
-            className="lamt-line-item venue-real-map__venue"
-            whileHover={reduceMotion ? undefined : { x: 2 }}
-            transition={{ duration: 0.18, ease: [0.16, 1, 0.3, 1] }}
+            className="venue-map__venue"
           >
             <span>
               <strong>{venue.label}</strong>
               <em>{venue.meta}</em>
             </span>
             <ExternalLinkIcon aria-hidden="true" />
-          </motion.a>
+          </a>
         ))}
       </div>
-    </motion.section>
+    </section>
   );
 }

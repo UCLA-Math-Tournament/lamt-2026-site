@@ -24,17 +24,14 @@ export default function TournamentPage() {
 
   const format = [
     { name: 'Individual Rounds', desc: '10 questions plus tiebreaker. 50 minutes.' },
-    { name: 'Secret Team Round', desc: 'Team round. Format revealed on site.' },
+    { name: 'Secret Team Round', desc: 'Team round before individual tests.' },
     { name: 'Guts Round', desc: '8 sets of 3 problems plus 1 estimation set. Sequential delivery.' },
   ];
 
   return (
     <div className="page-shell">
       <header className="page-hero">
-        <div>
-          <span className="gold-rule" />
-        </div>
-        <div>
+        <div className="page-hero__body">
           <h1 className="page-title">Tournament</h1>
           <p className="page-summary mt-5">
             May 17, 2026. UCLA. Teams up to 6.

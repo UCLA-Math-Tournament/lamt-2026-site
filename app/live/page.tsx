@@ -169,10 +169,7 @@ export default function LivePage() {
   return (
     <div className="page-shell">
       <header className="page-hero">
-        <div>
-          <span className="gold-rule" />
-        </div>
-        <div>
+        <div className="page-hero__body">
           <h1 className="page-title">Event Day</h1>
           <p className="page-summary mt-5">
             May 17, 2026.

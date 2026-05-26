@@ -2,7 +2,6 @@ import { type ReactNode } from 'react';
 import { Inter, Inter_Tight } from 'next/font/google';
 import NavbarClient from './components/NavbarClient';
 import FooterClient from './components/FooterClient';
-import AnimationEngine from './components/AnimationEngine';
 import 'katex/dist/katex.min.css';
 import './globals.css';
 
@@ -27,7 +26,6 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" className={`${inter.variable} ${interTight.variable}`} suppressHydrationWarning>
       <body className="min-h-screen transition-colors duration-300">
-        <AnimationEngine />
         <NavbarClient />
         <main>{children}</main>
         <FooterClient />

@@ -114,10 +114,7 @@ export default function RulesPage() {
   return (
     <div className="page-shell">
       <header className="page-hero">
-        <div>
-          <span className="gold-rule" />
-        </div>
-        <div>
+        <div className="page-hero__body">
           <h1 className="page-title">Rules</h1>
           <p className="page-summary mt-5">
             Exact answers. No calculators. Team communication only during team rounds.

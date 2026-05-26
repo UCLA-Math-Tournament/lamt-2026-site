@@ -43,10 +43,7 @@ export default function ArchivePage() {
   return (
     <div className="page-shell">
       <header className="page-hero">
-        <div>
-          <span className="gold-rule" />
-        </div>
-        <div>
+        <div className="page-hero__body">
           <h1 className="page-title">Archive</h1>
           <p className="page-summary mt-5">
             2026 papers, solutions, results.

@@ -15,10 +15,7 @@ export default function FAQPage() {
   return (
     <div className="page-shell">
       <header className="page-hero">
-        <div>
-          <span className="gold-rule" />
-        </div>
-        <div>
+        <div className="page-hero__body">
           <h1 className="page-title">
             FAQ
           </h1>

@@ -11,10 +11,7 @@ export default function NotFound() {
   return (
     <div className="page-shell not-found-page">
       <header className="page-hero">
-        <div>
-          <span className="gold-rule" />
-        </div>
-        <div>
+        <div className="page-hero__body">
           <h1 className="page-title" id="not-found-title">Page Not Found</h1>
           <p className="page-summary mt-5">
             Use a published LAMT page.
