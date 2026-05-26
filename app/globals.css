@@ -670,11 +670,6 @@ textarea {
   overflow: visible;
   border: 0;
   background: transparent;
-  transition: transform var(--medium) var(--ease), opacity var(--medium) var(--ease);
-}
-
-.sponsor-logo-frame:hover {
-  transform: translateY(-1px);
 }
 
 .sponsor-logo-frame img {
@@ -685,8 +680,12 @@ textarea {
   object-fit: contain;
 }
 
-.dark .sponsor-logo-frame img {
+.dark .sponsor-logo-frame[data-logo-tone="mono"] img {
   filter: invert(1) hue-rotate(180deg) saturate(1.05) brightness(1.08) contrast(1.05);
+}
+
+.dark .sponsor-logo-frame[data-logo-tone="color"] img {
+  filter: brightness(1.65) contrast(0.9) saturate(1.08);
 }
 
 .sponsor-matrix--silver .sponsor-logo-frame img {
@@ -1025,16 +1024,16 @@ textarea {
 .venue-map__frame {
   position: relative;
   display: block;
-  min-height: 18rem;
+  width: 100%;
+  height: clamp(18rem, 34vw, 24rem);
   overflow: hidden;
   border: 1px solid var(--rule);
-  transition: border-color var(--fast) var(--ease), transform var(--fast) var(--ease);
+  transition: border-color var(--fast) var(--ease);
 }
 
 .venue-map__frame:hover,
 .venue-map__frame:focus-visible {
   border-color: var(--rule-strong);
-  transform: translateY(-1px);
 }
 
 .venue-map-tile-grid {
@@ -1069,7 +1068,7 @@ textarea {
   right: 0.4rem;
   bottom: 0.4rem;
   background: rgba(244, 248, 252, 0.86);
-  color: var(--text);
+  color: var(--ucla-blue-deep);
   padding: 0.2rem 0.35rem;
   font-size: 0.68rem;
   font-weight: 800;

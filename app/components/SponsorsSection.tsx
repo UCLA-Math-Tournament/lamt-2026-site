@@ -13,6 +13,17 @@ const TIER_CONFIG: Record<Tier, {
 
 const TIER_ORDER: Tier[] = ['gold', 'silver', 'bronze', 'friends'];
 
+function getSponsorName(src: string) {
+  if (src.includes('SUSQUEHANNA')) return 'Susquehanna';
+  if (src.includes('AoPS')) return 'Art of Problem Solving';
+  if (src.includes('LOGO_stacked')) return 'Jane Street';
+  if (src.includes('imageedit')) return 'GEOGRA';
+  if (src.includes('SCMCLOGO')) return 'Southern California Math Circle';
+  if (src.includes('bmt')) return 'Berkeley Math Tournament';
+  if (src.includes('cmm')) return 'Cincinnati Math Meet';
+  return 'LAMT sponsor';
+}
+
 function getLogoScale(src: string) {
   return src.includes('imageedit') || src.includes('SCMCLOGO') ? 'mark' : undefined;
 }
@@ -44,7 +55,7 @@ export default function SponsorsSection({
                   <h3 className="section-title">{label}</h3>
                 </div>
                 <div className={`sponsor-grid sponsor-matrix sponsor-matrix--${tier}`}>
-                  {sponsorsByTier[tier].map((src, index) => (
+                  {sponsorsByTier[tier].map((src) => (
                     <div
                       key={src}
                       className="sponsor-logo-frame"
@@ -53,7 +64,7 @@ export default function SponsorsSection({
                     >
                       <Image
                         src={src}
-                        alt={`${label} sponsor ${index + 1}`}
+                        alt={getSponsorName(src)}
                         width={420}
                         height={imgHeight}
                         loading="eager"

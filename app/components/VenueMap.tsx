@@ -1,5 +1,3 @@
-"use client";
-
 import { ExternalLinkIcon } from "@radix-ui/react-icons";
 
 const MAP_ZOOM = 16;
