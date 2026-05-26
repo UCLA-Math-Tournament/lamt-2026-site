@@ -1,4 +1,5 @@
 import VenueMap from '../components/VenueMap';
+import SchedulePathClient from '../components/SchedulePathClient';
 
 export default function TournamentPage() {
   const schedule = [
@@ -65,19 +66,7 @@ export default function TournamentPage() {
 
       <section className="section-row">
         <h2 className="section-title">Schedule</h2>
-        <div className="lamt-agenda" aria-label="LAMT 2026 schedule">
-          {schedule.map(({ time, end, event, location }) => (
-            <article key={`${time}-${event}`} className="lamt-agenda-item">
-              <div className="lamt-agenda-time">
-                <strong>{time} - {end}</strong>
-              </div>
-              <div className="lamt-agenda-main">
-                <h3>{event}</h3>
-              </div>
-              <strong className="lamt-agenda-place">{location}</strong>
-            </article>
-          ))}
-        </div>
+        <SchedulePathClient items={schedule} ariaLabel="LAMT 2026 schedule" />
       </section>
 
       <section id="venue" className="section-row">

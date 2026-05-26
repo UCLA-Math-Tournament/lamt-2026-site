@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import SchedulePathClient from "../components/SchedulePathClient";
 import VenueMap from "../components/VenueMap";
 import type { ScheduleItem, Update } from "./types";
 import { DEFAULT_SCHEDULE, DEFAULT_UPDATES } from "./types";
@@ -33,21 +34,7 @@ function readStored<T>(key: string, fallback: T): T {
 function ScheduleTimeline({ schedule }: { schedule: ScheduleItem[] }) {
   return (
     <section className="live-schedule-block">
-      <div className="live-schedule-list" aria-label="LAMT 2026 tournament day schedule">
-        {schedule.map((item) => (
-          <article key={`${item.time}-${item.event}`} className="live-schedule-item">
-            <div className="live-schedule-time">
-              <strong>{item.time} - {item.end}</strong>
-              {item.originalTime && <span>{item.originalTime}</span>}
-            </div>
-            <div className="live-schedule-main">
-              <h3>{item.event}</h3>
-              {item.adjustmentReason && <p>{item.adjustmentReason}</p>}
-            </div>
-            <div className="live-schedule-place">{item.location}</div>
-          </article>
-        ))}
-      </div>
+      <SchedulePathClient items={schedule} ariaLabel="LAMT 2026 tournament day schedule" />
     </section>
   );
 }
