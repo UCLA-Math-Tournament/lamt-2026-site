@@ -26,9 +26,8 @@ export default function NotFound() {
       <section className="section-row" aria-labelledby="not-found-title">
         <h2 className="section-title">Routes</h2>
         <div className="lamt-line-list">
-          {routes.map((route, index) => (
+          {routes.map((route) => (
             <Link key={route.href} href={route.href} className="lamt-line-item not-found-link">
-              <span>{String(index + 1).padStart(2, '0')}</span>
               <strong>{route.label}</strong>
               <p>{route.detail}</p>
             </Link>

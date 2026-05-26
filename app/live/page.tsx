@@ -167,7 +167,7 @@ function PreviewModeNotice() {
     <section className="local-mode-notice local-mode-notice--preview" aria-label="Staff preview notice">
       <div>
         <p className="label-caps">Preview</p>
-        <h2>Draft view.</h2>
+        <h2>Preview</h2>
       </div>
       <Link href="/live" className="btn-outline">
         Event Page

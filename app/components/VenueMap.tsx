@@ -56,7 +56,6 @@ export default function VenueMap({ className = "" }: { className?: string }) {
     >
       <div className="venue-real-map__toolbar">
         <div>
-          <p>UCLA Campus</p>
           <h3>Venue Map</h3>
         </div>
         <button
@@ -102,7 +101,7 @@ export default function VenueMap({ className = "" }: { className?: string }) {
       </motion.div>
 
       <div className="venue-real-map__details">
-        {VENUES.map((venue, index) => (
+        {VENUES.map((venue) => (
           <motion.a
             key={venue.label}
             href={venue.href}
@@ -112,7 +111,6 @@ export default function VenueMap({ className = "" }: { className?: string }) {
             whileHover={reduceMotion ? undefined : { x: 2 }}
             transition={{ duration: 0.18, ease: [0.16, 1, 0.3, 1] }}
           >
-            <span className="venue-real-map__pin" aria-hidden="true">{index + 1}</span>
             <span>
               <strong>{venue.label}</strong>
               <em>{venue.meta}</em>

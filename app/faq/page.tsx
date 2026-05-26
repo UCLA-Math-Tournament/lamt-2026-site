@@ -59,11 +59,11 @@ export default function FAQPage() {
       </header>
 
       <section className="section-row">
-        <h2 className="section-title">Questions</h2>
+        <h2 className="section-title">Search</h2>
         <div className="faq-console">
           <div className="faq-control-panel" aria-label="FAQ filters">
             <label className="grid gap-2">
-              <span className="label-caps">Search FAQ</span>
+              <span className="label-caps">Search</span>
               <input
                 value={query}
                 onChange={(event) => setQuery(event.target.value)}

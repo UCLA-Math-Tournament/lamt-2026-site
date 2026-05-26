@@ -5,7 +5,6 @@ import { useRef, useState } from 'react';
 
 type AboutRevealItem = {
   id: string;
-  number: string;
   title: string;
   summary: string;
   detail: string;
@@ -15,7 +14,6 @@ type AboutRevealItem = {
 const revealItems: AboutRevealItem[] = [
   {
     id: 'ucla',
-    number: '01',
     title: 'At UCLA',
     summary: 'Student-run math tournament on campus.',
     detail: 'UCLA students write, staff, and run the tournament.',
@@ -23,7 +21,6 @@ const revealItems: AboutRevealItem[] = [
   },
   {
     id: 'day',
-    number: '02',
     title: 'Contest Day',
     summary: 'Rounds, lunch, Guts, disputes, awards.',
     detail: 'Check-in through awards on one UCLA schedule.',
@@ -31,7 +28,6 @@ const revealItems: AboutRevealItem[] = [
   },
   {
     id: 'rounds',
-    number: '03',
     title: 'Divisions & Rounds',
     summary: 'Individual, team, and fast-paced formats.',
     detail: 'Individual and team rounds reward exact answers.',
@@ -39,7 +35,6 @@ const revealItems: AboutRevealItem[] = [
   },
   {
     id: 'archive',
-    number: '04',
     title: 'Archive',
     summary: 'Problems, solutions, and results stay posted.',
     detail: 'Problems, solutions, and results remain posted.',
@@ -83,7 +78,6 @@ export default function AboutStickyReveal() {
           animate={{ opacity: 1, y: 0 }}
           transition={reduceMotion ? { duration: 0 } : { duration: 0.18, ease: [0.16, 1, 0.3, 1] }}
         >
-          <p>{activeItem.number}</p>
           <h3>{activeItem.title}</h3>
           <span>{activeItem.summary}</span>
         </motion.div>
@@ -98,7 +92,7 @@ export default function AboutStickyReveal() {
               aria-pressed={index === activeIndex}
               onClick={() => setActiveIndex(index)}
             >
-              <span>{item.number}</span>
+              <span>{item.title}</span>
             </button>
           ))}
         </div>
@@ -123,7 +117,6 @@ export default function AboutStickyReveal() {
                   : { duration: 0.24, delay: Math.min(index * 0.035, 0.12), ease: [0.16, 1, 0.3, 1] }
               }
             >
-              <span className="about-reveal__step-number">{item.number}</span>
               <div>
                 <strong>{item.signal}</strong>
                 <h3>{item.title}</h3>

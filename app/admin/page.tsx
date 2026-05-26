@@ -163,7 +163,7 @@ function MessagesTab({ onUnreadChange }: { onUnreadChange: (count: number) => vo
     return (
       <section className="lamt-panel">
         <div className="lamt-panel-body py-16 text-center">
-          <p className="text-xl font-extrabold text-[var(--color-text)]">No saved messages</p>
+          <p className="text-xl font-extrabold text-[var(--color-text)]">No messages</p>
         </div>
       </section>
     );
@@ -284,7 +284,7 @@ function AnnouncementsTab({ updates, setUpdates }: {
         <div className="lamt-panel-header">
           <div>
             <p className="label-caps">Notices</p>
-            <h2 className="mt-1 text-xl font-extrabold text-[var(--color-text)]">Event Notices</h2>
+            <h2 className="mt-1 text-xl font-extrabold text-[var(--color-text)]">Notices</h2>
           </div>
         </div>
         <div className="lamt-panel-body grid gap-4">
@@ -303,10 +303,10 @@ function AnnouncementsTab({ updates, setUpdates }: {
 
       <section className="lamt-panel">
         <div className="lamt-panel-header">
-          <h2 className="text-xl font-extrabold text-[var(--color-text)]">Saved Notices</h2>
+          <h2 className="text-xl font-extrabold text-[var(--color-text)]">Current Notices</h2>
         </div>
         {updates.length === 0 ? (
-          <div className="lamt-panel-body text-center text-[var(--color-text-muted)]">No saved notices.</div>
+          <div className="lamt-panel-body text-center text-[var(--color-text-muted)]">No notices.</div>
         ) : (
           updates.map((update) => (
             <article key={update.id} className="admin-notice-row">

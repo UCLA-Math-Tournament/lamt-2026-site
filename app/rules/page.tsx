@@ -38,9 +38,9 @@ function AnswerFormatTabs({
 }) {
   const reduceMotion = useReducedMotion();
   const [activeTab, setActiveTab] = useState<AnswerTabId>('accepted');
-  const tabs: Array<{ id: AnswerTabId; label: string; count: number }> = [
-    { id: 'accepted', label: 'Accepted', count: acceptableExamples.length },
-    { id: 'rejected', label: 'Rejected', count: unacceptableExamples.length },
+  const tabs: Array<{ id: AnswerTabId; label: string }> = [
+    { id: 'accepted', label: 'Accepted' },
+    { id: 'rejected', label: 'Rejected' },
   ];
 
   const focusTab = (id: AnswerTabId) => {
@@ -96,7 +96,6 @@ function AnswerFormatTabs({
                 />
               ) : null}
               <span>{tab.label}</span>
-              <strong>{tab.count}</strong>
             </button>
           );
         })}
@@ -119,7 +118,6 @@ function AnswerFormatTabs({
             <>
               <div className="answer-panel-heading">
                 <h3>Accepted Examples</h3>
-                <span>{acceptableExamples.length}</span>
               </div>
               <div className="answer-chip-grid">
                 {acceptableExamples.map((item, index) => (
@@ -143,7 +141,6 @@ function AnswerFormatTabs({
             <>
               <div className="answer-panel-heading">
                 <h3>Rejected Examples</h3>
-                <span>{unacceptableExamples.length}</span>
               </div>
               <div className="answer-correction-list" aria-label="Rejected answer examples with accepted rewrites">
                 <div className="answer-correction-head" aria-hidden="true">
