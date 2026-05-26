@@ -806,6 +806,69 @@ textarea {
   line-height: 0.95;
 }
 
+.kinetic-band {
+  position: relative;
+  display: grid;
+  gap: clamp(0.75rem, 1.35vw, 1.05rem);
+  overflow: hidden;
+  padding-block: clamp(1.9rem, 4.6vw, 3.7rem);
+}
+
+.kinetic-band__rule {
+  height: 2px;
+  width: min(84rem, calc(100% - (var(--side-pad) * 2)));
+  justify-self: center;
+  background: linear-gradient(90deg, transparent, var(--ucla-gold) 16%, var(--ucla-gold) 84%, transparent);
+  transform-origin: center;
+}
+
+.kinetic-band__rule--blue {
+  background: linear-gradient(90deg, transparent, var(--ucla-blue) 16%, var(--ucla-blue) 84%, transparent);
+}
+
+.kinetic-band__viewport {
+  width: 100%;
+  overflow: hidden;
+}
+
+.kinetic-band__track {
+  display: flex;
+  width: max-content;
+  align-items: center;
+  white-space: nowrap;
+  will-change: transform;
+}
+
+.kinetic-band__item {
+  display: inline-flex;
+  align-items: center;
+  gap: clamp(0.55rem, 1vw, 0.9rem);
+  padding-inline: clamp(0.72rem, 1.65vw, 1.45rem);
+  color: color-mix(in srgb, var(--text) 84%, transparent);
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 6.3vw, 5.45rem);
+  font-weight: 950;
+  letter-spacing: 0;
+  line-height: 0.86;
+  text-transform: uppercase;
+}
+
+.kinetic-band__item:nth-child(3n) {
+  color: color-mix(in srgb, var(--ucla-blue-dark) 64%, var(--text));
+}
+
+.kinetic-band__item:nth-child(4n) {
+  color: color-mix(in srgb, var(--ucla-gold) 62%, var(--text));
+}
+
+.kinetic-band__item img {
+  width: clamp(2.1rem, 4.8vw, 4.25rem);
+  height: auto;
+  flex: 0 0 auto;
+  opacity: 0.78;
+  filter: drop-shadow(0 0.8rem 1rem rgba(0, 59, 92, 0.1));
+}
+
 .day-motion-section {
   padding-block: clamp(1.2rem, 3vw, 2.5rem);
 }
@@ -1914,6 +1977,10 @@ textarea {
     opacity: 0.16;
   }
 
+  .kinetic-band {
+    padding-block: 1.55rem 2.3rem;
+  }
+
   .day-motion__stops {
     grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 0.95rem 0.85rem;
@@ -2066,6 +2133,15 @@ textarea {
 
   .contest-story__beat {
     padding-bottom: 0.72rem;
+  }
+
+  .kinetic-band__item {
+    font-size: clamp(1.9rem, 10.8vw, 2.7rem);
+    padding-inline: 0.7rem;
+  }
+
+  .kinetic-band__item img {
+    width: 2.35rem;
   }
 
   .site-compass__button {

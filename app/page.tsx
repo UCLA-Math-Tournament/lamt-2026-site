@@ -1,6 +1,7 @@
 import SponsorsSection from './components/SponsorsSection';
 import ContestStoryClient from './components/ContestStoryClient';
 import HomeClient from './components/HomeClient';
+import KineticTournamentBandClient from './components/KineticTournamentBandClient';
 import TournamentDayClient from './components/TournamentDayClient';
 import fs from 'fs';
 import path from 'path';
@@ -32,6 +33,7 @@ export default function HomePage() {
     <div>
       <HomeClient />
       <ContestStoryClient />
+      <KineticTournamentBandClient />
       <TournamentDayClient />
       <SponsorsSection sponsorsByTier={sponsorsByTier} />
     </div>
