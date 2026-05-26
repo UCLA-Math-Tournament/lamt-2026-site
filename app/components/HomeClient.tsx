@@ -7,6 +7,17 @@ const homeButtonClass =
 export default function HomeClient() {
   return (
     <section className="home-hero">
+      <div className="home-hero__motion" aria-hidden="true">
+        <svg viewBox="0 0 640 460" role="presentation" focusable="false">
+          <path className="motion-route motion-route--blue" d="M18 370 C138 296 156 188 274 166 C390 144 428 54 618 34" />
+          <path className="motion-route motion-route--gold" d="M24 284 C132 220 232 236 326 156 C414 80 496 88 620 118" />
+          <path className="motion-route motion-route--deep" d="M80 426 C168 332 268 328 376 250 C478 176 520 190 616 152" />
+          <circle className="motion-node motion-node--one" cx="274" cy="166" r="7" />
+          <circle className="motion-node motion-node--two" cx="326" cy="156" r="6" />
+          <circle className="motion-node motion-node--three" cx="494" cy="88" r="5" />
+        </svg>
+      </div>
+
       <div className="home-hero__content">
         <p className="home-hero__meta">May 17, 2026. UCLA.</p>
         <h1>Los Angeles Math Tournament</h1>

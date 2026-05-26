@@ -2,6 +2,7 @@ import { type ReactNode } from 'react';
 import { Inter, Inter_Tight } from 'next/font/google';
 import NavbarClient from './components/NavbarClient';
 import FooterClient from './components/FooterClient';
+import DarkModeToggle from './components/DarkModeToggle';
 import 'katex/dist/katex.min.css';
 import './globals.css';
 
@@ -29,6 +30,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <NavbarClient />
         <main>{children}</main>
         <FooterClient />
+        <DarkModeToggle />
       </body>
     </html>
   );

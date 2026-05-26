@@ -2,7 +2,6 @@
 
 import type { ReactNode } from 'react';
 import { DiscordLogoIcon, EnvelopeClosedIcon, InstagramLogoIcon } from '@radix-ui/react-icons';
-import DarkModeToggle from './DarkModeToggle';
 
 const DISCORD_URL = 'https://discord.gg/tqR3bGjVke';
 
@@ -56,10 +55,6 @@ export default function FooterClient() {
             </a>
           ))}
         </nav>
-
-        <div className="site-footer__theme">
-          <DarkModeToggle />
-        </div>
 
         <p className="site-footer__note">
           We are a student group acting independently of the University of California; we take full responsibility for our organization and this website.
