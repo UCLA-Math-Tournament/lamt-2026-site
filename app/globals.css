@@ -1456,15 +1456,34 @@ textarea {
 .sponsor-tier-stack {
   display: grid;
   gap: 0;
+  perspective: 1200px;
+  perspective-origin: 50% 18%;
+}
+
+.sponsor-tier-row {
+  transform-style: preserve-3d;
+  will-change: opacity, transform;
 }
 
 .sponsor-grid {
+  position: relative;
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: clamp(0.9rem, 2.5vw, 1.75rem);
   align-items: center;
-  border-top: 1px solid var(--rule);
-  padding-block: clamp(1rem, 2.2vw, 1.65rem);
+  border-top: 0;
+  padding-block: clamp(1.15rem, 2.5vw, 1.9rem);
+}
+
+.sponsor-grid__rule {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 1px;
+  background: linear-gradient(90deg, var(--ucla-blue), var(--ucla-gold), transparent);
+  opacity: 0.52;
+  transform-origin: left;
 }
 
 .sponsor-marquee {
@@ -1515,7 +1534,13 @@ textarea {
   grid-template-columns: minmax(0, 1fr);
 }
 
+.sponsor-matrix--bronze,
+.sponsor-matrix--friends {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
 .sponsor-logo-frame {
+  position: relative;
   display: flex;
   min-height: 5.25rem;
   align-items: center;
@@ -1523,6 +1548,33 @@ textarea {
   overflow: visible;
   border: 0;
   background: transparent;
+  transform: translateZ(0);
+  transition: opacity var(--fast) var(--ease), transform var(--fast) var(--ease);
+}
+
+.sponsor-logo-frame::after {
+  content: "";
+  position: absolute;
+  right: 12%;
+  bottom: -0.2rem;
+  left: 12%;
+  height: 2px;
+  background: var(--ucla-gold);
+  opacity: 0;
+  transform: scaleX(0.2);
+  transform-origin: center;
+  transition: opacity var(--fast) var(--ease), transform var(--fast) var(--ease);
+}
+
+.sponsor-logo-frame:hover,
+.sponsor-logo-frame:focus-within {
+  transform: translateY(-2px) translateZ(28px);
+}
+
+.sponsor-logo-frame:hover::after,
+.sponsor-logo-frame:focus-within::after {
+  opacity: 1;
+  transform: scaleX(1);
 }
 
 .sponsor-logo-frame img {
@@ -1538,7 +1590,7 @@ textarea {
 }
 
 .dark .sponsor-logo-frame[data-logo-tone="color"] img {
-  filter: brightness(1.65) contrast(0.9) saturate(1.08);
+  filter: brightness(2.15) contrast(0.82) saturate(1.18);
 }
 
 .sponsor-matrix--silver .sponsor-logo-frame img {
@@ -1551,6 +1603,11 @@ textarea {
 
 .sponsor-logo-frame[data-logo-scale="mark"] img {
   max-width: min(100%, 9rem) !important;
+}
+
+.sponsor-logo-frame[data-logo-scale="wide"] img {
+  max-width: min(100%, 21rem) !important;
+  max-height: 5.65rem !important;
 }
 
 .archive-round-table,

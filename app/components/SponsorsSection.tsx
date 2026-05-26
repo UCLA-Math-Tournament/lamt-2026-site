@@ -1,4 +1,8 @@
+'use client';
+
 import Image from 'next/image';
+import { useRef } from 'react';
+import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion';
 import type { Tier } from '../page';
 
 const TIER_CONFIG: Record<Tier, {
@@ -25,6 +29,7 @@ function getSponsorName(src: string) {
 }
 
 function getLogoScale(src: string) {
+  if (src.includes('AoPS')) return 'wide';
   return src.includes('imageedit') || src.includes('SCMCLOGO') ? 'mark' : undefined;
 }
 
@@ -59,6 +64,48 @@ function SponsorLogo({
   );
 }
 
+function SponsorTierRow({
+  tier,
+  label,
+  imgHeight,
+  sources,
+}: {
+  tier: Tier;
+  label: string;
+  imgHeight: number;
+  sources: string[];
+}) {
+  const ref = useRef<HTMLElement | null>(null);
+  const reduceMotion = Boolean(useReducedMotion());
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ['start end', 'end start'],
+  });
+  const y = useTransform(scrollYProgress, [0, 0.36, 0.72, 1], reduceMotion ? [0, 0, 0, 0] : [54, 0, 0, -24]);
+  const rotateX = useTransform(scrollYProgress, [0, 0.38, 0.72, 1], reduceMotion ? [0, 0, 0, 0] : [7, 0, 0, -3]);
+  const opacity = useTransform(scrollYProgress, [0, 0.24, 0.82, 1], reduceMotion ? [1, 1, 1, 1] : [0.3, 1, 1, 0.84]);
+  const ruleScale = useTransform(scrollYProgress, [0.12, 0.42], reduceMotion ? [1, 1] : [0.16, 1]);
+
+  return (
+    <motion.section
+      ref={ref}
+      className="section-row sponsor-tier-row"
+      data-tier={tier}
+      style={{ y, rotateX, opacity }}
+    >
+      <div className="sponsor-tier-heading">
+        <h3 className="section-title">{label}</h3>
+      </div>
+      <div className={`sponsor-grid sponsor-matrix sponsor-matrix--${tier}`}>
+        <motion.span className="sponsor-grid__rule" style={{ scaleX: ruleScale }} aria-hidden="true" />
+        {sources.map((src) => (
+          <SponsorLogo key={src} src={src} imgHeight={imgHeight} />
+        ))}
+      </div>
+    </motion.section>
+  );
+}
+
 export default function SponsorsSection({
   sponsorsByTier,
 }: {
@@ -77,31 +124,13 @@ export default function SponsorsSection({
           {activeTiers.map((tier) => {
             const { label, imgHeight } = TIER_CONFIG[tier];
             return (
-              <section key={tier} className="section-row">
-                <div className="sponsor-tier-heading">
-                  <h3 className="section-title">{label}</h3>
-                </div>
-                {sponsorsByTier[tier].length > 1 ? (
-                  <div className={`sponsor-marquee sponsor-marquee--${tier}`}>
-                    <div className="sponsor-marquee__group">
-                      {sponsorsByTier[tier].map((src) => (
-                        <SponsorLogo key={src} src={src} imgHeight={imgHeight} />
-                      ))}
-                    </div>
-                    <div className="sponsor-marquee__group" aria-hidden="true">
-                      {sponsorsByTier[tier].map((src) => (
-                        <SponsorLogo key={`${src}-loop`} src={src} imgHeight={imgHeight} />
-                      ))}
-                    </div>
-                  </div>
-                ) : (
-                  <div className={`sponsor-grid sponsor-matrix sponsor-matrix--${tier}`}>
-                    {sponsorsByTier[tier].map((src) => (
-                      <SponsorLogo key={src} src={src} imgHeight={imgHeight} />
-                    ))}
-                  </div>
-                )}
-              </section>
+              <SponsorTierRow
+                key={tier}
+                tier={tier}
+                label={label}
+                imgHeight={imgHeight}
+                sources={sponsorsByTier[tier]}
+              />
             );
           })}
         </div>
