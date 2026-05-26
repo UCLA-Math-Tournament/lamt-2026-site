@@ -61,7 +61,6 @@ function LoginScreen({ onLogin }: { onLogin: () => void }) {
     <div className="page-shell admin-page">
       <header className="page-hero">
         <div>
-          <p className="page-kicker">Admin</p>
           <span className="gold-rule" />
         </div>
         <div>
@@ -477,7 +476,6 @@ export default function AdminPage() {
     <div className="page-shell admin-page">
       <header className="page-hero">
         <div>
-          <p className="page-kicker">Admin</p>
           <span className="gold-rule" />
         </div>
         <div>

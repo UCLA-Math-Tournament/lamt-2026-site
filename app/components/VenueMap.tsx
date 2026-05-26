@@ -26,19 +26,16 @@ const VENUES = [
   {
     label: "Mathematical Sciences",
     meta: "MS 4000A / MS 5200",
-    detail: "Contest rooms and opening ceremony.",
     href: MAP_MARKER.href,
   },
   {
     label: "Court of Sciences",
     meta: "Lunch / Disputes",
-    detail: "Lunch, score checks, and dispute window.",
     href: "https://www.openstreetmap.org/search?query=Court%20of%20Sciences%20UCLA",
   },
   {
     label: "Parking Structure 2",
     meta: "Parking",
-    detail: "Closest public parking reference.",
     href: "https://www.openstreetmap.org/search?query=UCLA%20Parking%20Structure%202",
   },
 ];
@@ -55,9 +52,6 @@ export default function VenueMap({ className = "" }: { className?: string }) {
       aria-label="LAMT UCLA venue map"
     >
       <div className="venue-real-map__toolbar">
-        <div>
-          <h3>Venue Map</h3>
-        </div>
         <button
           type="button"
           className="venue-real-map__toggle"
@@ -114,7 +108,6 @@ export default function VenueMap({ className = "" }: { className?: string }) {
             <span>
               <strong>{venue.label}</strong>
               <em>{venue.meta}</em>
-              <small>{venue.detail}</small>
             </span>
             <ExternalLinkIcon aria-hidden="true" />
           </motion.a>

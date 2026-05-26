@@ -448,7 +448,6 @@ textarea {
 .home-hero h1,
 .cinema-lede,
 .cinema-actions,
-.home-index,
 .page-hero > *,
 .section-row > * {
   animation: lamt-rise 240ms var(--ease) both;
@@ -468,44 +467,6 @@ textarea {
   animation-delay: 75ms;
 }
 
-.home-index {
-  padding-block: 0;
-}
-
-.home-index__list {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: clamp(1rem, 3vw, 2.2rem);
-  border-top: 1px solid var(--rule);
-}
-
-.home-index__link {
-  display: grid;
-  gap: 0.45rem;
-  padding-block: 1.1rem;
-  transition: color var(--fast) var(--ease), transform var(--fast) var(--ease);
-}
-
-.home-index__link:hover,
-.home-index__link:focus-visible {
-  color: var(--ucla-blue-dark);
-  transform: translateY(-1px);
-}
-
-.home-index__link span {
-  color: var(--ucla-blue-dark);
-  font-size: 0.78rem;
-  font-weight: 950;
-  text-transform: uppercase;
-}
-
-.home-index__link strong {
-  color: var(--text);
-  font-size: 1.12rem;
-  font-weight: 850;
-  line-height: 1.25;
-}
-
 .page-hero {
   display: grid;
   grid-template-columns: var(--left-rail) minmax(0, var(--measure));
@@ -518,7 +479,7 @@ textarea {
   display: block;
   width: 2.65rem;
   height: 2px;
-  margin-top: 0.85rem;
+  margin-top: 0.35rem;
   background: var(--ucla-gold);
 }
 
@@ -817,7 +778,6 @@ textarea {
 .live-update-list,
 .live-schedule-block {
   display: grid;
-  gap: 0;
   gap: 0;
 }
 
@@ -1137,14 +1097,8 @@ textarea {
 .venue-real-map__toolbar {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
   gap: 1rem;
-}
-
-.venue-real-map__toolbar h3 {
-  color: var(--text);
-  font-size: 1.45rem;
-  font-weight: 950;
 }
 
 .venue-real-map__frame {
@@ -1215,8 +1169,7 @@ textarea {
   font-size: 1.08rem;
 }
 
-.venue-real-map__venue em,
-.venue-real-map__venue small {
+.venue-real-map__venue em {
   color: var(--text-soft);
   font-style: normal;
   font-weight: 700;
@@ -1420,7 +1373,7 @@ textarea {
   }
 
   .gold-rule {
-    margin-top: 0.6rem;
+    margin-top: 0;
   }
 
   .format-grid,
@@ -1428,11 +1381,6 @@ textarea {
   .live-help-grid,
   .sponsor-grid {
     grid-template-columns: 1fr;
-  }
-
-  .home-index__list {
-    grid-template-columns: 1fr;
-    gap: 0;
   }
 
   .lamt-agenda-item,
@@ -1466,6 +1414,10 @@ textarea {
   .live-update-row {
     grid-template-columns: 1fr;
     gap: 0.35rem;
+  }
+
+  .archive-round-head {
+    display: none;
   }
 
   .site-footer__inner {
@@ -1543,10 +1495,6 @@ textarea {
   .lamt-fact-row strong,
   .tournament-format-row h3 {
     font-size: 1.04rem;
-  }
-
-  .home-index__link strong {
-    font-size: 1rem;
   }
 
   .faq-row summary {
@@ -1641,8 +1589,7 @@ textarea {
   }
 
   .venue-real-map__toolbar {
-    align-items: flex-start;
-    flex-direction: column;
+    justify-content: flex-start;
   }
 }
 

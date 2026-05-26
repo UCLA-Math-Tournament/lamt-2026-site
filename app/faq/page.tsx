@@ -20,7 +20,6 @@ export default function FAQPage() {
     <div className="page-shell">
       <header className="page-hero">
         <div>
-          <p className="page-kicker">Questions</p>
           <span className="gold-rule" />
         </div>
         <div>

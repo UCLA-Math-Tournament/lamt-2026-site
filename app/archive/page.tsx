@@ -54,7 +54,6 @@ export default function ArchivePage() {
     <div className="page-shell">
       <header className="page-hero">
         <div>
-          <p className="page-kicker">2026 Files</p>
           <span className="gold-rule" />
         </div>
         <div>

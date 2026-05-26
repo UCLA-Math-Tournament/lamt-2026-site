@@ -12,7 +12,6 @@ export default function NotFound() {
     <div className="page-shell not-found-page">
       <header className="page-hero">
         <div>
-          <p className="page-kicker">404</p>
           <span className="gold-rule" />
         </div>
         <div>

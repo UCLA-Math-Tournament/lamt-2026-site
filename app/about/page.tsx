@@ -80,7 +80,6 @@ export default function AboutPage() {
     <div className="page-shell">
       <header className="page-hero">
         <div>
-          <p className="page-kicker">Organization</p>
           <span className="gold-rule" />
         </div>
         <div>

@@ -121,7 +121,6 @@ export default function RulesPage() {
     <div className="page-shell">
       <header className="page-hero">
         <div>
-          <p className="page-kicker">Competition</p>
           <span className="gold-rule" />
         </div>
         <div>
