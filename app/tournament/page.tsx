@@ -15,12 +15,12 @@ export default function TournamentPage() {
     { time: '6:00 PM', end: '7:30 PM', event: 'Awards Ceremony', location: 'MS 4000A', note: 'Final rankings and awards.' },
   ];
 
-  const eligibility = [
-    'Grade 12 or below as of May 2026.',
-    'Teams of up to 6 students.',
-    'Same school or organization; no geography restriction.',
-    'Each team needs an accompanying chaperone.',
-    'Individuals may apply with their own chaperone.',
+  const basics = [
+    { label: 'Eligibility', value: 'Grade 12 or below' },
+    { label: 'Teams', value: 'Up to 6 students' },
+    { label: 'School', value: 'Same school or organization' },
+    { label: 'Chaperone', value: 'Required' },
+    { label: 'Cost', value: 'Free' },
   ];
 
   const format = [
@@ -41,27 +41,30 @@ export default function TournamentPage() {
             <span className="word">Tournament</span>
           </h1>
           <p className="page-summary reveal mt-5">
-            May 17, 2026. UCLA. Free. Teams up to 6.
+            May 17, 2026. UCLA. Teams up to 6.
           </p>
         </div>
       </header>
 
       <section className="section-row">
-        <h2 className="section-title">Eligibility</h2>
-        <ul className="tournament-eligibility-list">
-          {eligibility.map((item) => (
-            <li key={item}>{item}</li>
+        <h2 className="section-title">Basics</h2>
+        <div className="lamt-fact-list">
+          {basics.map((item) => (
+            <div key={item.label} className="lamt-fact-row">
+              <span>{item.label}</span>
+              <strong>{item.value}</strong>
+            </div>
           ))}
-        </ul>
+        </div>
       </section>
 
       <section className="section-row">
         <h2 className="section-title">Format</h2>
-        <div className="lamt-line-list format-grid stagger-parent">
+        <div className="tournament-format-list stagger-parent">
           {format.map(({ name, desc }) => (
-            <article key={name} className="lamt-line-item format-card">
+            <article key={name} className="tournament-format-row">
               <h3>{name}</h3>
-              <p className="section-copy mt-2">{desc}</p>
+              <p>{desc}</p>
             </article>
           ))}
         </div>

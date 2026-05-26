@@ -282,10 +282,7 @@ function AnnouncementsTab({ updates, setUpdates }: {
     <div className="grid gap-5">
       <section className="lamt-panel">
         <div className="lamt-panel-header">
-          <div>
-            <p className="label-caps">Notices</p>
-            <h2 className="mt-1 text-xl font-extrabold text-[var(--color-text)]">Notices</h2>
-          </div>
+          <h2>Notices</h2>
         </div>
         <div className="lamt-panel-body grid gap-4">
           <input className="lamt-input" value={title} onChange={(event) => setTitle(event.target.value)} placeholder="Title (optional)" />
@@ -303,7 +300,7 @@ function AnnouncementsTab({ updates, setUpdates }: {
 
       <section className="lamt-panel">
         <div className="lamt-panel-header">
-          <h2 className="text-xl font-extrabold text-[var(--color-text)]">Current Notices</h2>
+          <h2>Current</h2>
         </div>
         {updates.length === 0 ? (
           <div className="lamt-panel-body text-center text-[var(--color-text-muted)]">No notices.</div>
@@ -350,15 +347,12 @@ function ScheduleTab({ schedule, setSchedule }: {
   return (
     <section className="lamt-panel">
       <div className="lamt-panel-header">
-        <div>
-          <p className="label-caps">Schedule</p>
-          <h2 className="mt-1 text-xl font-extrabold text-[var(--color-text)]">Schedule Editor</h2>
-        </div>
+        <h2>Schedule</h2>
       </div>
       <div className="lamt-panel-body">
         <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
           <p className="section-copy max-w-3xl">
-            Edit times, rooms, and delay notes.
+            Edit event-day times and rooms.
           </p>
           <button type="button" onClick={resetSchedule} className="btn-outline">
             Reset to Official
@@ -434,7 +428,7 @@ export default function AdminPage() {
   if (!authed) return <LoginScreen onLogin={() => setAuthed(true)} />;
 
   const tabs: { key: AdminTabKey; label: string; badge?: number }[] = [
-    { key: "announcements", label: "Announcements" },
+    { key: "announcements", label: "Notices" },
     { key: "schedule", label: "Schedule" },
     { key: "messages", label: "Messages", badge: msgCount },
   ];

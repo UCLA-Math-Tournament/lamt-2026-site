@@ -4,44 +4,6 @@ import { useEffect } from 'react';
 
 const EASE = 'cubic-bezier(0.16, 1, 0.3, 1)';
 
-function initCounters() {
-  const els = document.querySelectorAll<HTMLElement>('[data-count]');
-  if (!els.length) return () => {};
-
-  const easeOut = (t: number) => 1 - Math.pow(1 - t, 3);
-
-  const animate = (el: HTMLElement) => {
-    const target = parseFloat(el.dataset.count ?? '0');
-    const suffix = el.dataset.countSuffix ?? '';
-    const prefix = el.dataset.countPrefix ?? '';
-    const duration = 1100;
-    const start = performance.now();
-
-    const tick = (now: number) => {
-      const progress = Math.min((now - start) / duration, 1);
-      const value = target * easeOut(progress);
-      el.textContent = prefix + (Number.isInteger(target) ? Math.round(value).toString() : value.toFixed(1)) + suffix;
-      if (progress < 1) requestAnimationFrame(tick);
-    };
-
-    requestAnimationFrame(tick);
-  };
-
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
-        animate(entry.target as HTMLElement);
-        observer.unobserve(entry.target);
-      });
-    },
-    { threshold: 0.5 }
-  );
-
-  els.forEach((el) => observer.observe(el));
-  return () => observer.disconnect();
-}
-
 function initReveals() {
   const els = document.querySelectorAll<HTMLElement>(
     [
@@ -51,8 +13,9 @@ function initReveals() {
       '.hero-animate-words .word',
       '.page-title',
       '.lamt-line-item',
-      '.archive-material-link',
-      '.lamt-timeline-item',
+      '.lamt-fact-row',
+      '.tournament-format-row',
+      '.archive-index-group',
       '.faq-accordion-item',
     ].join(', ')
   );
@@ -60,8 +23,8 @@ function initReveals() {
 
   els.forEach((el) => {
     if (el.dataset.revealed) return;
-    el.style.opacity = '0.72';
-    el.style.transform = 'translateY(6px)';
+    el.style.opacity = '0.88';
+    el.style.transform = 'translateY(4px)';
   });
 
   const observer = new IntersectionObserver(
@@ -77,12 +40,12 @@ function initReveals() {
         el.dataset.revealed = '1';
         el.animate(
           [
-            { opacity: 0.72, transform: 'translateY(6px)' },
+            { opacity: 0.88, transform: 'translateY(4px)' },
             { opacity: 1, transform: 'translateY(0)' },
           ],
           {
-            duration: 320,
-            delay: Math.min(index * 35, 140),
+            duration: 220,
+            delay: Math.min(index * 24, 72),
             easing: EASE,
             fill: 'forwards',
           }
@@ -98,42 +61,6 @@ function initReveals() {
   );
 
   els.forEach((el) => observer.observe(el));
-  return () => observer.disconnect();
-}
-
-function initTimelineDraw() {
-  const rails = document.querySelectorAll<HTMLElement>('.timeline-rail');
-  if (!rails.length) return () => {};
-
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
-        (entry.target as HTMLElement).classList.add('timeline-drawn');
-        observer.unobserve(entry.target);
-      });
-    },
-    { threshold: 0.1 }
-  );
-
-  rails.forEach((rail) => observer.observe(rail));
-  return () => observer.disconnect();
-}
-
-function initSectionFocus() {
-  const sections = document.querySelectorAll<HTMLElement>('.section-row, .home-bento, .registration-showcase');
-  if (!sections.length) return () => {};
-
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        entry.target.classList.toggle('is-section-active', entry.isIntersecting);
-      });
-    },
-    { threshold: 0.18, rootMargin: '-24% 0px -58% 0px' }
-  );
-
-  sections.forEach((section) => observer.observe(section));
   return () => observer.disconnect();
 }
 
@@ -168,10 +95,7 @@ export default function AnimationEngine() {
     if (reducedMotion) return;
 
     const cleanups = [
-      initCounters(),
       initReveals(),
-      initTimelineDraw(),
-      initSectionFocus(),
       initHeaderState(),
     ];
 

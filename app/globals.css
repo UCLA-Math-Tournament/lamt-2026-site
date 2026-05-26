@@ -100,8 +100,8 @@ textarea {
 
 @keyframes lamt-rise {
   from {
-    opacity: 0;
-    transform: translateY(8px);
+    opacity: 0.88;
+    transform: translateY(4px);
   }
 
   to {
@@ -426,7 +426,6 @@ textarea {
 .page-kicker,
 .section-title,
 .label-caps,
-.archive-index-heading p,
 .live-update-row time,
 .live-help-card__tag,
 .rules-cell-label,
@@ -479,13 +478,6 @@ textarea {
   margin-top: clamp(1.35rem, 2.4vw, 2rem);
 }
 
-.home-hero__countdowns {
-  display: grid;
-  max-width: 40rem;
-  gap: 1.2rem;
-  margin-top: 1.5rem;
-}
-
 .home-hero__meta,
 .home-hero h1,
 .cinema-lede,
@@ -493,21 +485,21 @@ textarea {
 .home-index,
 .page-hero > *,
 .section-row > * {
-  animation: lamt-rise 420ms var(--ease) both;
+  animation: lamt-rise 240ms var(--ease) both;
 }
 
 .home-hero h1 {
-  animation-delay: 50ms;
+  animation-delay: 30ms;
 }
 
 .cinema-lede,
 .page-hero > :nth-child(2) {
-  animation-delay: 90ms;
+  animation-delay: 55ms;
 }
 
 .cinema-actions,
 .section-row > :nth-child(2) {
-  animation-delay: 130ms;
+  animation-delay: 75ms;
 }
 
 .home-index {
@@ -648,18 +640,40 @@ textarea {
   line-height: 1.45;
 }
 
-.tournament-eligibility-list {
+.lamt-fact-list,
+.tournament-format-list {
   display: grid;
-  gap: 0.35rem;
-  max-width: 42rem;
-  color: var(--text);
-  font-size: 1.08rem;
-  font-weight: 650;
-  line-height: 1.55;
+  border-top: 1px solid var(--rule);
 }
 
-.tournament-eligibility-list li {
-  padding-left: 0;
+.lamt-fact-row,
+.tournament-format-row {
+  display: grid;
+  grid-template-columns: minmax(8rem, 0.32fr) minmax(0, 1fr);
+  gap: clamp(0.8rem, 2vw, 1.5rem);
+  border-bottom: 1px solid var(--rule);
+  padding-block: 0.84rem;
+}
+
+.lamt-fact-row span {
+  color: var(--ucla-blue-dark);
+  font-size: 0.78rem;
+  font-weight: 950;
+  text-transform: uppercase;
+}
+
+.lamt-fact-row strong,
+.tournament-format-row h3 {
+  color: var(--text);
+  font-size: 1.12rem;
+  font-weight: 900;
+  line-height: 1.18;
+}
+
+.tournament-format-row p {
+  color: var(--text-soft);
+  font-weight: 690;
+  line-height: 1.42;
 }
 
 .schedule-tabs,
@@ -850,25 +864,6 @@ textarea {
   max-width: min(100%, 9rem) !important;
 }
 
-.sponsor-contact-line {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.35rem;
-  align-items: baseline;
-  padding-block: clamp(1.5rem, 3vw, 2.5rem);
-  color: var(--text-soft);
-  font-weight: 680;
-}
-
-.sponsor-contact-line a {
-  color: var(--ucla-blue-dark);
-  font-weight: 900;
-  text-decoration: underline;
-  text-decoration-color: var(--ucla-gold);
-  text-decoration-thickness: 2px;
-  text-underline-offset: 0.22em;
-}
-
 .archive-years,
 .archive-index,
 .about-staff-list,
@@ -916,9 +911,10 @@ textarea {
 }
 
 .archive-index-link {
-  display: inline-flex;
+  display: inline-grid;
+  grid-template-columns: minmax(0, max-content) auto;
   width: fit-content;
-  gap: 0.4rem;
+  column-gap: 0.55rem;
   align-items: baseline;
   padding-bottom: 0.14rem;
   text-transform: none;
@@ -1359,12 +1355,19 @@ textarea {
   height: 2.25rem;
   place-items: center;
   color: var(--text);
+  opacity: 0.82;
   transition: color var(--fast) var(--ease), transform var(--fast) var(--ease);
+}
+
+.site-social-link svg {
+  width: 1.12rem;
+  height: 1.12rem;
 }
 
 .site-social-link:hover,
 .site-social-link:focus-visible {
   color: var(--ucla-blue-dark);
+  opacity: 1;
   transform: translateY(-1px);
 }
 
@@ -1501,17 +1504,22 @@ textarea {
 
 @media (max-width: 640px) {
   .site-brand__mark {
-    width: 2.6rem;
-    height: 2.6rem;
+    width: 2.28rem;
+    height: 2.28rem;
   }
 
   .site-brand strong {
-    font-size: 1rem;
+    font-size: 0.96rem;
   }
 
   .site-brand small {
     max-width: 12rem;
-    font-size: 0.68rem;
+    font-size: 0.62rem;
+  }
+
+  .site-menu-button {
+    width: 2.42rem;
+    height: 2.42rem;
   }
 
   .home-hero {
@@ -1523,19 +1531,22 @@ textarea {
     line-height: 0.94;
   }
 
-  .page-title,
-  .sponsor-title {
+  .page-title {
     font-size: 2.72rem;
   }
 
+  .sponsor-title {
+    font-size: 2.34rem;
+  }
+
   .page-hero {
-    padding-block: 3rem 2rem;
+    padding-block: 2.65rem 1.85rem;
   }
 
   .page-summary,
   .section-copy,
   .cinema-lede {
-    font-size: 1rem;
+    font-size: 0.98rem;
   }
 
   .lamt-line-item h3,
@@ -1546,8 +1557,16 @@ textarea {
     font-size: 1.28rem;
   }
 
-  .tournament-eligibility-list {
-    font-size: 0.98rem;
+  .lamt-fact-row,
+  .tournament-format-row {
+    grid-template-columns: 1fr;
+    gap: 0.24rem;
+    padding-block: 0.76rem;
+  }
+
+  .lamt-fact-row strong,
+  .tournament-format-row h3 {
+    font-size: 1.04rem;
   }
 
   .home-index__link strong {
@@ -1555,7 +1574,24 @@ textarea {
   }
 
   .faq-question strong {
+    font-size: 0.98rem;
+  }
+
+  .faq-accordion-content__inner {
+    padding-right: 0;
+    font-size: 0.98rem;
+  }
+
+  .archive-index-heading h3,
+  .about-staff-row h3,
+  .live-update-index h2,
+  .live-schedule-block h2 {
     font-size: 1.05rem;
+  }
+
+  .archive-index-link,
+  .about-staff-row p {
+    font-size: 0.98rem;
   }
 
   .sponsor-logo-frame {

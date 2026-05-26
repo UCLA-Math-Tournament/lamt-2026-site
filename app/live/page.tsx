@@ -26,7 +26,7 @@ const ARCHIVE_UPDATES: Update[] = [
     id: -2,
     timestamp: "Post-contest",
     title: "Questions",
-    body: `Email ${STAFF_EMAIL} with your school, team name, and event.`,
+    body: STAFF_EMAIL,
   },
 ];
 

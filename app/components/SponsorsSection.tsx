@@ -52,7 +52,7 @@ export default function SponsorsSection({
                   {sponsorsByTier[tier].map((src, index) => (
                     <div
                       key={src}
-                      className="sponsor-card sponsor-logo-frame"
+                      className="sponsor-logo-frame"
                       data-logo-scale={getLogoScale(src)}
                       data-logo-tone={getLogoTone(src)}
                     >
@@ -79,12 +79,6 @@ export default function SponsorsSection({
           <p className="section-copy">Pending.</p>
         </div>
       )}
-
-      <div className="sponsor-contact-line">
-        <span>Interested in supporting LAMT?</span>
-        {' '}
-        <a href="mailto:uclamathtournament@gmail.com">Email LAMT</a>
-      </div>
     </section>
   );
 }

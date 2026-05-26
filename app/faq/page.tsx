@@ -16,7 +16,7 @@ const faqs = [
   { id: 'guts', category: 'Contest', q: 'What was the format of the Guts Round?', a: '8 sets of 3 problems plus 1 estimation set, delivered in order.' },
   { id: 'calculators', category: 'Rules', q: 'Were calculators allowed?', a: 'No calculators or computational aids during testing.' },
   { id: 'location', category: 'Logistics', q: 'Where did LAMT 2026 take place?', a: 'UCLA, May 17, 2026. Mathematical Sciences for testing; Court of Sciences for lunch and disputes.' },
-  { id: 'registration-closed', category: 'Registration', q: 'Can I still register for LAMT 2026?', a: 'No. LAMT 2026 is complete. Use Archive for materials and Discord for future announcements.' },
+  { id: 'registration-closed', category: 'Registration', q: 'Can I still register for LAMT 2026?', a: 'No. LAMT 2026 is complete. Use Archive for materials.' },
 ];
 
 const categories = ['All', ...Array.from(new Set(faqs.map((item) => item.category)))];
@@ -59,16 +59,16 @@ export default function FAQPage() {
       </header>
 
       <section className="section-row">
-        <h2 className="section-title">Filter</h2>
+        <h2 className="section-title">Find</h2>
         <div className="faq-console">
           <div className="faq-control-panel" aria-label="FAQ filters">
             <label className="grid gap-2">
-              <span className="label-caps">Search</span>
+              <span className="sr-only">Search FAQ</span>
               <input
                 value={query}
                 onChange={(event) => setQuery(event.target.value)}
                 className="lamt-input"
-                placeholder="teams, calculators, location..."
+                placeholder="Search FAQ"
               />
             </label>
 
