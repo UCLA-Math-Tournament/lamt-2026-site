@@ -186,7 +186,7 @@ textarea {
   bottom: max(1rem, env(safe-area-inset-bottom));
   left: max(4.25rem, calc((100vw - var(--page-max)) / 2 + var(--page-x)));
   z-index: 84;
-  width: min(22rem, calc(100vw - 8rem));
+  width: min(24rem, calc(100vw - 8rem));
   transform: none;
 }
 
@@ -202,29 +202,74 @@ textarea {
 .site-compass__button {
   display: grid;
   width: 100%;
-  min-height: 3rem;
-  grid-template-columns: auto minmax(0, 1fr);
-  gap: 0.65rem;
+  min-height: 3.25rem;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 0.7rem;
   align-items: center;
   border: 1px solid var(--rule-strong);
   background: var(--bg);
   background: color-mix(in srgb, var(--bg) 94%, transparent);
   color: var(--text);
-  padding: 0.42rem 0.82rem;
+  padding: 0.5rem 0.72rem 0.56rem;
   text-align: left;
-  transition: border-color var(--fast) var(--ease), color var(--fast) var(--ease), transform var(--fast) var(--ease);
+  transition: border-color var(--fast) var(--ease), color var(--fast) var(--ease), transform var(--fast) var(--ease), background-color var(--fast) var(--ease);
 }
 
-.site-compass__button img {
+.site-compass__mark {
+  position: relative;
+  display: grid;
+  width: 1.88rem;
+  height: 1.88rem;
+  place-items: center;
+}
+
+.site-compass__mark img {
+  position: relative;
+  z-index: 1;
   width: 1.75rem;
   height: 1.75rem;
   object-fit: contain;
 }
 
-.site-compass__button span {
+.site-compass__mark-progress {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -0.36rem;
+  width: 2px;
+  background: var(--ucla-gold);
+  transform-origin: 50% 0;
+}
+
+.site-compass__label {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.site-compass__count {
+  color: var(--accent-text);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.site-compass__meter {
+  display: flex;
+  grid-column: 1 / -1;
+  gap: 0.22rem;
+}
+
+.site-compass__meter span {
+  flex: 1 1 0;
+  height: 2px;
+  background: var(--rule-strong);
+  transform-origin: left;
+  transition: background-color var(--fast) var(--ease), transform var(--fast) var(--ease);
+}
+
+.site-compass__meter span[data-active="true"] {
+  background: var(--ucla-gold);
+  transform: scaleY(2);
 }
 
 .site-compass__button:hover,
@@ -238,12 +283,13 @@ textarea {
 .site-compass__panel {
   position: absolute;
   right: 0;
-  bottom: calc(100% + 0.55rem);
+  bottom: calc(100% + 0.42rem);
   left: 0;
   display: grid;
   border: 1px solid var(--rule-strong);
   background: var(--bg);
-  box-shadow: 0 16px 38px rgba(0, 59, 92, 0.14);
+  box-shadow: 0 18px 42px rgba(0, 59, 92, 0.13);
+  overflow: hidden;
 }
 
 .site-compass__item {
@@ -2840,12 +2886,23 @@ textarea {
     padding-inline: 0.65rem;
   }
 
-  .site-compass__button img {
+  .site-compass__mark img {
     width: 1.55rem;
     height: 1.55rem;
   }
 
   .site-compass {
+    right: 4.75rem;
+    left: 0.9rem;
+    display: block;
+    width: auto;
+  }
+
+  .site-compass__button {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+
+  .site-compass__count {
     display: none;
   }
 

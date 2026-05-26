@@ -30,7 +30,7 @@ const REVEAL_SELECTOR = [
   '.sponsor-grid',
 ].join(',');
 
-const TOC_SELECTOR = '.page-hero h1, .home-hero h1, .section-row > .section-title, .sponsor-heading .sponsor-title';
+const TOC_SELECTOR = '.page-hero h1, .home-hero h1, .contest-flow h2, .section-row > .section-title, .sponsor-heading .sponsor-title';
 
 type TocItem = {
   id: string;
@@ -56,8 +56,10 @@ export default function SiteExperienceClient() {
     const targets = Array.from(document.querySelectorAll<HTMLElement>(REVEAL_SELECTOR));
     const tocTargets = Array.from(document.querySelectorAll<HTMLElement>(TOC_SELECTOR));
     const nextToc = tocTargets.map((target, index) => {
+      const label = target.getAttribute('aria-label') || target.textContent?.trim() || `Section ${index + 1}`;
+
       if (!target.id) {
-        const slug = (target.textContent || `section-${index + 1}`)
+        const slug = label
           .toLowerCase()
           .replace(/\s+/g, '-')
           .replace(/[^\w-]/g, '');
@@ -66,7 +68,7 @@ export default function SiteExperienceClient() {
 
       return {
         id: target.id,
-        label: target.textContent?.trim() || 'Section',
+        label,
       };
     });
 
@@ -119,6 +121,8 @@ export default function SiteExperienceClient() {
     () => tocItems.find((item) => item.id === activeId)?.label || tocItems[0]?.label || 'LAMT',
     [activeId, tocItems],
   );
+  const activeIndex = Math.max(0, tocItems.findIndex((item) => item.id === activeId));
+  const showCompass = !pathname.startsWith('/admin') && tocItems.length > 1;
 
   const goToSection = (id: string) => {
     const target = document.getElementById(id);
@@ -139,10 +143,12 @@ export default function SiteExperienceClient() {
           </motion.span>
         </div>
       </div>
-      {tocItems.length > 1 ? (
+      {showCompass ? (
         <motion.nav
           className="site-compass"
+          data-open={compassOpen}
           aria-label="Page sections"
+          layout
           initial={reduceMotion ? false : { y: 18, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
@@ -151,10 +157,22 @@ export default function SiteExperienceClient() {
             type="button"
             className="site-compass__button"
             aria-expanded={compassOpen}
+            aria-label={`${compassOpen ? 'Close' : 'Open'} page sections`}
             onClick={() => setCompassOpen((open) => !open)}
           >
-            <Image src="/LAMTBear.png" alt="" width={28} height={28} />
-            <span>{activeLabel}</span>
+            <span className="site-compass__mark">
+              <Image src="/LAMTBear.png" alt="" width={28} height={28} />
+              <motion.span className="site-compass__mark-progress" style={{ scaleY: progress }} />
+            </span>
+            <span className="site-compass__label">{activeLabel}</span>
+            <span className="site-compass__count">
+              {String(activeIndex + 1).padStart(2, '0')} / {String(tocItems.length).padStart(2, '0')}
+            </span>
+            <span className="site-compass__meter" aria-hidden="true">
+              {tocItems.map((item) => (
+                <span key={item.id} data-active={item.id === activeId} />
+              ))}
+            </span>
           </button>
           <AnimatePresence>
             {compassOpen ? (
