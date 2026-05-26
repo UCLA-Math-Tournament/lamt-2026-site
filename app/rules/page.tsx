@@ -139,27 +139,25 @@ export default function RulesPage() {
 
       <section id="allowed-not-allowed" className="section-row">
         <h2 className="section-title">Materials</h2>
-        <div className="rules-comparison-board">
-          <div className="rules-comparison-table" role="table" aria-label="LAMT rules reference">
-            <div className="rules-table-row rules-table-head" role="row">
-              <span role="columnheader">Area</span>
-              <span role="columnheader">Allowed</span>
-              <span role="columnheader">Not Allowed</span>
-            </div>
-            {ruleTable.map((row) => (
-              <div key={row.category} className="rules-table-row" role="row">
-                <strong role="cell">{row.category}</strong>
-                <p role="cell">
-                  <span className="rules-cell-label">Allowed</span>
-                  {row.allowed}
-                </p>
-                <p role="cell">
-                  <span className="rules-cell-label">Not Allowed</span>
-                  {row.notAllowed}
-                </p>
-              </div>
-            ))}
+        <div className="rules-comparison-table" role="table" aria-label="LAMT rules reference">
+          <div className="rules-table-row rules-table-head" role="row">
+            <span role="columnheader">Area</span>
+            <span role="columnheader">Allowed</span>
+            <span role="columnheader">Not Allowed</span>
           </div>
+          {ruleTable.map((row) => (
+            <div key={row.category} className="rules-table-row" role="row">
+              <strong role="cell">{row.category}</strong>
+              <p role="cell">
+                <span className="rules-cell-label">Allowed</span>
+                {row.allowed}
+              </p>
+              <p role="cell">
+                <span className="rules-cell-label">Not Allowed</span>
+                {row.notAllowed}
+              </p>
+            </div>
+          ))}
         </div>
       </section>
 

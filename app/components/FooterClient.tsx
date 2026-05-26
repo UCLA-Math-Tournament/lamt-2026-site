@@ -46,24 +46,22 @@ export default function FooterClient() {
           <Image src="/LAMTBear.png" alt="LAMT Bear Logo" width={150} height={150} className="site-footer__mark" />
         </Link>
 
-        <div className="site-footer__contact">
-          <nav className="site-footer__socials" aria-label="LAMT contact links">
-            {socialLinks.map((item) => (
-              <a
-                key={item.title}
-                href={item.href}
-                target={item.href.startsWith('mailto:') ? undefined : '_blank'}
-                rel={item.href.startsWith('mailto:') ? undefined : 'noreferrer'}
-                aria-label={`LAMT ${item.title}`}
-                title={`LAMT ${item.title}`}
-                className="site-social-link"
-                data-platform={item.title.toLowerCase()}
-              >
-                <span className="site-social-link__icon" aria-hidden="true">{item.icon}</span>
-              </a>
-            ))}
-          </nav>
-        </div>
+        <nav className="site-footer__socials" aria-label="LAMT contact links">
+          {socialLinks.map((item) => (
+            <a
+              key={item.title}
+              href={item.href}
+              target={item.href.startsWith('mailto:') ? undefined : '_blank'}
+              rel={item.href.startsWith('mailto:') ? undefined : 'noreferrer'}
+              aria-label={`LAMT ${item.title}`}
+              title={`LAMT ${item.title}`}
+              className="site-social-link"
+              data-platform={item.title.toLowerCase()}
+            >
+              <span className="site-social-link__icon" aria-hidden="true">{item.icon}</span>
+            </a>
+          ))}
+        </nav>
 
         <div className="site-footer__theme">
           <DarkModeToggle />

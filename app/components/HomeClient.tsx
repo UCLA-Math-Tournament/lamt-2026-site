@@ -9,11 +9,7 @@ export default function HomeClient() {
     <section className="home-hero">
       <div className="home-hero__content">
         <p className="home-hero__meta">May 17, 2026. UCLA.</p>
-        <h1 className="hero-animate-words">
-          <span className="word">Los Angeles</span>
-          {' '}
-          <span className="word gold-shimmer-text">Math Tournament</span>
-        </h1>
+        <h1>Los Angeles Math Tournament</h1>
         <p className="cinema-lede">
           Free in-person math contest for middle and high school students.
         </p>

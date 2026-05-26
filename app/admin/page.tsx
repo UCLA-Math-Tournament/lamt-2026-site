@@ -515,13 +515,6 @@ export default function AdminPage() {
                 className="admin-tools-tab"
                 data-state={isSelected ? "selected" : undefined}
               >
-                {isSelected ? (
-                  <motion.span
-                    className="admin-tools-tab-marker"
-                    layoutId="admin-tools-tab-marker"
-                    transition={reduceMotion ? { duration: 0 } : { type: "spring", stiffness: 430, damping: 36 }}
-                  />
-                ) : null}
                 <span>{item.label}</span>
                 {(item.badge ?? 0) > 0 && <strong>{item.badge}</strong>}
               </button>

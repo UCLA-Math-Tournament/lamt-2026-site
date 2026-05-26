@@ -35,10 +35,8 @@ export default function TournamentPage() {
           <span className="gold-rule" />
         </div>
         <div>
-          <h1 className="page-title hero-animate-words">
-            <span className="word">Tournament</span>
-          </h1>
-          <p className="page-summary reveal mt-5">
+          <h1 className="page-title">Tournament</h1>
+          <p className="page-summary mt-5">
             May 17, 2026. UCLA. Teams up to 6.
           </p>
         </div>
@@ -58,7 +56,7 @@ export default function TournamentPage() {
 
       <section className="section-row">
         <h2 className="section-title">Format</h2>
-        <div className="tournament-format-list stagger-parent">
+        <div className="tournament-format-list">
           {format.map(({ name, desc }) => (
             <article key={name} className="tournament-format-row">
               <h3>{name}</h3>

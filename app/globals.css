@@ -369,17 +369,11 @@ textarea {
   padding: 5.6rem var(--page-x) 4.1rem;
 }
 
-.home-hero__mesh,
-.home-hero__bear {
-  display: none;
-}
-
 .home-hero__content {
   max-width: 66rem;
 }
 
 .home-hero__meta,
-.page-kicker,
 .section-title,
 .label-caps,
 .live-update-row time,
@@ -412,10 +406,6 @@ textarea {
   max-width: 12ch;
   font-size: 6.85rem;
   line-height: 0.88;
-}
-
-.home-hero h1 span {
-  display: block;
 }
 
 .cinema-lede {
@@ -594,10 +584,6 @@ textarea {
   padding: 0.35rem 0 0.75rem;
 }
 
-.admin-tools-tab-marker {
-  display: none;
-}
-
 .lamt-agenda,
 .live-schedule-list {
   display: grid;
@@ -774,9 +760,7 @@ textarea {
   padding-top: 0;
 }
 
-.about-staff-row h3,
-.live-update-index h2,
-.live-schedule-block h2 {
+.about-staff-row h3 {
   color: var(--text);
   font-size: 1.16rem;
   font-weight: 900;
@@ -1157,11 +1141,6 @@ textarea {
   gap: 1rem;
 }
 
-.live-update-index h2,
-.live-schedule-block h2 {
-  margin-bottom: 0.9rem;
-}
-
 .live-update-row {
   grid-template-columns: minmax(7rem, 9.5rem) minmax(0, 1fr);
 }
@@ -1492,8 +1471,8 @@ textarea {
 
   .archive-round-row strong,
   .about-staff-row h3,
-  .live-update-index h2,
-  .live-schedule-block h2 {
+  .live-update-row h3,
+  .live-schedule-main h3 {
     font-size: 1.05rem;
   }
 

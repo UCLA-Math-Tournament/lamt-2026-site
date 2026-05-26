@@ -83,9 +83,7 @@ export default function AboutPage() {
           <span className="gold-rule" />
         </div>
         <div>
-          <h1 className="page-title hero-animate-words">
-            <span className="word">About</span>
-          </h1>
+          <h1 className="page-title">About</h1>
         </div>
       </header>
 
