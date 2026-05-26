@@ -2683,6 +2683,97 @@ textarea {
   z-index: 1;
 }
 
+.theme-toggle__orb {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  width: 1.52rem;
+  height: 1.52rem;
+  place-items: center;
+}
+
+.theme-toggle__sun,
+.theme-toggle__moon,
+.theme-toggle__pulse {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+}
+
+.theme-toggle__core {
+  position: absolute;
+  width: 0.68rem;
+  height: 0.68rem;
+  border-radius: 999px;
+  background: var(--ucla-gold);
+}
+
+.theme-toggle__ray {
+  position: absolute;
+  width: 0.1rem;
+  height: 0.34rem;
+  border-radius: 999px;
+  background: var(--ucla-gold);
+  transform-origin: 50% 0.76rem;
+}
+
+.theme-toggle__ray:nth-child(1) {
+  transform: rotate(0deg) translateY(-0.68rem);
+}
+
+.theme-toggle__ray:nth-child(2) {
+  transform: rotate(45deg) translateY(-0.68rem);
+}
+
+.theme-toggle__ray:nth-child(3) {
+  transform: rotate(90deg) translateY(-0.68rem);
+}
+
+.theme-toggle__ray:nth-child(4) {
+  transform: rotate(135deg) translateY(-0.68rem);
+}
+
+.theme-toggle__ray:nth-child(5) {
+  transform: rotate(180deg) translateY(-0.68rem);
+}
+
+.theme-toggle__ray:nth-child(6) {
+  transform: rotate(225deg) translateY(-0.68rem);
+}
+
+.theme-toggle__ray:nth-child(7) {
+  transform: rotate(270deg) translateY(-0.68rem);
+}
+
+.theme-toggle__ray:nth-child(8) {
+  transform: rotate(315deg) translateY(-0.68rem);
+}
+
+.theme-toggle__moon {
+  width: 1.1rem;
+  height: 1.1rem;
+  justify-self: center;
+  align-self: center;
+  border-radius: 999px;
+  background: var(--ucla-gold);
+}
+
+.theme-toggle__moon-cut {
+  position: absolute;
+  top: -0.12rem;
+  right: -0.18rem;
+  width: 0.9rem;
+  height: 0.9rem;
+  border-radius: 999px;
+  background: var(--bg);
+  transition: background-color var(--fast) var(--ease);
+}
+
+.theme-toggle__pulse {
+  border: 1px solid var(--ucla-gold);
+}
+
 .theme-toggle:hover,
 .theme-toggle:focus-visible {
   border-color: var(--ucla-gold);
