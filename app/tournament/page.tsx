@@ -74,8 +74,7 @@ export default function TournamentPage() {
           {schedule.map(({ time, end, event, location }) => (
             <article key={`${time}-${event}`} className="lamt-agenda-item">
               <div className="lamt-agenda-time">
-                <span>{time}</span>
-                <small>{end}</small>
+                <strong>{time} - {end}</strong>
               </div>
               <div className="lamt-agenda-main">
                 <h3>{event}</h3>

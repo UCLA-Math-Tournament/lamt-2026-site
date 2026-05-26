@@ -651,6 +651,7 @@ textarea {
   overflow-wrap: normal;
 }
 
+.lamt-agenda-time strong,
 .live-schedule-time strong {
   white-space: nowrap;
 }

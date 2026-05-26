@@ -86,9 +86,6 @@ export default function AboutPage() {
           <h1 className="page-title hero-animate-words">
             <span className="word">About</span>
           </h1>
-          <p className="page-summary reveal mt-5">
-            UCLA students. Free contest. In person.
-          </p>
         </div>
       </header>
 

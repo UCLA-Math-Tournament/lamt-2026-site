@@ -1,5 +1,3 @@
-const STAFF_EMAIL = 'uclamathtournament@gmail.com';
-
 const faqs = [
   { id: 'eligibility', q: 'Who is eligible to compete at LAMT?', a: 'Grade 12 or below as of May 2026. No geographic restriction.' },
   { id: 'fee', q: 'Was there a registration fee?', a: 'No. LAMT 2026 was free. Participants covered travel and housing.' },
@@ -38,18 +36,6 @@ export default function FAQPage() {
               <p>{item.a}</p>
             </details>
           ))}
-        </div>
-      </section>
-
-      <section className="section-row">
-        <h2 className="section-title">Contact</h2>
-        <div className="contact-strip">
-          <div>
-            <h3>{STAFF_EMAIL}</h3>
-          </div>
-          <a href={`mailto:${STAFF_EMAIL}`} className="btn-outline">
-            Email Staff
-          </a>
         </div>
       </section>
     </div>

@@ -30,37 +30,6 @@ const ARCHIVE_UPDATES: Update[] = [
   },
 ];
 
-function parseTime(value: string): number {
-  const [time, period] = value.split(" ");
-  const [hour, minute] = time.split(":").map(Number);
-  let hours = hour;
-
-  if (period === "PM" && hour !== 12) hours += 12;
-  if (period === "AM" && hour === 12) hours = 0;
-
-  return hours * 60 + minute;
-}
-
-function getTimelineState(schedule: ScheduleItem[], now: Date | null) {
-  if (!now) return { currentIdx: -1, nextIdx: -1, progress: 0 };
-
-  const currentMinutes = now.getHours() * 60 + now.getMinutes();
-  const currentIdx = schedule.findIndex((item) => {
-    const start = parseTime(item.time);
-    const end = parseTime(item.end);
-    return currentMinutes >= start && currentMinutes < end;
-  });
-  const nextIdx = schedule.findIndex((item) => currentMinutes < parseTime(item.time));
-
-  if (currentIdx === -1) return { currentIdx, nextIdx, progress: 0 };
-
-  const start = parseTime(schedule[currentIdx].time);
-  const end = parseTime(schedule[currentIdx].end);
-  const progress = Math.min(100, Math.max(0, ((currentMinutes - start) / (end - start)) * 100));
-
-  return { currentIdx, nextIdx, progress };
-}
-
 function readStored<T>(key: string, fallback: T): T {
   const raw = window.localStorage.getItem(key) || window.sessionStorage.getItem(key);
   if (!raw) return fallback;
@@ -68,36 +37,22 @@ function readStored<T>(key: string, fallback: T): T {
 }
 
 function ScheduleTimeline({ schedule }: { schedule: ScheduleItem[] }) {
-  const { currentIdx, nextIdx } = getTimelineState(schedule, new Date());
-
   return (
     <section className="live-schedule-block">
       <div className="live-schedule-list" aria-label="LAMT 2026 tournament day schedule">
-        {schedule.map((item, index) => {
-          const state = TOURNAMENT_OVER
-            ? "archive"
-            : index === currentIdx
-              ? "now"
-              : index === nextIdx
-                ? "next"
-                : index < currentIdx
-                  ? "done"
-                  : "upcoming";
-
-          return (
-            <article key={`${item.time}-${item.event}`} className="live-schedule-item" data-state={state}>
-              <div className="live-schedule-time">
-                {item.originalTime && <span>{item.originalTime}</span>}
-                <strong>{item.time}-{item.end}</strong>
-              </div>
-              <div className="live-schedule-main">
-                <h3>{item.event}</h3>
-                {item.adjustmentReason && <p>{item.adjustmentReason}</p>}
-              </div>
-              <div className="live-schedule-place">{item.location}</div>
-            </article>
-          );
-        })}
+        {schedule.map((item) => (
+          <article key={`${item.time}-${item.event}`} className="live-schedule-item">
+            <div className="live-schedule-time">
+              <strong>{item.time} - {item.end}</strong>
+              {item.originalTime && <span>{item.originalTime}</span>}
+            </div>
+            <div className="live-schedule-main">
+              <h3>{item.event}</h3>
+              {item.adjustmentReason && <p>{item.adjustmentReason}</p>}
+            </div>
+            <div className="live-schedule-place">{item.location}</div>
+          </article>
+        ))}
       </div>
     </section>
   );

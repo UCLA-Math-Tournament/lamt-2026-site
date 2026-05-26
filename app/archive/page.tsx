@@ -38,16 +38,6 @@ export default function ArchivePage() {
       href: '/lamt2026/Apology Letter.pdf',
       type: 'PDF',
     },
-    {
-      label: 'Schedule',
-      href: '/tournament',
-      type: 'Page',
-    },
-    {
-      label: 'Rules',
-      href: '/rules',
-      type: 'Page',
-    },
   ];
 
   return (
