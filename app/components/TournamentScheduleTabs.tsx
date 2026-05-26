@@ -50,13 +50,6 @@ export default function TournamentScheduleTabs({ schedule }: { schedule: Schedul
     ? annotatedSchedule
     : annotatedSchedule.filter((item) => item.period === activePeriod);
   const activeMeta = periods.find((period) => period.id === activePeriod) || periods[0];
-  const counts = periods.reduce<Record<PeriodId, number>>((acc, period) => {
-    acc[period.id] = period.id === 'all'
-      ? annotatedSchedule.length
-      : annotatedSchedule.filter((item) => item.period === period.id).length;
-    return acc;
-  }, { all: 0, morning: 0, afternoon: 0, closing: 0 });
-
   return (
     <div className="schedule-tabs">
       <div className="schedule-tab-list" role="tablist" aria-label="Schedule filters">
@@ -70,7 +63,7 @@ export default function TournamentScheduleTabs({ schedule }: { schedule: Schedul
               role="tab"
               aria-selected={isActive}
               aria-controls="schedule-period-panel"
-              aria-label={`${period.label}, ${counts[period.id]} ${counts[period.id] === 1 ? 'event' : 'events'}`}
+              aria-label={`${period.label} schedule`}
               className="schedule-tab"
               onClick={() => setActivePeriod(period.id)}
             >
@@ -82,7 +75,6 @@ export default function TournamentScheduleTabs({ schedule }: { schedule: Schedul
                 />
               ) : null}
               <span className="schedule-tab-label">{period.label}</span>
-              <strong>{counts[period.id]}</strong>
             </button>
           );
         })}
@@ -99,18 +91,18 @@ export default function TournamentScheduleTabs({ schedule }: { schedule: Schedul
         <AnimatePresence mode="wait" initial={false}>
           <motion.div
             key={activePeriod}
-            className="lamt-timeline"
+            className="lamt-agenda"
             aria-label={`${activeMeta.label} LAMT 2026 schedule`}
-            initial={reduceMotion ? false : { opacity: 0, y: 10 }}
+            initial={reduceMotion ? false : { opacity: 0, y: 4 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={reduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: -6 }}
+            exit={reduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: -4 }}
             transition={reduceMotion ? { duration: 0 } : { duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
           >
-            {visibleSchedule.map(({ time, end, event, location, note, index }, visibleIndex) => (
+            {visibleSchedule.map(({ time, end, event, location, note }, visibleIndex) => (
               <motion.article
                 key={`${time}-${event}`}
-                className="lamt-timeline-item"
-                initial={reduceMotion ? false : { opacity: 0, x: -8 }}
+                className="lamt-agenda-item"
+                initial={reduceMotion ? false : { opacity: 0, x: -2 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={
                   reduceMotion
@@ -118,17 +110,15 @@ export default function TournamentScheduleTabs({ schedule }: { schedule: Schedul
                     : { duration: 0.18, delay: Math.min(visibleIndex * 0.025, 0.12), ease: [0.16, 1, 0.3, 1] }
                 }
               >
-                <div className="lamt-timeline-node" aria-hidden="true">
-                  <span>{String(index + 1).padStart(2, '0')}</span>
+                <div className="lamt-agenda-time">
+                  <span>{time}</span>
+                  <small>{end}</small>
                 </div>
-                <div className="lamt-timeline-card">
-                  <div>
-                    <span className="lamt-timeline-time">{time}-{end}</span>
-                    <h3>{event}</h3>
-                  </div>
+                <div className="lamt-agenda-main">
+                  <h3>{event}</h3>
                   <p>{note}</p>
-                  <strong>{location}</strong>
                 </div>
+                <strong className="lamt-agenda-place">{location}</strong>
               </motion.article>
             ))}
           </motion.div>

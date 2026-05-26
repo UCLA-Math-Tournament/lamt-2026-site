@@ -47,8 +47,7 @@ export default function FooterClient() {
         </Link>
 
         <div className="site-footer__contact">
-          <p className="site-footer__eyebrow">Contact</p>
-          <div className="site-footer__socials" aria-label="LAMT contact links">
+          <nav className="site-footer__socials" aria-label="LAMT contact links">
             {socialLinks.map((item) => (
               <a
                 key={item.title}
@@ -61,12 +60,9 @@ export default function FooterClient() {
                 data-platform={item.title.toLowerCase()}
               >
                 <span className="site-social-link__icon" aria-hidden="true">{item.icon}</span>
-                <span className="site-social-link__copy">
-                  <strong>{item.title}</strong>
-                </span>
               </a>
             ))}
-          </div>
+          </nav>
         </div>
 
         <div className="site-footer__theme">

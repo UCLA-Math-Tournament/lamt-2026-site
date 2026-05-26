@@ -53,13 +53,6 @@ export default function ArchivePage() {
           <section key={year.title} className="section-row">
             <h2 className="section-title">{year.title}</h2>
             <div className="archive-year-board">
-              <div className="archive-year-meta">
-                <span className="label-caps">Files</span>
-                <strong>LAMT {year.title}</strong>
-                <p className="section-copy">
-                  Problems, solutions, results.
-                </p>
-              </div>
               <ArchiveMaterialGrid
                 groups={Object.entries(year.files).map(([category, items]) => ({
                   category,

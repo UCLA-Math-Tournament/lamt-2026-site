@@ -1,7 +1,6 @@
 "use client";
 
-import { useEffect, useState, type CSSProperties } from "react";
-import { motion, useReducedMotion } from "framer-motion";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import VenueMap from "../components/VenueMap";
 import type { ScheduleItem, Update } from "./types";
@@ -77,68 +76,12 @@ function readStored<T>(key: string, fallback: T): T {
   return JSON.parse(raw) as T;
 }
 
-function LiveStatus({ schedule }: { schedule: ScheduleItem[] }) {
-  const [now, setNow] = useState<Date | null>(null);
-
-  useEffect(() => {
-    const update = () => setNow(new Date());
-    update();
-    const id = window.setInterval(update, 30_000);
-    return () => window.clearInterval(id);
-  }, []);
-
-  const { currentIdx, nextIdx, progress } = getTimelineState(schedule, now);
-  const current = schedule[currentIdx];
-  const next = current ? schedule[currentIdx + 1] : schedule[nextIdx];
-  const displayEvent = TOURNAMENT_OVER ? "LAMT 2026 concluded." : current?.event || next?.event || "Thanks for joining LAMT.";
-  const displayMeta = TOURNAMENT_OVER ? "May 17, 2026 / UCLA" : `${(current || next)?.time}-${(current || next)?.end} / ${(current || next)?.location}`;
-
-  return (
-    <section className="lamt-panel">
-      <div className="lamt-panel-header">
-        <div>
-          <h2 className="mt-1 text-xl font-extrabold text-[var(--color-text)]">
-            {TOURNAMENT_OVER ? "Tournament Complete" : current ? "Happening Now" : next ? "Next Up" : "Schedule Complete"}
-          </h2>
-        </div>
-        {!TOURNAMENT_OVER && (
-          <span className="inline-flex border-2 border-[var(--ucla-gold)] bg-[var(--ucla-gold)] px-3 py-1 text-sm font-extrabold uppercase text-[var(--ucla-blue-deep)]">
-            Live
-          </span>
-        )}
-      </div>
-
-      <div className="lamt-panel-body">
-        <p className="text-2xl font-extrabold text-[var(--color-text)]">{displayEvent}</p>
-        {(TOURNAMENT_OVER || current || next) && (
-          <p className="mt-2 text-lg font-bold text-[var(--color-text-secondary)]">
-            {displayMeta}
-          </p>
-        )}
-        {!TOURNAMENT_OVER && current && (
-          <>
-            <div className="mt-5 h-3 border-2 border-[var(--color-border)] bg-[var(--color-surface-2)]">
-              <div className="h-full bg-[var(--ucla-gold)]" style={{ width: `${progress}%` }} />
-            </div>
-            {next && <p className="mt-3 text-sm font-bold text-[var(--color-text-muted)]">Next: {next.event} at {next.time}</p>}
-          </>
-        )}
-        {!TOURNAMENT_OVER && !current && next && <p className="mt-3 text-sm font-bold text-[var(--color-text-muted)]">The next scheduled event starts at {next.time}.</p>}
-      </div>
-    </section>
-  );
-}
-
 function ScheduleTimeline({ schedule }: { schedule: ScheduleItem[] }) {
   const { currentIdx, nextIdx } = getTimelineState(schedule, new Date());
 
   return (
-    <section className="lamt-panel">
-      <div className="lamt-panel-header">
-        <div>
-          <h2 className="mt-1 text-xl font-extrabold text-[var(--color-text)]">LAMT 2026 Schedule</h2>
-        </div>
-      </div>
+    <section className="live-schedule-block">
+      <h2>LAMT 2026 Schedule</h2>
       <div className="live-schedule-list" aria-label="LAMT 2026 tournament day schedule">
         {schedule.map((item, index) => {
           const state = TOURNAMENT_OVER
@@ -187,100 +130,30 @@ function MapSection() {
 function UpdatesFeed({ updates, previewMode }: { updates: Update[]; previewMode: boolean }) {
   const useArchiveUpdates = !previewMode && TOURNAMENT_OVER && updates.length === 0;
   const displayedUpdates = useArchiveUpdates ? ARCHIVE_UPDATES : updates;
-  const heading = previewMode ? "Preview" : "Posted";
-  const reduceMotion = useReducedMotion();
-  const noticeHover = reduceMotion ? undefined : { x: 2 };
-
-  function noticeStyle(index: number): CSSProperties {
-    return {
-      "--notice-delay": `${Math.min(index * 55, 180)}ms`,
-      "--notice-rail-delay": `${Math.min(index * 55 + 60, 220)}ms`,
-      "--notice-detail-delay": `${Math.min(index * 55 + 90, 250)}ms`,
-    } as CSSProperties;
-  }
+  const heading = previewMode ? "Preview" : "Updates";
 
   return (
-    <section className="lamt-panel" aria-live="polite">
-      <div className="lamt-panel-header">
-        <div>
-          <h2 className="mt-1 text-xl font-extrabold text-[var(--color-text)]">{heading}</h2>
-        </div>
-        {(displayedUpdates.length > 0 || previewMode) && (
-          <div className="flex flex-wrap items-center justify-end gap-2">
-            <span className="font-bold text-[var(--color-text-muted)]">
-              {displayedUpdates.length === 0 ? "No notices" : `${displayedUpdates.length} ${displayedUpdates.length === 1 ? "notice" : "notices"}`}
-            </span>
-            {previewMode && (
-              <span className="feed-mode-badge feed-mode-badge--preview">
-                Preview
-              </span>
-            )}
-          </div>
-        )}
-      </div>
+    <section className="live-update-index" aria-live="polite">
+      <h2>{heading}</h2>
       {displayedUpdates.length === 0 ? (
-        <div className="live-announcement-list" role="status">
-          <motion.div
-            className="live-announcement-card live-announcement-card--empty"
-            data-mode={previewMode ? "preview" : TOURNAMENT_OVER ? "archive" : "posted"}
-            style={noticeStyle(0)}
-            whileHover={noticeHover}
-            transition={{ duration: 0.18, ease: [0.16, 1, 0.3, 1] }}
-          >
-            <span className="live-announcement-rail" aria-hidden="true" />
-            <div className="live-announcement-shell">
-              <span className="live-announcement-badge" aria-hidden="true">
-                {previewMode ? "D" : TOURNAMENT_OVER ? "A" : "L"}
-              </span>
-              <div className="live-announcement-content">
-                <div className="live-announcement-meta">
-                  <span className="live-latest-badge live-latest-badge--quiet">
-                    {previewMode ? "Preview" : TOURNAMENT_OVER ? "Archive" : "Official"}
-                  </span>
-                </div>
-                <p className="section-copy live-announcement-copy">
-                  {previewMode ? "No preview notices." : "No announcements yet."}
-                </p>
-              </div>
-            </div>
-          </motion.div>
-        </div>
+        <p className="section-copy">{previewMode ? "No preview notices." : "No announcements yet."}</p>
       ) : (
-        <div className="live-announcement-list" role="list">
+        <div className="live-update-list" role="list">
           {displayedUpdates.map((update, index) => {
-            const status = previewMode ? "Preview" : useArchiveUpdates ? "" : index === 0 ? "Latest" : "Posted";
-            const badge = previewMode ? "P" : useArchiveUpdates ? "" : index === 0 ? "L" : "P";
-
             return (
-            <motion.article
+            <article
               key={update.id}
-              className="live-announcement-card"
+              className="live-update-row"
               data-latest={index === 0 ? "true" : undefined}
               data-mode={useArchiveUpdates ? "archive" : previewMode ? "preview" : "posted"}
               role="listitem"
-              style={noticeStyle(index)}
-              whileHover={noticeHover}
-              transition={{ duration: 0.18, ease: [0.16, 1, 0.3, 1] }}
             >
-              <span className="live-announcement-rail" aria-hidden="true" />
-              <div className="live-announcement-shell">
-                {badge && <span className="live-announcement-badge" aria-hidden="true">{badge}</span>}
-                <div className="live-announcement-content">
-                  <div className="live-announcement-meta">
-                    {status && (
-                      <span className="live-latest-badge" aria-label={`${status} announcement`}>
-                        {status}
-                      </span>
-                    )}
-                    <span className="live-announcement-time">{update.timestamp}</span>
-                  </div>
-                  <div className="live-announcement-copy">
-                    {update.title && <h3>{update.title}</h3>}
-                    <p className="section-copy whitespace-pre-line">{update.body}</p>
-                  </div>
-                </div>
+              <time>{update.timestamp}</time>
+              <div>
+                {update.title && <h3>{update.title}</h3>}
+                <p className="section-copy whitespace-pre-line">{update.body}</p>
               </div>
-            </motion.article>
+            </article>
             );
           })}
         </div>
@@ -294,7 +167,7 @@ function PreviewModeNotice() {
     <section className="local-mode-notice local-mode-notice--preview" aria-label="Staff preview notice">
       <div>
         <p className="label-caps">Preview</p>
-        <h2>Staff only.</h2>
+        <h2>Draft view.</h2>
       </div>
       <Link href="/live" className="btn-outline">
         Event Page
@@ -422,7 +295,6 @@ export default function LivePage() {
       <section id="schedule" className="section-row">
         <h2 className="section-title">Schedule</h2>
         <div className="grid items-start gap-5 xl:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)]">
-          <LiveStatus schedule={schedule} />
           <ScheduleTimeline schedule={schedule} />
         </div>
       </section>

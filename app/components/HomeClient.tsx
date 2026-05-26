@@ -3,7 +3,6 @@
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { ArrowRightIcon, FileTextIcon } from '@radix-ui/react-icons';
-import AnimatedStatValue from './AnimatedStatValue';
 
 const homeButtonClass =
   'hero-button inline-flex min-h-12 items-center justify-center gap-2 px-5 py-3 text-sm font-extrabold uppercase text-white';
@@ -81,22 +80,14 @@ export default function HomeClient({
   const regDiff = useCountdown('2026-05-10T23:59:59-07:00');
   const regClosed = regDiff <= 0;
   const tournamentComplete = tournamentDiff <= 0;
-  const highlightStats = [
-    { value: 'May 17', label: '2026' },
-    { value: 'UCLA', label: 'campus' },
-    { value: '250+', label: 'students' },
-    { value: '$0', label: 'fee' },
-  ];
+
   return (
     <>
       <section className="home-hero">
         <div aria-hidden className="home-hero__mesh" />
 
         <div className="home-hero__content">
-          <div className="hero-badge">
-            <span>LAMT 2026</span>
-            <strong>{tournamentComplete ? 'May 17 at UCLA' : 'Registration closed May 10'}</strong>
-          </div>
+          <p className="home-hero__meta">May 17, 2026 / UCLA</p>
           <h1 className="hero-animate-words">
             <span className="word">Los Angeles</span>
             {' '}
@@ -139,15 +130,6 @@ export default function HomeClient({
               </div>
             </div>
           )}
-
-          <div className="home-hero__stats">
-            {highlightStats.map((stat) => (
-              <div key={stat.label} className="home-stat-card">
-                <strong><AnimatedStatValue value={stat.value} /></strong>
-                <span>{stat.label}</span>
-              </div>
-            ))}
-          </div>
         </div>
       </section>
     </>

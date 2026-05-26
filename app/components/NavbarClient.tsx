@@ -15,8 +15,6 @@ const navLinks = [
   { href: '/about', label: 'About' },
 ];
 
-const ctaLink = { href: 'https://discord.gg/tqR3bGjVke', label: 'Discord' };
-
 export default function NavbarClient() {
   const [menuOpen, setMenuOpen] = useState(false);
   const pathname = usePathname();
@@ -45,9 +43,6 @@ export default function NavbarClient() {
               </Link>
             );
           })}
-          <a href={ctaLink.href} target="_blank" rel="noreferrer" className="btn-premium btn-premium--gold">
-            {ctaLink.label}
-          </a>
         </nav>
 
         <button type="button" onClick={() => setMenuOpen((open) => !open)} aria-label="Toggle menu" className="site-menu-button">
@@ -70,9 +65,6 @@ export default function NavbarClient() {
                 </Link>
               );
             })}
-          <a href={ctaLink.href} target="_blank" rel="noreferrer" className="btn-premium btn-premium--gold" onClick={() => setMenuOpen(false)}>
-            {ctaLink.label}
-          </a>
         </nav>
       )}
     </header>

@@ -101,16 +101,16 @@ export default function FAQPage() {
               className="faq-accordion"
               aria-live="polite"
             >
-              {filtered.map((item, index) => {
+              {filtered.map((item) => {
                 const isOpen = openId === item.id;
                 return (
                   <AccordionPrimitive.Item key={item.id} value={item.id} asChild>
                     <article className={`faq-accordion-item ${isOpen ? 'is-open' : ''}`}>
                       <AccordionPrimitive.Header className="faq-accordion-heading">
                         <AccordionPrimitive.Trigger className="faq-accordion-trigger">
-                          <span className="faq-index">{String(index + 1).padStart(2, '0')}</span>
                           <span className="faq-question">
                             <strong>{item.q}</strong>
+                            {' '}
                             <small>{item.category}</small>
                           </span>
                           <span className="faq-toggle" aria-hidden="true">

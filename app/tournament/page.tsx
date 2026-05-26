@@ -29,13 +29,6 @@ export default function TournamentPage() {
     { name: 'Guts Round', desc: '8 sets of 3 problems plus 1 estimation set. Sequential delivery.' },
   ];
 
-  const facts = [
-    { label: 'Date', value: 'May 17, 2026' },
-    { label: 'Campus', value: 'UCLA' },
-    { label: 'Capacity', value: '250 students' },
-    { label: 'Fee', value: '$0' },
-  ];
-
   return (
     <div className="page-shell">
       <header className="page-hero">
@@ -54,24 +47,10 @@ export default function TournamentPage() {
       </header>
 
       <section className="section-row">
-        <h2 className="section-title">At a Glance</h2>
-        <div className="lamt-line-list tournament-fact-grid">
-          {facts.map((fact) => (
-            <article key={fact.label} className="lamt-line-item tournament-fact">
-              <span>{fact.label}</span>
-              <strong>{fact.value}</strong>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section className="section-row">
         <h2 className="section-title">Eligibility</h2>
-        <ul className="lamt-line-list lamt-line-list--compact stagger-parent">
+        <ul className="tournament-eligibility-list">
           {eligibility.map((item) => (
-            <li key={item} className="lamt-line-item lamt-line-item--plain">
-              <p>{item}</p>
-            </li>
+            <li key={item}>{item}</li>
           ))}
         </ul>
       </section>

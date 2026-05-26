@@ -96,18 +96,6 @@ function LoginScreen({ onLogin }: { onLogin: () => void }) {
   );
 }
 
-function AdminMetric({ label, value, detail }: { label: string; value: string | number; detail: string }) {
-  return (
-    <div className="admin-metric">
-      <div>
-        <p className="label-caps">{label}</p>
-        <p className="admin-metric__detail">{detail}</p>
-      </div>
-      <strong>{value}</strong>
-    </div>
-  );
-}
-
 function MessagesTab({ onUnreadChange }: { onUnreadChange: (count: number) => void }) {
   const [messages, setMessages] = useState<ContactMessage[]>([]);
   const [replyMap, setReplyMap] = useState<Record<number, string>>({});
@@ -316,7 +304,6 @@ function AnnouncementsTab({ updates, setUpdates }: {
       <section className="lamt-panel">
         <div className="lamt-panel-header">
           <h2 className="text-xl font-extrabold text-[var(--color-text)]">Saved Notices</h2>
-          <span className="font-bold text-[var(--color-text-muted)]">{updates.length}</span>
         </div>
         {updates.length === 0 ? (
           <div className="lamt-panel-body text-center text-[var(--color-text-muted)]">No saved notices.</div>
@@ -516,16 +503,7 @@ export default function AdminPage() {
       </header>
 
       <section className="section-row">
-        <h2 className="section-title">Status</h2>
-        <div className="grid gap-4 md:grid-cols-3">
-          <AdminMetric label="Notices" value={updates.length} detail="Saved" />
-          <AdminMetric label="Schedule" value={schedule.length} detail="Items" />
-          <AdminMetric label="Messages" value={msgCount} detail="Open" />
-        </div>
-      </section>
-
-      <section className="section-row">
-        <h2 className="section-title">Tools</h2>
+        <h2 className="section-title">Edit</h2>
         <div className="grid gap-6">
           <nav className="admin-tools-nav" role="tablist" aria-label="Admin sections">
             {tabs.map((item, index) => {
