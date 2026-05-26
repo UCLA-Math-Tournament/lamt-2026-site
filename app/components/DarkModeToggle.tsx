@@ -88,7 +88,6 @@ export default function DarkModeToggle() {
           <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
         </motion.g>
       </motion.svg>
-      <span className="theme-toggle__label">{dark ? 'Light mode' : 'Dark mode'}</span>
     </motion.button>
   );
 }

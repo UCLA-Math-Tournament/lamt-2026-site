@@ -107,12 +107,7 @@ function MapSection() {
   return (
     <section id="map" className="section-row">
       <h2 className="section-title">Venue</h2>
-      <div>
-        <p className="section-copy mb-6">
-          Mathematical Sciences and Court of Sciences.
-        </p>
-        <VenueMap />
-      </div>
+      <VenueMap />
     </section>
   );
 }
@@ -171,7 +166,6 @@ function ContactStaffSection() {
       <h2 className="section-title">Contact</h2>
       <div className="contact-strip">
         <div>
-          <p className="label-caps">Email</p>
           <h3>{STAFF_EMAIL}</h3>
         </div>
         <a href={mailto} className="btn-filled">

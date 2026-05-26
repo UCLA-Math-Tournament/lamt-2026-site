@@ -1276,17 +1276,27 @@ textarea {
 }
 
 .theme-toggle {
-  display: inline-flex;
-  min-height: 2.35rem;
+  display: inline-grid;
+  width: 2.25rem;
+  height: 2.25rem;
+  place-items: center;
+  border: 0;
+  background: transparent;
+  padding: 0;
   align-items: center;
-  gap: 0.45rem;
   color: var(--text);
-  font-size: 0.8rem;
-  font-weight: 850;
+  transition: color var(--fast) var(--ease), transform var(--fast) var(--ease);
 }
 
-.theme-toggle__label {
-  white-space: nowrap;
+.theme-toggle:hover,
+.theme-toggle:focus-visible {
+  color: var(--ucla-blue-dark);
+  transform: translateY(-1px);
+}
+
+.dark .theme-toggle:hover,
+.dark .theme-toggle:focus-visible {
+  color: var(--ucla-gold);
 }
 
 .site-footer__note {

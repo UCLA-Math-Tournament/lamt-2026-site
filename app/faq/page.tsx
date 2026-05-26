@@ -45,7 +45,6 @@ export default function FAQPage() {
         <h2 className="section-title">Contact</h2>
         <div className="contact-strip">
           <div>
-            <p className="label-caps">Email</p>
             <h3>{STAFF_EMAIL}</h3>
           </div>
           <a href={`mailto:${STAFF_EMAIL}`} className="btn-outline">
