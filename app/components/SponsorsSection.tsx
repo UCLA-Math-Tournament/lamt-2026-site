@@ -32,6 +32,33 @@ function getLogoTone(src: string) {
   return src.includes('SUSQUEHANNA') || src.includes('LOGO_stacked') || src.includes('imageedit') || src.includes('bmt') ? 'mono' : 'color';
 }
 
+function SponsorLogo({
+  src,
+  imgHeight,
+}: {
+  src: string;
+  imgHeight: number;
+}) {
+  return (
+    <div
+      className="sponsor-logo-frame"
+      data-logo-scale={getLogoScale(src)}
+      data-logo-tone={getLogoTone(src)}
+    >
+      <Image
+        src={src}
+        alt={getSponsorName(src)}
+        width={420}
+        height={imgHeight}
+        loading="eager"
+        unoptimized
+        style={{ height: imgHeight, width: 'auto', maxWidth: '100%' }}
+        className="object-contain"
+      />
+    </div>
+  );
+}
+
 export default function SponsorsSection({
   sponsorsByTier,
 }: {
@@ -54,27 +81,26 @@ export default function SponsorsSection({
                 <div className="sponsor-tier-heading">
                   <h3 className="section-title">{label}</h3>
                 </div>
-                <div className={`sponsor-grid sponsor-matrix sponsor-matrix--${tier}`}>
-                  {sponsorsByTier[tier].map((src) => (
-                    <div
-                      key={src}
-                      className="sponsor-logo-frame"
-                      data-logo-scale={getLogoScale(src)}
-                      data-logo-tone={getLogoTone(src)}
-                    >
-                      <Image
-                        src={src}
-                        alt={getSponsorName(src)}
-                        width={420}
-                        height={imgHeight}
-                        loading="eager"
-                        unoptimized
-                        style={{ height: imgHeight, width: 'auto', maxWidth: '100%' }}
-                        className="object-contain"
-                      />
+                {sponsorsByTier[tier].length > 1 ? (
+                  <div className={`sponsor-marquee sponsor-marquee--${tier}`}>
+                    <div className="sponsor-marquee__group">
+                      {sponsorsByTier[tier].map((src) => (
+                        <SponsorLogo key={src} src={src} imgHeight={imgHeight} />
+                      ))}
                     </div>
-                  ))}
-                </div>
+                    <div className="sponsor-marquee__group" aria-hidden="true">
+                      {sponsorsByTier[tier].map((src) => (
+                        <SponsorLogo key={`${src}-loop`} src={src} imgHeight={imgHeight} />
+                      ))}
+                    </div>
+                  </div>
+                ) : (
+                  <div className={`sponsor-grid sponsor-matrix sponsor-matrix--${tier}`}>
+                    {sponsorsByTier[tier].map((src) => (
+                      <SponsorLogo key={src} src={src} imgHeight={imgHeight} />
+                    ))}
+                  </div>
+                )}
               </section>
             );
           })}

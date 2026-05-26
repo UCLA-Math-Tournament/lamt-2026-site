@@ -1262,6 +1262,50 @@ textarea {
   padding-block: clamp(1rem, 2.2vw, 1.65rem);
 }
 
+.sponsor-marquee {
+  display: flex;
+  gap: clamp(1rem, 2.4vw, 1.75rem);
+  overflow: hidden;
+  border-top: 1px solid var(--rule);
+  padding-block: clamp(1rem, 2.2vw, 1.65rem);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  --sponsor-marquee-duration: 34s;
+}
+
+.sponsor-marquee:hover .sponsor-marquee__group,
+.sponsor-marquee:focus-within .sponsor-marquee__group {
+  animation-play-state: paused;
+}
+
+.sponsor-marquee__group {
+  display: flex;
+  min-width: max-content;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: clamp(1rem, 2.4vw, 1.75rem);
+  animation: sponsor-marquee var(--sponsor-marquee-duration) linear infinite;
+}
+
+.sponsor-marquee--friends {
+  --sponsor-marquee-duration: 38s;
+}
+
+.sponsor-marquee--bronze .sponsor-logo-frame,
+.sponsor-marquee--friends .sponsor-logo-frame {
+  min-width: clamp(10rem, 21vw, 17rem);
+}
+
+@keyframes sponsor-marquee {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(calc(-100% - clamp(1rem, 2.4vw, 1.75rem)));
+  }
+}
+
 .sponsor-matrix--silver {
   grid-template-columns: minmax(0, 1fr);
 }
@@ -2038,6 +2082,11 @@ textarea {
     grid-template-columns: 1fr;
   }
 
+  .sponsor-marquee {
+    mask-image: none;
+    -webkit-mask-image: none;
+  }
+
   .lamt-agenda-item,
   .live-schedule-item {
     grid-template-columns: minmax(7.5rem, 0.35fr) minmax(0, 1fr);
@@ -2271,6 +2320,31 @@ textarea {
     min-height: 4.6rem;
   }
 
+  .sponsor-marquee {
+    gap: 1rem;
+    display: block;
+    overflow: visible;
+    mask-image: none;
+    -webkit-mask-image: none;
+  }
+
+  .sponsor-marquee__group {
+    display: grid;
+    min-width: 0;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+    animation: none;
+  }
+
+  .sponsor-marquee__group[aria-hidden="true"] {
+    display: none;
+  }
+
+  .sponsor-marquee--bronze .sponsor-logo-frame,
+  .sponsor-marquee--friends .sponsor-logo-frame {
+    min-width: 0;
+  }
+
   .sponsor-logo-frame img {
     max-height: 4rem !important;
   }
@@ -2335,6 +2409,20 @@ textarea {
     transition-duration: 0.01ms !important;
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
+  }
+
+  .sponsor-marquee {
+    overflow-x: auto;
+    mask-image: none;
+    -webkit-mask-image: none;
+  }
+
+  .sponsor-marquee__group {
+    animation: none;
+  }
+
+  .sponsor-marquee__group[aria-hidden="true"] {
+    display: none;
   }
 
   [data-scroll-reveal="true"] {
