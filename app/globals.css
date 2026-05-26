@@ -931,12 +931,22 @@ textarea {
 }
 
 .contest-flow__line {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.02em 0.18em;
   max-width: 38rem;
   margin-top: clamp(1.05rem, 2vw, 1.55rem);
   color: var(--text-soft);
   font-size: clamp(1.2rem, 2vw, 1.65rem);
   font-weight: 780;
   line-height: 1.24;
+  perspective: 520px;
+}
+
+.contest-flow__line-word {
+  display: inline-block;
+  transform-origin: 50% 70%;
+  will-change: opacity, transform;
 }
 
 .contest-flow__facts {

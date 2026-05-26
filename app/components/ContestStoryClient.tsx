@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import { useRef } from 'react';
-import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion';
+import { motion, type MotionValue, useReducedMotion, useScroll, useTransform } from 'framer-motion';
 
 const storyPanels = [
   {
@@ -27,6 +27,67 @@ const storyPanels = [
     tone: 'blue',
   },
 ] as const;
+
+function ContestLineWord({
+  word,
+  index,
+  isLast,
+  centerIndex,
+  reduceMotion,
+  scrollYProgress,
+}: {
+  word: string;
+  index: number;
+  isLast: boolean;
+  centerIndex: number;
+  reduceMotion: boolean;
+  scrollYProgress: MotionValue<number>;
+}) {
+  const distance = index - centerIndex;
+  const x = useTransform(scrollYProgress, [0.12, 0.42], reduceMotion ? [0, 0] : [distance * 12, 0]);
+  const y = useTransform(scrollYProgress, [0.12, 0.42], reduceMotion ? [0, 0] : [Math.abs(distance) * 2.5 + 8, 0]);
+  const opacity = useTransform(scrollYProgress, [0.12, 0.42], reduceMotion ? [1, 1] : [0.42, 1]);
+  const rotateX = useTransform(scrollYProgress, [0.12, 0.42], reduceMotion ? [0, 0] : [distance * -2.5, 0]);
+
+  return (
+    <motion.span
+      aria-hidden="true"
+      className="contest-flow__line-word"
+      style={{ opacity, rotateX, x, y }}
+    >
+      {word}{isLast ? '' : ' '}
+    </motion.span>
+  );
+}
+
+function ContestAnimatedLine({
+  line,
+  reduceMotion,
+  scrollYProgress,
+}: {
+  line: string;
+  reduceMotion: boolean;
+  scrollYProgress: MotionValue<number>;
+}) {
+  const words = line.split(' ');
+  const centerIndex = Math.floor(words.length / 2);
+
+  return (
+    <p className="contest-flow__line" aria-label={line}>
+      {words.map((word, wordIndex) => (
+        <ContestLineWord
+          key={`${word}-${wordIndex}`}
+          word={word}
+          index={wordIndex}
+          isLast={wordIndex === words.length - 1}
+          centerIndex={centerIndex}
+          reduceMotion={reduceMotion}
+          scrollYProgress={scrollYProgress}
+        />
+      ))}
+    </p>
+  );
+}
 
 function ContestFlowPanel({
   panel,
@@ -65,7 +126,11 @@ function ContestFlowPanel({
                 <span key={line} aria-hidden="true">{line}</span>
               ))}
             </h2>
-            <p className="contest-flow__line">{panel.line}</p>
+            <ContestAnimatedLine
+              line={panel.line}
+              reduceMotion={reduceMotion}
+              scrollYProgress={scrollYProgress}
+            />
             <ul className="contest-flow__facts" aria-label={`${panel.label} details`}>
               {panel.facts.map((fact) => (
                 <li key={fact}>{fact}</li>
