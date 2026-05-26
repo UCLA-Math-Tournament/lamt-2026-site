@@ -191,7 +191,8 @@ textarea {
 .site-nav-link,
 .admin-tools-tab,
 .event-day-nav a,
-.archive-index-link,
+.archive-file-link,
+.archive-reference-row,
 .subtle-link {
   position: relative;
   color: var(--text);
@@ -212,7 +213,8 @@ textarea {
 .site-nav-link::after,
 .admin-tools-tab::after,
 .event-day-nav a::after,
-.archive-index-link::after,
+.archive-file-link::after,
+.archive-reference-row::after,
 .subtle-link::after {
   content: "";
   position: absolute;
@@ -234,8 +236,10 @@ textarea {
 .admin-tools-tab[data-state="selected"],
 .event-day-nav a:hover,
 .event-day-nav a:focus-visible,
-.archive-index-link:hover,
-.archive-index-link:focus-visible,
+.archive-file-link:hover,
+.archive-file-link:focus-visible,
+.archive-reference-row:hover,
+.archive-reference-row:focus-visible,
 .subtle-link:hover,
 .subtle-link:focus-visible {
   color: var(--ucla-blue-dark);
@@ -249,8 +253,10 @@ textarea {
 .dark .admin-tools-tab[data-state="selected"],
 .dark .event-day-nav a:hover,
 .dark .event-day-nav a:focus-visible,
-.dark .archive-index-link:hover,
-.dark .archive-index-link:focus-visible,
+.dark .archive-file-link:hover,
+.dark .archive-file-link:focus-visible,
+.dark .archive-reference-row:hover,
+.dark .archive-reference-row:focus-visible,
 .dark .subtle-link:hover,
 .dark .subtle-link:focus-visible {
   color: var(--ucla-gold);
@@ -264,8 +270,10 @@ textarea {
 .admin-tools-tab[data-state="selected"]::after,
 .event-day-nav a:hover::after,
 .event-day-nav a:focus-visible::after,
-.archive-index-link:hover::after,
-.archive-index-link:focus-visible::after,
+.archive-file-link:hover::after,
+.archive-file-link:focus-visible::after,
+.archive-reference-row:hover::after,
+.archive-reference-row:focus-visible::after,
 .subtle-link:hover::after,
 .subtle-link:focus-visible::after {
   transform: scaleX(1);
@@ -802,38 +810,32 @@ textarea {
   max-width: min(100%, 9rem) !important;
 }
 
-.archive-years,
-.archive-index,
+.archive-round-table,
+.archive-reference-list,
 .about-staff-list,
 .live-update-index,
 .live-update-list,
 .live-schedule-block {
   display: grid;
   gap: 0;
+  gap: 0;
 }
 
-.archive-year-board {
-  display: block;
-}
-
-.archive-index-group,
 .about-staff-row,
 .live-update-row {
   display: grid;
-  grid-template-columns: minmax(7rem, 10rem) minmax(0, 1fr);
+  grid-template-columns: minmax(10rem, 12rem) minmax(0, 1fr);
   gap: clamp(1rem, 2vw, 1.75rem);
   border-top: 1px solid var(--rule);
   padding-block: 0.9rem;
 }
 
-.archive-index-group:first-child,
 .about-staff-row:first-child,
 .live-update-row:first-child {
   border-top: 0;
   padding-top: 0;
 }
 
-.archive-index-heading h3,
 .about-staff-row h3,
 .live-update-index h2,
 .live-schedule-block h2 {
@@ -843,12 +845,36 @@ textarea {
   line-height: 1.15;
 }
 
-.archive-index-links {
-  display: grid;
-  gap: 0.35rem;
+.archive-round-table,
+.archive-reference-list {
+  border-top: 1px solid var(--rule);
 }
 
-.archive-index-link {
+.archive-round-row {
+  display: grid;
+  grid-template-columns: minmax(12rem, 0.48fr) minmax(7rem, 0.26fr) minmax(7rem, 0.26fr);
+  gap: clamp(1rem, 2vw, 1.6rem);
+  align-items: baseline;
+  border-bottom: 1px solid var(--rule);
+  padding-block: 0.88rem;
+}
+
+.archive-round-head {
+  color: var(--ucla-blue-dark);
+  font-size: 0.78rem;
+  font-weight: 950;
+  text-transform: uppercase;
+}
+
+.archive-round-row strong {
+  color: var(--text);
+  font-size: 1.12rem;
+  font-weight: 900;
+  line-height: 1.16;
+}
+
+.archive-file-link,
+.archive-reference-row {
   display: inline-grid;
   grid-template-columns: minmax(0, max-content) auto;
   width: fit-content;
@@ -856,15 +882,17 @@ textarea {
   align-items: baseline;
   padding-bottom: 0.14rem;
   text-transform: none;
-  font-size: 1.05rem;
-  font-weight: 700;
+  font-size: 1rem;
+  font-weight: 780;
 }
 
-.archive-index-link::after {
+.archive-file-link::after,
+.archive-reference-row::after {
   bottom: 0;
 }
 
-.archive-index-link em {
+.archive-file-link em,
+.archive-reference-row em {
   color: var(--text-muted);
   font-style: normal;
   font-size: 0.78em;
@@ -872,11 +900,34 @@ textarea {
   text-transform: uppercase;
 }
 
-.about-staff-row p {
+.archive-reference-row {
+  display: grid;
+  width: 100%;
+  grid-template-columns: minmax(0, 1fr) auto;
+  border-bottom: 1px solid var(--rule);
+  padding-block: 0.9rem;
+}
+
+.archive-reference-row::after {
+  display: none;
+}
+
+.archive-reference-row:hover,
+.archive-reference-row:focus-visible {
+  transform: translateY(-1px);
+}
+
+.about-staff-row p,
+.about-name-list {
   color: var(--text-soft);
   font-size: 1.05rem;
   font-weight: 650;
   line-height: 1.5;
+}
+
+.about-name-list {
+  border-top: 1px solid var(--rule);
+  padding-top: 0.9rem;
 }
 
 .lamt-input,
@@ -1410,7 +1461,7 @@ textarea {
     margin-bottom: 0.2rem;
   }
 
-  .archive-index-group,
+  .archive-round-row,
   .about-staff-row,
   .live-update-row {
     grid-template-columns: 1fr;
@@ -1507,19 +1558,22 @@ textarea {
     font-size: 0.98rem;
   }
 
-  .archive-index-heading h3,
+  .archive-round-row strong,
   .about-staff-row h3,
   .live-update-index h2,
   .live-schedule-block h2 {
     font-size: 1.05rem;
   }
 
-  .archive-index-link,
-  .about-staff-row p {
+  .archive-file-link,
+  .archive-reference-row,
+  .about-staff-row p,
+  .about-name-list {
     font-size: 0.92rem;
   }
 
-  .about-staff-row p {
+  .about-staff-row p,
+  .about-name-list {
     line-height: 1.42;
   }
 

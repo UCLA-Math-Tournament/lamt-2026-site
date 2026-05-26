@@ -1,37 +1,54 @@
-import ArchiveMaterialGrid from '../components/ArchiveMaterialGrid';
-
 export default function ArchivePage() {
-  const pastFiles = [
+  const rounds = [
     {
-      title: '2026',
-      files: {
-        Problems: {
-          Shopping: '/lamt2026/Shopping Round.pdf',
-          'Algebra & Number Theory': '/lamt2026/AlgNT.pdf',
-          Combinatorics: '/lamt2026/Combo.pdf',
-          Geometry: '/lamt2026/Geo.pdf',
-          Guts: '/lamt2026/Guts.pdf',
-        },
-        Solutions: {
-          Shopping: '/lamt2026/Shopping Round Solutions.pdf',
-          'Algebra & Number Theory': '/lamt2026/AlgNT Solutions.pdf',
-          Combinatorics: '/lamt2026/Combo Solutions.pdf',
-          Geometry: '/lamt2026/Geo Solutions.pdf',
-          Guts: '/lamt2026/Guts Solutions.pdf',
-        },
-        Results: {
-          Results: '/lamt2026/lamt2026results',
-        },
-        Info: {
-          Schedule: '/tournament',
-          Rules: '/rules',
-          'Correction Notice': '/lamt2026/Apology Letter.pdf',
-        },
-      },
+      name: 'Shopping',
+      problem: '/lamt2026/Shopping Round.pdf',
+      solution: '/lamt2026/Shopping Round Solutions.pdf',
+    },
+    {
+      name: 'Algebra / Number Theory',
+      problem: '/lamt2026/AlgNT.pdf',
+      solution: '/lamt2026/AlgNT Solutions.pdf',
+    },
+    {
+      name: 'Combinatorics',
+      problem: '/lamt2026/Combo.pdf',
+      solution: '/lamt2026/Combo Solutions.pdf',
+    },
+    {
+      name: 'Geometry',
+      problem: '/lamt2026/Geo.pdf',
+      solution: '/lamt2026/Geo Solutions.pdf',
+    },
+    {
+      name: 'Guts',
+      problem: '/lamt2026/Guts.pdf',
+      solution: '/lamt2026/Guts Solutions.pdf',
     },
   ];
 
-  const fileType = (href: string) => (href.endsWith('.pdf') ? 'PDF' : 'HTML');
+  const reference = [
+    {
+      label: 'Results',
+      href: '/lamt2026/lamt2026results',
+      type: 'HTML',
+    },
+    {
+      label: 'Correction Notice',
+      href: '/lamt2026/Apology Letter.pdf',
+      type: 'PDF',
+    },
+    {
+      label: 'Schedule',
+      href: '/tournament',
+      type: 'Page',
+    },
+    {
+      label: 'Rules',
+      href: '/rules',
+      type: 'Page',
+    },
+  ];
 
   return (
     <div className="page-shell">
@@ -48,25 +65,46 @@ export default function ArchivePage() {
         </div>
       </header>
 
-      <div className="archive-years">
-        {pastFiles.map((year) => (
-          <section key={year.title} className="section-row">
-            <h2 className="section-title">{year.title}</h2>
-            <div className="archive-year-board">
-              <ArchiveMaterialGrid
-                groups={Object.entries(year.files).map(([category, items]) => ({
-                  category,
-                  items: Object.entries(items as Record<string, string>).map(([name, value]) => ({
-                    name,
-                    href: value,
-                    type: fileType(value),
-                  })),
-                }))}
-              />
+      <section className="section-row">
+        <h2 className="section-title">Rounds</h2>
+        <div className="archive-round-table" role="table" aria-label="LAMT 2026 archive rounds">
+          <div className="archive-round-row archive-round-head" role="row">
+            <span role="columnheader">Round</span>
+            <span role="columnheader">Problems</span>
+            <span role="columnheader">Solutions</span>
+          </div>
+
+          {rounds.map((round) => (
+            <div key={round.name} className="archive-round-row" role="row">
+              <strong role="cell">{round.name}</strong>
+              <a href={round.problem} target="_blank" rel="noreferrer" role="cell" className="archive-file-link">
+                Problems <em>PDF</em>
+              </a>
+              <a href={round.solution} target="_blank" rel="noreferrer" role="cell" className="archive-file-link">
+                Solutions <em>PDF</em>
+              </a>
             </div>
-          </section>
-        ))}
-      </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="section-row">
+        <h2 className="section-title">Reference</h2>
+        <div className="archive-reference-list">
+          {reference.map((item) => (
+            <a
+              key={item.label}
+              href={item.href}
+              target={item.type === 'PDF' ? '_blank' : undefined}
+              rel={item.type === 'PDF' ? 'noreferrer' : undefined}
+              className="archive-reference-row"
+            >
+              <span>{item.label}</span>
+              <em>{item.type}</em>
+            </a>
+          ))}
+        </div>
+      </section>
     </div>
   );
 }

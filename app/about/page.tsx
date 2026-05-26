@@ -37,47 +37,43 @@ export default function AboutPage() {
       title: 'Tournament Development',
       people: ['Patrick Bian', 'Kenneth Ren', 'Muztaba Syed', 'Arpit Uppal', 'Brooks Wang', 'Vicky Zhang'],
     },
-    {
-      title: 'General Members',
-      people: [
-        'Patrick Bian',
-        'Richard Cai',
-        'Betty Chang',
-        'Allan Chen',
-        'Arahat Chikkatur',
-        'Eva Chung-Yoon',
-        'Aryan Dalal',
-        'Sean He',
-        'Kyle Hess',
-        'Ricky Hu',
-        'Nathan Jiang',
-        'Luke Jones',
-        'Bhargava Kanakapura',
-        'Jian Kweon',
-        'Andrew Li',
-        'William Li',
-        'Aliya Ling',
-        'Anthony Mui',
-        'Pierre Nguyen',
-        'Gautham Subramanian',
-        'Nish Tharakan',
-        'Albert Tran',
-      ],
-    },
-    {
-      title: 'Advising / Friends',
-      people: [
-        'Richard Chen (SCMC)',
-        'Aedan Hui (BMT)',
-        'Vivian Loh (CMM)',
-        'Oliver Ni (BMT, ICMT)',
-        'Arpit Ranasaria (ICMT, SMT)',
-        'Taman Truong (ICMT, SCMC)',
-        'Nathan Wong (BMT)',
-        'Grace Yang (BrUMO)',
-        'Yibo Zhang (SCMC)',
-      ],
-    },
+  ];
+
+  const contributors = [
+    'Patrick Bian',
+    'Richard Cai',
+    'Betty Chang',
+    'Allan Chen',
+    'Arahat Chikkatur',
+    'Eva Chung-Yoon',
+    'Aryan Dalal',
+    'Sean He',
+    'Kyle Hess',
+    'Ricky Hu',
+    'Nathan Jiang',
+    'Luke Jones',
+    'Bhargava Kanakapura',
+    'Jian Kweon',
+    'Andrew Li',
+    'William Li',
+    'Aliya Ling',
+    'Anthony Mui',
+    'Pierre Nguyen',
+    'Gautham Subramanian',
+    'Nish Tharakan',
+    'Albert Tran',
+  ];
+
+  const advisors = [
+    'Richard Chen (SCMC)',
+    'Aedan Hui (BMT)',
+    'Vivian Loh (CMM)',
+    'Oliver Ni (BMT, ICMT)',
+    'Arpit Ranasaria (ICMT, SMT)',
+    'Taman Truong (ICMT, SCMC)',
+    'Nathan Wong (BMT)',
+    'Grace Yang (BrUMO)',
+    'Yibo Zhang (SCMC)',
   ];
 
   return (
@@ -98,7 +94,7 @@ export default function AboutPage() {
       </header>
 
       <section className="section-row">
-        <h2 className="section-title">LAMT Staff</h2>
+        <h2 className="section-title">Staff</h2>
         <div className="about-staff-list">
           {staffGroups.map((group) => (
             <section key={group.title} className="about-staff-row">
@@ -107,6 +103,16 @@ export default function AboutPage() {
             </section>
           ))}
         </div>
+      </section>
+
+      <section className="section-row">
+        <h2 className="section-title">Contributors</h2>
+        <p className="about-name-list">{contributors.join(', ')}</p>
+      </section>
+
+      <section className="section-row">
+        <h2 className="section-title">Advisors</h2>
+        <p className="about-name-list">{advisors.join(', ')}</p>
       </section>
 
     </div>

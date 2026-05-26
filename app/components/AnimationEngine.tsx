@@ -15,7 +15,9 @@ function initReveals() {
       '.lamt-line-item',
       '.lamt-fact-row',
       '.tournament-format-row',
-      '.archive-index-group',
+      '.archive-round-row',
+      '.archive-reference-row',
+      '.about-staff-row',
       '.faq-row',
       '.answer-correction',
     ].join(', ')
