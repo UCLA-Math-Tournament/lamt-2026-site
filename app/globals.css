@@ -686,124 +686,133 @@ textarea {
   margin-top: clamp(1.35rem, 2.4vw, 2rem);
 }
 
-.contest-story-section {
-  min-height: 135svh;
+.contest-flow {
+  position: relative;
+  overflow-x: clip;
 }
 
-.contest-story-row {
+.contest-flow__panel {
+  position: relative;
+  min-height: 112svh;
+}
+
+.contest-flow__panel:last-child {
+  min-height: 100svh;
+}
+
+.contest-flow__shell {
   position: sticky;
   top: 5.2rem;
+  display: grid;
   min-height: calc(100svh - 5.2rem);
   align-items: center;
   overflow: hidden;
 }
 
-.contest-story {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(14rem, 0.34fr);
-  gap: clamp(1.4rem, 4vw, 4rem);
-  align-items: center;
-}
-
-.contest-story__text {
-  max-width: 48rem;
-  color: color-mix(in srgb, var(--text) 16%, transparent);
-  font-family: var(--font-display);
-  font-size: clamp(2.45rem, 5.3vw, 5.25rem);
-  font-weight: 950;
-  letter-spacing: 0;
-  line-height: 1.01;
-}
-
-.contest-story__word {
+.contest-flow__inner {
   position: relative;
-  display: inline-block;
-  margin-right: 0.18em;
-}
-
-.contest-story__word > span:first-child {
-  color: color-mix(in srgb, var(--ucla-blue-dark) 10%, transparent);
-}
-
-.contest-story__word > span:last-child {
-  position: absolute;
-  inset: 0;
-  color: var(--text);
-}
-
-.contest-story__stage {
-  position: relative;
-  min-height: 22rem;
-  border-left: 1px solid var(--rule);
-  padding-left: clamp(1rem, 2.6vw, 1.75rem);
-}
-
-.contest-story__stage::before,
-.contest-story__stage::after {
-  content: "";
-  position: absolute;
-  left: clamp(1rem, 2.6vw, 1.75rem);
-  right: 0;
-  height: 2px;
-  background: var(--ucla-gold);
-  transform-origin: left;
-}
-
-.contest-story__stage::before {
-  top: 0;
-}
-
-.contest-story__stage::after {
-  bottom: 0;
-  background: var(--ucla-blue);
-}
-
-.contest-story__bear {
-  position: absolute;
-  top: 50%;
-  right: clamp(0.5rem, 2vw, 1.5rem);
   display: grid;
-  width: clamp(5rem, 12vw, 7rem);
-  place-items: center;
-  transform: translateY(-50%);
-  opacity: 0.44;
-}
-
-.contest-story__bear img {
   width: 100%;
-  height: auto;
-  object-fit: contain;
-  filter: drop-shadow(0 1rem 1.4rem rgba(0, 59, 92, 0.16));
+  grid-template-columns: var(--left-rail) minmax(0, 1fr);
+  gap: var(--section-gap);
+  align-items: center;
+  transform-origin: bottom left;
+  will-change: opacity, transform;
 }
 
-.contest-story__beats {
-  position: relative;
-  z-index: 1;
-  display: grid;
-  gap: 1.1rem;
-}
-
-.contest-story__beat {
-  display: grid;
-  grid-template-columns: minmax(3.8rem, 0.34fr) minmax(0, 1fr);
-  gap: 0.72rem;
-  align-items: baseline;
-  border-bottom: 1px solid var(--rule);
-  padding-bottom: 0.9rem;
-}
-
-.contest-story__beat span {
-  color: var(--accent-text);
+.contest-flow__label {
+  align-self: start;
+  color: var(--text-muted);
   font-size: 0.74rem;
   font-weight: 950;
+  line-height: 1.05;
   text-transform: uppercase;
 }
 
-.contest-story__beat strong {
+.contest-flow__body {
+  position: relative;
+  max-width: 76rem;
+  padding-block: clamp(1.4rem, 3vw, 2.6rem);
+}
+
+.contest-flow__rule {
+  height: 3px;
+  width: 100%;
+  margin-bottom: clamp(1.1rem, 2.2vw, 1.8rem);
+  background: var(--ucla-blue);
+  transform-origin: left;
+}
+
+.contest-flow__panel[data-tone="gold"] .contest-flow__rule {
+  background: var(--ucla-gold);
+}
+
+.contest-flow h2 {
+  position: relative;
+  z-index: 1;
+  max-width: 10.5ch;
   color: var(--text);
-  font-size: clamp(1.45rem, 3vw, 2.4rem);
+  font-family: var(--font-display);
+  font-size: clamp(4.25rem, 10.5vw, 10.6rem);
   font-weight: 950;
-  line-height: 0.95;
+  letter-spacing: 0;
+  line-height: 0.82;
+  text-transform: uppercase;
+}
+
+.contest-flow h2 span {
+  display: block;
+}
+
+.contest-flow__panel[data-tone="blue"] h2 span:nth-child(2) {
+  color: var(--ucla-blue);
+}
+
+.contest-flow__panel[data-tone="gold"] h2 span:nth-child(2) {
+  color: var(--ucla-gold);
+}
+
+.contest-flow__line {
+  max-width: 38rem;
+  margin-top: clamp(1.05rem, 2vw, 1.55rem);
+  color: var(--text-soft);
+  font-size: clamp(1.2rem, 2vw, 1.65rem);
+  font-weight: 780;
+  line-height: 1.24;
+}
+
+.contest-flow__facts {
+  display: grid;
+  max-width: 54rem;
+  margin-top: clamp(1.55rem, 2.8vw, 2.35rem);
+  border-top: 1px solid var(--rule);
+  list-style: none;
+}
+
+.contest-flow__facts li {
+  border-bottom: 1px solid var(--rule);
+  color: var(--text);
+  font-size: clamp(0.98rem, 1.32vw, 1.16rem);
+  font-weight: 900;
+  line-height: 1.15;
+  padding-block: 0.82rem;
+}
+
+.contest-flow__bear {
+  position: absolute;
+  right: clamp(0rem, 2.4vw, 2rem);
+  bottom: clamp(1.5rem, 7vw, 5.5rem);
+  z-index: 0;
+  width: clamp(5.25rem, 13vw, 9.25rem);
+  opacity: 0.2;
+  pointer-events: none;
+}
+
+.contest-flow__bear img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 1.1rem 1.6rem rgba(0, 59, 92, 0.14));
 }
 
 .kinetic-band {
@@ -2478,38 +2487,29 @@ textarea {
     font-size: 5rem;
   }
 
-  .contest-story-section {
+  .contest-flow__panel,
+  .contest-flow__panel:last-child {
     min-height: auto;
   }
 
-  .contest-story-row {
+  .contest-flow__shell {
     position: relative;
     top: auto;
     min-height: auto;
-    padding-top: 1.4rem;
+    overflow: visible;
+    padding-block: clamp(2.2rem, 7vw, 4rem);
   }
 
-  .contest-story {
+  .contest-flow__inner {
     grid-template-columns: 1fr;
+    gap: 0.75rem;
   }
 
-  .contest-story__stage {
-    min-height: auto;
-    border-left: 0;
-    padding: 1.05rem 0 0;
-  }
-
-  .contest-story__stage::before,
-  .contest-story__stage::after {
-    left: 0;
-  }
-
-  .contest-story__bear {
-    top: auto;
+  .contest-flow__bear {
     right: 0;
-    bottom: 0.75rem;
+    bottom: 1rem;
     width: 4.6rem;
-    opacity: 0.16;
+    opacity: 0.12;
   }
 
   .kinetic-band {
@@ -2658,21 +2658,21 @@ textarea {
     line-height: 0.94;
   }
 
-  .contest-story__text {
-    font-size: clamp(2.08rem, 11.4vw, 2.9rem);
-    line-height: 1.03;
+  .contest-flow__shell {
+    padding-block: 2.35rem 2.85rem;
   }
 
-  .contest-story__stage {
-    padding-top: 0.95rem;
+  .contest-flow h2 {
+    font-size: clamp(3.05rem, 16.8vw, 4.55rem);
+    line-height: 0.88;
   }
 
-  .contest-story__beats {
-    gap: 0.85rem;
+  .contest-flow__line {
+    font-size: 1.08rem;
   }
 
-  .contest-story__beat {
-    padding-bottom: 0.72rem;
+  .contest-flow__facts {
+    margin-top: 1.25rem;
   }
 
   .kinetic-band__item {

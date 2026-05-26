@@ -1,107 +1,92 @@
 'use client';
 
 import Image from 'next/image';
-import { useMemo, useRef } from 'react';
-import { motion, MotionValue, useReducedMotion, useScroll, useTransform } from 'framer-motion';
+import { useRef } from 'react';
+import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion';
 
-const storyText = 'Free in-person contest. Teams up to six. Individual, team, Guts, and awards. UCLA, May 17, 2026.';
+const storyPanels = [
+  {
+    label: 'Contest',
+    title: ['Free', 'in person', 'at UCLA'],
+    line: 'May 17, 2026. Middle and high school students.',
+    facts: ['$0 registration', 'Teams up to six', 'UCLA Mathematical Sciences'],
+    tone: 'blue',
+  },
+  {
+    label: 'Rounds',
+    title: ['Five', 'ways to', 'compete'],
+    line: 'Individual, team, relay, collaboration, and Guts rounds.',
+    facts: ['Exact work', 'Team strategy', 'Fast scoring'],
+    tone: 'gold',
+  },
+  {
+    label: 'Day',
+    title: ['Check in', 'compete', 'awards'],
+    line: 'A single campus schedule from morning check-in through awards.',
+    facts: ['8:00 AM check-in', '12:30 PM lunch', '6:00 PM awards'],
+    tone: 'blue',
+  },
+] as const;
 
-const beats = [
-  { label: 'Free', value: '$0' },
-  { label: 'Teams', value: '6' },
-  { label: 'Rounds', value: '5' },
-  { label: 'UCLA', value: 'MS' },
-];
-
-function RevealWord({
-  children,
-  progress,
+function ContestFlowPanel({
+  panel,
   index,
-  total,
-  reduceMotion,
 }: {
-  children: string;
-  progress: MotionValue<number>;
+  panel: typeof storyPanels[number];
   index: number;
-  total: number;
-  reduceMotion: boolean;
 }) {
-  const start = Math.max(0, (index - 2) / total);
-  const end = Math.min(1, (index + 1.5) / total);
-  const opacity = useTransform(progress, [start, end], reduceMotion ? [1, 1] : [0.28, 1]);
-  const y = useTransform(progress, [start, end], reduceMotion ? [0, 0] : [2, 0]);
-
-  return (
-    <span className="contest-story__word">
-      <span aria-hidden="true">{children}</span>
-      <motion.span style={{ opacity, y }}>{children}</motion.span>
-    </span>
-  );
-}
-
-function StoryBeat({
-  beat,
-  index,
-  activeBeat,
-}: {
-  beat: { label: string; value: string };
-  index: number;
-  activeBeat: MotionValue<number>;
-}) {
-  const opacity = useTransform(activeBeat, [index - 0.55, index, index + 0.55], [0.34, 1, 0.34]);
-  const y = useTransform(activeBeat, [index - 0.55, index, index + 0.55], [8, 0, 8]);
-
-  return (
-    <motion.div className="contest-story__beat" style={{ opacity, y }}>
-      <span>{beat.label}</span>
-      <strong>{beat.value}</strong>
-    </motion.div>
-  );
-}
-
-export default function ContestStoryClient() {
   const ref = useRef<HTMLElement | null>(null);
   const reduceMotion = Boolean(useReducedMotion());
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: ['start 80%', 'end 35%'],
+    offset: ['start end', 'end start'],
   });
-  const activeBeat = useTransform(scrollYProgress, [0, 0.28, 0.56, 0.84], [0, 1, 2, 3]);
-  const bearX = useTransform(scrollYProgress, [0, 1], ['-8%', '8%']);
-  const bearRotate = useTransform(scrollYProgress, [0, 0.5, 1], [-7, 4, 8]);
-  const words = useMemo(() => storyText.split(' '), []);
+  const y = useTransform(scrollYProgress, [0, 0.3, 0.72, 1], reduceMotion ? [0, 0, 0, 0] : [72, 0, 0, -36]);
+  const rotate = useTransform(scrollYProgress, [0, 0.34, 0.74, 1], reduceMotion ? [0, 0, 0, 0] : [7, 0, 0, -2]);
+  const opacity = useTransform(scrollYProgress, [0, 0.24, 0.82, 1], reduceMotion ? [1, 1, 1, 1] : [0.08, 1, 1, 0.66]);
+  const ruleScale = useTransform(scrollYProgress, [0.08, 0.36], reduceMotion ? [1, 1] : [0, 1]);
+  const bearY = useTransform(scrollYProgress, [0, 1], reduceMotion ? [0, 0] : [26, -34]);
+  const bearRotate = useTransform(scrollYProgress, [0, 0.55, 1], reduceMotion ? [0, 0, 0] : [-8, 3, 8]);
 
   return (
-    <section ref={ref} className="page-shell contest-story-section" aria-labelledby="contest-story-title">
-      <div className="section-row contest-story-row">
-        <h2 id="contest-story-title" className="section-title">Contest</h2>
-        <div className="contest-story">
-          <p className="contest-story__text">
-            {words.map((word, index) => (
-              <RevealWord
-                key={`${word}-${index}`}
-                progress={scrollYProgress}
-                index={index}
-                total={words.length}
-                reduceMotion={reduceMotion}
-              >
-                {word}
-              </RevealWord>
-            ))}
-          </p>
-
-          <div className="contest-story__stage" aria-hidden="true">
-            <motion.div className="contest-story__bear" style={{ x: bearX, rotate: bearRotate }}>
-              <Image src="/LAMTBear.png" alt="" width={112} height={112} />
-            </motion.div>
-            <div className="contest-story__beats">
-              {beats.map((beat, index) => (
-                <StoryBeat key={beat.label} beat={beat} index={index} activeBeat={activeBeat} />
+    <section
+      ref={ref}
+      className="contest-flow__panel"
+      data-tone={panel.tone}
+      aria-labelledby={`contest-flow-${index}`}
+    >
+      <div className="page-shell contest-flow__shell">
+        <motion.div className="contest-flow__inner" style={{ opacity, rotate, y }}>
+          <p className="contest-flow__label">{panel.label}</p>
+          <div className="contest-flow__body">
+            <motion.div className="contest-flow__rule" style={{ scaleX: ruleScale }} aria-hidden="true" />
+            <h2 id={`contest-flow-${index}`} aria-label={panel.title.join(' ')}>
+              {panel.title.map((line) => (
+                <span key={line} aria-hidden="true">{line}</span>
               ))}
-            </div>
+            </h2>
+            <p className="contest-flow__line">{panel.line}</p>
+            <ul className="contest-flow__facts" aria-label={`${panel.label} details`}>
+              {panel.facts.map((fact) => (
+                <li key={fact}>{fact}</li>
+              ))}
+            </ul>
           </div>
-        </div>
+          <motion.div className="contest-flow__bear" style={{ y: bearY, rotate: bearRotate }} aria-hidden="true">
+            <Image src="/LAMTBear.png" alt="" width={148} height={148} />
+          </motion.div>
+        </motion.div>
       </div>
+    </section>
+  );
+}
+
+export default function ContestStoryClient() {
+  return (
+    <section className="contest-flow" aria-label="LAMT contest overview">
+      {storyPanels.map((panel, index) => (
+        <ContestFlowPanel key={panel.label} panel={panel} index={index} />
+      ))}
     </section>
   );
 }
