@@ -163,14 +163,14 @@ textarea {
   color: var(--text);
   font-family: var(--font-display);
   font-size: 1.2rem;
-  font-weight: 900;
+  font-weight: 950;
   line-height: 0.95;
 }
 
 .site-brand small {
   color: var(--text);
   font-size: 0.72rem;
-  font-weight: 820;
+  font-weight: 900;
   line-height: 1;
   text-transform: uppercase;
 }
@@ -189,7 +189,7 @@ textarea {
   position: relative;
   color: var(--text);
   font-size: 0.82rem;
-  font-weight: 830;
+  font-weight: 900;
   letter-spacing: 0;
   line-height: 1.05;
   text-transform: uppercase;
@@ -369,16 +369,26 @@ textarea {
 .rules-cell-label {
   color: var(--text-muted);
   font-size: 0.74rem;
-  font-weight: 820;
+  font-weight: 950;
   letter-spacing: 0;
   line-height: 1.05;
   text-transform: uppercase;
 }
 
 .home-hero__meta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
   margin-bottom: clamp(1rem, 2vw, 1.4rem);
   color: var(--accent-text);
   font-size: 0.78rem;
+}
+
+.home-hero__meta::before {
+  content: "";
+  width: 2.15rem;
+  height: 3px;
+  background: var(--ucla-gold);
 }
 
 .home-hero h1,
@@ -386,14 +396,14 @@ textarea {
 .sponsor-title {
   color: var(--text);
   font-family: var(--font-display);
-  font-weight: 900;
+  font-weight: 950;
   letter-spacing: 0;
 }
 
 .home-hero h1 {
   max-width: 12ch;
-  font-size: 6.45rem;
-  line-height: 0.9;
+  font-size: 6.85rem;
+  line-height: 0.88;
 }
 
 .cinema-lede {
@@ -401,7 +411,7 @@ textarea {
   margin-top: clamp(1.2rem, 2vw, 1.65rem);
   color: var(--text-soft);
   font-size: 1.25rem;
-  font-weight: 650;
+  font-weight: 760;
   line-height: 1.35;
 }
 
@@ -438,7 +448,7 @@ textarea {
 .section-copy {
   color: var(--text-soft);
   font-size: 1.02rem;
-  font-weight: 600;
+  font-weight: 680;
   line-height: 1.5;
 }
 
@@ -476,7 +486,7 @@ textarea {
   color: var(--text);
   font-family: var(--font-display);
   font-size: 1.48rem;
-  font-weight: 850;
+  font-weight: 950;
   line-height: 1.06;
 }
 
@@ -496,13 +506,13 @@ textarea {
 .rules-key-row strong {
   color: var(--text);
   font-size: 1.12rem;
-  font-weight: 780;
+  font-weight: 900;
   line-height: 1.15;
 }
 
 .rules-key-row p {
   color: var(--text-soft);
-  font-weight: 590;
+  font-weight: 680;
   line-height: 1.45;
 }
 
@@ -524,7 +534,7 @@ textarea {
 .lamt-fact-row span {
   color: var(--accent-text);
   font-size: 0.78rem;
-  font-weight: 820;
+  font-weight: 950;
   text-transform: uppercase;
 }
 
@@ -532,13 +542,13 @@ textarea {
 .tournament-format-row h3 {
   color: var(--text);
   font-size: 1.12rem;
-  font-weight: 780;
+  font-weight: 900;
   line-height: 1.18;
 }
 
 .tournament-format-row p {
   color: var(--text-soft);
-  font-weight: 590;
+  font-weight: 690;
   line-height: 1.42;
 }
 
@@ -589,7 +599,7 @@ textarea {
 .lamt-agenda-time,
 .live-schedule-time {
   color: var(--accent-text);
-  font-weight: 760;
+  font-weight: 900;
   line-height: 1.2;
 }
 
@@ -604,7 +614,7 @@ textarea {
 .live-schedule-main h3 {
   color: var(--text);
   font-size: 1.08rem;
-  font-weight: 780;
+  font-weight: 900;
   line-height: 1.15;
   overflow-wrap: normal;
 }
@@ -619,7 +629,7 @@ textarea {
 .lamt-agenda-place,
 .live-schedule-place {
   color: var(--text-soft);
-  font-weight: 590;
+  font-weight: 700;
   line-height: 1.35;
 }
 
@@ -734,7 +744,7 @@ textarea {
 .about-staff-row h3 {
   color: var(--text);
   font-size: 1.16rem;
-  font-weight: 780;
+  font-weight: 900;
   line-height: 1.15;
 }
 
@@ -755,14 +765,14 @@ textarea {
 .archive-round-head {
   color: var(--accent-text);
   font-size: 0.78rem;
-  font-weight: 820;
+  font-weight: 950;
   text-transform: uppercase;
 }
 
 .archive-round-row strong {
   color: var(--text);
   font-size: 1.12rem;
-  font-weight: 780;
+  font-weight: 900;
   line-height: 1.16;
 }
 
@@ -776,7 +786,7 @@ textarea {
   padding-bottom: 0.14rem;
   text-transform: none;
   font-size: 1rem;
-  font-weight: 700;
+  font-weight: 780;
 }
 
 .archive-file-link::after,
@@ -789,7 +799,7 @@ textarea {
   color: var(--text-muted);
   font-style: normal;
   font-size: 0.78em;
-  font-weight: 780;
+  font-weight: 900;
   text-transform: uppercase;
 }
 
@@ -814,7 +824,7 @@ textarea {
 .about-name-list {
   color: var(--text-soft);
   font-size: 1.05rem;
-  font-weight: 560;
+  font-weight: 650;
   line-height: 1.5;
 }
 
@@ -869,7 +879,7 @@ textarea {
   padding-block: 1rem;
   color: var(--text);
   font-size: 1.16rem;
-  font-weight: 780;
+  font-weight: 900;
   line-height: 1.2;
   transition: color var(--fast) var(--ease), transform var(--fast) var(--ease);
 }
@@ -882,7 +892,7 @@ textarea {
   content: "+";
   color: var(--accent-text);
   font-size: 1.15rem;
-  font-weight: 760;
+  font-weight: 900;
 }
 
 .faq-row[open] summary::after {
@@ -899,7 +909,7 @@ textarea {
   max-width: 50rem;
   padding: 0 3rem 1rem 0;
   color: var(--text-soft);
-  font-weight: 580;
+  font-weight: 680;
   line-height: 1.55;
 }
 
@@ -916,7 +926,7 @@ textarea {
 .local-mode-notice h2 {
   color: var(--text);
   font-size: 1.35rem;
-  font-weight: 780;
+  font-weight: 900;
 }
 
 .rules-comparison-table {
@@ -935,18 +945,18 @@ textarea {
 .rules-table-head {
   color: var(--accent-text);
   font-size: 0.78rem;
-  font-weight: 820;
+  font-weight: 950;
   text-transform: uppercase;
 }
 
 .rules-table-row strong {
   color: var(--text);
-  font-weight: 780;
+  font-weight: 900;
 }
 
 .rules-table-row p {
   color: var(--text-soft);
-  font-weight: 590;
+  font-weight: 680;
   line-height: 1.45;
 }
 
@@ -973,7 +983,7 @@ textarea {
 .answer-rewrite-head {
   color: var(--accent-text);
   font-size: 0.78rem;
-  font-weight: 820;
+  font-weight: 950;
   text-transform: uppercase;
 }
 
@@ -982,7 +992,7 @@ textarea {
   flex-wrap: wrap;
   gap: 0.35rem 1rem;
   color: var(--text);
-  font-weight: 620;
+  font-weight: 750;
 }
 
 .answer-example-line span {
@@ -1006,7 +1016,7 @@ textarea {
 
 .answer-rewrite-row p {
   color: var(--text);
-  font-weight: 620;
+  font-weight: 750;
 }
 
 .venue-map {
@@ -1052,7 +1062,7 @@ textarea {
   color: var(--ucla-blue-deep);
   padding: 0.4rem 0.55rem;
   font-size: 0.74rem;
-  font-weight: 820;
+  font-weight: 950;
   text-transform: uppercase;
 }
 
@@ -1098,13 +1108,12 @@ textarea {
 .venue-map__venue strong {
   color: var(--text);
   font-size: 1.08rem;
-  font-weight: 780;
 }
 
 .venue-map__venue em {
   color: var(--text-soft);
   font-style: normal;
-  font-weight: 580;
+  font-weight: 700;
 }
 
 .live-update-index {
@@ -1118,7 +1127,7 @@ textarea {
 .live-update-row h3 {
   color: var(--text);
   font-size: 1.12rem;
-  font-weight: 780;
+  font-weight: 900;
 }
 
 .lamt-panel {
@@ -1143,7 +1152,7 @@ textarea {
 .lamt-panel-header h2 {
   color: var(--text);
   font-size: 1.25rem;
-  font-weight: 780;
+  font-weight: 900;
 }
 
 .admin-page .page-title {
@@ -1165,7 +1174,7 @@ textarea {
 .admin-status {
   color: var(--accent-text);
   font-size: 0.78rem;
-  font-weight: 780;
+  font-weight: 900;
   text-transform: uppercase;
 }
 
@@ -1198,13 +1207,13 @@ textarea {
   height: 2.25rem;
   place-items: center;
   color: var(--text);
-  opacity: 0.74;
+  opacity: 0.82;
   transition: color var(--fast) var(--ease), transform var(--fast) var(--ease);
 }
 
 .site-social-link svg {
-  width: 1.04rem;
-  height: 1.04rem;
+  width: 1.12rem;
+  height: 1.12rem;
 }
 
 .site-social-link:hover,
@@ -1247,7 +1256,7 @@ textarea {
   grid-column: 1 / -1;
   color: var(--text-soft);
   font-size: 0.78rem;
-  font-weight: 560;
+  font-weight: 650;
   line-height: 1.35;
 }
 

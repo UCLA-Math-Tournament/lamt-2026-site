@@ -29,7 +29,7 @@ function getLogoScale(src: string) {
 }
 
 function getLogoTone(src: string) {
-  return src.includes('SUSQUEHANNA') || src.includes('LOGO_stacked') || src.includes('imageedit') ? 'mono' : 'color';
+  return src.includes('SUSQUEHANNA') || src.includes('LOGO_stacked') || src.includes('imageedit') || src.includes('bmt') ? 'mono' : 'color';
 }
 
 export default function SponsorsSection({
