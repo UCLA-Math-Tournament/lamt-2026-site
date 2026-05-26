@@ -14,15 +14,13 @@
     "katex": "^0.16.9",
     "next": "14.2.3",
     "react": "^18",
-    "react-dom": "^18",
-    "three": "^0.184.0"
+    "react-dom": "^18"
   },
   "devDependencies": {
     "@types/katex": "^0.16.7",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
-    "@types/three": "^0.184.1",
     "autoprefixer": "^10.0.1",
     "eslint": "^8",
     "eslint-config-next": "14.2.3",

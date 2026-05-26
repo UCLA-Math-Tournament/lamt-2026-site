@@ -30,15 +30,6 @@ const ARCHIVE_UPDATES: Update[] = [
   },
 ];
 
-const HELP_ITEMS = [
-  { label: "Info Desk", tag: "Check-In", detail: "Outside MS 4000A.", href: null },
-  { label: "Wi-Fi", tag: "Campus", detail: "UCLA-WEB.", href: null },
-  { label: "Restrooms", tag: "Building", detail: "Near MS elevators.", href: null },
-  { label: "Disputes", tag: "Scoring", detail: "Court of Sciences at lunch.", href: null },
-  { label: "Emergency", tag: "Safety", detail: "911 or UCPD: 310-825-4321.", href: "tel:3108254321", action: "Call", tone: "alert" },
-  { label: "Email LAMT", tag: "Contact", detail: STAFF_EMAIL, href: `mailto:${STAFF_EMAIL}`, action: "Email" },
-];
-
 function parseTime(value: string): number {
   const [time, period] = value.split(" ");
   const [hour, minute] = time.split(":").map(Number);
@@ -173,36 +164,6 @@ function PreviewModeNotice() {
   );
 }
 
-function HelpSection() {
-  return (
-    <section className="section-row">
-      <h2 className="section-title">Reference</h2>
-      <div className="lamt-line-list live-help-grid">
-        {HELP_ITEMS.map((item) => {
-          const content = (
-            <>
-              <span className="live-help-card__tag">{item.tag}</span>
-              <h3>{item.label}</h3>
-              <p>{item.detail}</p>
-              {item.action && <em>{item.action}</em>}
-            </>
-          );
-
-          return item.href ? (
-            <a key={item.label} href={item.href} className="lamt-line-item live-help-card live-help-card--link" data-tone={item.tone}>
-              {content}
-            </a>
-          ) : (
-            <article key={item.label} className="lamt-line-item live-help-card">
-              {content}
-            </article>
-          );
-        })}
-      </div>
-    </section>
-  );
-}
-
 function ContactStaffSection() {
   const mailto = `mailto:${STAFF_EMAIL}?subject=${encodeURIComponent("LAMT 2026 question")}`;
   return (
@@ -267,17 +228,6 @@ export default function LivePage() {
           <p className="page-summary mt-5">
             May 17, 2026.
           </p>
-          <nav className="event-day-nav mt-6" aria-label="Event day sections">
-            <a href="#announcements">
-              Notices
-            </a>
-            <a href="#schedule">
-              Schedule
-            </a>
-            <a href="#map">
-              Venue
-            </a>
-          </nav>
         </div>
       </header>
 
@@ -294,12 +244,6 @@ export default function LivePage() {
       </section>
 
       <MapSection />
-
-      {!TOURNAMENT_OVER && (
-        <div id="reference">
-          <HelpSection />
-        </div>
-      )}
 
       <ContactStaffSection />
     </div>

@@ -96,18 +96,6 @@ export default function TournamentPage() {
           <VenueMap />
         </div>
       </section>
-
-      <section className="section-row">
-        <h2 className="section-title">Links</h2>
-        <div className="lamt-action-row stagger-parent">
-          <a href="/archive" className="btn-filled">
-            View 2026 Archive
-          </a>
-          <a href="/rules" className="btn-outline">
-            Read Competition Rules
-          </a>
-        </div>
-      </section>
     </div>
   );
 }

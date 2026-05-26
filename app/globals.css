@@ -190,7 +190,6 @@ textarea {
 
 .site-nav-link,
 .admin-tools-tab,
-.event-day-nav a,
 .archive-file-link,
 .archive-reference-row,
 .subtle-link {
@@ -212,7 +211,6 @@ textarea {
 
 .site-nav-link::after,
 .admin-tools-tab::after,
-.event-day-nav a::after,
 .archive-file-link::after,
 .archive-reference-row::after,
 .subtle-link::after {
@@ -234,8 +232,6 @@ textarea {
 .admin-tools-tab:hover,
 .admin-tools-tab:focus-visible,
 .admin-tools-tab[data-state="selected"],
-.event-day-nav a:hover,
-.event-day-nav a:focus-visible,
 .archive-file-link:hover,
 .archive-file-link:focus-visible,
 .archive-reference-row:hover,
@@ -251,8 +247,6 @@ textarea {
 .dark .admin-tools-tab:hover,
 .dark .admin-tools-tab:focus-visible,
 .dark .admin-tools-tab[data-state="selected"],
-.dark .event-day-nav a:hover,
-.dark .event-day-nav a:focus-visible,
 .dark .archive-file-link:hover,
 .dark .archive-file-link:focus-visible,
 .dark .archive-reference-row:hover,
@@ -268,8 +262,6 @@ textarea {
 .admin-tools-tab:hover::after,
 .admin-tools-tab:focus-visible::after,
 .admin-tools-tab[data-state="selected"]::after,
-.event-day-nav a:hover::after,
-.event-day-nav a:focus-visible::after,
 .archive-file-link:hover::after,
 .archive-file-link:focus-visible::after,
 .archive-reference-row:hover::after,
@@ -391,7 +383,6 @@ textarea {
 .section-title,
 .label-caps,
 .live-update-row time,
-.live-help-card__tag,
 .rules-cell-label,
 .answer-correction__label {
   color: var(--text-muted);
@@ -436,8 +427,7 @@ textarea {
   line-height: 1.35;
 }
 
-.cinema-actions,
-.lamt-action-row {
+.cinema-actions {
   display: flex;
   flex-wrap: wrap;
   gap: 0.7rem;
@@ -517,17 +507,13 @@ textarea {
   gap: 0;
 }
 
-.format-grid,
-.rules-reference-grid,
-.live-help-grid {
+.rules-reference-grid {
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: clamp(1.1rem, 2.4vw, 2rem);
 }
 
 .lamt-line-item,
-.format-card,
 .rules-mini-rule,
-.live-help-card,
 .not-found-link {
   min-width: 0;
   border-top: 1px solid var(--rule);
@@ -536,17 +522,13 @@ textarea {
   box-shadow: none;
 }
 
-.format-card,
-.rules-mini-rule,
-.live-help-card {
+.rules-mini-rule {
   border-top-color: var(--rule-strong);
 }
 
 .lamt-line-item h3,
-.format-card h3,
 .rules-mini-rule span,
 .rules-mini-rule strong,
-.live-help-card h3,
 .not-found-link strong {
   color: var(--text);
   font-family: var(--font-display);
@@ -555,10 +537,7 @@ textarea {
   line-height: 1.06;
 }
 
-.format-card p,
-.rules-mini-rule p,
-.live-help-card p,
-.not-found-link p {
+.rules-mini-rule p {
   margin-top: 0.5rem;
   color: var(--text-soft);
   font-weight: 700;
@@ -601,16 +580,14 @@ textarea {
   line-height: 1.42;
 }
 
-.admin-tools-nav,
-.event-day-nav {
+.admin-tools-nav {
   display: flex;
   flex-wrap: wrap;
   gap: clamp(0.85rem, 2vw, 1.4rem);
   border-bottom: 1px solid var(--rule);
 }
 
-.admin-tools-tab,
-.event-day-nav a {
+.admin-tools-tab {
   min-height: 2.8rem;
   border: 0;
   background: transparent;
@@ -1376,9 +1353,7 @@ textarea {
     margin-top: 0;
   }
 
-  .format-grid,
   .rules-reference-grid,
-  .live-help-grid,
   .sponsor-grid {
     grid-template-columns: 1fr;
   }
@@ -1477,10 +1452,8 @@ textarea {
   }
 
   .lamt-line-item h3,
-  .format-card h3,
   .rules-mini-rule span,
   .rules-mini-rule strong,
-  .live-help-card h3,
   .not-found-link strong {
     font-size: 1.14rem;
   }
@@ -1538,7 +1511,6 @@ textarea {
   }
 
   .cinema-actions,
-  .lamt-action-row,
   .contact-strip,
   .local-mode-notice {
     align-items: stretch;
@@ -1553,14 +1525,12 @@ textarea {
     width: 100%;
   }
 
-  .admin-tools-nav,
-  .event-day-nav {
+  .admin-tools-nav {
     display: flex;
     gap: 0.75rem 1rem;
   }
 
-  .admin-tools-tab,
-  .event-day-nav a {
+  .admin-tools-tab {
     width: auto;
   }
 

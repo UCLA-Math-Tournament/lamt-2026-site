@@ -87,12 +87,6 @@ export default function RulesPage() {
     { unsimplified: '1 / \\sqrt{3}', acceptable: '\\frac{\\sqrt{3}}{3}' },
   ];
 
-  const testFormats = [
-    { name: 'Individual Rounds', desc: '10 questions plus tiebreaker. 50 minutes.' },
-    { name: 'Secret Team Round', desc: 'Team round. Structure revealed on tournament day.' },
-    { name: 'Guts Round', desc: '8 sets of 3 problems plus 1 estimation set. Sequential delivery.' },
-  ];
-
   const keyRules = [
     { label: 'Answers', text: 'Exact and simplified unless the problem states otherwise.' },
     { label: 'Individual Tests', text: 'No internet access and no communication with other people.' },
@@ -143,20 +137,8 @@ export default function RulesPage() {
         </div>
       </section>
 
-      <section id="test-format" className="section-row">
-        <h2 className="section-title">Test Format</h2>
-        <div className="lamt-line-list format-grid">
-          {testFormats.map(({ name, desc }) => (
-            <article key={name} className="lamt-line-item format-card">
-              <h3 className="font-extrabold text-[var(--color-text)]">{name}</h3>
-              <p className="section-copy mt-2">{desc}</p>
-            </article>
-          ))}
-        </div>
-      </section>
-
       <section id="allowed-not-allowed" className="section-row">
-        <h2 className="section-title">Allowed / Not Allowed</h2>
+        <h2 className="section-title">Materials</h2>
         <div className="rules-comparison-board">
           <div className="rules-comparison-table" role="table" aria-label="LAMT rules reference">
             <div className="rules-table-row rules-table-head" role="row">

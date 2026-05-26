@@ -2,10 +2,10 @@ import Link from 'next/link';
 
 export default function NotFound() {
   const routes = [
-    { href: '/', label: 'Home', detail: 'LAMT front page.' },
-    { href: '/archive', label: 'Archive', detail: '2026 papers and results.' },
-    { href: '/tournament', label: 'Tournament', detail: 'Date, format, eligibility.' },
-    { href: '/faq', label: 'FAQ', detail: 'Common logistics answers.' },
+    { href: '/', label: 'Home' },
+    { href: '/archive', label: 'Archive' },
+    { href: '/tournament', label: 'Tournament' },
+    { href: '/faq', label: 'FAQ' },
   ];
 
   return (
@@ -28,7 +28,6 @@ export default function NotFound() {
           {routes.map((route) => (
             <Link key={route.href} href={route.href} className="lamt-line-item not-found-link">
               <strong>{route.label}</strong>
-              <p>{route.detail}</p>
             </Link>
           ))}
         </div>
