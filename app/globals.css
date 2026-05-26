@@ -2051,14 +2051,25 @@ textarea {
   display: block;
   width: 100%;
   height: clamp(18rem, 34vw, 24rem);
+  isolation: isolate;
   overflow: hidden;
   border: 1px solid var(--rule);
   transition: border-color var(--fast) var(--ease);
 }
 
-.venue-map__frame:hover,
-.venue-map__frame:focus-visible {
+.venue-map__frame:hover {
   border-color: var(--rule-strong);
+}
+
+.venue-map__open {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+}
+
+.venue-map__open:focus-visible {
+  outline: 0;
+  box-shadow: inset 0 0 0 2px var(--ucla-gold);
 }
 
 .venue-map-tile-grid {
@@ -2067,6 +2078,15 @@ textarea {
   height: 100%;
   grid-template-columns: repeat(6, 1fr);
   grid-template-rows: repeat(3, 1fr);
+  filter: saturate(0.86) contrast(1.02);
+  transform: scale(1);
+  transition: filter var(--medium) var(--ease), transform 520ms var(--ease);
+}
+
+.venue-map__frame:hover .venue-map-tile-grid,
+.venue-map__frame:focus-within .venue-map-tile-grid {
+  filter: saturate(1) contrast(1.04);
+  transform: scale(1.025);
 }
 
 .venue-map-tile {
@@ -2075,21 +2095,98 @@ textarea {
   background-size: cover;
 }
 
+.venue-map-route {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.venue-map-route polyline {
+  fill: none;
+  opacity: 0.88;
+  stroke: var(--ucla-gold);
+  stroke-dasharray: 3 3;
+  stroke-linecap: square;
+  stroke-linejoin: bevel;
+  stroke-width: 0.42;
+  vector-effect: non-scaling-stroke;
+  animation: venue-route-dash 5.8s linear infinite;
+}
+
+@keyframes venue-route-dash {
+  to {
+    stroke-dashoffset: -24;
+  }
+}
+
 .venue-map-marker {
   position: absolute;
-  display: inline-flex;
+  z-index: 5;
+  display: grid;
+  width: 1.05rem;
+  height: 1.05rem;
+  place-items: center;
+  border: 0;
+  background: transparent;
+  padding: 0;
   transform: translate(-50%, -50%);
+}
+
+.venue-map-marker::before {
+  content: "";
+  display: block;
+  width: 0.78rem;
+  height: 0.78rem;
+  border: 2px solid var(--ucla-blue-deep);
+  background: var(--bg);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--bg) 82%, transparent);
+  transition: background-color var(--fast) var(--ease), border-color var(--fast) var(--ease), box-shadow var(--fast) var(--ease), transform var(--fast) var(--ease);
+}
+
+.venue-map-marker span {
+  position: absolute;
+  bottom: calc(100% + 0.46rem);
+  left: 50%;
   border: 1px solid var(--ucla-blue-deep);
   background: var(--ucla-gold);
   color: var(--ucla-blue-deep);
-  padding: 0.4rem 0.55rem;
+  opacity: 0;
+  padding: 0.34rem 0.48rem;
   font-size: 0.74rem;
   font-weight: 950;
+  line-height: 1;
+  pointer-events: none;
+  transform: translate(-50%, 0.2rem);
+  transition: opacity var(--fast) var(--ease), transform var(--fast) var(--ease);
+  white-space: nowrap;
   text-transform: uppercase;
+}
+
+.venue-map-marker:hover,
+.venue-map-marker:focus-visible {
+  outline: 0;
+}
+
+.venue-map-marker:hover::before,
+.venue-map-marker:focus-visible::before,
+.venue-map-marker[data-active="true"]::before {
+  border-color: var(--ucla-blue-deep);
+  background: var(--ucla-gold);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--ucla-gold) 30%, transparent);
+  transform: scale(1.18);
+}
+
+.venue-map-marker:hover span,
+.venue-map-marker:focus-visible span,
+.venue-map-marker[data-active="true"] span {
+  opacity: 1;
+  transform: translate(-50%, 0);
 }
 
 .venue-map-attribution {
   position: absolute;
+  z-index: 4;
   right: 0.4rem;
   bottom: 0.4rem;
   background: rgba(244, 248, 252, 0.86);
@@ -2117,8 +2214,11 @@ textarea {
 }
 
 .venue-map__venue:hover,
-.venue-map__venue:focus-visible {
+.venue-map__venue:focus-visible,
+.venue-map__venue[data-active="true"] {
   color: var(--interactive-text);
+  outline: 0;
+  box-shadow: inset 2px 0 0 var(--ucla-gold);
   transform: translateX(2px);
 }
 
