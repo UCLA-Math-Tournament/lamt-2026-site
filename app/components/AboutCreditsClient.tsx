@@ -27,12 +27,12 @@ function NameRiver({
   const x = useTransform(
     scrollYProgress,
     [0, 1],
-    reduceMotion ? ['0%', '0%'] : direction === 1 ? ['-3.5%', '3.5%'] : ['3.5%', '-3.5%'],
+    reduceMotion ? ['0%', '0%'] : direction === 1 ? ['-1.6%', '1.6%'] : ['1.6%', '-1.6%'],
   );
   const rotate = useTransform(
     scrollYProgress,
     [0, 0.5, 1],
-    reduceMotion ? [0, 0, 0] : direction === 1 ? [-1.4, 0, 1.4] : [1.4, 0, -1.4],
+    reduceMotion ? [0, 0, 0] : direction === 1 ? [-0.45, 0, 0.45] : [0.45, 0, -0.45],
   );
 
   return (
@@ -63,7 +63,6 @@ export default function AboutCreditsClient({
           {staffGroups.map((group, index) => (
             <section key={group.title} className="about-credit-row" data-tone={index % 2 === 0 ? 'blue' : 'gold'}>
               <div className="about-credit-row__heading">
-                <span>{String(index + 1).padStart(2, '0')}</span>
                 <h3>{group.title}</h3>
               </div>
               <NameRiver names={group.people} direction={index % 2 === 0 ? 1 : -1} />

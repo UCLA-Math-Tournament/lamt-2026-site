@@ -2,8 +2,8 @@
 
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
-import { useEffect, useMemo, useState } from 'react';
-import { AnimatePresence, motion, useReducedMotion, useScroll, useSpring, useTransform } from 'framer-motion';
+import { useEffect, useState } from 'react';
+import { motion, useReducedMotion, useScroll, useSpring, useTransform } from 'framer-motion';
 
 const REVEAL_SELECTOR = [
   '.page-hero__body',
@@ -42,7 +42,6 @@ export default function SiteExperienceClient() {
   const reduceMotion = Boolean(useReducedMotion());
   const [tocItems, setTocItems] = useState<TocItem[]>([]);
   const [activeId, setActiveId] = useState<string>('');
-  const [compassOpen, setCompassOpen] = useState(false);
   const { scrollYProgress } = useScroll();
   const progress = useSpring(scrollYProgress, {
     stiffness: 120,
@@ -51,6 +50,10 @@ export default function SiteExperienceClient() {
   });
   const bearTop = useTransform(progress, [0, 1], ['0%', '100%']);
   const bearRotate = useTransform(progress, [0, 0.5, 1], [-6, 4, 8]);
+  const fieldBlueX = useTransform(progress, [0, 1], reduceMotion ? ['0%', '0%'] : ['-8%', '6%']);
+  const fieldGoldX = useTransform(progress, [0, 1], reduceMotion ? ['0%', '0%'] : ['7%', '-5%']);
+  const fieldBearY = useTransform(progress, [0, 1], reduceMotion ? ['0%', '0%'] : ['-8%', '9%']);
+  const fieldBearRotate = useTransform(progress, [0, 0.5, 1], reduceMotion ? [0, 0, 0] : [-4, 2, 5]);
 
   useEffect(() => {
     const targets = Array.from(document.querySelectorAll<HTMLElement>(REVEAL_SELECTOR));
@@ -117,23 +120,24 @@ export default function SiteExperienceClient() {
     };
   }, [pathname, reduceMotion]);
 
-  const activeLabel = useMemo(
-    () => tocItems.find((item) => item.id === activeId)?.label || tocItems[0]?.label || 'LAMT',
-    [activeId, tocItems],
-  );
-  const activeIndex = Math.max(0, tocItems.findIndex((item) => item.id === activeId));
-  const showCompass = !pathname.startsWith('/admin') && tocItems.length > 1;
+  const showJumpRail = !pathname.startsWith('/admin') && tocItems.length > 1;
 
   const goToSection = (id: string) => {
     const target = document.getElementById(id);
     if (!target) return;
     const top = target.getBoundingClientRect().top + window.scrollY - 92;
     window.scrollTo({ top, behavior: reduceMotion ? 'auto' : 'smooth' });
-    setCompassOpen(false);
   };
 
   return (
     <>
+      <div className="site-atmosphere" data-home={pathname === '/' ? 'true' : undefined} aria-hidden="true">
+        <motion.span className="site-atmosphere__path site-atmosphere__path--blue" style={{ x: fieldBlueX }} />
+        <motion.span className="site-atmosphere__path site-atmosphere__path--gold" style={{ x: fieldGoldX }} />
+        <motion.span className="site-atmosphere__bear" style={{ y: fieldBearY, rotate: fieldBearRotate }}>
+          <Image src="/LAMTBear.png" alt="" width={260} height={260} />
+        </motion.span>
+      </div>
       <motion.div className="site-top-progress" style={{ scaleX: progress }} aria-hidden="true" />
       <div className="site-scroll-rail" aria-hidden="true">
         <div className="site-scroll-rail__track">
@@ -143,60 +147,35 @@ export default function SiteExperienceClient() {
           </motion.span>
         </div>
       </div>
-      {showCompass ? (
+      {showJumpRail ? (
         <motion.nav
-          className="site-compass"
-          data-open={compassOpen}
+          className="site-jumprail"
           aria-label="Page sections"
-          layout
           initial={reduceMotion ? false : { y: 18, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
         >
-          <button
-            type="button"
-            className="site-compass__button"
-            aria-expanded={compassOpen}
-            aria-label={`${compassOpen ? 'Close' : 'Open'} page sections`}
-            onClick={() => setCompassOpen((open) => !open)}
-          >
-            <span className="site-compass__mark">
-              <Image src="/LAMTBear.png" alt="" width={28} height={28} />
-              <motion.span className="site-compass__mark-progress" style={{ scaleY: progress }} />
-            </span>
-            <span className="site-compass__label">{activeLabel}</span>
-            <span className="site-compass__count">
-              {String(activeIndex + 1).padStart(2, '0')} / {String(tocItems.length).padStart(2, '0')}
-            </span>
-            <span className="site-compass__meter" aria-hidden="true">
-              {tocItems.map((item) => (
-                <span key={item.id} data-active={item.id === activeId} />
-              ))}
-            </span>
-          </button>
-          <AnimatePresence>
-            {compassOpen ? (
-              <motion.div
-                className="site-compass__panel"
-                initial={reduceMotion ? false : { opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={reduceMotion ? { opacity: 0 } : { opacity: 0, y: 8 }}
-                transition={{ duration: 0.18, ease: [0.16, 1, 0.3, 1] }}
+          <span className="site-jumprail__track" aria-hidden="true">
+            <motion.span className="site-jumprail__fill" style={{ scaleY: progress }} />
+            <motion.span className="site-jumprail__bear" style={{ top: bearTop, rotate: bearRotate }}>
+              <Image src="/LAMTBear.png" alt="" width={30} height={30} />
+            </motion.span>
+          </span>
+          <div className="site-jumprail__items">
+            {tocItems.map((item) => (
+              <button
+                key={item.id}
+                type="button"
+                className="site-jumprail__item"
+                data-active={item.id === activeId}
+                aria-label={`Jump to ${item.label}`}
+                onClick={() => goToSection(item.id)}
               >
-                {tocItems.map((item) => (
-                  <button
-                    key={item.id}
-                    type="button"
-                    className="site-compass__item"
-                    data-active={item.id === activeId}
-                    onClick={() => goToSection(item.id)}
-                  >
-                    {item.label}
-                  </button>
-                ))}
-              </motion.div>
-            ) : null}
-          </AnimatePresence>
+                <span className="site-jumprail__tick" aria-hidden="true" />
+                <span className="site-jumprail__label">{item.label}</span>
+              </button>
+            ))}
+          </div>
         </motion.nav>
       ) : null}
     </>
