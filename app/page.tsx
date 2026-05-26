@@ -1,5 +1,6 @@
 import SponsorsSection from './components/SponsorsSection';
 import HomeClient from './components/HomeClient';
+import TournamentDayClient from './components/TournamentDayClient';
 import fs from 'fs';
 import path from 'path';
 
@@ -29,6 +30,7 @@ export default function HomePage() {
   return (
     <div>
       <HomeClient />
+      <TournamentDayClient />
       <SponsorsSection sponsorsByTier={sponsorsByTier} />
     </div>
   );
