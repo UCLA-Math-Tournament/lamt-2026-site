@@ -24,7 +24,8 @@ const REVEAL_SELECTOR = [
   '.archive-materials__root',
   '.archive-materials__round',
   '.archive-materials__reference',
-  '.about-staff-row',
+  '.about-credit-row',
+  '.about-river',
   '.sponsor-heading',
   '.sponsor-grid',
 ].join(',');

@@ -1,3 +1,5 @@
+import AboutCreditsClient from '../components/AboutCreditsClient';
+
 export default function AboutPage() {
   const staffGroups = [
     {
@@ -84,27 +86,7 @@ export default function AboutPage() {
         </div>
       </header>
 
-      <section className="section-row">
-        <h2 className="section-title">Staff</h2>
-        <div className="about-staff-list">
-          {staffGroups.map((group) => (
-            <section key={group.title} className="about-staff-row">
-              <h3>{group.title}</h3>
-              <p>{group.people.join(', ')}</p>
-            </section>
-          ))}
-        </div>
-      </section>
-
-      <section className="section-row">
-        <h2 className="section-title">Contributors</h2>
-        <p className="about-name-list">{contributors.join(', ')}</p>
-      </section>
-
-      <section className="section-row">
-        <h2 className="section-title">Advisors</h2>
-        <p className="about-name-list">{advisors.join(', ')}</p>
-      </section>
+      <AboutCreditsClient staffGroups={staffGroups} contributors={contributors} advisors={advisors} />
 
     </div>
   );

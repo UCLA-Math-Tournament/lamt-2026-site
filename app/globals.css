@@ -1680,6 +1680,147 @@ textarea {
   padding-top: 0.9rem;
 }
 
+.about-credits {
+  position: relative;
+  overflow: hidden;
+  border-top: 1px solid var(--rule);
+}
+
+.about-credit-row {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(10rem, 13rem) minmax(0, 1fr);
+  gap: clamp(1rem, 2.4vw, 2.2rem);
+  align-items: start;
+  min-height: clamp(7rem, 12vw, 10rem);
+  border-bottom: 1px solid var(--rule);
+  isolation: isolate;
+  overflow: hidden;
+  padding-block: clamp(1.25rem, 2.8vw, 2.2rem);
+}
+
+.about-credit-row::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 3px;
+  background: var(--ucla-blue);
+  opacity: 0.82;
+  transform: scaleY(0.34);
+  transform-origin: top;
+  transition: transform var(--medium) var(--ease), background-color var(--fast) var(--ease);
+}
+
+.about-credit-row[data-tone="gold"]::before {
+  background: var(--ucla-gold);
+}
+
+.about-credit-row:hover::before,
+.about-credit-row:focus-within::before {
+  transform: scaleY(1);
+}
+
+.about-credit-row__heading {
+  display: grid;
+  gap: 0.45rem;
+  align-self: start;
+}
+
+.about-credit-row__heading span {
+  color: var(--accent-text);
+  font-size: 0.72rem;
+  font-weight: 950;
+  line-height: 1;
+}
+
+.about-credit-row__heading h3 {
+  color: var(--text);
+  font-family: var(--font-display);
+  font-size: clamp(1.26rem, 2vw, 1.8rem);
+  font-weight: 950;
+  letter-spacing: 0;
+  line-height: 0.95;
+  text-transform: uppercase;
+}
+
+.about-river {
+  width: 100%;
+  overflow: hidden;
+}
+
+.about-river p {
+  display: flex;
+  width: 100%;
+  max-width: 100%;
+  flex-wrap: wrap;
+  align-items: baseline;
+  color: var(--text);
+  font-family: var(--font-display);
+  font-size: clamp(1.55rem, 2.9vw, 3.05rem);
+  font-weight: 950;
+  letter-spacing: 0;
+  line-height: 0.9;
+  row-gap: 0.16em;
+  text-transform: uppercase;
+  transform-origin: center;
+  will-change: transform;
+}
+
+.about-river span {
+  display: inline-flex;
+  align-items: baseline;
+}
+
+.about-river span::after {
+  content: "";
+  width: clamp(1.2rem, 3vw, 2.8rem);
+  height: 0.16em;
+  margin-inline: clamp(0.52rem, 1.2vw, 1rem);
+  background: var(--ucla-gold);
+  transform: translateY(-0.16em);
+}
+
+.about-credit-row[data-tone="blue"] .about-river span:nth-child(2n),
+.about-credit-row[data-tone="gold"] .about-river span:nth-child(2n + 1) {
+  color: var(--ucla-blue);
+}
+
+.about-credit-row[data-tone="gold"] .about-river span::after {
+  background: var(--ucla-blue);
+}
+
+.about-river--compact {
+  border-top: 1px solid var(--rule);
+  padding-block: clamp(0.9rem, 2vw, 1.35rem);
+}
+
+.about-river--compact p {
+  color: var(--text-soft);
+  font-size: clamp(1.25rem, 2.1vw, 2.1rem);
+}
+
+.about-river--compact span:nth-child(3n) {
+  color: var(--text);
+}
+
+.about-credits__bear {
+  position: absolute;
+  right: clamp(0.6rem, 3vw, 2rem);
+  bottom: clamp(0.8rem, 2.4vw, 1.6rem);
+  width: clamp(4.6rem, 10vw, 8.25rem);
+  opacity: 0.1;
+  pointer-events: none;
+}
+
+.about-credits__bear img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 1rem 1.4rem rgba(0, 59, 92, 0.14));
+}
+
 .lamt-input,
 .lamt-textarea {
   width: min(100%, 42rem);
@@ -2606,9 +2747,19 @@ textarea {
 
   .archive-round-row,
   .about-staff-row,
+  .about-credit-row,
   .live-update-row {
     grid-template-columns: 1fr;
     gap: 0.35rem;
+  }
+
+  .about-credit-row {
+    min-height: auto;
+    padding-block: 1.35rem;
+  }
+
+  .about-credit-row__heading {
+    gap: 0.28rem;
   }
 
   .archive-round-head {
@@ -2790,6 +2941,7 @@ textarea {
 
   .archive-round-row strong,
   .about-staff-row h3,
+  .about-credit-row__heading h3,
   .live-update-row h3,
   .live-schedule-main h3 {
     font-size: 1.05rem;
@@ -2798,13 +2950,19 @@ textarea {
   .archive-file-link,
   .archive-reference-row,
   .about-staff-row p,
+  .about-river p,
   .about-name-list {
     font-size: 0.92rem;
   }
 
   .about-staff-row p,
+  .about-river p,
   .about-name-list {
     line-height: 1.42;
+  }
+
+  .about-river p {
+    transform: none !important;
   }
 
   .sponsor-logo-frame {
