@@ -3,6 +3,7 @@ import { Inter, Inter_Tight } from 'next/font/google';
 import NavbarClient from './components/NavbarClient';
 import FooterClient from './components/FooterClient';
 import DarkModeToggle from './components/DarkModeToggle';
+import SiteExperienceClient from './components/SiteExperienceClient';
 import 'katex/dist/katex.min.css';
 import './globals.css';
 
@@ -28,6 +29,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     <html lang="en" className={`${inter.variable} ${interTight.variable}`} suppressHydrationWarning>
       <body className="min-h-screen transition-colors duration-300">
         <NavbarClient />
+        <SiteExperienceClient />
         <main>{children}</main>
         <FooterClient />
         <DarkModeToggle />
