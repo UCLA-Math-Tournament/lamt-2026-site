@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 import { motion, useReducedMotion, useScroll, useSpring, useTransform } from 'framer-motion';
 
 const REVEAL_SELECTOR = [
+  '.page-title',
   '.page-hero__body',
   '.section-row',
   '.lamt-line-item',
@@ -26,8 +27,12 @@ const REVEAL_SELECTOR = [
   '.archive-materials__reference',
   '.about-credit-row',
   '.about-river',
+  '.venue-map__tag',
+  '.venue-map__details',
   '.sponsor-heading',
   '.sponsor-grid',
+  '.site-footer__socials',
+  '.site-footer__note',
 ].join(',');
 
 const TOC_SELECTOR = '.page-hero h1, .home-hero h1, .contest-flow h2, .section-row > .section-title, .sponsor-heading .sponsor-title';
@@ -54,6 +59,9 @@ export default function SiteExperienceClient() {
   const fieldGoldX = useTransform(progress, [0, 1], reduceMotion ? ['0%', '0%'] : ['7%', '-5%']);
   const fieldBearY = useTransform(progress, [0, 1], reduceMotion ? ['0%', '0%'] : ['-8%', '9%']);
   const fieldBearRotate = useTransform(progress, [0, 0.5, 1], reduceMotion ? [0, 0, 0] : [-4, 2, 5]);
+  const auroraBlueY = useTransform(progress, [0, 1], reduceMotion ? ['0%', '0%'] : ['-6%', '10%']);
+  const auroraGoldY = useTransform(progress, [0, 1], reduceMotion ? ['0%', '0%'] : ['9%', '-7%']);
+  const auroraScale = useTransform(progress, [0, 0.5, 1], reduceMotion ? [1, 1, 1] : [1, 1.04, 1.01]);
 
   useEffect(() => {
     const targets = Array.from(document.querySelectorAll<HTMLElement>(REVEAL_SELECTOR));
@@ -132,12 +140,16 @@ export default function SiteExperienceClient() {
   return (
     <>
       <div className="site-atmosphere" data-home={pathname === '/' ? 'true' : undefined} aria-hidden="true">
+        <motion.span className="site-atmosphere__aurora site-atmosphere__aurora--blue" style={{ scale: auroraScale, y: auroraBlueY }} />
+        <motion.span className="site-atmosphere__aurora site-atmosphere__aurora--gold" style={{ scale: auroraScale, y: auroraGoldY }} />
         <motion.span className="site-atmosphere__path site-atmosphere__path--blue" style={{ x: fieldBlueX }} />
         <motion.span className="site-atmosphere__path site-atmosphere__path--gold" style={{ x: fieldGoldX }} />
         <motion.span className="site-atmosphere__bear" style={{ y: fieldBearY, rotate: fieldBearRotate }}>
           <Image src="/LAMTBear.png" alt="" width={260} height={260} />
         </motion.span>
       </div>
+      <div className="site-edge-blur site-edge-blur--top" aria-hidden="true" />
+      <div className="site-edge-blur site-edge-blur--bottom" aria-hidden="true" />
       <motion.div className="site-top-progress" style={{ scaleX: progress }} aria-hidden="true" />
       <div className="site-scroll-rail" aria-hidden="true">
         <div className="site-scroll-rail__track">

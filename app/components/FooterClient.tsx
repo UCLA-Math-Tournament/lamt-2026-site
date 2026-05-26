@@ -1,6 +1,6 @@
 'use client';
 
-import type { ReactNode } from 'react';
+import type { CSSProperties, ReactNode } from 'react';
 import { DiscordLogoIcon, EnvelopeClosedIcon, InstagramLogoIcon } from '@radix-ui/react-icons';
 
 const DISCORD_URL = 'https://discord.gg/tqR3bGjVke';
@@ -24,6 +24,7 @@ const LinkedInIcon = () => (
 );
 
 export default function FooterClient() {
+  const waveBars = Array.from({ length: 18 }, (_, index) => index);
   const socialLinks: {
     title: string;
     href: string;
@@ -39,6 +40,12 @@ export default function FooterClient() {
   return (
     <footer className="site-footer">
       <div className="site-footer__inner site-pad">
+        <div className="site-footer__wave" aria-hidden="true">
+          {waveBars.map((bar) => (
+            <span key={bar} style={{ '--bar-index': bar } as CSSProperties} />
+          ))}
+        </div>
+
         <nav className="site-footer__socials" aria-label="LAMT contact links">
           {socialLinks.map((item) => (
             <a

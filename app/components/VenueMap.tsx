@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { ExternalLinkIcon } from "@radix-ui/react-icons";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 
 const MAP_ZOOM = 16;
 const MAP_TILE_X_START = 11203;
@@ -42,6 +43,7 @@ const VENUES = [
 
 export default function VenueMap({ className = "" }: { className?: string }) {
   const [activeVenue, setActiveVenue] = useState(0);
+  const reduceMotion = Boolean(useReducedMotion());
   const active = VENUES[activeVenue] || VENUES[0];
   const routePoints = VENUES.map((venue) => `${venue.left},${venue.top}`).join(" ");
 
@@ -68,7 +70,7 @@ export default function VenueMap({ className = "" }: { className?: string }) {
         </svg>
 
         {VENUES.map((venue, index) => (
-          <a
+          <motion.a
             key={venue.label}
             href={venue.href}
             target="_blank"
@@ -79,10 +81,30 @@ export default function VenueMap({ className = "" }: { className?: string }) {
             aria-label={`Open ${venue.label} on OpenStreetMap`}
             onMouseEnter={() => setActiveVenue(index)}
             onFocus={() => setActiveVenue(index)}
+            animate={reduceMotion ? undefined : { scale: index === activeVenue ? 1.14 : 1 }}
+            transition={{ duration: reduceMotion ? 0 : 0.18, ease: [0.16, 1, 0.3, 1] }}
           >
             <span>{venue.label}</span>
-          </a>
+          </motion.a>
         ))}
+
+        <AnimatePresence mode="wait">
+          <motion.a
+            key={active.label}
+            href={active.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="venue-map__tag"
+            initial={reduceMotion ? false : { opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={reduceMotion ? { opacity: 0 } : { opacity: 0, y: -8 }}
+            transition={{ duration: reduceMotion ? 0 : 0.2, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <strong>{active.label}</strong>
+            <span>{active.meta}</span>
+            <ExternalLinkIcon aria-hidden="true" />
+          </motion.a>
+        </AnimatePresence>
 
         <span className="venue-map-attribution">
           OpenStreetMap

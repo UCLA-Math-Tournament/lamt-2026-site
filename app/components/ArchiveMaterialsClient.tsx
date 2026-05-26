@@ -2,7 +2,7 @@
 
 import { ChevronRightIcon } from '@radix-ui/react-icons';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 type ArchiveRound = {
   name: string;
@@ -20,6 +20,59 @@ type ArchiveMaterialsClientProps = {
   rounds: ArchiveRound[];
   reference: ArchiveReference[];
 };
+
+const SCRAMBLE_CHARS = 'LAMT2026UCLA';
+
+function ScrambleLabel({ text }: { text: string }) {
+  const [displayText, setDisplayText] = useState(text);
+  const reduceMotion = Boolean(useReducedMotion());
+  const timerRef = useRef<number | null>(null);
+
+  useEffect(() => {
+    setDisplayText(text);
+    return () => {
+      if (timerRef.current) {
+        window.clearInterval(timerRef.current);
+      }
+    };
+  }, [text]);
+
+  const run = () => {
+    if (reduceMotion || timerRef.current) return;
+
+    let step = 0;
+    const maxSteps = 12;
+    timerRef.current = window.setInterval(() => {
+      step += 1;
+      const progress = step / maxSteps;
+      const next = text
+        .split('')
+        .map((char, index) => {
+          if (char === ' ' || progress * text.length > index) return char;
+          return SCRAMBLE_CHARS[(index + step) % SCRAMBLE_CHARS.length];
+        })
+        .join('');
+
+      setDisplayText(next);
+
+      if (step >= maxSteps && timerRef.current) {
+        window.clearInterval(timerRef.current);
+        timerRef.current = null;
+        setDisplayText(text);
+      }
+    }, 18);
+  };
+
+  return (
+    <span
+      className="archive-materials__scramble"
+      onMouseEnter={run}
+      onFocus={run}
+    >
+      {displayText}
+    </span>
+  );
+}
 
 export default function ArchiveMaterialsClient({ rounds, reference }: ArchiveMaterialsClientProps) {
   const [openRound, setOpenRound] = useState(rounds[0]?.name || '');
@@ -95,7 +148,7 @@ export default function ArchiveMaterialsClient({ rounds, reference }: ArchiveMat
                           animate={{ opacity: 1, y: 0 }}
                           transition={{ duration: motionDuration, delay: reduceMotion ? 0 : index * 0.035 }}
                         >
-                          <span>{file.label}</span>
+                          <ScrambleLabel text={file.label} />
                           <em>PDF</em>
                         </motion.a>
                       ))}
@@ -115,7 +168,7 @@ export default function ArchiveMaterialsClient({ rounds, reference }: ArchiveMat
             rel={item.type === 'PDF' ? 'noreferrer' : undefined}
             className="archive-materials__reference"
           >
-            <span>{item.label}</span>
+            <ScrambleLabel text={item.label} />
             <em>{item.type}</em>
           </a>
         ))}
