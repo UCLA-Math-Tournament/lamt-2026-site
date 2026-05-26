@@ -1501,43 +1501,73 @@ textarea {
   border-bottom: 1px solid var(--rule);
 }
 
-.faq-row summary {
+.faq-row__trigger {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
   gap: 1rem;
+  width: 100%;
   align-items: center;
   cursor: pointer;
-  list-style: none;
+  border: 0;
+  background: transparent;
   padding-block: 1rem;
   color: var(--text);
   font-size: 1.16rem;
   font-weight: 900;
   line-height: 1.2;
+  text-align: left;
   transition: color var(--fast) var(--ease), transform var(--fast) var(--ease);
 }
 
-.faq-row summary::-webkit-details-marker {
-  display: none;
-}
-
-.faq-row summary::after {
-  content: "+";
+.faq-row__trigger svg {
+  width: 1.08rem;
+  height: 1.08rem;
   color: var(--accent-text);
-  font-size: 1.15rem;
-  font-weight: 900;
+  transition: transform 0.2s var(--ease), color var(--fast) var(--ease);
 }
 
-.faq-row[open] summary::after {
-  content: "-";
+.faq-row[data-open="true"] .faq-row__trigger svg {
+  transform: rotate(180deg);
 }
 
-.faq-row summary:hover,
-.faq-row summary:focus-visible {
+.faq-row__trigger:hover,
+.faq-row__trigger:focus-visible {
+  outline: 0;
   color: var(--interactive-text);
+}
+
+.faq-row__trigger:hover {
   transform: translateY(-1px);
 }
 
-.faq-row p {
+.faq-row__trigger:focus-visible {
+  box-shadow: inset 0 -2px 0 var(--ucla-gold);
+}
+
+.faq-row__trigger:hover svg,
+.faq-row__trigger:focus-visible svg {
+  color: var(--ucla-gold);
+}
+
+.faq-row__content {
+  display: grid;
+  grid-template-rows: 0fr;
+  overflow: hidden;
+  opacity: 0;
+  transition: grid-template-rows 0.2s var(--ease), opacity 0.2s var(--ease);
+}
+
+.faq-row[data-open="true"] .faq-row__content {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+
+.faq-row__content > div {
+  min-height: 0;
+  overflow: hidden;
+}
+
+.faq-row__content p {
   max-width: 50rem;
   padding: 0 3rem 1rem 0;
   color: var(--text-soft);
@@ -2288,11 +2318,11 @@ textarea {
     font-size: 1.04rem;
   }
 
-  .faq-row summary {
+  .faq-row__trigger {
     font-size: 0.98rem;
   }
 
-  .faq-row p {
+  .faq-row__content p {
     padding-right: 0;
     font-size: 0.98rem;
   }

@@ -1,3 +1,5 @@
+import FAQAccordionClient from '../components/FAQAccordionClient';
+
 const faqs = [
   { id: 'eligibility', q: 'Who is eligible to compete at LAMT?', a: 'Grade 12 or below as of May 2026. No geographic restriction.' },
   { id: 'fee', q: 'Was there a registration fee?', a: 'No. LAMT 2026 was free. Participants covered travel and housing.' },
@@ -24,16 +26,7 @@ export default function FAQPage() {
 
       <section className="section-row">
         <h2 className="section-title">Questions</h2>
-        <div className="faq-list">
-          {faqs.map((item, index) => (
-            <details key={item.id} className="faq-row" open={index === 0}>
-              <summary>
-                <span>{item.q}</span>
-              </summary>
-              <p>{item.a}</p>
-            </details>
-          ))}
-        </div>
+        <FAQAccordionClient items={faqs} />
       </section>
     </div>
   );
