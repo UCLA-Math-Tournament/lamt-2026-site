@@ -1,8 +1,6 @@
 'use client';
 
 import type { ReactNode } from 'react';
-import Image from 'next/image';
-import Link from 'next/link';
 import { DiscordLogoIcon, EnvelopeClosedIcon, InstagramLogoIcon } from '@radix-ui/react-icons';
 import DarkModeToggle from './DarkModeToggle';
 
@@ -42,10 +40,6 @@ export default function FooterClient() {
   return (
     <footer className="site-footer">
       <div className="site-footer__inner site-pad">
-        <Link href="/" className="site-footer__brand-link" aria-label="LAMT home">
-          <Image src="/LAMTBear.png" alt="LAMT Bear Logo" width={150} height={150} className="site-footer__mark" />
-        </Link>
-
         <nav className="site-footer__socials" aria-label="LAMT contact links">
           {socialLinks.map((item) => (
             <a

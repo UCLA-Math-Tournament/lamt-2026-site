@@ -9,82 +9,66 @@ function InlineMath({ math }: { math: string }) {
   return <span dangerouslySetInnerHTML={{ __html: html }} />;
 }
 
-type AcceptableExample = { math: string };
-type UnacceptableExample = { unsimplified: string; acceptable: string };
+type RewriteExample = { rejected: string; accepted: string };
 
 function AnswerFormatExamples({
   acceptableExamples,
-  unacceptableExamples,
+  rewriteExamples,
 }: {
-  acceptableExamples: AcceptableExample[];
-  unacceptableExamples: UnacceptableExample[];
+  acceptableExamples: string[];
+  rewriteExamples: RewriteExample[];
 }) {
   return (
-    <div className="answer-format-examples">
-      <section className="answer-format-panel" aria-label="Accepted answer examples">
-        <div className="answer-panel-heading">
-          <h3>Accepted</h3>
-        </div>
-        <div className="answer-chip-grid">
-          {acceptableExamples.map((item) => (
-            <span key={item.math} className="answer-chip">
-              <InlineMath math={item.math} />
+    <div className="answer-format">
+      <div className="answer-example-line" aria-label="Accepted answer examples">
+        <strong>Accepted examples</strong>
+        <p>
+          {acceptableExamples.map((math) => (
+            <span key={math}>
+              <InlineMath math={math} />
             </span>
           ))}
-        </div>
-      </section>
+        </p>
+      </div>
 
-      <section className="answer-format-panel" aria-label="Rejected answer examples">
-        <div className="answer-panel-heading">
-          <h3>Rejected</h3>
+      <div className="answer-rewrite-list" aria-label="Rejected and accepted answer rewrites">
+        <div className="answer-rewrite-head" aria-hidden="true">
+          <span>Rejected</span>
+          <span>Accepted</span>
         </div>
-        <div className="answer-correction-list">
-          <div className="answer-correction-head" aria-hidden="true">
-            <span>Rejected</span>
-            <span>Rewrite</span>
-            <span>Accepted</span>
+        {rewriteExamples.map((item) => (
+          <div key={item.rejected} className="answer-rewrite-row">
+            <p className="line-through"><InlineMath math={item.rejected} /></p>
+            <p><InlineMath math={item.accepted} /></p>
           </div>
-          {unacceptableExamples.map((item) => (
-            <article key={item.unsimplified} className="answer-correction">
-              <div className="answer-correction__cell answer-correction__cell--rejected">
-                <span className="answer-correction__label">Rejected</span>
-                <p className="line-through"><InlineMath math={item.unsimplified} /></p>
-              </div>
-              <div className="answer-correction__arrow" aria-hidden="true">→</div>
-              <div className="answer-correction__cell answer-correction__cell--accepted">
-                <span className="answer-correction__label">Accepted</span>
-                <p><InlineMath math={item.acceptable} /></p>
-              </div>
-            </article>
-          ))}
-        </div>
-      </section>
+        ))}
+      </div>
     </div>
   );
 }
 
 export default function RulesPage() {
   const acceptableExamples = [
-    { math: '879' },
-    { math: '2^{57} + 1' },
-    { math: '\\frac{2}{7}' },
-    { math: '\\sqrt{\\pi}' },
-    { math: '\\frac{11}{3}' },
-    { math: '\\frac{\\sqrt{2}}{2}' },
-    { math: '420!' },
-    { math: '\\cos(1)' },
-    { math: '\\binom{10}{4}' },
-    { math: '\\frac{3\\pi}{2}' },
+    '879',
+    '2^{57} + 1',
+    '\\frac{2}{7}',
+    '\\sqrt{\\pi}',
+    '\\frac{11}{3}',
+    '\\frac{\\sqrt{2}}{2}',
+    '420!',
+    '\\cos(1)',
+    '\\binom{10}{4}',
+    '\\frac{3\\pi}{2}',
   ];
 
-  const unacceptableExamples = [
-    { unsimplified: '61 \\times 17', acceptable: '1037' },
-    { unsimplified: '\\sin(\\frac{\\pi}{7}) - \\sin(\\frac{6\\pi}{7})', acceptable: '0' },
-    { unsimplified: '\\frac{61}{31415}', acceptable: '\\frac{1}{515}' },
-    { unsimplified: '\\sqrt{3 + 2\\sqrt{2}}', acceptable: '1 + \\sqrt{2}' },
-    { unsimplified: '\\sqrt{\\frac{7}{9}}', acceptable: '\\frac{\\sqrt{7}}{3}' },
-    { unsimplified: '\\sin(\\frac{\\pi}{10})', acceptable: '\\frac{\\sqrt{5}-1}{4}' },
-    { unsimplified: '1 / \\sqrt{3}', acceptable: '\\frac{\\sqrt{3}}{3}' },
+  const rewriteExamples = [
+    { rejected: '61 \\times 17', accepted: '1037' },
+    { rejected: '\\sin(\\frac{\\pi}{7}) - \\sin(\\frac{6\\pi}{7})', accepted: '0' },
+    { rejected: '\\frac{61}{31415}', accepted: '\\frac{1}{515}' },
+    { rejected: '\\sqrt{3 + 2\\sqrt{2}}', accepted: '1 + \\sqrt{2}' },
+    { rejected: '\\sqrt{\\frac{7}{9}}', accepted: '\\frac{\\sqrt{7}}{3}' },
+    { rejected: '\\sin(\\frac{\\pi}{10})', accepted: '\\frac{\\sqrt{5}-1}{4}' },
+    { rejected: '1 / \\sqrt{3}', accepted: '\\frac{\\sqrt{3}}{3}' },
   ];
 
   const keyRules = [
@@ -124,12 +108,12 @@ export default function RulesPage() {
 
       <section id="key-rules" className="section-row">
         <h2 className="section-title">Key Rules</h2>
-        <div className="lamt-line-list rules-reference-grid">
+        <div className="rules-key-list">
           {keyRules.map((item) => (
-            <article key={item.label} className="lamt-line-item rules-mini-rule">
-              <span>{item.label}</span>
+            <div key={item.label} className="rules-key-row">
+              <strong>{item.label}</strong>
               <p>{item.text}</p>
-            </article>
+            </div>
           ))}
         </div>
       </section>
@@ -167,7 +151,7 @@ export default function RulesPage() {
 
           <AnswerFormatExamples
             acceptableExamples={acceptableExamples}
-            unacceptableExamples={unacceptableExamples}
+            rewriteExamples={rewriteExamples}
           />
         </div>
       </section>

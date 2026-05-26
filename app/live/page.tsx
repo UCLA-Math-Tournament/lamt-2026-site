@@ -22,12 +22,6 @@ const ARCHIVE_UPDATES: Update[] = [
     title: "Materials posted",
     body: "Problems, solutions, and results are available.",
   },
-  {
-    id: -2,
-    timestamp: "Post-contest",
-    title: "Questions",
-    body: STAFF_EMAIL,
-  },
 ];
 
 function readStored<T>(key: string, fallback: T): T {
