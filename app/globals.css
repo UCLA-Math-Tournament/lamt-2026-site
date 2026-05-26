@@ -1244,6 +1244,11 @@ textarea {
   transition: color var(--fast) var(--ease), transform var(--fast) var(--ease);
 }
 
+.theme-toggle svg {
+  width: 1.12rem;
+  height: 1.12rem;
+}
+
 .theme-toggle:hover,
 .theme-toggle:focus-visible {
   color: var(--interactive-text);
