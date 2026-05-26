@@ -294,9 +294,7 @@ export default function LivePage() {
 
       <section id="schedule" className="section-row">
         <h2 className="section-title">Schedule</h2>
-        <div className="grid items-start gap-5 xl:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)]">
-          <ScheduleTimeline schedule={schedule} />
-        </div>
+        <ScheduleTimeline schedule={schedule} />
       </section>
 
       <MapSection />

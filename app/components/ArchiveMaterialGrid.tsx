@@ -9,13 +9,6 @@ type ArchiveGroup = {
   items: ArchiveMaterial[];
 };
 
-const categoryCopy: Record<string, string> = {
-  Problems: 'Contest papers',
-  Solutions: 'Solutions',
-  Results: 'Results',
-  Info: 'Schedule, rules, notice',
-};
-
 export default function ArchiveMaterialGrid({ groups }: { groups: ArchiveGroup[] }) {
   return (
     <div className="archive-index" aria-label="LAMT archive materials">
@@ -23,7 +16,6 @@ export default function ArchiveMaterialGrid({ groups }: { groups: ArchiveGroup[]
         <section key={group.category} className="archive-index-group">
           <div className="archive-index-heading">
             <h3>{group.category}</h3>
-            <p>{categoryCopy[group.category] ?? 'Published materials'}</p>
           </div>
 
           <ul className="archive-index-links">

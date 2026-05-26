@@ -59,7 +59,7 @@ export default function FAQPage() {
       </header>
 
       <section className="section-row">
-        <h2 className="section-title">Search</h2>
+        <h2 className="section-title">Filter</h2>
         <div className="faq-console">
           <div className="faq-control-panel" aria-label="FAQ filters">
             <label className="grid gap-2">

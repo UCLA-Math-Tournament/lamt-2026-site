@@ -98,6 +98,18 @@ textarea {
   color: var(--ucla-blue-deep);
 }
 
+@keyframes lamt-rise {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .site-pad,
 .page-shell {
   width: min(100%, var(--page-max));
@@ -398,7 +410,7 @@ textarea {
 .home-hero {
   width: min(100%, var(--page-max));
   margin-inline: auto;
-  padding: clamp(4.4rem, 8vw, 7rem) var(--page-x) clamp(3.2rem, 6vw, 5rem);
+  padding: 6.25rem var(--page-x) 4.5rem;
 }
 
 .home-hero__mesh,
@@ -442,7 +454,7 @@ textarea {
 
 .home-hero h1 {
   max-width: 12ch;
-  font-size: clamp(4.2rem, 8.4vw, 7.7rem);
+  font-size: 6.85rem;
   line-height: 0.88;
 }
 
@@ -454,7 +466,7 @@ textarea {
   max-width: 44rem;
   margin-top: clamp(1.2rem, 2vw, 1.65rem);
   color: var(--text-soft);
-  font-size: clamp(1.1rem, 1.55vw, 1.35rem);
+  font-size: 1.25rem;
   font-weight: 760;
   line-height: 1.35;
 }
@@ -474,12 +486,75 @@ textarea {
   margin-top: 1.5rem;
 }
 
+.home-hero__meta,
+.home-hero h1,
+.cinema-lede,
+.cinema-actions,
+.home-index,
+.page-hero > *,
+.section-row > * {
+  animation: lamt-rise 420ms var(--ease) both;
+}
+
+.home-hero h1 {
+  animation-delay: 50ms;
+}
+
+.cinema-lede,
+.page-hero > :nth-child(2) {
+  animation-delay: 90ms;
+}
+
+.cinema-actions,
+.section-row > :nth-child(2) {
+  animation-delay: 130ms;
+}
+
+.home-index {
+  padding-block: 0;
+}
+
+.home-index__list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(1rem, 3vw, 2.2rem);
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+}
+
+.home-index__link {
+  display: grid;
+  gap: 0.45rem;
+  padding-block: 1.1rem;
+  transition: color var(--fast) var(--ease), transform var(--fast) var(--ease);
+}
+
+.home-index__link:hover,
+.home-index__link:focus-visible {
+  color: var(--ucla-blue-dark);
+  transform: translateY(-1px);
+}
+
+.home-index__link span {
+  color: var(--ucla-blue-dark);
+  font-size: 0.78rem;
+  font-weight: 950;
+  text-transform: uppercase;
+}
+
+.home-index__link strong {
+  color: var(--text);
+  font-size: 1.12rem;
+  font-weight: 850;
+  line-height: 1.25;
+}
+
 .page-hero {
   display: grid;
   grid-template-columns: var(--left-rail) minmax(0, var(--measure));
   align-items: start;
   gap: clamp(1rem, 3vw, 2rem);
-  padding-block: clamp(3.2rem, 6vw, 5.2rem) clamp(2.2rem, 4vw, 3.6rem);
+  padding-block: 4rem 2.7rem;
   border-bottom: 1px solid var(--rule);
 }
 
@@ -493,14 +568,14 @@ textarea {
 
 .page-title {
   max-width: 12ch;
-  font-size: clamp(3.2rem, 6.3vw, 5.7rem);
+  font-size: 4.7rem;
   line-height: 0.94;
 }
 
 .page-summary,
 .section-copy {
   color: var(--text-soft);
-  font-size: clamp(1rem, 1.25vw, 1.12rem);
+  font-size: 1.08rem;
   font-weight: 680;
   line-height: 1.5;
 }
@@ -558,7 +633,7 @@ textarea {
 .not-found-link strong {
   color: var(--text);
   font-family: var(--font-display);
-  font-size: clamp(1.35rem, 2.25vw, 2rem);
+  font-size: 1.72rem;
   font-weight: 950;
   line-height: 1.02;
 }
@@ -578,7 +653,7 @@ textarea {
   gap: 0.35rem;
   max-width: 42rem;
   color: var(--text);
-  font-size: clamp(1.02rem, 1.3vw, 1.15rem);
+  font-size: 1.08rem;
   font-weight: 650;
   line-height: 1.55;
 }
@@ -604,6 +679,16 @@ textarea {
   flex-wrap: wrap;
   gap: clamp(0.85rem, 2vw, 1.4rem);
   border-bottom: 1px solid var(--rule);
+}
+
+.faq-category-grid {
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.faq-category-grid::-webkit-scrollbar {
+  display: none;
 }
 
 .schedule-tab,
@@ -640,7 +725,7 @@ textarea {
 .lamt-agenda-item,
 .live-schedule-item {
   display: grid;
-  grid-template-columns: minmax(8.25rem, 0.24fr) minmax(0, 1fr) minmax(10rem, 0.32fr);
+  grid-template-columns: minmax(8.8rem, 0.24fr) minmax(14rem, 1fr) minmax(10rem, 0.36fr);
   gap: clamp(0.9rem, 2vw, 1.6rem);
   align-items: baseline;
   border-top: 1px solid var(--rule);
@@ -674,9 +759,14 @@ textarea {
 .lamt-agenda-main h3,
 .live-schedule-main h3 {
   color: var(--text);
-  font-size: clamp(1rem, 1.45vw, 1.2rem);
+  font-size: 1.08rem;
   font-weight: 900;
   line-height: 1.15;
+  overflow-wrap: normal;
+}
+
+.live-schedule-time strong {
+  white-space: nowrap;
 }
 
 .lamt-agenda-main p,
@@ -699,7 +789,7 @@ textarea {
 }
 
 .sponsor-title {
-  font-size: clamp(3rem, 6vw, 5.1rem);
+  font-size: 3.6rem;
   line-height: 0.92;
 }
 
@@ -723,7 +813,7 @@ textarea {
 
 .sponsor-logo-frame {
   display: flex;
-  min-height: clamp(5.5rem, 10vw, 8rem);
+  min-height: 6.25rem;
   align-items: center;
   justify-content: center;
   overflow: visible;
@@ -740,7 +830,7 @@ textarea {
   width: auto !important;
   max-width: min(100%, 18rem) !important;
   height: auto !important;
-  max-height: clamp(4.5rem, 9vw, 7rem) !important;
+  max-height: 5.8rem !important;
   object-fit: contain;
 }
 
@@ -815,7 +905,7 @@ textarea {
 .live-update-index h2,
 .live-schedule-block h2 {
   color: var(--text);
-  font-size: clamp(1.05rem, 1.45vw, 1.25rem);
+  font-size: 1.16rem;
   font-weight: 900;
   line-height: 1.15;
 }
@@ -832,7 +922,7 @@ textarea {
   align-items: baseline;
   padding-bottom: 0.14rem;
   text-transform: none;
-  font-size: clamp(1rem, 1.25vw, 1.12rem);
+  font-size: 1.05rem;
   font-weight: 700;
 }
 
@@ -850,7 +940,7 @@ textarea {
 
 .about-staff-row p {
   color: var(--text-soft);
-  font-size: clamp(1rem, 1.25vw, 1.12rem);
+  font-size: 1.05rem;
   font-weight: 650;
   line-height: 1.5;
 }
@@ -909,7 +999,7 @@ textarea {
 
 .faq-question strong {
   color: var(--text);
-  font-size: clamp(1.08rem, 1.5vw, 1.28rem);
+  font-size: 1.16rem;
   font-weight: 900;
   line-height: 1.2;
 }
@@ -962,7 +1052,7 @@ textarea {
 .contact-strip h3,
 .local-mode-notice h2 {
   color: var(--text);
-  font-size: clamp(1.2rem, 2vw, 1.6rem);
+  font-size: 1.35rem;
   font-weight: 900;
 }
 
@@ -1018,7 +1108,7 @@ textarea {
 
 .answer-panel-heading h3 {
   color: var(--text);
-  font-size: clamp(1.08rem, 1.55vw, 1.35rem);
+  font-size: 1.18rem;
   font-weight: 900;
 }
 
@@ -1030,8 +1120,8 @@ textarea {
 
 .answer-chip {
   display: inline-flex;
-  border: 1px solid var(--rule);
-  padding: 0.6rem 0.72rem;
+  border-bottom: 1px solid var(--rule);
+  padding: 0.35rem 0;
   color: var(--text);
   font-weight: 750;
 }
@@ -1083,7 +1173,7 @@ textarea {
 
 .venue-real-map__toolbar h3 {
   color: var(--text);
-  font-size: clamp(1.3rem, 2vw, 1.8rem);
+  font-size: 1.45rem;
   font-weight: 950;
 }
 
@@ -1152,7 +1242,7 @@ textarea {
 
 .venue-real-map__venue strong {
   color: var(--text);
-  font-size: clamp(1rem, 1.4vw, 1.2rem);
+  font-size: 1.08rem;
 }
 
 .venue-real-map__venue em,
@@ -1177,7 +1267,7 @@ textarea {
 
 .live-update-row h3 {
   color: var(--text);
-  font-size: clamp(1.05rem, 1.5vw, 1.25rem);
+  font-size: 1.12rem;
   font-weight: 900;
 }
 
@@ -1202,7 +1292,7 @@ textarea {
 
 .lamt-panel-header h2 {
   color: var(--text);
-  font-size: clamp(1.15rem, 1.7vw, 1.4rem);
+  font-size: 1.25rem;
   font-weight: 900;
 }
 
@@ -1314,6 +1404,18 @@ textarea {
     min-height: 4.4rem;
   }
 
+  .home-hero {
+    padding-block: 4.6rem 3.4rem;
+  }
+
+  .home-hero h1 {
+    font-size: 5rem;
+  }
+
+  .page-title {
+    font-size: 3.85rem;
+  }
+
   .site-nav {
     display: none;
   }
@@ -1350,9 +1452,14 @@ textarea {
     grid-template-columns: 1fr;
   }
 
+  .home-index__list {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
   .lamt-agenda-item,
   .live-schedule-item {
-    grid-template-columns: minmax(6.5rem, 0.35fr) minmax(0, 1fr);
+    grid-template-columns: minmax(7.5rem, 0.35fr) minmax(0, 1fr);
   }
 
   .lamt-agenda-place,
@@ -1408,16 +1515,59 @@ textarea {
   }
 
   .home-hero {
-    padding-block: clamp(3.25rem, 12vw, 4.8rem) clamp(2.2rem, 8vw, 3.4rem);
+    padding-block: 3.4rem 2.4rem;
   }
 
   .home-hero h1 {
-    font-size: clamp(3.25rem, 14vw, 4.6rem);
+    font-size: 3.18rem;
+    line-height: 0.94;
   }
 
   .page-title,
   .sponsor-title {
-    font-size: clamp(2.8rem, 12vw, 4.1rem);
+    font-size: 2.72rem;
+  }
+
+  .page-hero {
+    padding-block: 3rem 2rem;
+  }
+
+  .page-summary,
+  .section-copy,
+  .cinema-lede {
+    font-size: 1rem;
+  }
+
+  .lamt-line-item h3,
+  .format-card h3,
+  .rules-mini-rule strong,
+  .live-help-card h3,
+  .not-found-link strong {
+    font-size: 1.28rem;
+  }
+
+  .tournament-eligibility-list {
+    font-size: 0.98rem;
+  }
+
+  .home-index__link strong {
+    font-size: 1rem;
+  }
+
+  .faq-question strong {
+    font-size: 1.05rem;
+  }
+
+  .sponsor-logo-frame {
+    min-height: 4.6rem;
+  }
+
+  .sponsor-logo-frame img {
+    max-height: 4rem !important;
+  }
+
+  .sponsor-matrix--silver .sponsor-logo-frame img {
+    max-width: min(100%, 22rem) !important;
   }
 
   .cinema-actions,
@@ -1444,6 +1594,11 @@ textarea {
   .event-day-nav {
     display: flex;
     gap: 0.75rem 1rem;
+  }
+
+  .faq-category-grid {
+    margin-inline: calc(var(--page-x) * -1);
+    padding-inline: var(--page-x);
   }
 
   .schedule-tab,

@@ -1,93 +1,21 @@
-'use client';
-
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
 import { ArrowRightIcon, FileTextIcon } from '@radix-ui/react-icons';
 
 const homeButtonClass =
   'hero-button inline-flex min-h-12 items-center justify-center gap-2 px-5 py-3 text-sm font-extrabold uppercase text-white';
 
-function useCountdown(targetISO: string) {
-  const target = new Date(targetISO).getTime();
-  const [diff, setDiff] = useState(target - Date.now());
+const homeLinks = [
+  { href: '/tournament', label: 'Tournament', detail: 'Schedule, eligibility, venue.' },
+  { href: '/rules', label: 'Rules', detail: 'Allowed materials and answer format.' },
+  { href: '/archive', label: 'Archive', detail: '2026 papers, solutions, results.' },
+];
 
-  useEffect(() => {
-    const id = window.setInterval(() => setDiff(target - Date.now()), 1000);
-    return () => window.clearInterval(id);
-  }, [target]);
-
-  return diff;
-}
-
-function TournamentCountdown({ diff }: { diff: number }) {
-  if (diff <= 0) return null;
-
-  const days = Math.floor(diff / 86400000);
-  const hours = Math.floor((diff % 86400000) / 3600000);
-  const minutes = Math.floor((diff % 3600000) / 60000);
-  const seconds = Math.floor((diff % 60000) / 1000);
-  const pad = (value: number) => String(value).padStart(2, '0');
-
-  return (
-    <div className="flex select-none items-end justify-center gap-5 tabular-nums md:gap-7">
-      {[
-        { value: String(days), label: 'days' },
-        { value: pad(hours), label: 'hrs' },
-        { value: pad(minutes), label: 'min' },
-        { value: pad(seconds), label: 'sec' },
-      ].map((item) => (
-        <div key={item.label} className="flex flex-col items-center">
-          <span className="text-3xl font-light leading-none tracking-tight text-white md:text-5xl">{item.value}</span>
-          <span className="mt-2 text-[10px] font-semibold uppercase tracking-[0.2em] text-[#8BB8E8]">{item.label}</span>
-        </div>
-      ))}
-    </div>
-  );
-}
-
-function RegistrationCountdown({ diff }: { diff: number }) {
-  if (diff <= 0) return null;
-
-  const days = Math.floor(diff / 86400000);
-  const hours = Math.floor((diff % 86400000) / 3600000);
-  const minutes = Math.floor((diff % 3600000) / 60000);
-  const pad = (value: number) => String(value).padStart(2, '0');
-
-  return (
-    <div className="flex select-none items-end justify-center gap-5 tabular-nums md:gap-7">
-      {[
-        { value: String(days), label: 'days' },
-        { value: pad(hours), label: 'hrs' },
-        { value: pad(minutes), label: 'min' },
-      ].map((item) => (
-        <div key={item.label} className="flex flex-col items-center">
-          <span className="text-3xl font-light leading-none tracking-tight text-[#FFD100] md:text-5xl">{item.value}</span>
-          <span className="mt-2 text-[10px] font-semibold uppercase tracking-[0.2em] text-[#8BB8E8]">{item.label}</span>
-        </div>
-      ))}
-    </div>
-  );
-}
-
-export default function HomeClient({
-  registerUrl,
-  discordUrl,
-}: {
-  registerUrl: string;
-  discordUrl: string;
-}) {
-  const tournamentDiff = useCountdown('2026-05-17T08:00:00-07:00');
-  const regDiff = useCountdown('2026-05-10T23:59:59-07:00');
-  const regClosed = regDiff <= 0;
-  const tournamentComplete = tournamentDiff <= 0;
-
+export default function HomeClient() {
   return (
     <>
       <section className="home-hero">
-        <div aria-hidden className="home-hero__mesh" />
-
         <div className="home-hero__content">
-          <p className="home-hero__meta">May 17, 2026 / UCLA</p>
+          <p className="home-hero__meta">May 17, 2026. UCLA.</p>
           <h1 className="hero-animate-words">
             <span className="word">Los Angeles</span>
             {' '}
@@ -97,39 +25,25 @@ export default function HomeClient({
             Free in-person math contest for middle and high school students.
           </p>
 
-          {tournamentComplete ? (
-            <div className="cinema-actions">
-              <Link href="/tournament" className={homeButtonClass}>
-                Tournament <ArrowRightIcon />
-              </Link>
-              <Link href="/archive" className={`${homeButtonClass} hero-button--ghost`}>
-                <FileTextIcon /> 2026 Archive
-              </Link>
-            </div>
-          ) : (
-            <div className="home-hero__countdowns">
-              <div>
-                <p className="label-caps">Tournament - May 17</p>
-                <TournamentCountdown diff={tournamentDiff} />
-              </div>
-              {!regClosed && (
-                <div>
-                  <p className="label-caps text-[#FFD100]">Registration Deadline</p>
-                  <RegistrationCountdown diff={regDiff} />
-                </div>
-              )}
-              <div className="cinema-actions">
-                {!regClosed && (
-                  <Link href={registerUrl} target="_blank" rel="noreferrer" className={homeButtonClass}>
-                    Register on ContestDojo <ArrowRightIcon />
-                  </Link>
-                )}
-                <Link href={discordUrl} target="_blank" rel="noreferrer" className={`${homeButtonClass} hero-button--ghost`}>
-                  Join Discord
-                </Link>
-              </div>
-            </div>
-          )}
+          <div className="cinema-actions">
+            <Link href="/tournament" className={homeButtonClass}>
+              Tournament <ArrowRightIcon />
+            </Link>
+            <Link href="/archive" className={`${homeButtonClass} hero-button--ghost`}>
+              <FileTextIcon /> 2026 Archive
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      <section className="home-index page-shell" aria-label="LAMT links">
+        <div className="home-index__list">
+          {homeLinks.map((item) => (
+            <Link key={item.href} href={item.href} className="home-index__link">
+              <span>{item.label}</span>
+              <strong>{item.detail}</strong>
+            </Link>
+          ))}
         </div>
       </section>
     </>

@@ -3,9 +3,6 @@ import HomeClient from './components/HomeClient';
 import fs from 'fs';
 import path from 'path';
 
-const REGISTER_URL = 'https://contestdojo.com/public/BoJ8sPuig3IJ4BQeC97u';
-const DISCORD_URL = 'https://discord.gg/tqR3bGjVke';
-
 const SUPPORTED_EXTS = ['.jpg', '.jpeg', '.png', '.gif', '.webp', '.avif', '.svg'];
 const TIERS = ['gold', 'silver', 'bronze', 'friends'] as const;
 export type Tier = typeof TIERS[number];
@@ -31,7 +28,7 @@ export default function HomePage() {
 
   return (
     <div>
-      <HomeClient registerUrl={REGISTER_URL} discordUrl={DISCORD_URL} />
+      <HomeClient />
       <SponsorsSection sponsorsByTier={sponsorsByTier} />
     </div>
   );
