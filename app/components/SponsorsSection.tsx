@@ -32,12 +32,9 @@ export default function SponsorsSection({
 
   return (
     <section id="sponsors" className="page-shell sponsor-section">
-      <section className="section-row sponsor-intro">
-        <p className="section-title" aria-hidden="true">Sponsors</p>
-        <div>
-          <h2 className="sponsor-title">Sponsors</h2>
-        </div>
-      </section>
+      <header className="sponsor-heading">
+        <h2 className="sponsor-title">Sponsors</h2>
+      </header>
 
       {activeTiers.length > 0 ? (
         <div className="sponsor-tier-stack">
